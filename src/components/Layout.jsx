@@ -19,7 +19,7 @@ export default function Layout() {
         <div className="mx-auto max-w-7xl px-4 h-14 flex items-center gap-6">
           <Link to="/" className="flex items-baseline gap-2 shrink-0" onClick={() => setOpen(false)}>
             <span className="font-display text-xl font-black tracking-tight">הכנסת ה-26</span>
-            <span className="text-xs text-muted hidden sm:inline">מאגר נתונים פתוח</span>
+            <span className="text-xs text-sub hidden sm:inline">מאגר נתונים פתוח</span>
           </Link>
           <nav className="hidden md:flex gap-1 text-sm">
             {NAV.map(([to, label]) => (
@@ -48,7 +48,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <footer className="border-t border-rule mt-16">
-        <div className="mx-auto max-w-7xl px-4 py-8 text-sm text-muted grid gap-2">
+        <div className="mx-auto max-w-7xl px-4 py-8 text-sm text-sub grid gap-2">
           <p>
             הנתונים נאספו ועובדו ע״י <strong className="text-ink">ד״ר דנה סיני</strong>. כל עובדה מקושרת למקור; מצאתם טעות?
             {' '}<Link className="underline" to="/about">ראו איך לדווח</Link>.
