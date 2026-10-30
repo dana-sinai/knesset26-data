@@ -4,7 +4,7 @@
    (an exact-string map; anything not in the map is reported so it can be translated and added).
 2. Metrics: adds m.metrics — the numbers the site lets people filter and sort on. All are null for new MKs.
    faction_rate     share of votes cast in which the MK voted like the majority of their faction (weighted by votes)
-   participation    votes cast / plenum votes held while serving (all Knessets 20–25 in the data)
+   participation    votes cast / plenum votes held while serving (Knesset 16 onward)
    bills_per_k      bills initiated per Knesset served (average over Knessets with data)
    bills_passed     bills initiated that became law (total)
    cmt_rate         committee attendance: sessions attended / sessions held in committees they belonged to
@@ -72,7 +72,7 @@ for m in mks:
         if held:
             met["participation"] = round(sum(v.get("votes_cast") or 0 for v in vs.values()) / held, 4)
         bs = p.get("bill_stats") or {}
-        ks = [k for k in (m.get("prior_terms") or []) if 20 <= int(k) <= 25]
+        ks = [k for k in (m.get("prior_terms") or []) if int(k) >= 16]
         if ks:
             met["bills_per_k"] = round(sum((bs.get(str(k)) or {}).get("initiated", 0) for k in ks) / len(ks), 1)
             met["bills_passed"] = sum((bs.get(str(k)) or {}).get("passed", 0) for k in ks)

@@ -4,7 +4,6 @@ import { useMKs, useParties, useData, VOTE_CODE, VOTE_CLASS } from '@/lib/data';
 import { Loading, Page } from '@/components/bits';
 import { MKLink } from '@/components/MKDrawer';
 
-const KS = [25, 24, 23, 22, 21, 20];
 
 export const VOTE_TYPES = [
   ['all', 'כל ההצבעות'],
@@ -129,6 +128,8 @@ export default function Votes() {
   const [n, setN] = useState(60);
   const [type, setType] = useState('all');
   const { data: meta } = useData(`votes/meta_k${k}.json`);
+  const { data: idx } = useData('votes/index.json');
+  const KS = Object.keys(idx || { 25: 1 }).map(Number).sort((a, b) => b - a);
   const partyById = useMemo(() => Object.fromEntries((parties || []).map((p) => [p.id, p])), [parties]);
   const all = useMemo(() => (meta ? meta.votes.map((v) => ({ id: v[0], dt: v[1], title: v[2], subject: v[3], f: v[4], a: v[5], ab: v[6] })).map((v) => ({ ...v, type: voteType(v) })).reverse() : []), [meta]);
   const list = useMemo(() => {
@@ -147,7 +148,7 @@ export default function Votes() {
     <Page>
       <header className="grid gap-2 max-w-3xl">
         <h1 className="text-4xl font-black">הצבעות במליאה</h1>
-        <p className="text-sub">כל הצבעות המליאה בכנסות 20–25: הצבעות על הצעות חוק בקריאותיהן, על סעיפים והסתייגויות, הצעות לסדר היום, אי-אמון, מינויים והרכבי ועדות. ההצבעות בתוך הוועדות עצמן אינן מפורסמות במאגר הפתוח של הכנסת ולכן אינן כאן. בחרו הצבעה כדי לראות איך הצביעו חברי הכנסת הנבחרים שכיהנו אז. סיווג נושאי (תקציב, ביטחון, דת ומדינה…) יתווסף בהמשך.</p>
+        <p className="text-sub">כל הצבעות המליאה מהכנסת ה-16 (2003, תחילת הרישום השמי) ועד היום: הצבעות על הצעות חוק בקריאותיהן, על סעיפים והסתייגויות, הצעות לסדר היום, אי-אמון, מינויים והרכבי ועדות. ההצבעות בתוך הוועדות עצמן אינן מפורסמות במאגר הפתוח של הכנסת ולכן אינן כאן. בחרו הצבעה כדי לראות איך הצביעו חברי הכנסת הנבחרים שכיהנו אז. סיווג נושאי (תקציב, ביטחון, דת ומדינה…) יתווסף בהמשך.</p>
       </header>
       <div className="flex flex-wrap gap-2 items-center text-sm">
         <select value={k} onChange={(e) => setSp({ k: e.target.value })} className="rounded-md border border-rule bg-paper px-2 py-1.5">
