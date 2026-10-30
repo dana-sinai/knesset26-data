@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ExternalLink, AlertTriangle } from 'lucide-react';
-import { useMKs, useParties, useData, EDU_LABEL, SECTOR_LABEL, pct, fmt } from '@/lib/data';
+import { useMKs, useParties, useData, EDU_LABEL, SECTOR_LABEL, FIELD_HE, sourceName, pct, fmt } from '@/lib/data';
 import { Initials, Src, Loading, Page, Section } from '@/components/bits';
 import VoteTable from '@/components/VoteTable';
 import BillList from '@/components/BillList';
@@ -95,7 +95,7 @@ export function MKProfile({ id, compact = false }) {
               <Fact label="ויקיפדיה">
                 {m.wikipedia_he && <a className="underline" href={m.wikipedia_he} target="_blank" rel="noreferrer">עברית</a>}
                 {m.wikipedia_he && m.wikipedia_en && ' · '}
-                {m.wikipedia_en && <a className="underline" href={m.wikipedia_en} target="_blank" rel="noreferrer">English</a>}
+                {m.wikipedia_en && <a className="underline" href={m.wikipedia_en} target="_blank" rel="noreferrer">באנגלית</a>}
                 {!m.wikipedia_he && !m.wikipedia_en && null}
               </Fact>
             </dl>
@@ -215,17 +215,17 @@ export function MKProfile({ id, compact = false }) {
             <ul className="grid gap-2">
               {Object.entries(s).map(([field, urls]) => (
                 <li key={field} className="grid grid-cols-[160px_1fr] gap-3">
-                  <span className="text-sub">{field}</span>
+                  <span className="text-sub">{FIELD_HE[field] || field}</span>
                   <span className="grid gap-0.5 break-all">
                     {urls.map((u, i) => String(u).startsWith('http')
-                      ? <a key={i} href={u} target="_blank" rel="noreferrer" className="underline flex items-center gap-1" dir="ltr" style={{ textAlign: 'right' }}>{u}<ExternalLink size={11} /></a>
-                      : <span key={i} dir="ltr" style={{ textAlign: 'right' }}>{u}</span>)}
+                      ? <a key={i} href={u} target="_blank" rel="noreferrer" className="underline flex items-center gap-1">{sourceName(u)}<ExternalLink size={11} /></a>
+                      : <span key={i}>{sourceName(u)}</span>)}
                   </span>
                 </li>
               ))}
             </ul>
           </div>
-          {m.filled_from_wikidata?.length > 0 && <p className="text-sub">שדות שהושלמו מוויקינתונים: {m.filled_from_wikidata.join(', ')}</p>}
+          {m.filled_from_wikidata?.length > 0 && <p className="text-sub">שדות שהושלמו מוויקינתונים: {m.filled_from_wikidata.map((x) => FIELD_HE[x] || x).join(', ')}</p>}
           {m.notes && (
             <div className="grid gap-1">
               <h3 className="font-bold text-lg">הערות אמינות</h3>

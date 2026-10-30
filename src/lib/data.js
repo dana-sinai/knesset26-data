@@ -42,6 +42,32 @@ export const SECTOR_LABEL = {
 export const fmt = (n) => (n == null ? '—' : Number(n).toLocaleString('he-IL'));
 export const pct = (x, d = 0) => (x == null ? '—' : `${(x * 100).toFixed(d)}%`);
 
+const SOURCE_HE = {
+  'en.wikipedia.org': 'ויקיפדיה באנגלית', 'he.wikipedia.org': 'ויקיפדיה', 'ar.wikipedia.org': 'ויקיפדיה בערבית',
+  'wikidata.org': 'ויקינתונים', 'i24news.tv': 'i24NEWS', 'idi.org.il': 'המכון הישראלי לדמוקרטיה',
+  'israelhayom.co.il': 'ישראל היום', 'ynetnews.com': 'ynet', 'ynet.co.il': 'ynet', 'srugim.co.il': 'סרוגים', 'kipa.co.il': 'כיפה',
+  'maariv.co.il': 'מעריב', 'globes.co.il': 'גלובס', 'makorrishon.co.il': 'מקור ראשון', 'timesofisrael.com': 'טיימס אוף ישראל',
+  'israelnationalnews.com': 'ערוץ 7', 'inn.co.il': 'ערוץ 7', 'mako.co.il': 'מאקו', 'kikar.co.il': 'כיכר השבת', 'walla.co.il': 'וואלה',
+  'calcalist.co.il': 'כלכליסט', 'jpost.com': 'ג׳רוזלם פוסט', 'haaretz.co.il': 'הארץ', 'knesset.gov.il': 'אתר הכנסת',
+  'main.knesset.gov.il': 'אתר הכנסת', 'oknesset.org': 'כנסת פתוחה', 'cyclowiki.org': 'ציקלוויקי', 'zman.co.il': 'זמן ישראל',
+  'kohelet.org.il': 'פורום קהלת', 'ice.co.il': 'ice', 'jdn.co.il': 'JDN', 'br7news.co.il': 'חדשות באר שבע',
+};
+/** Short Hebrew name for a source URL (falls back to the domain). */
+export function sourceName(u) {
+  const s = String(u);
+  if (/KNS_Person/i.test(s)) return 'מאגר הכנסת';
+  if (!s.startsWith('http')) return s;
+  const h = hostname(s);
+  return SOURCE_HE[h] || h;
+}
+export const FIELD_HE = {
+  party_he: 'מפלגה', list_position: 'מקום ברשימה', name_he: 'שם', name_en: 'שם באנגלית', gender: 'מגדר', birth_date: 'תאריך לידה',
+  birth_year: 'שנת לידה', birthplace: 'מקום לידה', education: 'השכלה', highest_education_level: 'השכלה (גבוהה)', career: 'קריירה',
+  military_service: 'שירות צבאי', government_roles: 'תפקידים בממשלה', family_status: 'מצב משפחתי', bio_summary_he: 'תקציר',
+  wikipedia_en: 'ויקיפדיה באנגלית', wikipedia_he: 'ויקיפדיה', prior_knesset_terms: 'כנסות קודמות', is_new_mk: 'חדש/ה בכנסת',
+  languages: 'שפות', residence_locality_he: 'מקום מגורים', residence_note: 'הערה על מקום המגורים', residence: 'מקום מגורים',
+};
+
 export function hostname(url) {
   try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return url; }
 }

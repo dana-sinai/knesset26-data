@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { hostname } from '@/lib/data';
+import { sourceName } from '@/lib/data';
 import { MKLink } from '@/components/MKDrawer';
 
 export function PartyDot({ party, size = 10 }) {
@@ -23,8 +23,8 @@ export function Src({ urls }) {
     <span className="inline-flex flex-wrap gap-1 mr-1 align-super text-[10px] leading-none">
       {urls.slice(0, 3).map((u, i) => (
         String(u).startsWith('http')
-          ? <a key={i} href={u} target="_blank" rel="noreferrer" title={u} className="text-gold hover:underline">[{hostname(u)}]</a>
-          : <span key={i} title={u} className="text-gold">[{u}]</span>
+          ? <a key={i} href={u} target="_blank" rel="noreferrer" title={u} className="text-gold hover:underline">[{sourceName(u)}]</a>
+          : <span key={i} title={u} className="text-gold">[{sourceName(u)}]</span>
       ))}
     </span>
   );
