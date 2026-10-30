@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 export const EMPTY = {
   q: '', parties: [], gender: '', ageMin: 20, ageMax: 90, edu: [], sectors: [], tenure: '', district: '',
   place: 'residence', ses: [], periphery: [], popType: [], haredi: '', bornAbroad: '', met: {},
+  initTopic: '', initMin: 1, likeParty: '', likeMin: 50,
 };
 
 /** Numbers we know about each MK's record (m.metrics). Every one is a filter and a sort key. */
@@ -64,6 +65,11 @@ export function useMKFilters(mks, initial = {}) {
         const def = METRICS.find((d) => d.key === key);
         const v = def && metricValue(m, def);
         if (v == null || v < lo || v > hi) return false;
+      }
+      if (f.initTopic && ((m.initiated_topics || {})[f.initTopic] || 0) < f.initMin) return false;
+      if (f.likeParty) {
+        const r = (m.agreement || {})[f.likeParty];
+        if (r == null || r * 100 < f.likeMin) return false;
       }
       if (f.haredi === 'yes' && !((P?.haredi_hh_pct ?? 0) >= 50 || P?.religiosity_main === 'Haredi')) return false;
       return true;

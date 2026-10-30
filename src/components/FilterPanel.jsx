@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Search, RotateCcw } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
-import { EDU_LABEL, EDU_ORDER, SECTOR_LABEL } from '@/lib/data';
+import { EDU_LABEL, EDU_ORDER, SECTOR_LABEL, useTopics } from '@/lib/data';
 import { SES_LABEL, PER_LABEL, POP_LABEL, METRICS, placeOf } from '@/lib/filters';
 
 function Chip({ on, onClick, children, color }) {
@@ -26,6 +26,7 @@ function Group({ title, children, hint }) {
 
 export default function FilterPanel({ mks, parties, filters, count, hideParty = false }) {
   const { f, set, toggle, reset, active } = filters;
+  const { data: topics } = useTopics();
   const sectors = useMemo(() => {
     const c = {};
     (mks || []).forEach((m) => m.sectors.forEach((s) => (c[s] = (c[s] || 0) + 1)));
@@ -114,6 +115,34 @@ export default function FilterPanel({ mks, parties, filters, count, hideParty = 
         <div className="grid gap-1">
           <div className="text-xs font-semibold">פעילות בכנסות קודמות</div>
           <p className="text-[11px] text-sub">סינון לפי מדד מציג רק מי שיש לו/ה נתונים (מי שכיהן/ה מהכנסת ה-16 ואילך). חוץ ממספר הכנסות.</p>
+        </div>
+        {topics && (
+          <div className="grid gap-2">
+            <div className={`text-xs ${f.initTopic ? 'text-ink font-semibold' : 'text-sub'}`}>יזם/ה הצעות חוק בנושא</div>
+            <select value={f.initTopic} onChange={(e) => set({ initTopic: e.target.value })} className="rounded-lg border border-rule bg-paper px-2 py-1.5 text-sm">
+              <option value="">כל נושא</option>
+              {Object.entries(topics.labels).filter(([k]) => k !== 'other').map(([k, l]) => <option key={k} value={k}>{l}</option>)}
+            </select>
+            {f.initTopic && (
+              <>
+                <div className="text-xs text-sub flex justify-between"><span>לפחות</span><span className="num">{f.initMin} הצעות</span></div>
+                <Slider dir="rtl" min={1} max={60} step={1} value={[f.initMin]} onValueChange={([v]) => set({ initMin: v })} />
+              </>
+            )}
+          </div>
+        )}
+        <div className="grid gap-2">
+          <div className={`text-xs ${f.likeParty ? 'text-ink font-semibold' : 'text-sub'}`}>מצביע/ה כמו רוב המפלגה</div>
+          <select value={f.likeParty} onChange={(e) => set({ likeParty: e.target.value })} className="rounded-lg border border-rule bg-paper px-2 py-1.5 text-sm">
+            <option value="">בחרו מפלגה</option>
+            {parties.filter((p) => p.seats > 0).map((p) => <option key={p.id} value={p.id}>{p.name_he}</option>)}
+          </select>
+          {f.likeParty && (
+            <>
+              <div className="text-xs text-sub flex justify-between"><span>לפחות</span><span className="num">{f.likeMin}% מההצבעות השנויות במחלוקת</span></div>
+              <Slider dir="rtl" min={0} max={100} step={5} value={[f.likeMin]} onValueChange={([v]) => set({ likeMin: v })} />
+            </>
+          )}
         </div>
         {METRICS.map((d) => {
           const cur = f.met[d.key] || [0, d.max];

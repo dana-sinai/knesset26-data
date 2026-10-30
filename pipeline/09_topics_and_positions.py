@@ -309,3 +309,11 @@ json.dump(dict(labels=TOPICS, bills=dict(tc), contested_votes={k: int(v) for k, 
                                 agreement="חלק ההצבעות השנויות במחלוקת שבהן הצביע/ה כמו רוב חברי המפלגה (בהרכבה הנוכחי) שהצביעו בהן")),
           open(f"{OUT}/topics.json", "w"), ensure_ascii=False)
 print("topics with clusters:", list(clusters))
+
+# ---------------- add the per-MK topic numbers to mks.json, so the list page can filter on them
+for m in mks:
+    pid = int(m["person_id"]) if m.get("person_id") else None
+    m["initiated_topics"] = dict(init_topics.get(pid, {})) if pid else {}
+    m["agreement"] = {p: v["rate"] for p, v in agree.get(pid, {}).items()} if pid else {}
+json.dump(mks, open(f"{D}/mks.json", "w"), ensure_ascii=False)
+print("mks.json: added initiated_topics and agreement")
