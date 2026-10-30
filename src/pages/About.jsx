@@ -1,0 +1,67 @@
+import { useMeta } from '@/lib/data';
+import { Page, Section } from '@/components/bits';
+
+const SOURCES = [
+  ['תוצאות הבחירות לפי קלפי (ספירה סופית)', 'ועדת הבחירות המרכזית לכנסת – קובץ expb; עותק פתוח במאגר hopetohelp/26. סך הקולות אומת מול התוצאות הארציות.', 'https://github.com/hopetohelp/26'],
+  ['רשימת 120 הנבחרים', 'לפי תוצאות ועדת הבחירות כפי שפורסמו בתקשורת (i24NEWS); תושווה לפרסום הרשמי ברשומות.', 'https://www.i24news.tv/he/news/israel-elections-2026/artc-12604d2f'],
+  ['מאגר הנתונים הפתוח של הכנסת (OData)', 'חברי כנסת, תפקידים, ועדות, סיעות, הצבעות מליאה (KNS_PlenumVote, KNS_PlenumVoteResult), הצעות חוק ויוזמים. נלקח דרך המראה של "כנסת פתוחה" (הסדנא לידע ציבורי), מכיוון שאתר הכנסת חסום לגישה מחוץ לישראל.', 'https://production.oknesset.org/pipelines/data/'],
+  ['פרופילים אישיים', 'השכלה, קריירה, מגורים, תאריך ומקום לידה – ממקורות פומביים (ויקיפדיה, אתרי מפלגות, כלי תקשורת). לכל שדה מצוין מקור בדף חבר/ת הכנסת. ויקינתונים שימשו רק להשלמת חסרים ורק כשהערך זוהה בוודאות.', null],
+  ['הלמ״ס – קובץ היישובים 2024', 'סמלי יישוב, מחוז, צורת יישוב, הרכב אוכלוסייה, קואורדינטות.', 'https://www.cbs.gov.il/he/publications/DocLib/2019/ishuvim/bycode2024.xlsx'],
+  ['הלמ״ס – מדד חברתי-כלכלי 2021', 'רשויות מקומיות ויישובים במועצות אזוריות (הודעה 230/2024).', 'https://www.cbs.gov.il/he/mediarelease/DocLib/2024/230/24_24_230b.pdf'],
+  ['הלמ״ס – מדד פריפריאליות 2020', 'יישובים (הודעה 420/2022).', 'https://www.cbs.gov.il/he/mediarelease/DocLib/2022/420/24_22_420b.pdf'],
+  ['הלמ״ס – מפקד 2022', 'קובץ מסכם ליחידות גאוגרפיות: שיעור משקי בית חרדיים/דתיים, השכלה אקדמית, שכר חציוני, ילידי חו״ל.', 'https://www.cbs.gov.il/en/Surveys/Pages/Population-Census.aspx'],
+  ['מרכזי יישובים ואוכלוסייה', 'המרכז למיפוי ישראל (מרכזי יישובים), רשות האוכלוסין (תושבים לפי יישוב וגיל) – דרך data.gov.il.', 'https://data.gov.il'],
+];
+
+export default function About() {
+  const { data: meta } = useMeta();
+  return (
+    <Page className="max-w-4xl">
+      <header className="grid gap-2">
+        <h1 className="text-4xl font-black">מקורות ושיטה</h1>
+        <p className="text-sub">המאגר נבנה כך שכל נתון ניתן לבדיקה: מקורות רשמיים קודמים, מקורות משניים מסומנים, וסתירות בין מקורות מוצגות ולא מוסתרות.</p>
+      </header>
+      <Section title="מקורות">
+        <ul className="grid gap-3 text-sm">
+          {SOURCES.map(([t, d, u]) => (
+            <li key={t} className="grid gap-0.5">
+              <strong>{t}</strong>
+              <span className="text-sub">{d}</span>
+              {u && <a href={u} target="_blank" rel="noreferrer" className="underline text-xs break-all" dir="ltr" style={{ textAlign: 'right' }}>{u}</a>}
+            </li>
+          ))}
+        </ul>
+      </Section>
+      <Section title="סדר עדיפויות בין מקורות">
+        <ol className="list-decimal pr-5 grid gap-1 text-sm">
+          <li>נתוני הכנסת הרשמיים (זיהוי, כהונות, תפקידים, ועדות, הצבעות, הצעות חוק).</li>
+          <li>פרופילים שנאספו ממקורות פומביים, עם מקור לכל שדה.</li>
+          <li>ויקיפדיה/ויקינתונים – להשלמת חסרים בלבד.</li>
+        </ol>
+        <p className="text-sm text-sub">כשמקורות סותרים – הדבר מסומן בדף חבר/ת הכנסת. לחברי כנסת חדשים, רשומות הכנסת שנוצרו באוקטובר 2026 טרם אומתו, ולכן במקרה של סתירה מוצג המקור המחקרי.</p>
+      </Section>
+      <Section title="הגדרות">
+        <ul className="grid gap-2 text-sm">
+          <li><strong>השתתפות בהצבעות</strong> – הצבעות שבהן נרשמה הצבעה ÷ הצבעות מליאה שהתקיימו בזמן הכהונה. היעדרות אינה נרשמת במאגר. שרים משתתפים פחות מטבע תפקידם.</li>
+          <li><strong>הצבעה כמו רוב הסיעה</strong> – שיעור ההצבעות שבהן ההצבעה זהה להצבעת רוב חברי הסיעה שהצביעו באותה הצבעה.</li>
+          <li><strong>גיל</strong> – ביום הבחירות (27.10.2026). כשידועה רק שנת הלידה, הגיל משוער ומסומן ב-~.</li>
+          <li><strong>רקע מקצועי</strong> – סיווג כל תפקיד בקריירה לתחום אחד; אדם יכול להשתייך לכמה תחומים.</li>
+          <li><strong>מקום מגורים / לידה</strong> – ברמת יישוב בלבד, במכוון. המאגר אינו מאתר כתובות או שכונות של חברי כנסת.</li>
+          <li><strong>פרופיל המצביעים</strong> – קולות כל מפלגה בכל קלפי, מצורפים ליישוב ולמאפייני הלמ״ס שלו. זו תמונה ברמת יישוב, לא סקר: היא מתארת את היישובים שבהם הצביעו, לא את המצביעים עצמם.</li>
+        </ul>
+      </Section>
+      <Section title="הורדת נתונים">
+        <ul className="grid gap-1 text-sm">
+          {[['mks.csv', 'טבלת חברי הכנסת (CSV)'], ['mks.json', 'פרופילים מלאים עם מקורות (JSON)'], ['parliament.json', 'תפקידים, ועדות וסטטיסטיקת הצבעות (JSON)'],
+            ['electorate.json', 'פרופיל המצביעים לפי מפלגה (JSON)'], ['results_by_locality.json', 'תוצאות 2026 לפי יישוב (JSON)'], ['localities.json', 'מאפייני יישובים – למ״ס (JSON)']].map(([f, l]) => (
+            <li key={f}><a className="underline" href={`/data/${f}`} download>{l}</a></li>
+          ))}
+        </ul>
+        {meta && <p className="text-xs text-sub">עדכון אחרון של הנתונים: {meta.built_at}</p>}
+      </Section>
+      <Section title="מצאתם טעות?">
+        <p className="text-sm">כתבו לי עם קישור למקור, ואעדכן. המאגר יתעדכן אחרי השבעת הכנסת (10.11.2026) ופרסום התוצאות הרשמיות ברשומות.</p>
+      </Section>
+    </Page>
+  );
+}
