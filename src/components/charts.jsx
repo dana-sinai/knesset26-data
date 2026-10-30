@@ -66,7 +66,7 @@ export function Card({ title, note, children }) {
   return (
     <div className="rounded-xl border border-rule bg-paper p-4 grid gap-3 content-start">
       <div>
-        <h3 className="font-bold text-lg leading-tight">{title}</h3>
+        <h3 className="text-2xl leading-tight">{title}</h3>
         {note && <p className="text-xs text-sub mt-0.5">{note}</p>}
       </div>
       {children}

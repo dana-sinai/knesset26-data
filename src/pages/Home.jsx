@@ -62,7 +62,7 @@ function Fact({ title, big, sub, children }) {
   return (
     <div className="rounded-2xl border border-rule bg-paper p-5 grid gap-3 content-start">
       <div className="flex items-baseline justify-between gap-3">
-        <h3 className="text-base font-semibold">{title}</h3>
+        <h3 className="text-2xl leading-none">{title}</h3>
         {big != null && <span className="font-title text-4xl leading-none num">{big}</span>}
       </div>
       {sub && <p className="text-xs text-sub -mt-2">{sub}</p>}

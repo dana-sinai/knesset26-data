@@ -22,7 +22,7 @@ export function CommitteeSummary({ personId }) {
         return (
           <div key={k} className="grid gap-2">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h4 className="font-semibold">הכנסת ה-{k}</h4>
+              <h4 className="text-2xl">הכנסת ה-{k}</h4>
               <span className="text-xs text-sub num">השתתפות בכל הוועדות: {fmt(rec.attended_total)} ישיבות</span>
             </div>
             {rows.length > 0 && (

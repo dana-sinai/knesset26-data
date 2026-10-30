@@ -10,7 +10,7 @@ export function DimBars({ title, party, all, color }) {
   const keys = (ORDER[title.key] || Object.keys({ ...all, ...party })).filter((k) => (party[k] || 0) + (all[k] || 0) > 0.05);
   return (
     <div className="grid gap-2">
-      <h4 className="font-semibold text-sm">{title.he}</h4>
+      <h4 className="text-xl">{title.he}</h4>
       <div className="grid gap-1.5">
         {keys.map((k) => {
           const p = party[k] || 0, a = all[k] || 0;
