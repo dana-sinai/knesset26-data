@@ -1,5 +1,5 @@
 ﻿id,person_id,name_he,name_en,party,list_position,gender,birth_year,age,residence,residence_code,education_level,sectors,is_new,prior_terms,k25_participation,k25_with_faction,k25_bills_initiated
-965,965,בנימין נתניהו,Benjamin Netanyahu,likud,1,male,1949,77,בית אגיון,,MA,business;civil_society_ngo;politics_party;public_service,False,12;13;14;15;16;17;18;19;20;21;22;23;24;25,0.211,0.9975,
+965,965,בנימין נתניהו,Benjamin Netanyahu,likud,1,male,1949,77,ירושלים,3000,MA,business;civil_society_ngo;politics_party;public_service,False,12;13;14;15;16;17;18;19;20;21;22;23;24;25,0.211,0.9975,
 30083,30083,אליהו כהן,Eli Cohen,likud,2,male,1972,54,חולון,6600,MA,business,False,20;21;22;23;24;25,0.572,1.0,
 30300,30300,אמיר אוחנה,Amir Ohana,likud,3,male,1976,50,תל אביב-יפו,5000,LLB/LLM,law;politics_party;security_services,False,20;21;22;23;24;25,0.519,0.9954,2
 12951,12951,יריב גדעון לוין,Yariv Levin,likud,4,male,1969,57,מודיעין-מכבים-רעות,1200,LLB/LLM,law;politics_party,False,18;19;20;21;22;23;24;25,0.611,1.0,
@@ -26,7 +26,7 @@
 1025,1025,גילה גמליאל דמרי,Gila Gamliel,likud,25,female,1974,52,תל אביב-יפו,5000,MA,civil_society_ngo;education,False,16;18;19;20;21;22;23;24;25,0.491,0.9986,
 860,860,אלי גולדשמידט,Eli Goldschmidt,likud,26,male,1953,73,,,LLB/LLM,business;law;media;politics_party,False,13;14;15,,,
 30941,30941,ארז תדמור,Erez Tadmor,likud,27,male,1980,46,אפרת,3650,unknown,civil_society_ngo;media;politics_party,True,,,,
-30836,30836,גדי איזנקוט,Gadi Eisenkot,yashar,1,male,1960,66,הרצליה,,MA,military;politics_party,False,25,0.495,0.9964,5
+30836,30836,גדי איזנקוט,Gadi Eisenkot,yashar,1,male,1960,66,הרצליה,6400,MA,military;politics_party,False,25,0.495,0.9964,5
 30957,30957,יורם כהן,Yoram Cohen,yashar,2,male,1960,66,ירושלים,3000,MA,academia;military;security_services,True,,,,
 30685,30685,אורית פרקש הכהן,Orit Farkash-Hacohen,yashar,3,female,1970,55,ירושלים,3000,LLB/LLM,law;politics_party;public_service,False,21;22;23;24;25,0.545,0.9963,81
 30958,30958,עדי אלטשולר,Adi Altschuler,yashar,4,female,1986,39,,,unknown,civil_society_ngo;high_tech,True,,,,
@@ -53,7 +53,7 @@
 30102,30102,מירב בן ארי,Meirav Ben-Ari,beyachad,4,female,1975,50,תל אביב-יפו,5000,MA,education;local_government;politics_party,False,20;24;25,0.722,0.9991,286
 30925,30925,לירן אבישר בן חורין,Liran Avisar Ben-Horin,beyachad,5,female,1976,50,כפר סירקין,249,LLB/LLM,civil_society_ngo;law;public_service,True,,,,
 30926,30926,נעם משה תיבון,Noam Tibon,beyachad,6,male,1962,64,תל אביב-יפו,5000,MA,civil_society_ngo;military,True,,,,
-30927,30927,מיכל הירש נגרי,Michal Nagari,beyachad,7,female,1966,60,הרצליה,,MA,civil_society_ngo;local_government,True,,,,
+30927,30927,מיכל הירש נגרי,Michal Nagari,beyachad,7,female,1966,60,הרצליה,6400,MA,civil_society_ngo;local_government,True,,,,
 30693,30693,איתן גינזבורג,Eitan Ginzburg,beyachad,8,male,1977,49,רעננה,8700,MA,local_government;public_service,False,21;22;23;24;25,0.652,0.9976,71
 30686,30686,מירב כהן,Meirav Cohen,beyachad,9,female,1983,43,ירושלים,3000,MA,civil_society_ngo;local_government;public_service,False,21;22;23;24;25,0.619,0.9996,154
 30928,30928,יונתן שלו,Yonatan Shalev,beyachad,10,male,2002,24,זכרון יעקב,9300,post_secondary,civil_society_ngo,True,,,,
@@ -65,7 +65,7 @@ new-beyachad-11,,ברוריה נעים ארמן,Bruria Naim Erman,beyachad,11,fe
 30950,30950,בכר עואודה,Bakr Awawdeh,joint,4,male,,,כפר כנא,509,unknown,civil_society_ngo;local_government;politics_party,True,,,,
 30719,30719,עופר כסיף,Ofer Cassif,joint,5,male,1964,61,רחובות,8400,PhD,academia;politics_party,False,21;22;23;24;25,0.502,0.9976,216
 30558,30558,יוסף עטאונה,Youssef Atauna,joint,6,male,1966,60,חורה,1303,unknown,education;law;politics_party,False,20;25,0.581,0.9962,83
-30951,30951,מהא כרכבי סבאח,Maha Karkabi-Sabbah,joint,7,male,1971,55,שפרעם,8800,PhD,academia;civil_society_ngo;politics_party,True,,,,
+30951,30951,מהא כרכבי סבאח,Maha Karkabi-Sabbah,joint,7,female,1971,55,שפרעם,8800,PhD,academia;civil_society_ngo;politics_party,True,,,,
 new-joint-8,,אחמד דראושה,Ahmad Darawshe,joint,8,male,,,,,unknown,law;local_government;politics_party,True,,,,
 new-joint-9,,נהאיה ושאחי,Nihaya Washahi,joint,9,female,1975,51,ערערה,637,PhD,civil_society_ngo;education;local_government,True,,,,
 new-joint-10,,חסן אלנסאסרה,Hassan Nasasra,joint,10,male,,,רהט,1161,unknown,education;local_government;politics_party,True,,,,
