@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Search, RotateCcw } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { EDU_LABEL, EDU_ORDER, SECTOR_LABEL } from '@/lib/data';
+import { SES_LABEL, PER_LABEL, POP_LABEL, placeOf } from '@/lib/filters';
 
 function Chip({ on, onClick, children, color }) {
   return (
@@ -13,11 +14,12 @@ function Chip({ on, onClick, children, color }) {
   );
 }
 
-function Group({ title, children }) {
+function Group({ title, children, hint }) {
   return (
     <div className="grid gap-2">
       <div className="text-xs font-semibold text-sub">{title}</div>
       <div className="flex flex-wrap gap-1.5">{children}</div>
+      {hint && <p className="text-[11px] text-sub">{hint}</p>}
     </div>
   );
 }
@@ -29,7 +31,7 @@ export default function FilterPanel({ mks, parties, filters, count, hideParty = 
     (mks || []).forEach((m) => m.sectors.forEach((s) => (c[s] = (c[s] || 0) + 1)));
     return Object.entries(c).sort((a, b) => b[1] - a[1]).map(([s]) => s);
   }, [mks]);
-  const districts = useMemo(() => [...new Set((mks || []).map((m) => m.residence?.district).filter(Boolean))].sort(), [mks]);
+  const districts = useMemo(() => [...new Set((mks || []).map((m) => placeOf(m, f.place)?.district).filter(Boolean))].sort(), [mks, f.place]);
 
   return (
     <div className="grid gap-5">
@@ -76,16 +78,43 @@ export default function FilterPanel({ mks, parties, filters, count, hideParty = 
           <Chip key={s} on={f.sectors.includes(s)} onClick={() => toggle('sectors', s)}>{SECTOR_LABEL[s] || s}</Chip>
         ))}
       </Group>
-      {districts.length > 0 && (
+
+      <div className="grid gap-4 rounded-lg border border-rule p-3 bg-paper">
         <div className="grid gap-2">
-          <div className="text-xs font-semibold text-sub">נפת מגורים (למ״ס)</div>
-          <select value={f.district} onChange={(e) => set({ district: e.target.value })}
-            className="rounded-lg border border-rule bg-paper px-2 py-1.5 text-sm">
-            <option value="">כל הנפות</option>
-            {districts.map((d) => <option key={d} value={d}>{d}</option>)}
-          </select>
+          <div className="text-xs font-semibold">מאפייני היישוב (למ״ס) לפי</div>
+          <div className="grid grid-cols-2 rounded-md border border-rule overflow-hidden text-xs">
+            {[['residence', 'מקום מגורים'], ['birthplace', 'מקום לידה']].map(([v, l]) => (
+              <button key={v} onClick={() => set({ place: v })} className={`py-1.5 ${f.place === v ? 'bg-ink text-paper' : ''}`}>{l}</button>
+            ))}
+          </div>
+          <p className="text-[11px] text-sub">ברמת יישוב בלבד. מי שנולד/ה בחו״ל לא נכלל/ת בסינון לפי מקום לידה.</p>
         </div>
-      )}
+        <Group title="אשכול חברתי-כלכלי של היישוב">
+          {Object.entries(SES_LABEL).map(([k, l]) => <Chip key={k} on={f.ses.includes(k)} onClick={() => toggle('ses', k)}>{l}</Chip>)}
+        </Group>
+        <Group title="מדד פריפריאליות">
+          {Object.entries(PER_LABEL).map(([k, l]) => <Chip key={k} on={f.periphery.includes(k)} onClick={() => toggle('periphery', k)}>{l}</Chip>)}
+        </Group>
+        <Group title="הרכב אוכלוסיית היישוב">
+          {Object.entries(POP_LABEL).map(([k, l]) => <Chip key={k} on={f.popType.includes(k)} onClick={() => toggle('popType', k)}>{l}</Chip>)}
+          <Chip on={f.haredi === 'yes'} onClick={() => set({ haredi: f.haredi === 'yes' ? '' : 'yes' })}>יישוב ברוב חרדי</Chip>
+        </Group>
+        {districts.length > 0 && (
+          <div className="grid gap-2">
+            <div className="text-xs font-semibold text-sub">מחוז</div>
+            <select value={f.district} onChange={(e) => set({ district: e.target.value })}
+              className="rounded-lg border border-rule bg-paper px-2 py-1.5 text-sm">
+              <option value="">כל המחוזות</option>
+              {districts.map((d) => <option key={d} value={d}>{d}</option>)}
+            </select>
+          </div>
+        )}
+      </div>
+      <Group title="ארץ לידה">
+        {[['', 'הכול'], ['no', 'נולדו בישראל'], ['yes', 'נולדו בחו״ל']].map(([v, l]) => (
+          <Chip key={v} on={f.bornAbroad === v} onClick={() => set({ bornAbroad: v })}>{l}</Chip>
+        ))}
+      </Group>
     </div>
   );
 }
