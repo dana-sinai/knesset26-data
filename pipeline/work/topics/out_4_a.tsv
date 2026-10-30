@@ -1,0 +1,350 @@
+5660	economy	
+5661	settlement	economy
+5662	settlement	economy
+5663	settlement	
+5664	justice	rights
+5665	transport	settlement
+5666	transport	
+5667	transport	
+5668	transport	
+5669	transport	
+5670	transport	consumer
+5671	transport	
+5672	transport	consumer
+5673	transport	
+5674	transport	consumer
+5675	transport	
+5676	transport	
+5677	transport	security
+5678	transport	
+5679	transport	
+5680	transport	consumer
+5681	transport	
+5682	transport	
+5683	transport	
+5684	transport	
+5685	transport	
+5686	transport	
+5687	transport	
+5688	governance	
+5689	security	governance
+5690	security	governance
+5691	criminal	
+5692	criminal	
+5693	criminal	security
+5694	criminal	
+5695	criminal	
+5696	criminal	
+5697	criminal	
+5698	security	criminal
+5699	security	criminal
+5700	criminal	
+5701	criminal	
+5702	criminal	
+5703	security	criminal
+5704	criminal	security
+5705	security	criminal
+5706	security	criminal
+5707	religion	arab
+5708	education	
+5709	consumer	
+5710	consumer	
+5711	consumer	
+5712	consumer	
+5713	consumer	
+5714	economy	consumer
+5715	economy	consumer
+5716	consumer	
+5717	rights	heritage
+5718	security	
+5719	security	health
+5720	health	
+5721	security	
+5722	foreign	economy
+5723	heritage	local
+5724	education	
+5725	foreign	justice
+5726	criminal	health
+5727	immigration	security
+5728	immigration	security
+5729	security	welfare
+5730	settlement	housing
+5731	settlement	housing
+5732	settlement	housing
+5733	criminal	
+5734	criminal	
+5735	foreign	settlement
+5736	settlement	housing
+5737	arab	housing
+5738	arab	housing
+5739	criminal	rights
+5740	local	
+5741	heritage	
+5742	local	religion
+5743	housing	
+5744	security	
+5745	governance	local
+5746	welfare	
+5747	consumer	
+5748	settlement	justice
+5749	settlement	justice
+5750	housing	
+5751	housing	
+5752	housing	
+5753	labor	
+5754	housing	welfare
+5755	economy	
+5756	economy	
+5757	arab	housing
+5758	arab	housing
+5759	consumer	health
+5760	education	
+5761	environment	economy
+5762	education	
+5763	education	
+5764	labor	economy
+5765	labor	economy
+5766	justice	economy
+5767	housing	economy
+5768	labor	
+5769	labor	
+5770	labor	
+5771	labor	
+5772	labor	
+5773	labor	
+5774	labor	
+5775	labor	
+5776	labor	
+5777	labor	
+5778	labor	
+5779	labor	
+5780	economy	
+5781	economy	
+5782	economy	
+5783	economy	
+5784	economy	consumer
+5785	economy	consumer
+5786	economy	consumer
+5787	economy	consumer
+5788	housing	local
+5789	housing	
+5790	education	housing
+5791	housing	welfare
+5792	welfare	labor
+5793	welfare	labor
+5794	welfare	labor
+5795	welfare	labor
+5796	welfare	labor
+5797	welfare	labor
+5798	welfare	labor
+5799	welfare	labor
+5800	welfare	labor
+5801	welfare	labor
+5802	welfare	labor
+5803	welfare	labor
+5804	welfare	labor
+5805	welfare	labor
+5806	welfare	labor
+5807	welfare	labor
+5808	welfare	labor
+5809	welfare	labor
+5810	welfare	labor
+5811	security	foreign
+5812	foreign	justice
+5813	environment	
+5814	security	foreign
+5815	criminal	
+5816	justice	economy
+5817	heritage	
+5818	heritage	
+5819	heritage	
+5820	heritage	arab
+5821	environment	
+5822	environment	
+5823	environment	
+5824	environment	
+5825	environment	
+5826	environment	
+5827	environment	criminal
+5828	environment	
+5829	environment	
+5830	local	economy
+5831	labor	
+5832	welfare	health
+5833	health	economy
+5834	education	heritage
+5835	education	heritage
+5836	health	economy
+5837	heritage	rights
+5838	heritage	rights
+5839	heritage	rights
+5840	security	criminal
+5841	security	criminal
+5842	health	consumer
+5843	heritage	education
+5844	heritage	
+5845	heritage	
+5846	heritage	religion
+5847	heritage	religion
+5848	heritage	religion
+5849	heritage	religion
+5850	heritage	religion
+5851	heritage	religion
+5852	heritage	religion
+5853	heritage	
+5854	heritage	
+5855	heritage	
+5856	heritage	
+5857	heritage	
+5858	heritage	
+5859	heritage	
+5860	heritage	
+5861	heritage	
+5862	economy	heritage
+5863	justice	
+5864	justice	
+5865	education	labor
+5866	education	labor
+5867	justice	consumer
+5868	economy	
+5869	settlement	
+5870	welfare	
+5871	environment	consumer
+5872	environment	consumer
+5873	agriculture	housing
+5874	environment	
+5875	environment	
+5876	environment	
+5877	environment	
+5878	environment	local
+5879	environment	
+5880	environment	
+5881	environment	
+5882	environment	
+5883	agriculture	
+5884	agriculture	
+5885	agriculture	
+5886	transport	
+5887	justice	
+5888	health	
+5889	arab	housing
+5890	settlement	
+5891	housing	
+5892	housing	
+5893	economy	
+5894	health	labor
+5895	economy	
+5896	agriculture	
+5897	housing	consumer
+5898	religion	consumer
+5899	media	economy
+5900	labor	local
+5901	criminal	education
+5902	health	
+5903	welfare	
+5904	economy	
+5905	economy	
+5906	security	housing
+5907	welfare	
+5908	environment	
+5909	transport	environment
+5910	consumer	economy
+5911	transport	consumer
+5912	transport	consumer
+5913	foreign	security
+5914	foreign	security
+5915	foreign	security
+5916	foreign	security
+5917	economy	
+5918	settlement	
+5919	economy	housing
+5920	education	
+5921	education	
+5922	education	
+5923	education	arab
+5924	justice	arab
+5925	justice	foreign
+5926	governance	justice
+5927	education	
+5928	foreign	
+5929	education	arab
+5930	immigration	
+5931	education	health
+5932	security	
+5933	health	
+5934	security	economy
+5935	security	economy
+5936	security	economy
+5937	security	economy
+5938	security	economy
+5939	security	economy
+5940	security	economy
+5941	security	economy
+5942	security	welfare
+5943	labor	welfare
+5944	arab	rights
+5945	rights	labor
+5946	rights	labor
+5947	arab	labor
+5948	rights	labor
+5949	criminal	heritage
+5950	religion	justice
+5951	justice	welfare
+5952	economy	
+5953	criminal	
+5954	heritage	
+5955	heritage	
+5956	health	foreign
+5957	agriculture	criminal
+5958	education	rights
+5959	justice	rights
+5960	justice	labor
+5961	settlement	
+5962	economy	
+5963	security	rights
+5964	criminal	rights
+5965	criminal	
+5966	environment	
+5967	health	
+5968	health	
+5969	health	
+5970	security	health
+5971	economy	health
+5972	local	criminal
+5973	criminal	
+5974	local	transport
+5975	consumer	security
+5976	labor	religion
+5977	security	economy
+5978	security	
+5979	security	
+5980	security	
+5981	welfare	economy
+5982	immigration	education
+5983	education	
+5984	education	
+5985	education	
+5986	education	
+5987	education	
+5988	education	
+5989	education	
+5990	education	
+5991	education	
+5992	education	
+5993	education	
+5994	education	
+5995	education	
+5996	education	
+5997	education	
+5998	education	
+5999	education	
+6000	education	transport
+6001	education	religion
+6002	education	
+6003	education	
+6004	education	
+6005	education	
+6006	education	
+6007	education	
+6008	education	
+6009	education	
