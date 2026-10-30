@@ -103,6 +103,23 @@ V["contested"] = (V.n >= 20) & (V.a / V.n.clip(lower=1) >= 0.25) & (V.f / V.n.cl
 V["topic"] = V.bill.map(lambda b: bill_topic[b][0])
 V["topic2"] = V.bill.map(lambda b: bill_topic[b][1])
 C = V[V.contested].copy()
+# "בעד = …" lines are written per bill (input/bill_meaning.tsv: BillID \t line, from the bill's title and the
+# Knesset's official summary only) and shown on every contested vote on that bill.
+bill_meaning = {}
+if os.path.exists("pipeline/input/bill_meaning.tsv"):
+    for line in open("pipeline/input/bill_meaning.tsv", encoding="utf-8"):
+        p_ = line.rstrip("\n").split("\t")
+        if len(p_) >= 2 and p_[0].strip().isdigit() and p_[1].strip():
+            bill_meaning[int(p_[0])] = p_[1].strip()
+for r in C.itertuples():
+    if r.bill in bill_meaning and str(r.vid) not in meaning:
+        meaning[str(r.vid)] = "בעד = " + bill_meaning[r.bill]
+json.dump(meaning, open(f"{OUT}/vote_meaning.json", "w"), ensure_ascii=False, separators=(",", ":"))
+missing_meaning = sorted(set(C.bill) - set(bill_meaning))
+with open("pipeline/work/new_meaning_needed.tsv", "w", encoding="utf-8") as fh:
+    for b_ in missing_meaning:
+        fh.write(f"{b_}\t{bill_name.get(b_, '')}\n")
+print("contested bills without a 'בעד =' line:", len(missing_meaning))
 C.to_csv("pipeline/work/contested_votes.csv", index=False)
 print("whole-bill votes:", len(V), "| contested:", len(C), "| by stage:", C.stage.value_counts().to_dict())
 
