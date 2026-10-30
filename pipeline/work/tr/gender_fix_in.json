@@ -1,0 +1,92 @@
+[
+{
+"text": "CEO",
+"gender": "female",
+"field": "career.role",
+"current": "מנכ\"ל"
+},
+{
+"text": "Chair",
+"gender": "male",
+"field": "career.role",
+"current": "יושבת ראש"
+},
+{
+"text": "Co-founder",
+"gender": "female",
+"field": "career.role",
+"current": "מייסד שותף"
+},
+{
+"text": "Deputy Director-General",
+"gender": "male",
+"field": "career.role",
+"current": "סגנית המנהל הכללי"
+},
+{
+"text": "Director-General",
+"gender": "female",
+"field": "career.role",
+"current": "מנכ\"ל"
+},
+{
+"text": "Founder",
+"gender": "male",
+"field": "career.role",
+"current": "מייסדת"
+},
+{
+"text": "Founder and director",
+"gender": "male",
+"field": "career.role",
+"current": "מייסדת ומנהלת"
+},
+{
+"text": "Lawyer",
+"gender": "male",
+"field": "career.role",
+"current": "עורכת דין"
+},
+{
+"text": "Married",
+"gender": "male",
+"field": "family",
+"current": "נשואה"
+},
+{
+"text": "Married, three children",
+"gender": "male",
+"field": "family",
+"current": "נשואה, שלושה ילדים"
+},
+{
+"text": "Married, two children",
+"gender": "male",
+"field": "family",
+"current": "נשואה, שני ילדים"
+},
+{
+"text": "Member of Knesset",
+"gender": "female",
+"field": "career.role",
+"current": "חבר הכנסת"
+},
+{
+"text": "Member of Knesset (Blue and White / National Unity)",
+"gender": "male",
+"field": "career.role",
+"current": "חברת הכנסת (כחול לבן / המחנה הממלכתי)"
+},
+{
+"text": "Social worker",
+"gender": "female",
+"field": "career.role",
+"current": "עובד סוציאלי"
+},
+{
+"text": "Teacher",
+"gender": "male",
+"field": "career.role",
+"current": "מורה"
+}
+]
