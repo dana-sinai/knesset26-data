@@ -88,13 +88,14 @@ fac["f"] = pd.to_datetime(fac.finish).fillna(pd.Timestamp("2026-07-31"))
 
 # ---------- votes
 votes = pd.read_csv(f"{RAW}/ok/kns_plenumvote.csv", low_memory=False)
+votes = votes.sort_values("LastUpdatedDate").drop_duplicates("Id", keep="last")
 votes["dt"] = pd.to_datetime(votes.VoteDateTime.str[:19])
 votes["knesset"] = knesset_of(votes.dt)
 votes = votes[votes.knesset >= KMIN].copy()
 
 res = pd.read_parquet(f"{RAW}/ok/plenumvoteresult.parquet") if os.path.exists(f"{RAW}/ok/plenumvoteresult.parquet") \
     else pd.read_csv(f"{RAW}/ok/kns_plenumvoteresult.csv", usecols=["MkId", "VoteID", "VoteDate", "ResultCode", "ResultDesc"])
-res = res[res.VoteID.isin(votes.Id)].copy()
+res = res[res.VoteID.isin(votes.Id)].drop_duplicates(["VoteID", "MkId"], keep="last").copy()
 code = {"בעד": 1, "נגד": 2, "נמנע": 3, "נוכח": 4, "הצביע": 4}
 res["c"] = res.ResultDesc.map(code).fillna(4).astype(int)
 tot = res.pivot_table(index="VoteID", columns="c", values="MkId", aggfunc="count", fill_value=0)
