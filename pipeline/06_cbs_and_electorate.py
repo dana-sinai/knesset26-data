@@ -174,9 +174,10 @@ for code, r in res_loc.items():
 electorate = {}
 for k in keys:
     tot = party_votes.get(k) if k != "_all" else int(nat["כשרים"])
+    located = tot - unlocated[k]
     electorate[k] = dict(
         votes=tot, unlocated_votes=unlocated[k],
-        dims={d: {g: round(100 * v / tot, 1) for g, v in sorted(prof[k][d].items(), key=lambda x: -x[1])} for d in DIMS},
+        dims={d: {g: round(100 * v / located, 1) for g, v in sorted(prof[k][d].items(), key=lambda x: -x[1])} for d in DIMS},
         avg={m: (round(s / w, 2) if w else None) for m, (s, w) in wavg[k].items()},
         top_localities=[dict(code=c, name=locs.get(c, {}).get("name", str(c)), votes=r.get(k, 0),
                              share=round(100 * r.get(k, 0) / r["valid"], 1) if r["valid"] else None)
