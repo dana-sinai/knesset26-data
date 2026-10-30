@@ -1,0 +1,131 @@
+10155-10159	justice	
+10160-10161	labor	education
+10162-10175	economy	
+10176-10177	justice	
+10178-10179	labor	
+10180	heritage	security
+10181	labor	rights
+10182-10183	economy	
+10184-10185	consumer	justice
+10186	health	
+10187	health	education
+10188	consumer	
+10189-10190	security	labor
+10191	criminal	security
+10192	labor	education
+10193	environment	economy
+10194-10195	economy	
+10196-10198	welfare	
+10199-10200	economy	local
+10201	transport	
+10202	justice	governance
+10203	economy	
+10204	justice	
+10205-10209	immigration	rights
+10210-10216	immigration	
+10217-10221	governance	
+10222	security	labor
+10223	rights	
+10224	security	heritage
+10225-10226	justice	welfare
+10227	housing	
+10228	justice	rights
+10229-10230	housing	
+10231-10234	security	criminal
+10235	criminal	security
+10236	criminal	health
+10237-10238	transport	criminal
+10239	security	foreign
+10240-10243	economy	
+10244	labor	
+10245-10246	heritage	
+10247	welfare	health
+10248-10249	consumer	
+10250	economy	education
+10251	education	welfare
+10252	education	
+10253-10255	agriculture	
+10256	local	governance
+10257	welfare	justice
+10258	criminal	media
+10259	security	governance
+10260-10261	criminal	rights
+10262	environment	
+10263	heritage	
+10264-10265	security	education
+10266	economy	
+10267-10268	housing	consumer
+10269	governance	
+10270	security	welfare
+10271-10275	governance	
+10276	housing	
+10277-10278	housing	
+10279-10281	justice	
+10282-10283	heritage	
+10284	heritage	settlement
+10285-10286	heritage	
+10287	heritage	settlement
+10288	criminal	rights
+10289-10291	criminal	
+10292	housing	consumer
+10293-10294	transport	
+10295	justice	
+10296-10299	criminal	welfare
+10300	justice	
+10301	environment	
+10302-10303	security	welfare
+10304	environment	economy
+10305	agriculture	
+10306-10309	economy	
+10310	environment	
+10311-10312	consumer	economy
+10313	health	
+10314-10315	economy	
+10316-10318	economy	
+10319-10321	health	
+10322	environment	labor
+10323	health	security
+10324	environment	
+10325-10328	justice	
+10329	economy	
+10330	health	rights
+10331-10334	labor	
+10335	criminal	
+10336-10338	security	rights
+10339	security	health
+10340-10341	justice	criminal
+10342	transport	welfare
+10343-10345	heritage	
+10346-10347	transport	economy
+10348	security	criminal
+10349-10351	heritage	
+10352	justice	
+10353	security	
+10354	criminal	
+10355-10363	criminal	
+10364	security	criminal
+10365	health	
+10366	economy	
+10367	criminal	security
+10368	governance	
+10369-10370	heritage	immigration
+10371-10372	labor	
+10373-10374	economy	
+10375	justice	
+10376	economy	
+10377	environment	
+10378-10379	security	economy
+10380	agriculture	
+10381	consumer	education
+10382	education	consumer
+10383	welfare	education
+10384	consumer	
+10385-10393	economy	consumer
+10394	health	
+10395	settlement	justice
+10396	governance	
+10397	transport	environment
+10398-10401	media	
+10402	transport	
+10403	governance	security
+10404	health	
