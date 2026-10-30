@@ -1058,3 +1058,358 @@
 9547	welfare	health
 9548	consumer	health
 9549	consumer	health
+9550	transport	consumer
+9551	consumer	environment
+9552	economy	welfare
+9553	security	welfare
+9554	security	welfare
+9555	security	welfare
+9556	security	welfare
+9557	security	welfare
+9558	labor	
+9559	local	justice
+9560	economy	heritage
+9561	security	immigration
+9562	welfare	
+9563	security	welfare
+9564	security	welfare
+9565	security	welfare
+9566	security	welfare
+9567	security	welfare
+9568	security	welfare
+9569	security	welfare
+9570	security	welfare
+9571	security	welfare
+9572	security	welfare
+9573	environment	economy
+9574	rights	immigration
+9575	justice	governance
+9576	governance	rights
+9577	settlement	governance
+9578	governance	
+9579	governance	
+9580	governance	
+9581	governance	
+9582	governance	
+9583	governance	
+9584	justice	governance
+9585	justice	governance
+9586	settlement	foreign
+9587	governance	criminal
+9588	governance	criminal
+9589	governance	criminal
+9590	immigration	
+9591	environment	
+9592	immigration	
+9593	heritage	
+9594	justice	governance
+9595	housing	
+9596	justice	governance
+9597	governance	
+9598	governance	
+9599	governance	
+9600	governance	criminal
+9601	governance	labor
+9602	governance	
+9603	religion	governance
+9604	governance	
+9605	governance	security
+9606	governance	
+9607	governance	
+9608	governance	
+9609	governance	
+9610	governance	
+9611	governance	
+9612	governance	justice
+9613	governance	
+9614	governance	
+9615	governance	
+9616	governance	
+9617	governance	
+9618	governance	security
+9619	governance	
+9620	governance	
+9621	governance	
+9622	governance	
+9623	governance	
+9624	governance	rights
+9625	governance	
+9626	governance	
+9627	governance	
+9628	governance	rights
+9629	governance	rights
+9630	governance	
+9631	governance	
+9632	governance	
+9633	governance	
+9634	governance	security
+9635	governance	
+9636	governance	
+9637	governance	
+9638	governance	
+9639	rights	governance
+9640	rights	governance
+9641	governance	
+9642	governance	
+9643	governance	security
+9644	governance	rights
+9645	governance	foreign
+9646	governance	security
+9647	governance	
+9648	governance	
+9649	governance	
+9650	governance	
+9651	governance	
+9652	governance	justice
+9653	governance	
+9654	governance	security
+9655	governance	security
+9656	governance	security
+9657	governance	
+9658	governance	
+9659	governance	
+9660	governance	
+9661	governance	
+9662	governance	criminal
+9663	governance	security
+9664	governance	justice
+9665	governance	justice
+9666	governance	justice
+9667	governance	
+9668	governance	security
+9669	governance	rights
+9670	governance	media
+9671	governance	
+9672	governance	rights
+9673	governance	
+9674	governance	justice
+9675	foreign	
+9676	governance	criminal
+9677	arab	rights
+9678	arab	rights
+9679	governance	
+9680	governance	
+9681	governance	
+9682	governance	
+9683	governance	
+9684	governance	security
+9685	governance	
+9686	governance	
+9687	governance	criminal
+9688	governance	
+9689	governance	security
+9690	governance	foreign
+9691	governance	criminal
+9692	governance	
+9693	governance	
+9694	governance	
+9695	governance	
+9696	governance	
+9697	governance	
+9698	governance	
+9699	governance	
+9700	governance	
+9701	governance	
+9702	governance	
+9703	governance	
+9704	governance	
+9705	governance	
+9706	governance	
+9707	governance	
+9708	governance	
+9709	governance	
+9710	governance	criminal
+9711	governance	criminal
+9712	governance	criminal
+9713	governance	
+9714	governance	
+9715	governance	
+9716	governance	
+9717	governance	
+9718	governance	
+9719	governance	
+9720	governance	
+9721	governance	
+9722	governance	heritage
+9723	governance	
+9724	governance	criminal
+9725	governance	criminal
+9726	governance	criminal
+9727	governance	criminal
+9728	governance	criminal
+9729	governance	
+9730	governance	
+9731	governance	
+9732	governance	
+9733	governance	
+9734	governance	
+9735	governance	security
+9736	governance	
+9737	governance	
+9738	governance	
+9739	governance	health
+9740	governance	justice
+9741	governance	justice
+9742	governance	
+9743	governance	
+9744	governance	
+9745	governance	
+9746	governance	
+9747	governance	
+9748	governance	
+9749	governance	
+9750	governance	
+9751	governance	foreign
+9752	governance	
+9753	governance	foreign
+9754	governance	foreign
+9755	governance	
+9756	governance	
+9757	governance	
+9758	governance	
+9759	governance	
+9760	governance	
+9761	governance	
+9762	governance	
+9763	governance	
+9764	governance	
+9765	governance	
+9766	governance	
+9767	arab	rights
+9768	immigration	
+9769	rights	
+9770	rights	
+9771	rights	
+9772	justice	governance
+9773	justice	governance
+9774	justice	governance
+9775	justice	governance
+9776	justice	governance
+9777	justice	governance
+9778	justice	governance
+9779	justice	
+9780	justice	
+9781	justice	
+9782	justice	criminal
+9783	justice	
+9784	justice	governance
+9785	justice	governance
+9786	justice	governance
+9787	justice	governance
+9788	justice	governance
+9789	justice	governance
+9790	justice	governance
+9791	justice	governance
+9792	justice	
+9793	justice	
+9794	justice	governance
+9795	justice	governance
+9796	justice	
+9797	justice	governance
+9798	justice	governance
+9799	justice	
+9800	justice	
+9801	justice	governance
+9802	justice	
+9803	justice	
+9804	justice	governance
+9805	justice	governance
+9806	justice	criminal
+9807	justice	governance
+9808	justice	media
+9809	justice	governance
+9810	justice	
+9811	justice	rights
+9812	justice	rights
+9813	environment	rights
+9814	welfare	rights
+9815	security	
+9816	rights	
+9817	rights	religion
+9818	rights	labor
+9819	rights	labor
+9820	governance	
+9821	settlement	rights
+9822	settlement	foreign
+9823	settlement	
+9824	settlement	
+9825	settlement	religion
+9826	settlement	governance
+9827	settlement	governance
+9828	settlement	governance
+9829	settlement	economy
+9830	settlement	
+9831	rights	governance
+9832	governance	rights
+9833	governance	rights
+9834	governance	rights
+9835	governance	rights
+9836	governance	rights
+9837	arab	rights
+9838	governance	rights
+9839	governance	rights
+9840	arab	rights
+9841	governance	rights
+9842	governance	rights
+9843	rights	
+9844	rights	
+9845	rights	governance
+9846	rights	
+9847	rights	welfare
+9848	rights	justice
+9849	rights	justice
+9850	rights	justice
+9851	rights	
+9852	rights	
+9853	rights	
+9854	rights	immigration
+9855	rights	justice
+9856	rights	media
+9857	rights	
+9858	rights	justice
+9859	governance	
+9860	immigration	
+9861	religion	
+9862	governance	
+9863	governance	
+9864	governance	
+9865	governance	
+9866	governance	rights
+9867	rights	governance
+9868	rights	governance
+9869	governance	
+9870	governance	
+9871	governance	justice
+9872	governance	heritage
+9873	governance	
+9874	settlement	governance
+9875	settlement	governance
+9876	settlement	governance
+9877	religion	governance
+9878	governance	
+9879	foreign	governance
+9880	economy	health
+9881	economy	governance
+9882	economy	local
+9883	economy	local
+9884	economy	governance
+9885	economy	governance
+9886	economy	governance
+9887	economy	governance
+9888	economy	governance
+9889	economy	governance
+9890	economy	governance
+9891	economy	governance
+9892	economy	governance
+9893	economy	governance
+9894	economy	governance
+9895	economy	security
+9896	economy	governance
+9897	economy	governance
+9898	security	economy
+9899	governance	
+9900	governance	
+9901	governance	criminal
+9902	governance	criminal
+9903	governance	criminal
+9904	criminal	security
