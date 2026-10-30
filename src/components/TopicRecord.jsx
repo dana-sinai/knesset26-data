@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
-import { useData, useParties, VOTE_CODE, VOTE_CLASS, fmt } from '@/lib/data';
+import { useData, useParties, useBillSummaries, VOTE_CODE, VOTE_CLASS, fmt } from '@/lib/data';
 
 const STAGE = { final: 'אישור סופי', early: 'קריאה טרומית / ראשונה', whole: 'הצבעה על ההצעה' };
 const fmtDate = (d) => (d ? d.split('-').reverse().join('.') : '');
@@ -43,17 +43,26 @@ function Agreement({ agreement }) {
 
 function VoteRows({ list, party }) {
   const [n, setN] = useState(12);
+  const { data: summaries } = useBillSummaries();
   return (
     <ul className="grid gap-1">
       {list.slice(0, n).map((x) => {
         // MK row: [vid, k, date, name, stage, code, f, a, meaning]; party row: [vid, k, date, name, stage, pf, pa, f, a, meaning]
         const [vid, k, date, name, stage] = x;
         const meaning = party ? x[9] : x[8];
+        const billId = party ? x[10] : x[9];
+        const summary = summaries?.[billId];
         return (
           <li key={vid} className="grid grid-cols-[1fr_auto] gap-3 py-1.5 border-b border-rule text-sm">
             <span>
               <Link to={`/votes?k=${k}&id=${vid}`} className="hover:underline">{name}</Link>
               {meaning && <span className="block text-xs text-ink/80 mt-0.5">{meaning}</span>}
+              {summary && (
+                <details className="text-xs text-ink/80 mt-0.5">
+                  <summary className="cursor-pointer text-sub">תקציר החוק</summary>
+                  <span className="block mt-1 leading-relaxed">{summary}</span>
+                </details>
+              )}
               <span className="block text-[11px] text-sub num">{fmtDate(date)} · {STAGE[stage]} · במליאה: בעד {party ? x[7] : x[6]}, נגד {party ? x[8] : x[7]}</span>
             </span>
             <span className="self-start">

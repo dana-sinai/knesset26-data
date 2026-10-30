@@ -179,7 +179,7 @@ def vote_list(pid):
     for r in Crows:
         code = d.get(r.vid)
         if code in (1, 2, 3):
-            out[r.topic].append([r.vid, r.k, r.dt, bill_name.get(r.bill, ""), r.stage, code, int(r.f), int(r.a), meaning.get(str(r.vid))])
+            out[r.topic].append([r.vid, r.k, r.dt, bill_name.get(r.bill, ""), r.stage, code, int(r.f), int(r.a), meaning.get(str(r.vid)), int(r.bill)])
     for t in out:
         out[t].sort(key=lambda x: x[2], reverse=True)
     return out
@@ -209,7 +209,7 @@ for party in parties:
         if pty != party or vid not in Cidx.index:
             continue
         r = Cidx.loc[vid]
-        by_topic[r["topic"]].append([int(vid), int(r["k"]), r["dt"], bill_name.get(int(r["bill"]), ""), r["stage"], f_, a_, int(r["f"]), int(r["a"]), meaning.get(str(vid))])
+        by_topic[r["topic"]].append([int(vid), int(r["k"]), r["dt"], bill_name.get(int(r["bill"]), ""), r["stage"], f_, a_, int(r["f"]), int(r["a"]), meaning.get(str(vid)), int(r["bill"])])
     for t in by_topic:
         by_topic[t].sort(key=lambda x: x[2], reverse=True)
     json.dump(dict(members_with_record=len(voters), initiated=dict(ini), votes=by_topic),
@@ -277,7 +277,7 @@ def cluster_topic(vids, min_votes=15, min_shared=10):
                 continue
             r = Cidx.loc[vid]
             sig.append((max(vals) - min(vals), int(vid), int(r["k"]), r["dt"], bill_name.get(int(r["bill"]), ""), r["stage"],
-                        [round(float(x), 2) for x in vals], meaning.get(str(vid))))
+                        [round(float(x), 2) for x in vals], meaning.get(str(vid)), int(r["bill"])))
         sig.sort(key=lambda x: (-round(x[0], 1), -int(x[3][:4])))
         seen, uniq = set(), []
         for x in sig:

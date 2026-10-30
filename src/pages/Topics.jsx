@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useData, useMKs, useParties } from '@/lib/data';
+import { useData, useMKs, useParties, useBillSummaries } from '@/lib/data';
 import { Loading, Page, Section } from '@/components/bits';
 import { useOpenMK } from '@/components/MKDrawer';
 
@@ -55,6 +55,7 @@ export default function Topics() {
   const { data: topics } = useData('topics/topics.json');
   const { data: mks } = useMKs();
   const { data: parties } = useParties();
+  const { data: summaries } = useBillSummaries();
   const [t, setT] = useState('all');
   const pidToMK = useMemo(() => Object.fromEntries((mks || []).filter((m) => m.person_id).map((m) => [Number(m.person_id), m])), [mks]);
   const partyById = useMemo(() => Object.fromEntries((parties || []).map((p) => [p.id, p])), [parties]);
@@ -119,11 +120,17 @@ export default function Topics() {
                 {d.clusters.map((c) => <th key={c.id} className="text-right font-medium px-3 py-2 whitespace-nowrap">{GROUP_NAMES[c.id]}: בעד</th>)}
               </tr></thead>
               <tbody>
-                {d.separating.map(([vid, k, date, name, stage, shares, meaning]) => (
+                {d.separating.map(([vid, k, date, name, stage, shares, meaning, billId]) => (
                   <tr key={vid} className="border-t border-rule align-top">
                     <td className="px-3 py-2">
                       <Link to={`/votes?k=${k}&id=${vid}`} className="hover:underline">{name}</Link>
                       {meaning && <div className="text-xs text-ink/80 mt-0.5">{meaning}</div>}
+                      {summaries?.[billId] && (
+                        <details className="text-xs text-ink/80 mt-0.5">
+                          <summary className="cursor-pointer text-sub">תקציר החוק</summary>
+                          <span className="block mt-1 leading-relaxed">{summaries[billId]}</span>
+                        </details>
+                      )}
                       <div className="text-[11px] text-sub">{{ final: 'אישור סופי', early: 'קריאה טרומית / ראשונה', whole: 'הצבעה על ההצעה' }[stage]}</div>
                     </td>
                     <td className="px-3 py-2 num text-sub whitespace-nowrap">{fmtDate(date)}</td>
