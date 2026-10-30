@@ -20,7 +20,7 @@ export default function Layout() {
       <header className="sticky top-0 z-[1100] border-b border-rule bg-paper/95 backdrop-blur">
         <div className="mx-auto max-w-7xl px-4 h-14 flex items-center gap-6">
           <Link to="/" className="flex items-baseline gap-2 shrink-0" onClick={() => setOpen(false)}>
-            <span className="font-display text-xl font-black tracking-tight">הכנסת ה-26</span>
+            <span className="font-title text-2xl leading-none">הכנסת ה-26</span>
             <span className="text-xs text-sub hidden sm:inline">מאגר נתונים פתוח</span>
           </Link>
           <nav className="hidden md:flex gap-1 text-sm">
@@ -55,6 +55,10 @@ export default function Layout() {
           <p>
             הנתונים נאספו ועובדו ע״י <strong className="text-ink">ד״ר דנה סיני</strong>. כל עובדה מקושרת למקור; מצאתם טעות?
             {' '}<Link className="underline" to="/about">ראו איך לדווח</Link>.
+          </p>
+          <p className="text-xs">
+            הכותרות באתר כתובות בגופן <a className="underline" href="https://www.ot-hayim.co.il/fonts/amit-man/" target="_blank" rel="noreferrer">״עמית מן״</a>,
+            {' '}שנוצר מכתב ידו של עמית מן ז״ל במסגרת <a className="underline" href="https://www.ot-hayim.co.il/" target="_blank" rel="noreferrer">מיזם אות.חיים</a>. לזכרו.
           </p>
           <p dir="ltr" className="text-xs text-left">
             Independent analysis by Dr. Dana Sinai, done in a personal capacity. It does not represent, and is not affiliated

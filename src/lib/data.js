@@ -20,10 +20,10 @@ export const useMeta = () => useData('meta.json');
 
 export const VOTE_CODE = { 1: 'בעד', 2: 'נגד', 3: 'נמנע', 4: 'נוכח' };
 export const VOTE_CLASS = {
-  1: 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-200',
-  2: 'bg-rose-100 text-rose-900 dark:bg-rose-900/40 dark:text-rose-200',
-  3: 'bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200',
-  4: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',
+  1: 'bg-[#E3E9E4] text-[#2F4A3A] dark:bg-[#2F4A3A]/50 dark:text-[#D3E0D6]',
+  2: 'bg-[#EEE2E2] text-[#6A3036] dark:bg-[#6A3036]/50 dark:text-[#EAD3D5]',
+  3: 'bg-[#ECE7DC] text-[#5F5236] dark:bg-[#5F5236]/50 dark:text-[#E6DCC6]',
+  4: 'bg-sand text-sub',
 };
 
 export const EDU_LABEL = {

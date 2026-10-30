@@ -10,8 +10,8 @@ export function Initials({ name, color, size = 44 }) {
   const parts = (name || '').split(' ').filter(Boolean);
   const ini = (parts[0]?.[0] || '') + (parts.length > 1 ? parts[parts.length - 1][0] : '');
   return (
-    <div className="rounded-full grid place-items-center font-display font-bold text-white shrink-0"
-      style={{ width: size, height: size, background: color, fontSize: size * 0.38 }} aria-hidden>
+    <div className="rounded-full grid place-items-center font-display font-semibold text-ink bg-sand shrink-0"
+      style={{ width: size, height: size, boxShadow: `inset 0 0 0 2px ${color || 'transparent'}`, fontSize: size * 0.36 }} aria-hidden>
       {ini}
     </div>
   );

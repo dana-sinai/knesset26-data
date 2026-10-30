@@ -119,10 +119,10 @@ export default function Home() {
           {charts && sel.length > 0 && (
             <div className="grid md:grid-cols-2 gap-4">
               <Card title="נשים וגברים לפי מפלגה">
-                <StackedH rows={charts.gender} keys={[{ key: 'female', name: 'נשים', color: '#C48C2E' }, { key: 'male', name: 'גברים', color: '#3B4A6B' }]} />
+                <StackedH rows={charts.gender} keys={[{ key: 'female', name: 'נשים', color: '#B8A27C' }, { key: 'male', name: 'גברים', color: '#3B4A6B' }]} />
               </Card>
               <Card title="חדשים מול ותיקים">
-                <StackedH rows={charts.tenure} keys={[{ key: 'new', name: 'חדשים', color: '#C48C2E' }, { key: 'ret', name: 'כיהנו בעבר', color: '#3B4A6B' }]} />
+                <StackedH rows={charts.tenure} keys={[{ key: 'new', name: 'חדשים', color: '#B8A27C' }, { key: 'ret', name: 'כיהנו בעבר', color: '#3B4A6B' }]} />
               </Card>
               <Card title="גיל ביום הבחירות" note="גיל משוער (~) כשידועה רק שנת הלידה">
                 <VBar data={charts.age} />
