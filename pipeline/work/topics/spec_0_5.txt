@@ -1,0 +1,118 @@
+1000	governance	welfare
+1001-1003	governance	foreign
+1004-1005	governance	security
+1006-1007	governance	education
+1008	governance	welfare
+1009	governance	
+1010	governance	labor
+1011	governance	foreign
+1012	governance	labor
+1013-1025	governance	
+1026	governance	labor
+1027	governance	transport
+1028	governance	foreign
+1029	governance	
+1030	welfare	security
+1031-1037	welfare	
+1038	welfare	
+1039-1044	welfare	
+1045	welfare	security
+1046-1047	welfare	education
+1048-1079	welfare	
+1080	welfare	education
+1081	welfare	health
+1082	welfare	rights
+1083-1085	welfare	
+1086	welfare	rights
+1087-1089	welfare	
+1090	welfare	immigration
+1091-1093	welfare	
+1094	welfare	education
+1095	welfare	
+1096	welfare	immigration
+1097-1100	welfare	
+1101	welfare	security
+1102-1104	welfare	
+1105	welfare	education
+1106-1107	welfare	
+1108-1109	labor	immigration
+1110	welfare	
+1111-1112	welfare	
+1113-1114	housing	rights
+1115-1116	welfare	justice
+1117	welfare	foreign
+1118	economy	environment
+1119	labor	welfare
+1120	welfare	
+1121	labor	welfare
+1122	welfare	rights
+1123	welfare	health
+1124-1125	labor	welfare
+1126-1127	welfare	
+1128-1129	welfare	
+1130	welfare	health
+1131	welfare	rights
+1132-1133	welfare	
+1134	welfare	education
+1135	labor	security
+1136	welfare	rights
+1137	welfare	security
+1138-1139	welfare	security
+1140	welfare	labor
+1141	welfare	labor
+1142	welfare	security
+1143	welfare	labor
+1144-1145	welfare	
+1146	welfare	security
+1147	welfare	security
+1148	welfare	rights
+1149-1152	welfare	
+1153	welfare	rights
+1154-1156	welfare	health
+1157-1158	labor	welfare
+1159	welfare	justice
+1160-1161	welfare	labor
+1162	welfare	justice
+1163	welfare	rights
+1164	welfare	security
+1165-1167	welfare	economy
+1168	welfare	labor
+1169	labor	welfare
+1170-1171	welfare	
+1172-1175	welfare	health
+1176-1177	welfare	rights
+1178-1181	welfare	
+1182-1183	welfare	health
+1184-1185	welfare	health
+1186-1187	welfare	
+1188-1189	welfare	health
+1190-1191	welfare	health
+1192-1194	welfare	
+1195	welfare	justice
+1196-1198	labor	welfare
+1199	labor	security
+1200-1201	labor	welfare
+1202	labor	security
+1203-1209	labor	welfare
+1210-1211	labor	economy
+1212-1213	welfare	education
+1214	welfare	
+1215-1218	labor	welfare
+1219-1221	labor	welfare
+1222	welfare	
+1223	welfare	security
+1224	labor	security
+1225	welfare	health
+1226-1227	welfare	
+1228	welfare	health
+1229-1232	welfare	
+1233	welfare	health
+1234	welfare	security
+1235-1237	labor	welfare
+1238	labor	agriculture
+1239	labor	welfare
+1240	welfare	economy
+1241	welfare	justice
+1242	welfare	
+1243	welfare	justice
+1244-1249	welfare	
