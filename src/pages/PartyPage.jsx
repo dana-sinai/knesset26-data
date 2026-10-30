@@ -5,6 +5,7 @@ import { SES_B } from '@/lib/filters';
 import { MKCard, Loading, Page, Section, Stat } from '@/components/bits';
 import Electorate from '@/components/Electorate';
 import VoteShareMap from '@/components/VoteShareMap';
+import TopicRecord from '@/components/TopicRecord';
 
 function MKvsVoters({ mks, e, color }) {
   // compares where the party's MKs live with where its voters voted (both by CBS socio-economic cluster of the locality)
@@ -97,6 +98,10 @@ export default function PartyPage() {
           </div>
         </Section>
       )}
+      <Section title="בעד ונגד, בפועל">
+        <p className="text-sm text-sub -mt-2">לפי מה שעשו בכנסות קודמות מי שנבחרו היום מטעם המפלגה. רוב המפלגה = רוב חבריה הנוכחיים שהצביעו באותה הצבעה.</p>
+        <TopicRecord partyId={id} />
+      </Section>
     </Page>
   );
 }

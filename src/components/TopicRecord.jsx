@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import { useData, useParties, VOTE_CODE, VOTE_CLASS, fmt } from '@/lib/data';
