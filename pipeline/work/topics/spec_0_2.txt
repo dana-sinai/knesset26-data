@@ -1,0 +1,162 @@
+250	labor	
+251	foreign	governance
+252-253	security	foreign
+254	criminal	security
+255	settlement	
+256	security	justice
+257	governance	heritage
+258	education	consumer
+259	immigration	criminal
+260	media	security
+261	criminal	media
+262	criminal	rights
+263	education	
+264	immigration	
+265	rights	health
+266-267	criminal	environment
+268	health	criminal
+269	criminal	heritage
+270	education	
+271-272	governance	religion
+273	media	criminal
+274	health	
+275	immigration	rights
+276	foreign	security
+277	consumer	transport
+278-279	settlement	foreign
+280	criminal	rights
+281	local	environment
+282	environment	
+283	security	welfare
+284	foreign	
+285	immigration	foreign
+286	media	health
+287	environment	
+288	economy	security
+289	environment	
+290-291	health	criminal
+292	environment	
+293	labor	
+294	health	
+295-301	education	welfare
+302-303	education	
+304	local	
+305	health	
+306	consumer	
+307	settlement	
+308	labor	
+309	transport	health
+310	labor	justice
+311	economy	security
+312	security	foreign
+313-315	governance	labor
+316	labor	health
+317	local	consumer
+318-323	health	
+324	health	welfare
+325-329	health	
+330	health	education
+331-332	health	
+333-334	health	education
+335	health	
+336-338	health	
+339	health	education
+340	health	
+341-342	health	
+343	health	security
+344-345	health	
+346	health	education
+347	health	
+348	health	education
+349	health	welfare
+350	health	labor
+351-356	health	
+357-358	health	
+359-361	health	
+362	health	welfare
+363-364	health	
+365	health	education
+366	health	
+367	health	immigration
+368	health	education
+369	health	education
+370	health	
+371	health	immigration
+372	health	welfare
+373-381	health	
+382	health	welfare
+383	health	economy
+384	health	economy
+385	health	
+386	health	welfare
+387-388	health	
+389	health	
+390-394	health	
+395	health	welfare
+396-397	health	
+398-399	health	
+400	health	
+401	health	economy
+402-403	health	
+404	health	rights
+405	health	criminal
+406-407	health	
+408-409	health	
+410	health	
+411	health	rights
+412	health	welfare
+413-414	health	
+415	health	
+416	health	
+417	health	
+418	health	welfare
+419-421	health	
+422-423	health	
+424	health	
+425	health	security
+426-427	health	economy
+428	health	welfare
+429	health	economy
+430	health	welfare
+431-432	health	welfare
+433	health	
+434	health	welfare
+435-436	health	welfare
+437	health	education
+438	health	
+439	health	
+440-441	health	welfare
+442	health	
+443	health	welfare
+444	health	
+445	health	
+446-447	health	
+448-451	health	
+452	health	rights
+453	health	
+454	health	economy
+455	health	
+456-459	health	welfare
+460	health	
+461	health	
+462	health	economy
+463-464	health	
+465	health	criminal
+466	health	education
+467	health	welfare
+468	health	education
+469-470	health	welfare
+471-472	health	
+473-474	health	
+475	health	welfare
+476	health	immigration
+477-482	health	
+483-484	health	
+485	health	economy
+486-489	health	
+490	health	welfare
+491-494	health	
+495	health	
+496	health	
+497	health	welfare
+498-499	health	
