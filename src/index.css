@@ -121,3 +121,7 @@
 .leaflet-container { font-family: var(--font-body); background: rgb(var(--sand)); }
 .leaflet-popup-content { direction: rtl; text-align: right; margin: 10px 12px; }
 .num { font-variant-numeric: tabular-nums; }
+
+/* quiet, monochrome base map so the party colours carry the meaning */
+.leaflet-tile-pane { filter: grayscale(1) contrast(0.92) brightness(1.06); }
+.dark .leaflet-tile-pane { filter: grayscale(1) invert(1) contrast(0.85) brightness(0.9); }
