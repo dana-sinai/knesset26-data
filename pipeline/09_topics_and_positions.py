@@ -64,6 +64,20 @@ if os.path.exists(extra):
             bill_topic[int(p[0])] = [p[1], p[2] if len(p) > 2 and p[2] in TOPICS else None]
             if len(p) > 3 and p[3]:
                 bill_name.setdefault(int(p[0]), p[3])
+# bills that appeared since the classification (new votes or new bills by current MKs) -> list for the daily job
+kb = pd.read_csv("pipeline/raw/ok/kns_bill.csv", usecols=["BillID", "KnessetNum", "Name"], low_memory=False)
+kb_name = dict(zip(kb.BillID.astype(int), kb.Name.astype(str)))
+seen_items = set()
+for f in glob.glob(f"{D}/votes/meta_k*.json"):
+    seen_items |= {int(v[7]) for v in json.load(open(f))["votes"] if v[7] is not None}
+for f in glob.glob(f"{D}/bills/mk_*.json"):
+    seen_items |= {int(b["bill_id"]) for b in json.load(open(f))}
+new_bills = sorted(b for b in seen_items if b in kb_name and b not in bill_topic)
+with open("pipeline/work/new_bills_unclassified.tsv", "w", encoding="utf-8") as fh:
+    for b in new_bills:
+        fh.write(f"{b}\t{kb_name[b]}\n")
+        bill_name[b] = kb_name[b]
+print("new bills waiting for a topic:", len(new_bills))
 json.dump(bill_topic, open(f"{OUT}/bill_topics.json", "w"), separators=(",", ":"))
 meaning = json.load(open("pipeline/input/vote_meaning.json")) if os.path.exists("pipeline/input/vote_meaning.json") else {}
 print("bills with topic:", len(bill_topic), "| unclassified names:", sum(1 for n in set(bills.norm) if n not in topic_of_name))
