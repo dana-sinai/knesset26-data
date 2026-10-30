@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { LayoutGrid, Table2, Download } from 'lucide-react';
 import { useMKs, useParties, EDU_LABEL, pct } from '@/lib/data';
 import { useMKFilters, METRICS, metricValue } from '@/lib/filters';

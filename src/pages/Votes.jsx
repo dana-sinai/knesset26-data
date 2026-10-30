@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useMKs, useParties, useData, VOTE_CODE, VOTE_CLASS } from '@/lib/data';
 import { Loading, Page } from '@/components/bits';
 import { MKLink } from '@/components/MKDrawer';
