@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 # Daily refresh: download what changed on the oKnesset mirror of the Knesset open data, rebuild the site data.
-# Usage (from the app root):  bash pipeline/run_daily.sh
+# Usage (from the app root):  bash pipeline/run_daily.sh fetch   then   bash pipeline/run_daily.sh build
+#   (two calls so each stays well under a command time limit; "all" runs both)
 # Afterwards, the scheduled task classifies any bills listed in pipeline/work/new_bills_unclassified.tsv
 # (appending to pipeline/input/bill_topics_extra.tsv), adds "בעד = …" lines for new contested votes to
 # pipeline/input/vote_meaning.json, reruns step 09 and saves a checkpoint.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+STAGE="${1:-all}"
 python3 -c "import pandas, pyarrow, sklearn, pyproj" 2>/dev/null || pip install -q pandas pyarrow scikit-learn pyproj openpyxl
+if [ "$STAGE" = "fetch" ] || [ "$STAGE" = "all" ]; then
 B=https://production.oknesset.org/pipelines/data
 R=pipeline/raw/ok
 declare -A SRC=(
@@ -40,6 +43,8 @@ r.to_parquet("pipeline/raw/ok/plenumvoteresult.parquet")
 print("parquet rebuilt:", len(r))
 PY
 fi
+fi
+if [ "$STAGE" = "fetch" ]; then exit 0; fi
 cp public/data/votes/index.json pipeline/work/votes_index_before.json 2>/dev/null || true
 cd pipeline
 python3 01_match_roster.py | tail -3
