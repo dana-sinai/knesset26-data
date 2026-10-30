@@ -100,7 +100,7 @@ export default function Home() {
       </header>
 
       <SeatStrip mks={mks} parties={parties} groups={meta?.groups} />
-      {meta?.groups_source && <p className="text-[11px] text-sub -mt-6">{meta.groups_source}.</p>}
+      {meta?.groups_source && <p className="text-[11px] text-sub -mt-6">{meta.groups_source}. מסגרת זהב = חברת כנסת.</p>}
 
       <div className="grid lg:grid-cols-[300px_1fr] gap-8 items-start">
         <aside className="lg:sticky lg:top-20 rounded-xl border border-rule p-4 bg-sand/40">
