@@ -348,3 +348,353 @@
 8837	immigration	criminal
 8838	education	
 8839	education	rights
+8840	settlement	religion
+8841	rights	housing
+8842	rights	labor
+8843	rights	labor
+8844	labor	security
+8845	rights	labor
+8846	rights	religion
+8847	rights	labor
+8848	rights	labor
+8849	rights	labor
+8850	rights	labor
+8851	rights	labor
+8852	labor	
+8853	rights	labor
+8854	labor	rights
+8855	labor	
+8856	arab	labor
+8857	labor	rights
+8858	arab	labor
+8859	arab	labor
+8860	rights	labor
+8861	rights	labor
+8862	labor	rights
+8863	labor	rights
+8864	rights	labor
+8865	education	rights
+8866	rights	housing
+8867	rights	labor
+8868	arab	labor
+8869	rights	
+8870	rights	governance
+8871	welfare	heritage
+8872	welfare	labor
+8873	welfare	
+8874	welfare	housing
+8875	welfare	labor
+8876	welfare	education
+8877	welfare	labor
+8878	welfare	transport
+8879	welfare	transport
+8880	welfare	transport
+8881	welfare	
+8882	welfare	
+8883	welfare	transport
+8884	welfare	transport
+8885	welfare	
+8886	welfare	
+8887	welfare	labor
+8888	welfare	labor
+8889	welfare	
+8890	welfare	transport
+8891	welfare	labor
+8892	welfare	
+8893	welfare	transport
+8894	welfare	
+8895	welfare	
+8896	welfare	
+8897	welfare	
+8898	welfare	
+8899	welfare	
+8900	welfare	
+8901	welfare	
+8902	arab	rights
+8903	justice	religion
+8904	health	economy
+8905	health	economy
+8906	criminal	
+8907	criminal	
+8908	criminal	
+8909	criminal	
+8910	criminal	
+8911	criminal	security
+8912	criminal	
+8913	criminal	
+8914	criminal	security
+8915	criminal	security
+8916	criminal	
+8917	criminal	
+8918	criminal	
+8919	criminal	
+8920	criminal	
+8921	security	
+8922	media	heritage
+8923	media	heritage
+8924	justice	media
+8925	justice	media
+8926	media	education
+8927	media	welfare
+8928	media	welfare
+8929	media	welfare
+8930	media	welfare
+8931	media	welfare
+8932	media	welfare
+8933	media	welfare
+8934	media	immigration
+8935	rights	governance
+8936	rights	religion
+8937	rights	local
+8938	rights	local
+8939	rights	local
+8940	rights	
+8941	rights	
+8942	rights	
+8943	rights	governance
+8944	rights	
+8945	rights	religion
+8946	rights	
+8947	rights	
+8948	welfare	labor
+8949	environment	
+8950	governance	
+8951	education	immigration
+8952	education	welfare
+8953	environment	heritage
+8954	economy	
+8955	health	security
+8956	health	religion
+8957	health	rights
+8958	health	rights
+8959	governance	
+8960	settlement	
+8961	environment	
+8962	justice	governance
+8963	security	governance
+8964	labor	welfare
+8965	consumer	economy
+8966	religion	rights
+8967	religion	rights
+8968	religion	rights
+8969	religion	rights
+8970	religion	
+8971	religion	
+8972	religion	
+8973	religion	
+8974	religion	
+8975	religion	
+8976	religion	rights
+8977	religion	
+8978	religion	
+8979	religion	
+8980	religion	
+8981	religion	
+8982	religion	
+8983	religion	
+8984	religion	
+8985	religion	
+8986	religion	rights
+8987	religion	rights
+8988	religion	rights
+8989	religion	
+8990	religion	
+8991	religion	
+8992	religion	
+8993	religion	
+8994	religion	
+8995	criminal	welfare
+8996	security	local
+8997	welfare	health
+8998	health	welfare
+8999	housing	security
+9000	welfare	housing
+9001	security	local
+9002	environment	
+9003	immigration	housing
+9004	immigration	housing
+9005	immigration	housing
+9006	local	security
+9007	criminal	welfare
+9008	welfare	health
+9009	economy	consumer
+9010	economy	consumer
+9011	economy	consumer
+9012	economy	consumer
+9013	economy	consumer
+9014	economy	consumer
+9015	economy	consumer
+9016	consumer	economy
+9017	economy	security
+9018	consumer	economy
+9019	consumer	economy
+9020	consumer	economy
+9021	economy	consumer
+9022	economy	consumer
+9023	economy	security
+9024	security	
+9025	welfare	security
+9026	health	security
+9027	security	
+9028	security	
+9029	security	
+9030	security	
+9031	security	
+9032	security	
+9033	security	
+9034	security	
+9035	security	
+9036	security	education
+9037	religion	security
+9038	religion	security
+9039	security	
+9040	security	religion
+9041	security	criminal
+9042	security	criminal
+9043	security	
+9044	security	religion
+9045	security	criminal
+9046	security	rights
+9047	security	welfare
+9048	security	
+9049	security	rights
+9050	religion	security
+9051	religion	security
+9052	security	
+9053	security	rights
+9054	security	religion
+9055	security	
+9056	security	
+9057	security	
+9058	security	
+9059	security	religion
+9060	religion	security
+9061	security	rights
+9062	security	
+9063	religion	security
+9064	security	health
+9065	religion	security
+9066	security	
+9067	security	
+9068	security	
+9069	security	rights
+9070	security	
+9071	security	rights
+9072	religion	security
+9073	religion	security
+9074	religion	security
+9075	religion	security
+9076	security	education
+9077	security	religion
+9078	security	rights
+9079	religion	security
+9080	security	labor
+9081	religion	security
+9082	security	
+9083	security	
+9084	security	
+9085	religion	security
+9086	religion	security
+9087	security	
+9088	religion	security
+9089	security	
+9090	security	
+9091	security	
+9092	security	religion
+9093	religion	security
+9094	security	governance
+9095	security	governance
+9096	security	
+9097	criminal	justice
+9098	security	
+9099	labor	welfare
+9100	labor	welfare
+9101	labor	welfare
+9102	labor	welfare
+9103	security	labor
+9104	labor	welfare
+9105	labor	welfare
+9106	labor	welfare
+9107	labor	welfare
+9108	labor	welfare
+9109	labor	welfare
+9110	governance	religion
+9111	security	governance
+9112	justice	governance
+9113	security	governance
+9114	governance	criminal
+9115	foreign	governance
+9116	foreign	governance
+9117	governance	
+9118	governance	
+9119	foreign	labor
+9120	governance	local
+9121	security	governance
+9122	justice	governance
+9123	governance	
+9124	governance	
+9125	governance	
+9126	governance	
+9127	governance	
+9128	rights	governance
+9129	arab	governance
+9130	security	governance
+9131	security	governance
+9132	rights	governance
+9133	rights	governance
+9134	immigration	governance
+9135	security	governance
+9136	justice	governance
+9137	justice	governance
+9138	justice	governance
+9139	governance	
+9140	governance	
+9141	governance	
+9142	governance	
+9143	governance	
+9144	security	governance
+9145	governance	
+9146	security	governance
+9147	security	governance
+9148	security	governance
+9149	governance	
+9150	security	governance
+9151	governance	
+9152	governance	
+9153	governance	
+9154	governance	
+9155	governance	economy
+9156	labor	governance
+9157	governance	economy
+9158	justice	governance
+9159	governance	
+9160	governance	
+9161	governance	rights
+9162	governance	security
+9163	governance	
+9164	governance	
+9165	governance	
+9166	governance	
+9167	governance	
+9168	immigration	governance
+9169	security	
+9170	security	housing
+9171	security	education
+9172	security	
+9173	security	housing
+9174	security	welfare
+9175	security	economy
+9176	security	economy
+9177	security	economy
+9178	security	
+9179	security	
+9180	security	labor
+9181	security	labor
+9182	security	labor
+9183	security	welfare
+9184	security	health
+9185	security	
+9186	security	
+9187	security	
+9188	security	economy
+9189	security	health
