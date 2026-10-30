@@ -1,4 +1,4 @@
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, Cell } from 'recharts';
 
 const tick = { fontSize: 12, fill: '#626876' };
 const INK = '#3B4A6B';
@@ -14,8 +14,9 @@ export function HBar({ data, height, unit = '', max }) {
         <XAxis type="number" tick={tick} reversed domain={[0, max || 'auto']} allowDecimals={false} unit={unit} />
         <YAxis type="category" dataKey="label" tick={tick} width={120} orientation="right" interval={0} />
         <Tooltip {...tip} formatter={(v) => [`${v}${unit}`, '']} cursor={{ fill: 'rgba(0,0,0,0.04)' }} />
-        <Bar dataKey="value" radius={[4, 0, 0, 4]} fill={INK} isAnimationActive={false}
-          shape={(p) => <rect x={p.x} y={p.y} width={p.width} height={p.height} rx={3} fill={p.payload.color || INK} />} />
+        <Bar dataKey="value" radius={[4, 0, 0, 4]} fill={INK} isAnimationActive={false}>
+          {data.map((d, i) => <Cell key={i} fill={d.color || INK} />)}
+        </Bar>
       </BarChart>
     </ResponsiveContainer></div>
   );
