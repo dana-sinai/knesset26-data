@@ -99,9 +99,12 @@ code = {"בעד": 1, "נגד": 2, "נמנע": 3, "נוכח": 4, "הצביע": 4}
 res["c"] = res.ResultDesc.map(code).fillna(4).astype(int)
 tot = res.pivot_table(index="VoteID", columns="c", values="MkId", aggfunc="count", fill_value=0)
 votes = votes.join(tot, on="Id")
-for c in (1, 2, 3):
+for c in (1, 2, 3, 4):
     if c not in votes:
         votes[c] = 0
+    votes[c] = votes[c].fillna(0)
+votes["VoteTitle"] = votes.VoteTitle.fillna("")
+votes["VoteSubject"] = votes.VoteSubject.fillna("")
 
 for k, g in votes.groupby("knesset"):
     meta = [[int(r.Id), r.VoteDateTime[:16], str(r.VoteTitle or ""), str(r.VoteSubject or ""),
