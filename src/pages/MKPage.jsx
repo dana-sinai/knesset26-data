@@ -6,6 +6,7 @@ import { Initials, Src, Loading, Page, Section } from '@/components/bits';
 import VoteTable from '@/components/VoteTable';
 import { METRICS, metricValue } from '@/lib/filters';
 import BillList from '@/components/BillList';
+import TopicRecord from '@/components/TopicRecord';
 import { CommitteeSummary, CommitteeSessions } from '@/components/CommitteeActivity';
 
 const fmtDate = (d) => (d ? d.slice(0, 10).split('-').reverse().join('.') : '');
@@ -49,6 +50,7 @@ export function MKProfile({ id, compact = false }) {
   if (m.has_votes) tabs.push(['votes', 'הצבעות במליאה']);
   if (m.has_bills) tabs.push(['bills', 'הצעות חוק']);
   if (!m.is_new && m.person_id) tabs.push(['committees', 'ישיבות ועדה']);
+  tabs.push(['practice', 'בעד ונגד, בפועל']);
   tabs.push(['sources', 'מקורות']);
 
   return (
@@ -227,6 +229,12 @@ export function MKProfile({ id, compact = false }) {
       {tab === 'votes' && m.has_votes && <VoteTable personId={m.person_id} knessets={voteKs} />}
       {tab === 'bills' && m.has_bills && <BillList personId={m.person_id} />}
       {tab === 'committees' && <CommitteeSessions personId={m.person_id} />}
+      {tab === 'practice' && (m.is_new || !m.person_id
+        ? <div className="grid gap-4">
+            <p className="text-sm text-sub leading-relaxed">חבר/ת כנסת חדש/ה – אין עדיין רקורד אישי של הצבעות והצעות חוק. להלן הרקורד של חברי מפלגתו/ה שכיהנו בעבר (רקורד המפלגה, לא אישי).</p>
+            <TopicRecord partyId={m.party} />
+          </div>
+        : <TopicRecord personId={m.person_id} />)}
 
       {tab === 'sources' && (
         <div className="grid gap-6 text-sm">

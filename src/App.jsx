@@ -14,6 +14,7 @@ import MapPage from './pages/MapPage';
 import Represent from './pages/Represent';
 import Votes from './pages/Votes';
 import About from './pages/About';
+import Topics from './pages/Topics';
 
 // Public, read-only site: no sign-in required; all data is static JSON under /public/data.
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path="/represent" element={<Represent />} />
             <Route path="/map" element={<MapPage />} />
             <Route path="/votes" element={<Votes />} />
+            <Route path="/topics" element={<Topics />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
