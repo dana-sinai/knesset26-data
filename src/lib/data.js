@@ -17,6 +17,12 @@ export const useData = (path, opts = {}) =>
 export const useMKs = () => useData('mks.json');
 export const useParties = () => useData('parties.json');
 export const useMeta = () => useData('meta.json');
+export const useTopics = () => useData('topics/topics.json');
+export const useBillTopics = () => useData('topics/bill_topics.json');
+
+/** The bill's page on the Knesset website. */
+export const knessetBillUrl = (billId) =>
+  `https://main.knesset.gov.il/Activity/Legislation/Laws/Pages/LawBill.aspx?t=lawsuggestionssearch&lawitemid=${billId}`;
 
 export const VOTE_CODE = { 1: 'בעד', 2: 'נגד', 3: 'נמנע', 4: 'נוכח' };
 export const VOTE_CLASS = {
