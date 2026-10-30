@@ -99,6 +99,12 @@
   }
 
   body {
-    @apply bg-background text-foreground font-body;
+    @apply bg-paper text-ink font-body antialiased;
+    font-feature-settings: "tnum" 1;
   }
+  h1, h2, h3 { @apply font-display; }
 }
+
+.leaflet-container { font-family: var(--font-body); background: rgb(var(--sand)); }
+.leaflet-popup-content { direction: rtl; text-align: right; margin: 10px 12px; }
+.num { font-variant-numeric: tabular-nums; }
