@@ -60,9 +60,8 @@ export default function Layout() {
             הכותרות באתר כתובות בגופן <a className="underline" href="https://www.ot-hayim.co.il/fonts/amit-man/" target="_blank" rel="noreferrer">״עמית מן״</a>,
             {' '}שנוצר מכתב ידה של עמית מן ז״ל, פרמדיקית שנרצחה בבארי ב-7 באוקטובר 2023 בעודה מטפלת בפצועים, במסגרת <a className="underline" href="https://www.ot-hayim.co.il/" target="_blank" rel="noreferrer">מיזם אות.חיים</a>. לזכרה.
           </p>
-          <p dir="ltr" className="text-xs text-left">
-            Independent analysis by Dr. Dana Sinai, done in a personal capacity. It does not represent, and is not affiliated
-            with, any current or past employer.
+          <p className="text-xs">
+            ניתוח עצמאי של ד״ר דנה סיני, שנעשה באופן אישי. אינו מייצג, ואינו קשור, לאף מעסיק בהווה או בעבר.
           </p>
         </div>
       </footer>

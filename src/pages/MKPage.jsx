@@ -54,7 +54,15 @@ export function MKProfile({ id, compact = false }) {
   return (
     <div className={compact ? 'grid gap-6' : 'grid gap-10'}>
       <header className="grid grid-cols-[auto_1fr] gap-5 items-center">
-        <Initials name={m.name_he} color={party?.color} size={compact ? 64 : 84} />
+        <div className="grid justify-items-center gap-1">
+          <Initials name={m.name_he} color={party?.color} size={compact ? 72 : 96} photo={m.photo} />
+          {m.photo?.credit && (
+            <span className="text-[10px] text-sub max-w-[110px] text-center leading-tight">
+              {m.photo.source ? <a href={m.photo.source} target="_blank" rel="noreferrer" className="hover:underline">צילום: {m.photo.credit}</a> : `צילום: ${m.photo.credit}`}
+              {m.photo.license && ` · ${m.photo.license}`}
+            </span>
+          )}
+        </div>
         <div className="grid gap-1">
           <Link to={`/party/${party.id}`} className="text-sm font-semibold hover:underline" style={{ color: party.color }}>
             {party.name_he} · מקום {m.list_position} ברשימה

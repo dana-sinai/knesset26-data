@@ -5,7 +5,13 @@ export function PartyDot({ party, size = 10 }) {
   return <span className="inline-block rounded-full shrink-0" style={{ width: size, height: size, background: party?.color }} />;
 }
 
-export function Initials({ name, color, size = 44 }) {
+export function Initials({ name, color, size = 44, photo }) {
+  if (photo?.url) {
+    return (
+      <img src={photo.url} alt={name} loading="lazy" title={[photo.credit, photo.license].filter(Boolean).join(' · ')}
+        className="rounded-full object-cover shrink-0 bg-sand" style={{ width: size, height: size, boxShadow: `0 0 0 2px ${color || 'transparent'}` }} />
+    );
+  }
   const parts = (name || '').split(' ').filter(Boolean);
   const ini = (parts[0]?.[0] || '') + (parts.length > 1 ? parts[parts.length - 1][0] : '');
   return (
@@ -42,7 +48,7 @@ export function Stat({ label, value, hint }) {
 export function MKCard({ m, party }) {
   return (
     <MKLink id={m.id} className="group flex gap-3 items-center rounded-xl border border-rule bg-paper p-3 hover:border-ink/40 transition-colors">
-      <Initials name={m.name_he} color={party?.color} />
+      <Initials name={m.name_he} color={party?.color} photo={m.photo} />
       <div className="min-w-0">
         <div className="font-semibold truncate group-hover:underline">{m.name_he}</div>
         <div className="text-xs text-sub truncate">

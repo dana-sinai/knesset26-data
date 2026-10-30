@@ -86,6 +86,14 @@ for m in mks:
             met["cmt_per_k"] = round(sum(cs[k]["attended_total"] for k in kk) / len(kk))
     m["metrics"] = met
 
+# ---- photos: filled in by hand in input/photos.csv (only freely licensed images, with credit and licence)
+import csv as _csv
+photos = {r["id"]: r for r in _csv.DictReader(open("pipeline/input/photos.csv", encoding="utf-8")) if (r.get("photo_url") or "").strip()}
+for m in mks:
+    r = photos.get(m["id"])
+    m["photo"] = dict(url=r["photo_url"].strip(), credit=r.get("credit", "").strip(), license=r.get("license", "").strip(),
+                      source=r.get("source_url", "").strip()) if r else None
+
 json.dump(mks, open("public/data/mks.json", "w"), ensure_ascii=False)
 print("untranslated strings:", len(missing))
 for s in list(missing)[:15]:
