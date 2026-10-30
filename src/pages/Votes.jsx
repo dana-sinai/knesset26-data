@@ -95,7 +95,7 @@ function VoteDetail({ vote, k, mks, partyById }) {
         </div>
       ) : (
         <div className="grid sm:grid-cols-3 gap-3">
-          {SHOWN.filter((c) => on[c]).map((c) => (
+          {SHOWN.filter((c) => on[c] && counts[c]).map((c) => (
             <div key={c} className="rounded-lg border border-rule p-3 grid gap-1.5 content-start">
               <div className="flex items-center justify-between"><Chip code={c} /><span className="text-xs text-sub num">{counts[c]}</span></div>
               {shown.filter((r) => r.code === c).sort(byPartyOrder).map(({ m }) => (
