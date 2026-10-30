@@ -1,0 +1,122 @@
+0	security	housing
+1	security	education
+2	security	
+3	education	welfare
+4	local	governance
+5	security	local
+6-7	security	rights
+8	consumer	
+9-10	justice	consumer
+11	settlement	
+12	criminal	media
+13	justice	
+14-15	local	
+16	governance	
+17	welfare	education
+18	education	security
+19-20	security	
+21	housing	environment
+22-28	environment	
+29-34	welfare	
+35	health	
+36-39	economy	local
+40-41	economy	security
+42-43	economy	
+44	economy	settlement
+45	economy	local
+46-47	security	
+48	transport	local
+49	transport	criminal
+50	education	
+51	environment	economy
+52	consumer	
+53-54	labor	
+55	environment	
+56	consumer	
+57	media	justice
+58	settlement	
+59	justice	
+60	settlement	
+61	local	
+62	local	environment
+63	heritage	local
+64	local	
+65-69	welfare	justice
+70	welfare	
+71-72	welfare	religion
+73-77	welfare	justice
+78	welfare	
+79	labor	
+80-82	environment	
+83	environment	education
+84	criminal	heritage
+85-86	rights	heritage
+87-90	criminal	heritage
+91	security	
+92	security	criminal
+93	consumer	economy
+94	criminal	heritage
+95-113	religion	consumer
+114	health	
+115	criminal	
+116	criminal	heritage
+117	heritage	rights
+118-121	criminal	heritage
+122	security	religion
+123	economy	criminal
+124-128	criminal	economy
+129	environment	
+130	foreign	security
+131-132	security	foreign
+133	rights	criminal
+134	rights	housing
+135-139	rights	
+140-141	rights	education
+142-159	rights	
+160	rights	health
+161-162	rights	
+163	education	rights
+164-165	rights	welfare
+166	rights	security
+167-171	rights	welfare
+172	education	rights
+173	governance	settlement
+174	governance	criminal
+175	criminal	heritage
+176-177	criminal	heritage
+178	environment	
+179	economy	foreign
+180	economy	environment
+181	consumer	
+182	security	
+183	criminal	rights
+184-185	health	rights
+186-187	environment	consumer
+188	governance	
+189	education	
+190	governance	
+191	labor	
+192	foreign	settlement
+193-194	environment	
+195-205	justice	media
+206	justice	security
+207	justice	media
+208	justice	security
+209-211	justice	media
+212	security	heritage
+213	criminal	consumer
+214	environment	consumer
+215	labor	settlement
+216	governance	
+217-218	transport	environment
+219	media	security
+220-223	consumer	welfare
+224	criminal	rights
+225-226	environment	
+227-228	governance	
+229-230	rights	criminal
+231	justice	rights
+232	media	security
+233-241	health	consumer
+242-247	criminal	rights
+248-249	labor	
