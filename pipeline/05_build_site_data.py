@@ -217,18 +217,24 @@ json.dump(mks, open(f"{OUT}/mks.json", "w"), ensure_ascii=False, separators=(","
 with open(f"{OUT}/mks.csv", "w", newline="", encoding="utf-8-sig") as f:
     wr = csv.DictWriter(f, fieldnames=list(flat[0].keys())); wr.writeheader(); wr.writerows(flat)
 
+# vote totals: CEC ballot-box file (step 6) when available, else the secondary-source figures in parties.csv
+cec_path = f"{ROOT}/work/party_votes_cec.csv"
+cec = pd.read_csv(cec_path, index_col=0).iloc[:, 0].to_dict() if os.path.exists(cec_path) else {}
+VALID = 5690682
 plist = []
 for r in parties.itertuples():
+    v = int(cec.get(r.id, r.votes))
     plist.append(dict(id=r.id, name_he=r.name_he, full_name_he=r.full_name_he, letters=r.letters, leader_he=r.leader_he,
-                      seats=int(r.seats), votes=int(r.votes), pct=float(r.pct), color=r.color))
+                      seats=int(r.seats), votes=v, pct=round(100 * v / VALID, 2), color=r.color,
+                      votes_source="CEC ballot-box file" if r.id in cec else "Wikipedia"))
 json.dump(plist, open(f"{OUT}/parties.json", "w"), ensure_ascii=False, separators=(",", ":"))
 
 meta = dict(
     built_at=dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"),
     election_date=str(ELECTION),
     results=dict(eligible=7331981, voters=5716665, turnout=0.7797, valid=5690682, invalid=25983, threshold_votes=184947,
-                 source="ויקיפדיה העברית – 'הבחירות לכנסת העשרים ושש' (מצטטת את ועדת הבחירות המרכזית), נשלף 30.10.2026",
-                 source_url="https://he.wikipedia.org/wiki/הבחירות_לכנסת_העשרים_ושש",
+                 source="קובץ תוצאות לפי קלפיות של ועדת הבחירות המרכזית (ספירה סופית; עותק במאגר hopetohelp/26), סכומים אומתו מול התוצאות הארציות",
+                 source_url="https://github.com/hopetohelp/26",
                  caveat="התוצאות הרשמיות יפורסמו ברשומות; ייתכנו הבדלים קטנים במספרי הקולות."),
     roster_source="i24NEWS – רשימת 120 הנבחרים לפי תוצאות ועדת הבחירות (29–30.10.2026); טרם הושווה לפרסום ברשומות",
     roster_source_url="https://www.i24news.tv/he/news/israel-elections-2026/artc-12604d2f",
