@@ -1,0 +1,350 @@
+3180	local	welfare
+3181	local	economy
+3182	local	housing
+3183	local	housing
+3184	local	security
+3185	local	rights
+3186	local	education
+3187	local	housing
+3188	local	education
+3189	local	economy
+3190	local	economy
+3191	local	health
+3192	local	economy
+3193	local	transport
+3194	local	
+3195	local	security
+3196	economy	
+3197	environment	consumer
+3198	health	
+3199	environment	local
+3200	environment	local
+3201	environment	local
+3202	consumer	economy
+3203	consumer	economy
+3204	local	economy
+3205	health	
+3206	economy	consumer
+3207	economy	consumer
+3208	consumer	housing
+3209	economy	
+3210	labor	
+3211	economy	
+3212	economy	
+3213	economy	
+3214	health	
+3215	health	
+3216	health	
+3217	health	
+3218	health	
+3219	health	
+3220	health	
+3221	health	
+3222	health	
+3223	health	
+3224	health	immigration
+3225	health	
+3226	health	
+3227	health	
+3228	health	
+3229	health	
+3230	settlement	foreign
+3231	health	
+3232	arab	housing
+3233	religion	
+3234	education	
+3235	labor	media
+3236	immigration	rights
+3237	environment	consumer
+3238	environment	consumer
+3239	religion	environment
+3240	religion	environment
+3241	religion	environment
+3242	religion	environment
+3243	media	environment
+3244	governance	
+3245	governance	
+3246	religion	consumer
+3247	health	criminal
+3248	education	
+3249	justice	welfare
+3250	justice	welfare
+3251	justice	security
+3252	justice	welfare
+3253	justice	security
+3254	justice	welfare
+3255	justice	welfare
+3256	justice	criminal
+3257	justice	labor
+3258	justice	rights
+3259	justice	health
+3260	justice	health
+3261	justice	security
+3262	justice	criminal
+3263	justice	consumer
+3264	justice	criminal
+3265	justice	criminal
+3266	justice	rights
+3267	justice	
+3268	justice	security
+3269	justice	
+3270	justice	
+3271	education	
+3272	welfare	
+3273	welfare	health
+3274	justice	rights
+3275	health	rights
+3276	health	rights
+3277	health	rights
+3278	health	rights
+3279	health	rights
+3280	health	rights
+3281	health	rights
+3282	health	rights
+3283	health	rights
+3284	health	rights
+3285	labor	agriculture
+3286	labor	
+3287	labor	governance
+3288	labor	governance
+3289	labor	
+3290	labor	
+3291	labor	
+3292	labor	
+3293	labor	
+3294	labor	
+3295	labor	
+3296	labor	
+3297	labor	security
+3298	labor	
+3299	justice	criminal
+3300	justice	rights
+3301	justice	criminal
+3302	justice	criminal
+3303	justice	criminal
+3304	welfare	
+3305	education	welfare
+3306	education	welfare
+3307	education	welfare
+3308	security	transport
+3309	heritage	
+3310	heritage	rights
+3311	heritage	
+3312	heritage	health
+3313	heritage	criminal
+3314	heritage	
+3315	heritage	
+3316	heritage	
+3317	heritage	
+3318	heritage	
+3319	heritage	rights
+3320	heritage	
+3321	heritage	
+3322	heritage	arab
+3323	heritage	rights
+3324	heritage	
+3325	heritage	religion
+3326	heritage	religion
+3327	heritage	consumer
+3328	heritage	consumer
+3329	heritage	consumer
+3330	heritage	
+3331	heritage	
+3332	heritage	
+3333	heritage	
+3334	heritage	consumer
+3335	heritage	rights
+3336	heritage	media
+3337	heritage	
+3338	heritage	
+3339	heritage	
+3340	heritage	arab
+3341	heritage	
+3342	transport	
+3343	transport	criminal
+3344	environment	
+3345	environment	
+3346	environment	
+3347	environment	
+3348	environment	
+3349	environment	
+3350	heritage	
+3351	heritage	
+3352	heritage	
+3353	heritage	
+3354	heritage	
+3355	settlement	heritage
+3356	media	criminal
+3357	media	rights
+3358	criminal	housing
+3359	criminal	
+3360	criminal	
+3361	criminal	
+3362	criminal	
+3363	criminal	
+3364	criminal	
+3365	criminal	rights
+3366	governance	
+3367	welfare	economy
+3368	welfare	economy
+3369	welfare	economy
+3370	governance	rights
+3371	labor	
+3372	religion	health
+3373	governance	
+3374	health	welfare
+3375	arab	
+3376	security	labor
+3377	labor	
+3378	welfare	
+3379	criminal	
+3380	criminal	
+3381	criminal	
+3382	criminal	rights
+3383	criminal	agriculture
+3384	criminal	justice
+3385	criminal	
+3386	criminal	security
+3387	criminal	welfare
+3388	criminal	security
+3389	criminal	
+3390	criminal	
+3391	criminal	
+3392	criminal	
+3393	criminal	security
+3394	criminal	security
+3395	criminal	welfare
+3396	criminal	
+3397	criminal	
+3398	criminal	
+3399	criminal	consumer
+3400	criminal	
+3401	criminal	religion
+3402	criminal	security
+3403	criminal	security
+3404	criminal	security
+3405	criminal	consumer
+3406	criminal	
+3407	criminal	rights
+3408	criminal	rights
+3409	criminal	
+3410	criminal	welfare
+3411	criminal	rights
+3412	consumer	criminal
+3413	criminal	
+3414	criminal	consumer
+3415	criminal	consumer
+3416	criminal	media
+3417	criminal	media
+3418	criminal	education
+3419	criminal	consumer
+3420	criminal	rights
+3421	criminal	
+3422	criminal	rights
+3423	rights	health
+3424	criminal	rights
+3425	criminal	media
+3426	criminal	consumer
+3427	criminal	consumer
+3428	criminal	rights
+3429	criminal	religion
+3430	criminal	media
+3431	criminal	consumer
+3432	criminal	consumer
+3433	criminal	security
+3434	criminal	heritage
+3435	criminal	security
+3436	criminal	security
+3437	criminal	security
+3438	criminal	rights
+3439	criminal	welfare
+3440	criminal	
+3441	criminal	rights
+3442	criminal	rights
+3443	criminal	rights
+3444	criminal	rights
+3445	criminal	
+3446	criminal	rights
+3447	criminal	rights
+3448	criminal	
+3449	criminal	governance
+3450	criminal	
+3451	criminal	
+3452	criminal	
+3453	criminal	
+3454	criminal	
+3455	criminal	rights
+3456	criminal	rights
+3457	criminal	security
+3458	criminal	
+3459	criminal	agriculture
+3460	criminal	religion
+3461	criminal	
+3462	criminal	
+3463	criminal	
+3464	criminal	
+3465	criminal	rights
+3466	criminal	
+3467	criminal	
+3468	criminal	rights
+3469	criminal	foreign
+3470	criminal	
+3471	criminal	rights
+3472	criminal	security
+3473	criminal	rights
+3474	criminal	
+3475	criminal	
+3476	criminal	
+3477	criminal	
+3478	criminal	agriculture
+3479	criminal	
+3480	criminal	
+3481	rights	criminal
+3482	rights	criminal
+3483	criminal	rights
+3484	criminal	
+3485	criminal	health
+3486	criminal	rights
+3487	health	criminal
+3488	health	criminal
+3489	criminal	immigration
+3490	criminal	
+3491	health	rights
+3492	health	rights
+3493	criminal	justice
+3494	criminal	
+3495	criminal	
+3496	criminal	
+3497	criminal	governance
+3498	criminal	education
+3499	criminal	governance
+3500	criminal	security
+3501	criminal	welfare
+3502	criminal	health
+3503	criminal	
+3504	criminal	transport
+3505	criminal	health
+3506	criminal	justice
+3507	criminal	
+3508	criminal	
+3509	criminal	
+3510	criminal	
+3511	criminal	
+3512	criminal	
+3513	criminal	
+3514	criminal	security
+3515	criminal	
+3516	criminal	rights
+3517	criminal	governance
+3518	criminal	agriculture
+3519	criminal	agriculture
+3520	criminal	
+3521	criminal	health
+3522	criminal	security
+3523	criminal	security
+3524	criminal	welfare
+3525	criminal	welfare
+3526	criminal	welfare
+3527	criminal	media
+3528	criminal	rights
+3529	criminal	security

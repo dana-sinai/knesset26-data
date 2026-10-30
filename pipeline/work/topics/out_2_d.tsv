@@ -1,0 +1,365 @@
+3880	labor	
+3881	labor	
+3882	labor	
+3883	labor	
+3884	economy	labor
+3885	labor	
+3886	environment	economy
+3887	labor	
+3888	labor	religion
+3889	labor	
+3890	labor	
+3891	labor	
+3892	economy	
+3893	labor	consumer
+3894	labor	security
+3895	labor	consumer
+3896	labor	
+3897	labor	
+3898	environment	labor
+3899	labor	security
+3900	labor	consumer
+3901	economy	
+3902	consumer	
+3903	economy	
+3904	consumer	
+3905	economy	
+3906	health	consumer
+3907	labor	
+3908	labor	
+3909	health	rights
+3910	health	
+3911	health	criminal
+3912	health	
+3913	health	rights
+3914	criminal	rights
+3915	health	rights
+3916	governance	
+3917	governance	
+3918	media	security
+3919	labor	
+3920	governance	
+3921	security	settlement
+3922	transport	environment
+3923	transport	consumer
+3924	transport	religion
+3925	transport	religion
+3926	transport	religion
+3927	transport	religion
+3928	media	
+3929	labor	
+3930	criminal	
+3931	rights	
+3932	media	security
+3933	media	
+3934	media	
+3935	media	security
+3936	health	
+3937	rights	media
+3938	rights	media
+3939	labor	
+3940	rights	
+3941	rights	
+3942	rights	
+3943	rights	
+3944	rights	
+3945	rights	
+3946	governance	
+3947	governance	
+3948	health	
+3949	health	
+3950	health	
+3951	health	
+3952	health	
+3953	health	
+3954	health	housing
+3955	health	
+3956	health	
+3957	governance	
+3958	governance	justice
+3959	governance	labor
+3960	security	welfare
+3961	religion	justice
+3962	religion	rights
+3963	religion	justice
+3964	religion	justice
+3965	religion	justice
+3966	religion	arab
+3967	housing	local
+3968	housing	local
+3969	heritage	
+3970	heritage	
+3971	heritage	governance
+3972	heritage	rights
+3973	consumer	health
+3974	labor	
+3975	education	security
+3976	welfare	economy
+3977	education	arab
+3978	education	arab
+3979	education	arab
+3980	health	arab
+3981	health	arab
+3982	health	arab
+3983	health	arab
+3984	health	arab
+3985	health	
+3986	health	arab
+3987	health	arab
+3988	rights	welfare
+3989	rights	welfare
+3990	rights	welfare
+3991	rights	welfare
+3992	governance	security
+3993	governance	security
+3994	governance	
+3995	governance	security
+3996	governance	criminal
+3997	governance	criminal
+3998	governance	criminal
+3999	governance	security
+4000	governance	
+4001	health	
+4002	health	
+4003	health	
+4004	health	
+4005	health	
+4006	health	security
+4007	housing	
+4008	housing	arab
+4009	housing	arab
+4010	environment	
+4011	labor	education
+4012	consumer	
+4013	consumer	
+4014	economy	consumer
+4015	housing	environment
+4016	housing	environment
+4017	welfare	rights
+4018	health	arab
+4019	health	arab
+4020	economy	local
+4021	labor	health
+4022	economy	
+4023	religion	arab
+4024	transport	
+4025	transport	
+4026	transport	
+4027	transport	
+4028	health	
+4029	security	foreign
+4030	housing	consumer
+4031	governance	
+4032	housing	welfare
+4033	heritage	governance
+4034	housing	agriculture
+4035	housing	welfare
+4036	criminal	
+4037	criminal	welfare
+4038	environment	health
+4039	environment	health
+4040	environment	health
+4041	environment	health
+4042	environment	media
+4043	environment	media
+4044	local	economy
+4045	labor	welfare
+4046	labor	welfare
+4047	labor	welfare
+4048	environment	economy
+4049	heritage	religion
+4050	security	religion
+4051	heritage	religion
+4052	heritage	religion
+4053	religion	
+4054	religion	settlement
+4055	religion	
+4056	religion	
+4057	religion	
+4058	religion	rights
+4059	religion	rights
+4060	religion	security
+4061	religion	security
+4062	religion	
+4063	religion	
+4064	religion	rights
+4065	religion	
+4066	religion	
+4067	religion	
+4068	religion	
+4069	religion	
+4070	religion	
+4071	religion	
+4072	religion	
+4073	religion	
+4074	religion	
+4075	religion	criminal
+4076	religion	
+4077	religion	
+4078	religion	
+4079	religion	rights
+4080	religion	security
+4081	religion	local
+4082	religion	
+4083	religion	security
+4084	religion	
+4085	environment	
+4086	criminal	
+4087	security	welfare
+4088	governance	rights
+4089	education	
+4090	security	criminal
+4091	education	
+4092	agriculture	
+4093	local	environment
+4094	local	media
+4095	local	governance
+4096	environment	local
+4097	local	criminal
+4098	local	governance
+4099	local	governance
+4100	local	governance
+4101	local	governance
+4102	local	governance
+4103	local	security
+4104	local	rights
+4105	local	governance
+4106	local	labor
+4107	local	governance
+4108	local	labor
+4109	local	rights
+4110	local	governance
+4111	local	governance
+4112	local	governance
+4113	local	governance
+4114	local	rights
+4115	local	rights
+4116	local	labor
+4117	local	governance
+4118	local	governance
+4119	local	governance
+4120	local	security
+4121	local	governance
+4122	local	governance
+4123	local	governance
+4124	local	governance
+4125	local	governance
+4126	local	criminal
+4127	local	criminal
+4128	local	criminal
+4129	local	governance
+4130	local	criminal
+4131	local	security
+4132	local	governance
+4133	local	governance
+4134	local	governance
+4135	local	governance
+4136	local	governance
+4137	local	governance
+4138	local	governance
+4139	local	governance
+4140	local	governance
+4141	local	governance
+4142	local	criminal
+4143	local	criminal
+4144	local	arab
+4145	local	arab
+4146	local	arab
+4147	local	arab
+4148	local	arab
+4149	local	arab
+4150	local	arab
+4151	local	arab
+4152	local	labor
+4153	local	
+4154	local	
+4155	local	
+4156	local	governance
+4157	local	governance
+4158	local	housing
+4159	local	labor
+4160	local	labor
+4161	local	governance
+4162	local	governance
+4163	local	health
+4164	local	environment
+4165	local	environment
+4166	local	environment
+4167	local	economy
+4168	local	economy
+4169	local	education
+4170	local	welfare
+4171	local	
+4172	local	welfare
+4173	local	welfare
+4174	local	justice
+4175	local	rights
+4176	local	rights
+4177	local	rights
+4178	local	rights
+4179	local	education
+4180	local	education
+4181	local	education
+4182	local	education
+4183	local	welfare
+4184	local	welfare
+4185	local	welfare
+4186	local	welfare
+4187	local	education
+4188	local	welfare
+4189	local	justice
+4190	local	labor
+4191	criminal	local
+4192	local	governance
+4193	local	governance
+4194	local	rights
+4195	local	rights
+4196	local	rights
+4197	local	rights
+4198	local	rights
+4199	local	rights
+4200	local	rights
+4201	local	welfare
+4202	local	governance
+4203	local	heritage
+4204	local	heritage
+4205	local	labor
+4206	local	labor
+4207	local	labor
+4208	local	economy
+4209	local	welfare
+4210	local	justice
+4211	local	environment
+4212	local	economy
+4213	local	security
+4214	local	security
+4215	local	security
+4216	local	security
+4217	local	security
+4218	local	welfare
+4219	local	security
+4220	local	security
+4221	local	housing
+4222	local	security
+4223	local	security
+4224	local	security
+4225	local	security
+4226	local	welfare
+4227	local	security
+4228	local	consumer
+4229	local	consumer
+4230	local	consumer
+4231	local	consumer
+4232	local	consumer
+4233	local	economy
+4234	local	economy
+4235	local	education
+4236	local	governance
+4237	local	arab
+4238	local	labor
+4239	local	governance
+4240	local	labor
+4241	governance	rights
+4242	security	welfare
+4243	security	welfare
+4244	security	consumer
