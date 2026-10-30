@@ -33,9 +33,14 @@ def form_group(f):
         f = int(f)
     except Exception:
         return None
-    if f in (110, 120, 130, 140, 150, 160, 170, 180, 191, 192, 193): return "city/town"
-    for k, r in FORM.items():
-        if f in r: return k
+    # CBS locality-form codes: 1xx Jewish urban, 2xx non-Jewish urban, 31x moshav, 33x kibbutz,
+    # 34x-37x other Jewish rural / communal, 4xx non-Jewish rural (44x-46x Bedouin)
+    if f < 200 or 200 <= f < 300: return "city/town"
+    if 310 <= f < 330: return "moshav"
+    if 330 <= f < 340: return "kibbutz"
+    if 340 <= f < 400: return "communal"
+    if 440 <= f < 470: return "bedouin"
+    if 400 <= f < 500: return "arab_rural"
     return "other"
 
 # ---------- SES 2021
@@ -91,7 +96,7 @@ for _, r in by.iterrows():
             lon, lat = tr.transform(x, y)
             L.update(lat=round(lat, 5), lon=round(lon, 5))
     pop_total = num(r["סך הכל אוכלוסייה 2024"]); jews = num(r["יהודים ואחרים"]); arabs = num(r["ערבים"])
-    form = r["צורת ישוב שוטפת"]
+    form = r["צורת יישוב שוטפת"]
     L.update(district_he=r["שם מחוז"], subdistrict_he=r["שם נפה"],
              form_code=int(form) if pd.notna(form) else None, form=form_group(form),
              religion_code=int(r["דת יישוב"]) if pd.notna(r["דת יישוב"]) else None,
