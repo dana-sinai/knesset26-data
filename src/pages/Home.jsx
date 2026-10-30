@@ -6,52 +6,13 @@ import FilterPanel from '@/components/FilterPanel';
 import { Stat, Loading, Page, Section } from '@/components/bits';
 import { HBar, StackedH, VBar, Card } from '@/components/charts';
 import { MKLink } from '@/components/MKDrawer';
+import Hemicycle from '@/components/Hemicycle';
 
 function median(a) {
   const s = a.filter((x) => x != null).sort((x, y) => x - y);
   if (!s.length) return null;
   const m = Math.floor(s.length / 2);
   return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
-}
-
-function SeatStrip({ mks, parties, groups }) {
-  const order = parties.filter((p) => p.seats > 0);
-  const gs = (groups || []).map((g) => ({ ...g, parties: order.filter((p) => p.group === g.id) }));
-  const byParty = Object.fromEntries(order.map((p) => [p.id, mks.filter((m) => m.party === p.id).sort((a, b) => a.list_position - b.list_position)]));
-  return (
-    <div className="grid gap-3">
-      <div className="flex flex-wrap gap-[3px]">
-        {order.flatMap((p) => byParty[p.id].map((m) => (
-          <Link key={m.id} to={`/mk/${m.id}`} title={`${m.name_he} · ${p.name_he}`}
-            className="w-4 h-4 sm:w-5 sm:h-5 rounded-[3px] hover:scale-125 transition-transform"
-            style={{ background: p.color, outline: m.gender === 'female' ? '2px solid rgb(var(--gold))' : 'none', outlineOffset: -2 }} />
-        )))}
-      </div>
-      <div className="grid sm:grid-cols-2 gap-x-6 gap-y-1.5 text-xs">
-        {gs.map((g) => (
-          <div key={g.id} className="flex items-center gap-2">
-            <span className="w-1 self-stretch rounded-full" style={{ background: g.color }} />
-            <span className="flex flex-wrap gap-x-2">
-              {g.parties.map((p) => (
-                <Link key={p.id} to={`/party/${p.id}`} className="hover:underline flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-sm" style={{ background: p.color }} />{p.name_he}
-                </Link>
-              ))}
-            </span>
-            <span className="mr-auto num font-semibold">{g.parties.reduce((s, p) => s + p.seats, 0)}</span>
-          </div>
-        ))}
-      </div>
-      <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs hidden">
-        {order.map((p) => (
-          <Link key={p.id} to={`/party/${p.id}`} className="flex items-center gap-1.5 hover:underline">
-            <span className="w-2.5 h-2.5 rounded-sm" style={{ background: p.color }} />{p.name_he} <span className="text-sub num">{p.seats}</span>
-          </Link>
-        ))}
-        <span className="flex items-center gap-1.5 text-sub"><span className="w-2.5 h-2.5 rounded-sm border-2 border-gold" />מסגרת זהב = חברת כנסת</span>
-      </div>
-    </div>
-  );
 }
 
 export default function Home() {
@@ -100,8 +61,8 @@ export default function Home() {
         </p>
       </header>
 
-      <SeatStrip mks={mks} parties={parties} groups={meta?.groups} />
-      {meta?.groups_source && <p className="text-[11px] text-sub -mt-6">{meta.groups_source}. מסגרת זהב = חברת כנסת.</p>}
+      <Hemicycle mks={mks} parties={parties} groups={meta?.groups} />
+      {meta?.groups_source && <p className="text-[11px] text-sub -mt-6 text-center">{meta.groups_source}. הקבוצות מוצגות בצבעים בלבד, ללא שמות.</p>}
 
       <div className="grid lg:grid-cols-[300px_1fr] gap-8 items-start">
         <aside className="lg:sticky lg:top-20 rounded-xl border border-rule p-4 bg-sand/40">
