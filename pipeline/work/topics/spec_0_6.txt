@@ -1,0 +1,83 @@
+1250-1259	welfare	
+1260	welfare	economy
+1261-1262	welfare	labor
+1263	welfare	
+1264	labor	
+1265	labor	security
+1266	welfare	health
+1267	labor	transport
+1268	labor	welfare
+1269	welfare	
+1270	labor	welfare
+1271	welfare	foreign
+1272	welfare	security
+1273-1276	welfare	
+1277	welfare	security
+1278-1280	welfare	rights
+1281	welfare	health
+1282-1283	welfare	
+1284	welfare	security
+1285	labor	welfare
+1286	welfare	
+1287-1288	welfare	security
+1289	labor	welfare
+1290-1295	welfare	
+1296	welfare	health
+1297	welfare	security
+1298-1310	welfare	
+1311	welfare	
+1312	welfare	
+1313	welfare	
+1314-1321	welfare	
+1322	welfare	governance
+1323	welfare	
+1324	welfare	security
+1325	labor	welfare
+1326	welfare	rights
+1327	labor	welfare
+1328-1338	welfare	
+1339	welfare	labor
+1340	labor	welfare
+1341-1342	welfare	immigration
+1343-1351	labor	welfare
+1352	welfare	security
+1353-1354	welfare	labor
+1355	welfare	security
+1356	welfare	health
+1357	welfare	
+1358	labor	welfare
+1359-1362	welfare	
+1363	welfare	security
+1364-1365	welfare	
+1366-1367	welfare	rights
+1368-1373	welfare	
+1374	welfare	transport
+1375	welfare	
+1376-1380	security	welfare
+1381	labor	welfare
+1382	welfare	health
+1383	welfare	
+1384	welfare	health
+1385	welfare	
+1386	labor	security
+1387-1388	welfare	
+1389	security	welfare
+1390	welfare	
+1391	welfare	health
+1392	welfare	transport
+1393	welfare	health
+1394	welfare	education
+1395	welfare	health
+1396	security	welfare
+1397	welfare	rights
+1398	welfare	foreign
+1399	welfare	economy
+1400	welfare	
+1401	security	economy
+1402	welfare	labor
+1403-1404	welfare	security
+1405	labor	security
+1406-1408	welfare	
+1409-1411	welfare	education
+1412	labor	agriculture
+1413-1414	welfare	
