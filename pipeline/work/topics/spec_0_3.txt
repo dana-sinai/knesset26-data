@@ -1,0 +1,132 @@
+500-503	health	
+504-506	welfare	health
+507	economy	
+508	labor	economy
+509	consumer	religion
+510	criminal	justice
+511	governance	foreign
+512	settlement	
+513	media	heritage
+514	religion	
+515	health	
+516	criminal	justice
+517	justice	
+518	governance	
+519	criminal	
+520	media	
+521	media	heritage
+522	justice	health
+523-525	housing	
+526	criminal	rights
+527	education	environment
+528	education	heritage
+529	governance	
+530	labor	security
+531-533	labor	justice
+534-535	justice	
+536-537	justice	rights
+538-541	justice	
+542	heritage	justice
+543-544	justice	
+545	heritage	
+546	foreign	heritage
+547	health	
+548-549	housing	
+550	health	
+551-552	economy	
+553	economy	rights
+554-555	economy	governance
+556	economy	rights
+557-559	economy	
+560	housing	justice
+561-562	settlement	
+563-566	health	
+567-572	rights	religion
+573	heritage	
+574	religion	consumer
+575-576	religion	justice
+577-578	religion	justice
+579-595	religion	rights
+596-599	arab	religion
+600	justice	governance
+601-607	justice	
+608	justice	governance
+609-612	justice	media
+613-614	justice	
+615	justice	governance
+616-617	justice	
+618	justice	rights
+619	justice	security
+620-621	justice	criminal
+622	justice	governance
+623	justice	
+624	justice	media
+625	justice	
+626	justice	governance
+627	justice	
+628-629	criminal	justice
+630	justice	
+631	criminal	justice
+632	justice	health
+633	justice	
+634	justice	rights
+635	justice	
+636-638	justice	governance
+639-640	criminal	justice
+641	justice	
+642-647	justice	governance
+648-650	justice	
+651-652	justice	media
+653	justice	media
+654-655	justice	media
+656	justice	media
+657-661	justice	
+662-663	justice	governance
+664-665	justice	
+666	justice	governance
+667	justice	criminal
+668	justice	governance
+669	justice	governance
+670-671	justice	governance
+672	justice	
+673	justice	security
+674-679	justice	governance
+680	justice	security
+681-683	justice	
+684-685	justice	governance
+686-689	justice	
+690-692	religion	security
+693	religion	immigration
+694-697	religion	security
+698	religion	immigration
+699	local	
+700	education	
+701-704	security	
+705-711	settlement	
+712	religion	immigration
+713	rights	justice
+714	labor	
+715	labor	rights
+716	labor	welfare
+717-719	labor	
+720	labor	rights
+721	labor	health
+722-723	labor	rights
+724	labor	welfare
+725	labor	education
+726	labor	
+727	labor	security
+728-730	labor	
+731	labor	rights
+732-734	labor	
+735	labor	rights
+736-737	governance	
+738	immigration	security
+739-741	security	criminal
+742	security	education
+743	local	
+744-745	security	
+746	labor	
+747	governance	welfare
+748	environment	economy
+749	environment	housing
