@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
-import { useData, useBillTopics, knessetBillUrl } from '@/lib/data';
+import { useData, useBillTopics, useBillSummaries, knessetBillUrl } from '@/lib/data';
 import TopicChips, { TopicSelect } from '@/components/TopicChips';
 
 const PASSED = 118;
@@ -15,6 +15,7 @@ export default function BillList({ personId }) {
   const [n, setN] = useState(40);
   const [topic, setTopic] = useState('');
   const { data: bt } = useBillTopics();
+  const { data: summaries } = useBillSummaries();
   const tOf = (b) => (bt && bt[b.bill_id]) || [];
   const knessets = useMemo(() => [...new Set((data || []).map((b) => b.knesset))].sort((a, b) => b - a), [data]);
   const list = useMemo(() => (data || [])
@@ -45,6 +46,12 @@ export default function BillList({ personId }) {
           <li key={`${b.bill_id}-${b.is_initiator}`} className="rounded-lg border border-rule px-3 py-2 text-sm grid gap-0.5">
             <span>{b.name}</span>
             <TopicChips billId={b.bill_id} />
+            {summaries?.[b.bill_id] && (
+              <details className="text-xs text-ink/80">
+                <summary className="cursor-pointer text-sub">תקציר החוק (מאגר הכנסת)</summary>
+                <p className="mt-1 leading-relaxed">{summaries[b.bill_id]}</p>
+              </details>
+            )}
             <span className="text-xs text-sub">
               כנסת {b.knesset}{b.private_number ? ` · פ/${b.private_number}/${b.knesset}` : ''} · {b.status || 'סטטוס לא ידוע'}
               {b.status_id === PASSED && <strong className="text-emerald-700 dark:text-emerald-400"> ✓</strong>}

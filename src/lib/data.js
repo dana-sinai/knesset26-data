@@ -19,6 +19,7 @@ export const useParties = () => useData('parties.json');
 export const useMeta = () => useData('meta.json');
 export const useTopics = () => useData('topics/topics.json');
 export const useBillTopics = () => useData('topics/bill_topics.json');
+export const useBillSummaries = () => useData('topics/bill_summary.json', { retry: false });
 
 /** The bill's page on the Knesset website. */
 export const knessetBillUrl = (billId) =>

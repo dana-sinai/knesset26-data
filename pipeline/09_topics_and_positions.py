@@ -318,3 +318,10 @@ for m in mks:
     m["agreement"] = {p: v["rate"] for p, v in agree.get(pid, {}).items()} if pid else {}
 json.dump(mks, open(f"{D}/mks.json", "w"), ensure_ascii=False)
 print("mks.json: added initiated_topics and agreement")
+
+# ---------------- official law summaries (KNS_Bill.SummaryLaw, written by the Knesset) for the bills on the site
+kbs = pd.read_csv("pipeline/raw/ok/kns_bill.csv", usecols=["BillID", "SummaryLaw"], low_memory=False)
+kbs = kbs[kbs.SummaryLaw.notna() & kbs.BillID.isin(list(bill_topic))]
+json.dump({int(b): str(s).strip() for b, s in zip(kbs.BillID, kbs.SummaryLaw)},
+          open(f"{OUT}/bill_summary.json", "w"), ensure_ascii=False, separators=(",", ":"))
+print("official law summaries:", len(kbs))

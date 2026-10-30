@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ExternalLink, ArrowRight } from 'lucide-react';
-import { useMKs, useParties, useData, useBillTopics, VOTE_CODE, VOTE_CLASS, knessetBillUrl } from '@/lib/data';
+import { useMKs, useParties, useData, useBillTopics, useBillSummaries, VOTE_CODE, VOTE_CLASS, knessetBillUrl } from '@/lib/data';
 import TopicChips, { TopicSelect } from '@/components/TopicChips';
 import { Loading, Page } from '@/components/bits';
 import { MKLink } from '@/components/MKDrawer';
@@ -126,6 +126,7 @@ export default function Votes() {
   const { data: mks } = useMKs();
   const { data: parties } = useParties();
   const { data: bt } = useBillTopics();
+  const { data: summaries } = useBillSummaries();
   const [sp, setSp] = useSearchParams();
   const k = Number(sp.get('k') || 25);
   const selId = sp.get('id') ? Number(sp.get('id')) : null;
@@ -211,6 +212,12 @@ export default function Votes() {
               <p role="heading" aria-level={2} className="text-2xl font-semibold leading-snug">{sel.title}</p>
               <p className="text-sm text-sub">{fmtD(sel.dt)} {sel.subject && `· ${sel.subject}`} · הכנסת ה-{k} · הצבעה #{sel.id}</p>
               {meaning?.[sel.id] && <p className="text-sm rounded-lg bg-sand px-3 py-2">{meaning[sel.id]}</p>}
+              {sel.item != null && summaries?.[sel.item] && (
+                <div className="text-sm rounded-lg bg-sand/70 px-3 py-2 leading-relaxed">
+                  <span className="block text-[11px] text-sub mb-0.5">תקציר החוק, כפי שפורסם במאגר הכנסת</span>
+                  {summaries[sel.item]}
+                </div>
+              )}
               {sel.item != null && bt?.[sel.item] && (
                 <div className="flex flex-wrap items-center gap-2 text-xs">
                   <TopicChips billId={sel.item} />
