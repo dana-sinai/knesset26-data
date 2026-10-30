@@ -249,18 +249,27 @@ def cluster_topic(vids, min_votes=15, min_shared=10):
         clusters.append(dict(id=int(c), size=len(mem), parties=[[p, k] for p, k in comp.most_common()]))
     sig = []
     if len(set(lab)) >= 2:
-        share = {}
+        share, nvot = {}, {}
         for c in set(lab):
             rows_ = piv.iloc[[i for i in range(n) if lab[i] == c]]
-            share[c] = ((rows_ == 1).sum() / rows_.notna().sum().replace(0, np.nan))
+            nvot[c] = rows_.notna().sum()
+            share[c] = ((rows_ == 1).sum() / nvot[c].replace(0, np.nan))
         for vid in piv.columns:
             vals = [share[c].get(vid) for c in sorted(share)]
-            if any(pd.isna(x) for x in vals):
+            # only bills on which every cluster had at least 5 voters (otherwise one or two people decide the share)
+            if any(pd.isna(x) for x in vals) or min(int(nvot[c].get(vid, 0)) for c in share) < 5:
                 continue
             r = Cidx.loc[vid]
             sig.append((max(vals) - min(vals), int(vid), int(r["k"]), r["dt"], bill_name.get(int(r["bill"]), ""), r["stage"],
                         [round(float(x), 2) for x in vals], meaning.get(str(vid))))
-        sig.sort(key=lambda x: (-x[0], x[3]))
+        sig.sort(key=lambda x: (-round(x[0], 1), -int(x[3][:4])))
+        seen, uniq = set(), []
+        for x in sig:
+            if x[4] in seen:
+                continue
+            seen.add(x[4])
+            uniq.append(x)
+        sig = uniq
     return dict(points=[[int(pids[i]), round(float(xy[i, 0]), 3), round(float(xy[i, 1]), 3), int(lab[i]),
                          int(obs[i].sum())] for i in range(n)],
                 clusters=clusters, silhouette=round(float(best), 3) if best > -1 else None,
