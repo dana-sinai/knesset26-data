@@ -1,0 +1,132 @@
+750	heritage	environment
+751	settlement	environment
+752	heritage	
+753-755	environment	
+756	heritage	environment
+757	heritage	
+758-759	heritage	
+760	local	governance
+761	economy	security
+762-763	security	economy
+764	security	education
+765	consumer	economy
+766	economy	
+767	rights	governance
+768	rights	security
+769	governance	foreign
+770	security	governance
+771	criminal	education
+772-773	education	
+774	economy	foreign
+775	environment	governance
+776	housing	
+777	housing	welfare
+778-779	welfare	housing
+780-783	housing	welfare
+784	settlement	justice
+785	local	governance
+786	labor	
+787	justice	religion
+788	welfare	labor
+789-806	labor	
+807	labor	health
+808	labor	security
+809-826	labor	
+827-829	labor	health
+830-832	labor	
+833-834	labor	health
+835-838	labor	
+839-840	labor	health
+841	transport	education
+842	transport	labor
+843-845	security	
+846	justice	
+847	local	governance
+848	foreign	
+849	rights	criminal
+850-853	criminal	rights
+854-858	immigration	security
+859-863	immigration	
+864	immigration	
+865	immigration	
+866	immigration	rights
+867-868	immigration	security
+869	immigration	justice
+870-871	immigration	criminal
+872-881	immigration	
+882-883	immigration	security
+884-894	immigration	rights
+895	immigration	security
+896	welfare	
+897	welfare	local
+898	welfare	transport
+899	welfare	
+900	welfare	consumer
+901	welfare	
+902-903	welfare	local
+904	welfare	heritage
+905	welfare	health
+906	welfare	
+907	welfare	health
+908-910	welfare	transport
+911	welfare	health
+912	welfare	housing
+913	welfare	
+914	welfare	local
+915-916	welfare	transport
+917	welfare	health
+918	welfare	heritage
+919	welfare	consumer
+920	welfare	consumer
+921	welfare	transport
+922	welfare	housing
+923	welfare	heritage
+924	welfare	local
+925-926	welfare	transport
+927-931	welfare	
+932	welfare	consumer
+933	welfare	
+934	welfare	heritage
+935-936	welfare	education
+937-938	welfare	
+939	welfare	local
+940	welfare	media
+941	welfare	consumer
+942	welfare	heritage
+943	welfare	local
+944	religion	arab
+945	welfare	justice
+946	health	justice
+947	health	religion
+948-950	justice	economy
+951	welfare	justice
+952	justice	environment
+953	education	
+954	environment	
+955-957	heritage	governance
+958	security	justice
+959	economy	health
+960	economy	heritage
+961	welfare	
+962	local	economy
+963	welfare	health
+964-967	justice	
+968-970	governance	media
+971	rights	governance
+972-976	governance	media
+977	governance	criminal
+978-979	governance	media
+980	governance	foreign
+981-982	governance	media
+983	governance	
+984	governance	
+985-986	governance	security
+987-988	governance	
+989-990	governance	labor
+991-993	governance	
+994	governance	religion
+995	governance	
+996	governance	labor
+997	governance	
+998	governance	criminal
+999	governance	
