@@ -134,13 +134,14 @@ export default function Votes() {
   const [n, setN] = useState(60);
   const [type, setType] = useState('all');
   const [topic, setTopic] = useState('');
+  const [contested, setContested] = useState(true);
   const { data: meta } = useData(`votes/meta_k${k}.json`);
   const { data: idx } = useData('votes/index.json');
   const { data: meaning } = useData('topics/vote_meaning.json', { retry: false });
   const KS = Object.keys(idx || { 25: 1 }).map(Number).sort((a, b) => b - a);
   const partyById = useMemo(() => Object.fromEntries((parties || []).map((p) => [p.id, p])), [parties]);
   const all = useMemo(() => (meta ? meta.votes.map((v) => ({ id: v[0], dt: v[1], title: v[2], subject: v[3], f: v[4], a: v[5], ab: v[6], item: v[7] }))
-    .map((v) => ({ ...v, type: voteType(v), topics: (bt && v.item != null && bt[v.item]) || [] })).reverse() : []), [meta, bt]);
+    .map((v) => ({ ...v, type: voteType(v), topics: (bt && v.item != null && bt[v.item]) || [], contested: v.f + v.a >= 20 && Math.min(v.f, v.a) / (v.f + v.a) >= 0.25 })).reverse() : []), [meta, bt]);
   const set = (patch) => {
     const o = Object.fromEntries(sp.entries());
     Object.entries(patch).forEach(([a, b]) => (b == null || b === '' ? delete o[a] : (o[a] = String(b))));
@@ -148,9 +149,9 @@ export default function Votes() {
   };
   const list = useMemo(() => {
     const qq = q.trim();
-    return all.filter((v) => (!billParam || v.item === billParam) && (type === 'all' || v.type === type)
+    return all.filter((v) => (!billParam || v.item === billParam) && (!contested || billParam || v.contested) && (type === 'all' || v.type === type)
       && (!topic || v.topics.includes(topic)) && (!qq || `${v.title} ${v.subject}`.includes(qq)));
-  }, [all, q, type, topic, billParam]);
+  }, [all, q, type, topic, billParam, contested]);
   const typeCounts = useMemo(() => {
     const c = { all: all.length };
     all.forEach((v) => (c[v.type] = (c[v.type] || 0) + 1));
@@ -180,6 +181,10 @@ export default function Votes() {
           {VOTE_TYPES.map(([v, l]) => <option key={v} value={v}>{l} ({(typeCounts[v] || 0).toLocaleString('he-IL')})</option>)}
         </select>
         <TopicSelect value={topic} onChange={(t) => { setTopic(t); setN(60); }} counts={topicCounts} />
+        <label className="flex items-center gap-1.5 rounded-md border border-rule px-2 py-1.5 cursor-pointer" title="לפחות 20 מצביעים, ולפחות רבע מהם בכל צד">
+          <input type="checkbox" checked={contested} onChange={(e) => { setContested(e.target.checked); setN(60); }} />
+          רק הצבעות שנויות במחלוקת ({all.filter((v) => v.contested).length.toLocaleString('he-IL')})
+        </label>
         <span className="text-sub num">{list.length.toLocaleString('he-IL')} הצבעות</span>
         {billParam && <button onClick={() => set({ bill: null, id: null })} className="text-xs underline text-sub">הצגת כל ההצבעות (כרגע: הצבעות על הצעת חוק אחת)</button>}
       </div>
