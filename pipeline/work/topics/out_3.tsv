@@ -1,0 +1,1415 @@
+4245	security	labor
+4246	labor	security
+4247	environment	security
+4248	education	
+4249	heritage	foreign
+4250	transport	
+4251	transport	
+4252	economy	
+4253	health	criminal
+4254	welfare	
+4255	heritage	
+4256	criminal	rights
+4257	health	
+4258	health	justice
+4259	economy	
+4260	security	
+4261	immigration	
+4262	heritage	
+4263	heritage	
+4264	heritage	
+4265	heritage	
+4266	heritage	
+4267	heritage	
+4268	heritage	
+4269	heritage	
+4270	heritage	
+4271	heritage	
+4272	heritage	
+4273	heritage	
+4274	media	
+4275	media	
+4276	media	education
+4277	media	
+4278	media	education
+4279	media	
+4280	media	rights
+4281	media	rights
+4282	media	
+4283	media	
+4284	media	arab
+4285	media	arab
+4286	media	consumer
+4287	media	
+4288	media	rights
+4289	welfare	education
+4290	environment	
+4291	health	
+4292	health	
+4293	security	
+4294	security	health
+4295	heritage	
+4296	heritage	
+4297	criminal	health
+4298	criminal	health
+4299	criminal	rights
+4300	religion	
+4301	agriculture	economy
+4302	economy	
+4303	economy	
+4304	economy	
+4305	economy	
+4306	economy	
+4307	economy	
+4308	agriculture	housing
+4309	economy	
+4310	economy	
+4311	welfare	economy
+4312	economy	arab
+4313	rights	
+4314	rights	
+4315	rights	
+4316	rights	
+4317	rights	labor
+4318	heritage	foreign
+4319	heritage	
+4320	religion	arab
+4321	economy	
+4322	media	rights
+4323	education	heritage
+4324	education	
+4325	education	
+4326	immigration	religion
+4327	immigration	
+4328	immigration	religion
+4329	immigration	
+4330	religion	
+4331	consumer	
+4332	religion	
+4333	settlement	
+4334	labor	welfare
+4335	welfare	security
+4336	labor	rights
+4337	education	welfare
+4338	security	welfare
+4339	rights	criminal
+4340	consumer	
+4341	media	
+4342	media	
+4343	media	
+4344	media	
+4345	media	arab
+4346	media	rights
+4347	media	
+4348	media	education
+4349	media	education
+4350	media	consumer
+4351	media	rights
+4352	media	governance
+4353	media	foreign
+4354	media	rights
+4355	media	
+4356	media	
+4357	media	
+4358	media	heritage
+4359	media	
+4360	media	
+4361	heritage	
+4362	heritage	
+4363	security	criminal
+4364	security	justice
+4365	security	justice
+4366	security	criminal
+4367	security	criminal
+4368	security	criminal
+4369	security	
+4370	security	justice
+4371	security	justice
+4372	security	rights
+4373	security	criminal
+4374	security	religion
+4375	security	rights
+4376	security	criminal
+4377	security	criminal
+4378	settlement	security
+4379	settlement	security
+4380	security	justice
+4381	security	
+4382	security	criminal
+4383	security	
+4384	security	justice
+4385	security	justice
+4386	security	criminal
+4387	security	criminal
+4388	security	criminal
+4389	security	justice
+4390	security	criminal
+4391	security	criminal
+4392	security	criminal
+4393	security	criminal
+4394	security	criminal
+4395	heritage	
+4396	security	
+4397	religion	security
+4398	security	religion
+4399	religion	security
+4400	governance	
+4401	security	governance
+4402	economy	
+4403	housing	consumer
+4404	housing	
+4405	housing	security
+4406	housing	consumer
+4407	education	
+4408	education	
+4409	governance	economy
+4410	welfare	
+4411	justice	
+4412	criminal	justice
+4413	justice	
+4414	justice	
+4415	justice	
+4416	justice	welfare
+4417	justice	
+4418	religion	rights
+4419	religion	rights
+4420	religion	
+4421	religion	rights
+4422	religion	
+4423	religion	
+4424	religion	settlement
+4425	religion	rights
+4426	settlement	housing
+4427	heritage	
+4428	arab	rights
+4429	arab	rights
+4430	heritage	
+4431	economy	
+4432	economy	
+4433	economy	
+4434	economy	
+4435	economy	
+4436	security	
+4437	health	
+4438	health	
+4439	health	
+4440	criminal	security
+4441	education	heritage
+4442	security	welfare
+4443	welfare	education
+4444	welfare	
+4445	agriculture	
+4446	agriculture	
+4447	security	welfare
+4448	labor	
+4449	labor	
+4450	labor	
+4451	rights	governance
+4452	education	labor
+4453	welfare	criminal
+4454	welfare	criminal
+4455	welfare	security
+4456	welfare	security
+4457	welfare	security
+4458	welfare	security
+4459	heritage	security
+4460	welfare	security
+4461	welfare	health
+4462	welfare	security
+4463	welfare	security
+4464	welfare	security
+4465	welfare	security
+4466	welfare	rights
+4467	welfare	health
+4468	welfare	justice
+4469	welfare	security
+4470	welfare	criminal
+4471	welfare	criminal
+4472	welfare	religion
+4473	justice	welfare
+4474	welfare	
+4475	welfare	security
+4476	welfare	criminal
+4477	welfare	rights
+4478	justice	
+4479	religion	economy
+4480	economy	
+4481	local	economy
+4482	labor	health
+4483	local	economy
+4484	economy	consumer
+4485	economy	agriculture
+4486	economy	
+4487	economy	consumer
+4488	consumer	economy
+4489	consumer	economy
+4490	agriculture	economy
+4491	health	economy
+4492	environment	
+4493	housing	
+4494	housing	religion
+4495	housing	
+4496	housing	welfare
+4497	housing	criminal
+4498	environment	housing
+4499	arab	housing
+4500	environment	housing
+4501	environment	housing
+4502	environment	housing
+4503	environment	housing
+4504	housing	health
+4505	housing	
+4506	housing	governance
+4507	security	housing
+4508	environment	housing
+4509	housing	governance
+4510	settlement	housing
+4511	environment	housing
+4512	housing	justice
+4513	housing	consumer
+4514	housing	economy
+4515	environment	health
+4516	housing	welfare
+4517	housing	
+4518	housing	transport
+4519	housing	economy
+4520	housing	welfare
+4521	housing	local
+4522	housing	justice
+4523	housing	health
+4524	arab	housing
+4525	environment	security
+4526	housing	rights
+4527	housing	
+4528	housing	justice
+4529	security	housing
+4530	housing	
+4531	transport	housing
+4532	housing	local
+4533	housing	local
+4534	housing	justice
+4535	housing	welfare
+4536	housing	economy
+4537	housing	
+4538	housing	rights
+4539	housing	
+4540	housing	
+4541	arab	housing
+4542	housing	
+4543	housing	
+4544	housing	
+4545	housing	heritage
+4546	housing	
+4547	housing	
+4548	housing	economy
+4549	arab	housing
+4550	arab	housing
+4551	housing	
+4552	housing	transport
+4553	housing	welfare
+4554	housing	welfare
+4555	housing	
+4556	housing	
+4557	arab	housing
+4558	arab	housing
+4559	housing	
+4560	housing	economy
+4561	housing	
+4562	housing	
+4563	housing	rights
+4564	housing	transport
+4565	housing	transport
+4566	housing	
+4567	housing	
+4568	environment	housing
+4569	housing	
+4570	housing	consumer
+4571	housing	
+4572	housing	
+4573	housing	consumer
+4574	housing	education
+4575	housing	
+4576	housing	economy
+4577	housing	
+4578	housing	
+4579	economy	housing
+4580	housing	
+4581	housing	
+4582	religion	housing
+4583	housing	security
+4584	housing	
+4585	housing	economy
+4586	housing	
+4587	environment	housing
+4588	environment	housing
+4589	environment	housing
+4590	housing	
+4591	housing	welfare
+4592	housing	security
+4593	religion	housing
+4594	housing	
+4595	housing	environment
+4596	housing	
+4597	housing	
+4598	economy	housing
+4599	security	housing
+4600	housing	justice
+4601	arab	housing
+4602	arab	housing
+4603	agriculture	housing
+4604	housing	economy
+4605	housing	transport
+4606	housing	security
+4607	housing	transport
+4608	religion	housing
+4609	housing	transport
+4610	housing	environment
+4611	housing	health
+4612	environment	housing
+4613	housing	
+4614	housing	health
+4615	housing	transport
+4616	housing	transport
+4617	housing	security
+4618	housing	
+4619	housing	governance
+4620	housing	welfare
+4621	arab	housing
+4622	arab	housing
+4623	housing	
+4624	housing	
+4625	housing	local
+4626	environment	security
+4627	housing	economy
+4628	housing	
+4629	housing	welfare
+4630	housing	local
+4631	housing	rights
+4632	housing	rights
+4633	housing	rights
+4634	arab	housing
+4635	arab	housing
+4636	housing	rights
+4637	housing	rights
+4638	housing	welfare
+4639	housing	security
+4640	housing	economy
+4641	housing	
+4642	housing	justice
+4643	housing	environment
+4644	security	housing
+4645	agriculture	housing
+4646	housing	
+4647	housing	
+4648	housing	
+4649	housing	governance
+4650	housing	criminal
+4651	housing	
+4652	housing	
+4653	housing	governance
+4654	housing	
+4655	housing	economy
+4656	housing	environment
+4657	environment	housing
+4658	housing	welfare
+4659	environment	housing
+4660	environment	housing
+4661	housing	economy
+4662	environment	housing
+4663	housing	rights
+4664	housing	economy
+4665	housing	
+4666	housing	
+4667	housing	governance
+4668	arab	housing
+4669	housing	governance
+4670	housing	
+4671	housing	economy
+4672	housing	environment
+4673	housing	welfare
+4674	housing	health
+4675	housing	
+4676	housing	agriculture
+4677	housing	
+4678	housing	education
+4679	housing	economy
+4680	housing	justice
+4681	housing	
+4682	housing	
+4683	housing	transport
+4684	housing	transport
+4685	housing	welfare
+4686	housing	welfare
+4687	housing	transport
+4688	environment	health
+4689	housing	
+4690	housing	
+4691	housing	health
+4692	housing	
+4693	environment	housing
+4694	housing	health
+4695	environment	housing
+4696	housing	health
+4697	housing	
+4698	housing	economy
+4699	environment	housing
+4700	consumer	health
+4701	economy	
+4702	economy	
+4703	local	economy
+4704	economy	
+4705	local	economy
+4706	local	economy
+4707	labor	economy
+4708	labor	economy
+4709	economy	
+4710	labor	economy
+4711	labor	economy
+4712	labor	economy
+4713	economy	
+4714	labor	agriculture
+4715	economy	
+4716	local	economy
+4717	economy	
+4718	local	economy
+4719	local	economy
+4720	economy	
+4721	criminal	
+4722	security	housing
+4723	governance	labor
+4724	economy	labor
+4725	labor	economy
+4726	governance	
+4727	governance	
+4728	governance	
+4729	governance	economy
+4730	governance	
+4731	governance	
+4732	governance	
+4733	governance	
+4734	governance	
+4735	governance	
+4736	governance	
+4737	governance	
+4738	governance	
+4739	governance	
+4740	settlement	
+4741	consumer	economy
+4742	economy	consumer
+4743	health	housing
+4744	religion	housing
+4745	welfare	rights
+4746	welfare	rights
+4747	welfare	rights
+4748	welfare	rights
+4749	welfare	rights
+4750	welfare	rights
+4751	education	rights
+4752	economy	
+4753	media	rights
+4754	media	
+4755	media	criminal
+4756	media	
+4757	media	consumer
+4758	consumer	media
+4759	media	heritage
+4760	media	heritage
+4761	media	rights
+4762	media	housing
+4763	media	
+4764	media	economy
+4765	media	health
+4766	consumer	media
+4767	media	consumer
+4768	media	consumer
+4769	consumer	media
+4770	consumer	media
+4771	media	criminal
+4772	consumer	media
+4773	media	
+4774	consumer	media
+4775	consumer	media
+4776	media	consumer
+4777	media	rights
+4778	consumer	media
+4779	media	economy
+4780	media	consumer
+4781	media	health
+4782	media	arab
+4783	consumer	media
+4784	media	health
+4785	consumer	media
+4786	consumer	media
+4787	media	housing
+4788	consumer	media
+4789	media	consumer
+4790	media	heritage
+4791	media	
+4792	consumer	media
+4793	media	rights
+4794	media	consumer
+4795	consumer	media
+4796	media	local
+4797	media	consumer
+4798	consumer	media
+4799	media	rights
+4800	consumer	media
+4801	consumer	media
+4802	consumer	media
+4803	consumer	media
+4804	consumer	media
+4805	consumer	media
+4806	consumer	media
+4807	consumer	media
+4808	media	consumer
+4809	media	health
+4810	media	consumer
+4811	media	rights
+4812	media	security
+4813	media	local
+4814	media	health
+4815	media	
+4816	security	economy
+4817	media	governance
+4818	heritage	arab
+4819	heritage	
+4820	heritage	rights
+4821	heritage	arab
+4822	heritage	rights
+4823	heritage	
+4824	heritage	
+4825	heritage	arab
+4826	heritage	
+4827	heritage	
+4828	heritage	arab
+4829	religion	rights
+4830	justice	governance
+4831	governance	justice
+4832	governance	justice
+4833	governance	justice
+4834	health	welfare
+4835	security	governance
+4836	security	governance
+4837	security	governance
+4838	security	governance
+4839	security	governance
+4840	religion	agriculture
+4841	religion	agriculture
+4842	security	governance
+4843	heritage	
+4844	heritage	
+4845	security	
+4846	security	
+4847	heritage	security
+4848	heritage	security
+4849	heritage	security
+4850	heritage	
+4851	heritage	foreign
+4852	heritage	
+4853	heritage	
+4854	heritage	security
+4855	immigration	
+4856	education	welfare
+4857	security	housing
+4858	welfare	
+4859	environment	governance
+4860	housing	welfare
+4861	housing	welfare
+4862	housing	welfare
+4863	housing	welfare
+4864	housing	welfare
+4865	housing	immigration
+4866	housing	
+4867	housing	welfare
+4868	housing	environment
+4869	housing	welfare
+4870	housing	welfare
+4871	housing	welfare
+4872	housing	immigration
+4873	housing	immigration
+4874	housing	welfare
+4875	housing	welfare
+4876	housing	rights
+4877	housing	rights
+4878	housing	
+4879	housing	
+4880	housing	welfare
+4881	housing	health
+4882	housing	welfare
+4883	housing	
+4884	housing	health
+4885	housing	health
+4886	health	rights
+4887	health	rights
+4888	health	rights
+4889	health	rights
+4890	health	
+4891	health	criminal
+4892	health	rights
+4893	health	religion
+4894	health	religion
+4895	health	
+4896	health	
+4897	health	rights
+4898	health	rights
+4899	health	
+4900	health	
+4901	health	rights
+4902	health	rights
+4903	health	
+4904	health	
+4905	health	rights
+4906	health	
+4907	health	security
+4908	health	
+4909	health	rights
+4910	health	rights
+4911	health	
+4912	health	
+4913	health	rights
+4914	health	rights
+4915	health	
+4916	health	
+4917	health	
+4918	health	
+4919	health	criminal
+4920	health	rights
+4921	health	
+4922	health	rights
+4923	education	labor
+4924	education	labor
+4925	education	labor
+4926	labor	
+4927	welfare	rights
+4928	education	
+4929	education	arab
+4930	education	health
+4931	education	rights
+4932	education	rights
+4933	education	rights
+4934	education	rights
+4935	education	
+4936	education	governance
+4937	education	consumer
+4938	education	rights
+4939	security	education
+4940	education	labor
+4941	security	education
+4942	security	education
+4943	security	education
+4944	security	education
+4945	education	
+4946	education	security
+4947	education	health
+4948	education	arab
+4949	security	education
+4950	education	rights
+4951	education	rights
+4952	education	rights
+4953	education	
+4954	education	
+4955	education	
+4956	education	governance
+4957	education	governance
+4958	education	rights
+4959	education	rights
+4960	education	arab
+4961	education	rights
+4962	education	rights
+4963	education	housing
+4964	education	welfare
+4965	security	education
+4966	education	
+4967	education	arab
+4968	education	arab
+4969	education	rights
+4970	education	rights
+4971	education	
+4972	education	rights
+4973	education	
+4974	education	rights
+4975	welfare	rights
+4976	immigration	rights
+4977	immigration	rights
+4978	welfare	security
+4979	education	
+4980	education	security
+4981	education	rights
+4982	education	criminal
+4983	education	
+4984	education	
+4985	education	
+4986	education	
+4987	education	
+4988	education	transport
+4989	education	
+4990	education	
+4991	education	rights
+4992	education	rights
+4993	education	rights
+4994	education	rights
+4995	health	welfare
+4996	health	welfare
+4997	welfare	rights
+4998	welfare	rights
+4999	economy	heritage
+5000	labor	welfare
+5001	welfare	rights
+5002	security	labor
+5003	security	labor
+5004	labor	
+5005	economy	heritage
+5006	economy	heritage
+5007	welfare	
+5008	justice	rights
+5009	welfare	security
+5010	criminal	rights
+5011	criminal	rights
+5012	criminal	rights
+5013	criminal	
+5014	criminal	
+5015	criminal	justice
+5016	criminal	
+5017	criminal	
+5018	criminal	justice
+5019	criminal	justice
+5020	criminal	rights
+5021	criminal	transport
+5022	criminal	rights
+5023	criminal	rights
+5024	criminal	governance
+5025	criminal	rights
+5026	criminal	rights
+5027	criminal	rights
+5028	criminal	justice
+5029	criminal	rights
+5030	criminal	justice
+5031	criminal	justice
+5032	criminal	rights
+5033	criminal	rights
+5034	criminal	rights
+5035	criminal	rights
+5036	criminal	health
+5037	criminal	justice
+5038	welfare	criminal
+5039	criminal	health
+5040	security	criminal
+5041	welfare	rights
+5042	education	
+5043	education	rights
+5044	education	rights
+5045	labor	welfare
+5046	education	welfare
+5047	welfare	justice
+5048	economy	heritage
+5049	economy	heritage
+5050	rights	welfare
+5051	rights	welfare
+5052	economy	heritage
+5053	justice	economy
+5054	education	economy
+5055	economy	
+5056	justice	heritage
+5057	economy	heritage
+5058	health	rights
+5059	labor	governance
+5060	health	justice
+5061	environment	economy
+5062	economy	environment
+5063	environment	economy
+5064	local	economy
+5065	heritage	security
+5066	heritage	foreign
+5067	heritage	
+5068	heritage	immigration
+5069	heritage	
+5070	heritage	
+5071	settlement	heritage
+5072	heritage	
+5073	heritage	
+5074	religion	health
+5075	religion	
+5076	religion	
+5077	religion	
+5078	religion	
+5079	security	religion
+5080	arab	heritage
+5081	economy	justice
+5082	economy	
+5083	economy	
+5084	welfare	justice
+5085	economy	justice
+5086	consumer	health
+5087	environment	consumer
+5088	health	labor
+5089	consumer	environment
+5090	governance	foreign
+5091	consumer	transport
+5092	consumer	environment
+5093	consumer	environment
+5094	media	consumer
+5095	environment	
+5096	economy	consumer
+5097	consumer	
+5098	governance	consumer
+5099	health	
+5100	rights	health
+5101	governance	economy
+5102	governance	rights
+5103	governance	rights
+5104	governance	rights
+5105	governance	rights
+5106	governance	security
+5107	governance	security
+5108	governance	security
+5109	governance	economy
+5110	governance	economy
+5111	governance	environment
+5112	governance	environment
+5113	governance	environment
+5114	governance	economy
+5115	governance	labor
+5116	governance	security
+5117	governance	security
+5118	governance	economy
+5119	governance	economy
+5120	governance	economy
+5121	governance	justice
+5122	governance	
+5123	governance	consumer
+5124	governance	rights
+5125	governance	housing
+5126	governance	welfare
+5127	governance	consumer
+5128	governance	arab
+5129	governance	arab
+5130	governance	arab
+5131	governance	economy
+5132	governance	economy
+5133	governance	economy
+5134	governance	economy
+5135	governance	security
+5136	governance	education
+5137	governance	local
+5138	governance	security
+5139	governance	economy
+5140	governance	settlement
+5141	governance	labor
+5142	governance	rights
+5143	governance	labor
+5144	governance	labor
+5145	governance	environment
+5146	governance	economy
+5147	governance	economy
+5148	governance	labor
+5149	governance	labor
+5150	governance	economy
+5151	governance	economy
+5152	governance	immigration
+5153	governance	justice
+5154	governance	economy
+5155	governance	economy
+5156	governance	foreign
+5157	governance	housing
+5158	governance	
+5159	governance	economy
+5160	governance	security
+5161	governance	economy
+5162	rights	governance
+5163	rights	governance
+5164	media	consumer
+5165	governance	
+5166	criminal	security
+5167	health	
+5168	governance	media
+5169	education	welfare
+5170	environment	
+5171	education	rights
+5172	education	rights
+5173	health	rights
+5174	environment	health
+5175	transport	consumer
+5176	education	welfare
+5177	education	welfare
+5178	rights	consumer
+5179	consumer	
+5180	consumer	immigration
+5181	education	economy
+5182	education	religion
+5183	security	housing
+5184	security	housing
+5185	governance	welfare
+5186	governance	labor
+5187	governance	immigration
+5188	consumer	
+5189	governance	consumer
+5190	governance	
+5191	governance	
+5192	agriculture	
+5193	agriculture	
+5194	arab	rights
+5195	arab	rights
+5196	governance	media
+5197	criminal	security
+5198	agriculture	consumer
+5199	governance	
+5200	criminal	security
+5201	governance	
+5202	environment	
+5203	economy	justice
+5204	governance	
+5205	education	governance
+5206	consumer	economy
+5207	education	welfare
+5208	consumer	
+5209	consumer	justice
+5210	consumer	housing
+5211	consumer	
+5212	consumer	
+5213	consumer	
+5214	consumer	
+5215	consumer	
+5216	consumer	
+5217	consumer	economy
+5218	consumer	welfare
+5219	consumer	welfare
+5220	consumer	
+5221	consumer	
+5222	consumer	justice
+5223	consumer	health
+5224	consumer	
+5225	consumer	justice
+5226	consumer	justice
+5227	consumer	justice
+5228	labor	
+5229	labor	
+5230	criminal	security
+5231	criminal	security
+5232	health	security
+5233	consumer	agriculture
+5234	consumer	agriculture
+5235	governance	foreign
+5236	governance	health
+5237	governance	economy
+5238	governance	
+5239	governance	justice
+5240	governance	environment
+5241	governance	heritage
+5242	governance	
+5243	governance	
+5244	governance	education
+5245	governance	
+5246	governance	education
+5247	governance	
+5248	governance	rights
+5249	governance	rights
+5250	governance	
+5251	governance	
+5252	governance	economy
+5253	governance	environment
+5254	governance	health
+5255	governance	environment
+5256	governance	
+5257	education	rights
+5258	labor	
+5259	labor	security
+5260	labor	justice
+5261	labor	
+5262	labor	
+5263	labor	settlement
+5264	labor	
+5265	labor	security
+5266	labor	
+5267	labor	security
+5268	labor	education
+5269	labor	
+5270	labor	security
+5271	labor	
+5272	labor	governance
+5273	labor	welfare
+5274	labor	
+5275	labor	religion
+5276	labor	
+5277	labor	
+5278	labor	
+5279	labor	governance
+5280	labor	religion
+5281	labor	security
+5282	labor	security
+5283	health	welfare
+5284	heritage	
+5285	education	rights
+5286	labor	criminal
+5287	labor	
+5288	health	
+5289	settlement	housing
+5290	economy	local
+5291	environment	consumer
+5292	criminal	rights
+5293	media	heritage
+5294	local	governance
+5295	local	governance
+5296	education	economy
+5297	labor	security
+5298	labor	security
+5299	labor	security
+5300	labor	security
+5301	criminal	rights
+5302	criminal	agriculture
+5303	security	rights
+5304	environment	education
+5305	environment	health
+5306	education	health
+5307	education	health
+5308	education	
+5309	education	welfare
+5310	education	health
+5311	education	rights
+5312	education	rights
+5313	education	welfare
+5314	education	welfare
+5315	education	welfare
+5316	education	rights
+5317	education	welfare
+5318	education	
+5319	arab	education
+5320	education	
+5321	education	security
+5322	education	security
+5323	education	rights
+5324	education	rights
+5325	education	security
+5326	education	local
+5327	education	local
+5328	education	heritage
+5329	education	governance
+5330	education	governance
+5331	education	
+5332	education	
+5333	education	
+5334	education	health
+5335	arab	education
+5336	arab	education
+5337	education	criminal
+5338	education	economy
+5339	education	rights
+5340	education	arab
+5341	education	criminal
+5342	education	arab
+5343	education	arab
+5344	education	arab
+5345	education	arab
+5346	education	heritage
+5347	education	labor
+5348	education	environment
+5349	education	rights
+5350	education	rights
+5351	education	rights
+5352	education	settlement
+5353	education	religion
+5354	arab	education
+5355	education	economy
+5356	education	transport
+5357	arab	education
+5358	arab	education
+5359	education	heritage
+5360	education	
+5361	education	religion
+5362	education	heritage
+5363	education	governance
+5364	arab	education
+5365	arab	education
+5366	education	
+5367	education	
+5368	education	
+5369	education	rights
+5370	education	religion
+5371	education	consumer
+5372	education	
+5373	education	labor
+5374	education	rights
+5375	education	rights
+5376	education	heritage
+5377	education	heritage
+5378	education	
+5379	education	
+5380	education	rights
+5381	education	rights
+5382	education	rights
+5383	education	local
+5384	education	economy
+5385	education	economy
+5386	criminal	rights
+5387	environment	
+5388	welfare	economy
+5389	criminal	rights
+5390	education	criminal
+5391	welfare	education
+5392	labor	
+5393	transport	consumer
+5394	housing	consumer
+5395	labor	justice
+5396	health	
+5397	welfare	environment
+5398	welfare	transport
+5399	welfare	transport
+5400	welfare	rights
+5401	welfare	transport
+5402	welfare	housing
+5403	welfare	transport
+5404	welfare	transport
+5405	welfare	transport
+5406	criminal	justice
+5407	criminal	justice
+5408	criminal	rights
+5409	criminal	rights
+5410	governance	justice
+5411	governance	
+5412	governance	labor
+5413	governance	labor
+5414	governance	
+5415	governance	justice
+5416	governance	rights
+5417	governance	rights
+5418	governance	
+5419	governance	economy
+5420	governance	justice
+5421	governance	
+5422	governance	
+5423	governance	justice
+5424	governance	foreign
+5425	governance	arab
+5426	governance	economy
+5427	governance	economy
+5428	governance	criminal
+5429	governance	criminal
+5430	governance	criminal
+5431	governance	
+5432	governance	security
+5433	governance	media
+5434	governance	justice
+5435	governance	
+5436	governance	
+5437	governance	justice
+5438	governance	justice
+5439	governance	justice
+5440	governance	security
+5441	governance	justice
+5442	security	criminal
+5443	foreign	justice
+5444	criminal	security
+5445	religion	justice
+5446	environment	
+5447	labor	
+5448	criminal	foreign
+5449	media	rights
+5450	media	rights
+5451	economy	justice
+5452	governance	criminal
+5453	media	
+5454	transport	economy
+5455	criminal	health
+5456	criminal	health
+5457	health	rights
+5458	health	rights
+5459	health	rights
+5460	health	justice
+5461	health	
+5462	health	justice
+5463	health	rights
+5464	health	justice
+5465	health	justice
+5466	health	justice
+5467	health	criminal
+5468	health	rights
+5469	health	
+5470	criminal	rights
+5471	health	criminal
+5472	welfare	health
+5473	welfare	criminal
+5474	welfare	
+5475	welfare	criminal
+5476	rights	criminal
+5477	heritage	governance
+5478	rights	justice
+5479	settlement	
+5480	labor	
+5481	heritage	
+5482	health	heritage
+5483	health	heritage
+5484	heritage	
+5485	heritage	governance
+5486	heritage	security
+5487	heritage	security
+5488	heritage	security
+5489	heritage	arab
+5490	security	labor
+5491	transport	heritage
+5492	health	heritage
+5493	health	heritage
+5494	health	heritage
+5495	health	heritage
+5496	labor	religion
+5497	heritage	welfare
+5498	labor	heritage
+5499	immigration	heritage
+5500	immigration	heritage
+5501	heritage	
+5502	heritage	
+5503	heritage	
+5504	labor	heritage
+5505	labor	heritage
+5506	rights	heritage
+5507	heritage	foreign
+5508	arab	heritage
+5509	education	
+5510	education	
+5511	education	
+5512	heritage	religion
+5513	heritage	settlement
+5514	heritage	settlement
+5515	heritage	
+5516	heritage	
+5517	heritage	immigration
+5518	heritage	immigration
+5519	heritage	rights
+5520	heritage	rights
+5521	heritage	welfare
+5522	heritage	immigration
+5523	heritage	
+5524	heritage	
+5525	heritage	immigration
+5526	heritage	security
+5527	heritage	
+5528	heritage	foreign
+5529	heritage	religion
+5530	heritage	foreign
+5531	heritage	welfare
+5532	heritage	
+5533	arab	heritage
+5534	heritage	foreign
+5535	justice	governance
+5536	criminal	welfare
+5537	justice	
+5538	justice	
+5539	justice	
+5540	justice	criminal
+5541	justice	
+5542	justice	
+5543	justice	
+5544	health	consumer
+5545	governance	security
+5546	local	economy
+5547	economy	health
+5548	justice	
+5549	environment	justice
+5550	arab	governance
+5551	governance	rights
+5552	governance	rights
+5553	governance	rights
+5554	governance	rights
+5555	governance	rights
+5556	arab	governance
+5557	governance	rights
+5558	governance	rights
+5559	governance	rights
+5560	justice	rights
+5561	environment	economy
+5562	security	housing
+5563	labor	
+5564	labor	
+5565	labor	
+5566	labor	governance
+5567	labor	education
+5568	labor	economy
+5569	labor	
+5570	labor	
+5571	labor	governance
+5572	labor	
+5573	labor	
+5574	labor	education
+5575	settlement	security
+5576	settlement	housing
+5577	foreign	
+5578	foreign	settlement
+5579	foreign	economy
+5580	foreign	criminal
+5581	foreign	criminal
+5582	foreign	criminal
+5583	foreign	settlement
+5584	settlement	
+5585	settlement	
+5586	settlement	labor
+5587	settlement	
+5588	settlement	
+5589	settlement	
+5590	settlement	
+5591	settlement	
+5592	settlement	justice
+5593	settlement	economy
+5594	settlement	
+5595	settlement	governance
+5596	settlement	welfare
+5597	settlement	criminal
+5598	settlement	agriculture
+5599	settlement	housing
+5600	settlement	
+5601	governance	
+5602	justice	governance
+5603	justice	
+5604	justice	security
+5605	rights	governance
+5606	rights	governance
+5607	settlement	foreign
+5608	justice	arab
+5609	justice	arab
+5610	justice	religion
+5611	economy	governance
+5612	economy	governance
+5613	economy	governance
+5614	economy	governance
+5615	economy	labor
+5616	economy	labor
+5617	economy	
+5618	arab	heritage
+5619	economy	
+5620	economy	religion
+5621	economy	rights
+5622	security	economy
+5623	arab	economy
+5624	arab	economy
+5625	education	local
+5626	economy	justice
+5627	economy	labor
+5628	governance	economy
+5629	economy	
+5630	religion	security
+5631	economy	governance
+5632	economy	housing
+5633	economy	religion
+5634	health	economy
+5635	economy	rights
+5636	economy	governance
+5637	economy	governance
+5638	economy	
+5639	economy	governance
+5640	security	economy
+5641	governance	economy
+5642	economy	
+5643	education	health
+5644	security	education
+5645	religion	security
+5646	religion	economy
+5647	economy	governance
+5648	health	welfare
+5649	heritage	religion
+5650	economy	
+5651	religion	education
+5652	economy	
+5653	education	religion
+5654	security	economy
+5655	criminal	economy
+5656	foreign	economy
+5657	economy	
+5658	economy	
+5659	arab	heritage
