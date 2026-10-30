@@ -1,0 +1,1568 @@
+[
+{
+"field": "education.degree",
+"text": "BA/BS (bachelor's)",
+"mk": "בנימין נתניהו",
+"id": 0
+},
+{
+"field": "career.organization",
+"text": "Boston Consulting Group",
+"mk": "בנימין נתניהו",
+"id": 4
+},
+{
+"field": "education.degree",
+"text": "MBA",
+"mk": "אליהו כהן",
+"id": 8
+},
+{
+"field": "career.organization",
+"text": "S&P מעלות",
+"mk": "אליהו כהן",
+"id": 10
+},
+{
+"field": "notes",
+"text": "Shin Bet (~6 years) and criminal law (~10 years) periods given without exact years. Resigned seat July 2020 under Norwegian Law (23rd Knesset), returned 2021.",
+"mk": "אמיר אוחנה",
+"id": 13
+},
+{
+"field": "notes",
+"text": "Degree fields not stated in source. Energy minister years per EN Wikipedia ('2022–2024'). Entered Knesset Nov 1998 replacing Ehud Olmert (14th Knesset list).",
+"mk": "ישראל כץ",
+"id": 20
+},
+{
+"field": "notes",
+"text": "Roster spells her first name 'טלי'; all news sources use 'טליק' (Talik). English spellings vary (Gueili/Gvili/Guaily). Birth date/year, education not found. Residence Meitar from a wartime interview at her home; current residence not reconfirmed. Hebrew Wikipedia not checked (unreachable).",
+"mk": "טלי גואילי",
+"id": 24
+},
+{
+"field": "education.institution",
+"text": "INSEAD",
+"mk": "יואב קיש",
+"id": 25
+},
+{
+"field": "military_service",
+"text": "חיל האוויר מ-1985, טייס קרב F-16 (קורס טיס 1988); סיים שירות מילואים ב-2016 בדרגת סגן-אלוף",
+"mk": "יואב קיש",
+"id": 28
+},
+{
+"field": "education.degree",
+"text": "none/yeshiva",
+"mk": "אלמוג כהן",
+"id": 34
+},
+{
+"field": "education.degree",
+"text": "PhD (in progress)",
+"mk": "דוד פטר",
+"id": 40
+},
+{
+"field": "notes",
+"text": "Degrees: Kohelet bio says LL.B. + MBA (Finance) from Bar-Ilan; JNS/JDN say BA+MA from Bar-Ilan. Doctoral studies in progress. Birth date not found (born 'late communist era' in Hungary). Hamichlol has a page (דוד פטר (עורך דין)) that could not be fetched.",
+"mk": "דוד פטר",
+"id": 41
+},
+{
+"field": "notes",
+"text": "Military service not mentioned in EN Wikipedia. BA year 1984 at age ~20 as stated in source. Also chaired the National Security Committee from Feb 2025.",
+"mk": "בעז ביסמוט",
+"id": 46
+},
+{
+"field": "notes",
+"text": "Jerusalem College of Technology = Lev Academic Center.",
+"mk": "שלמה קרעי",
+"id": 50
+},
+{
+"field": "career.organization",
+"text": "BRM (תוכנת אנטי-וירוס)",
+"mk": "ניר ברקת",
+"id": 51
+},
+{
+"field": "bio_he",
+"text": "נולד בירושלים ב-1959, שירת בצנחנים עד דרגת רב-סרן ויסד את חברת התוכנה BRM. כיהן כראש עיריית ירושלים בין 2008 ל-2018. חבר כנסת מטעם הליכוד מאז 2019 ומכהן כשר הכלכלה והתעשייה מ-2023.",
+"mk": "ניר ברקת",
+"id": 53
+},
+{
+"field": "notes",
+"text": "CAUTION: en.wikipedia.org/wiki/Erez_Tadmor is a DIFFERENT person (film director, b. 1974) — not used. Birth date, education, military service and family not found. Residence Efrat as of 2022. Did not win a realistic slot in 2022 primary.",
+"mk": "ארז תדמור",
+"id": 57
+},
+{
+"field": "education.institution",
+"text": "Tel Aviv University",
+"mk": "גדי איזנקוט",
+"id": 59
+},
+{
+"field": "career.organization",
+"text": "IDF",
+"mk": "גדי איזנקוט",
+"id": 64
+},
+{
+"field": "career.role",
+"text": "Military Secretary to the Prime Minister",
+"mk": "גדי איזנקוט",
+"id": 65
+},
+{
+"field": "career.role",
+"text": "Commander, 366th Division",
+"mk": "גדי איזנקוט",
+"id": 67
+},
+{
+"field": "career.role",
+"text": "Deputy Chief of General Staff",
+"mk": "גדי איזנקוט",
+"id": 71
+},
+{
+"field": "career.role",
+"text": "Member of Knesset (National Unity)",
+"mk": "גדי איזנקוט",
+"id": 73
+},
+{
+"field": "education.institution",
+"text": "Israel National Defense College",
+"mk": "יורם כהן",
+"id": 84
+},
+{
+"field": "family_status",
+"text": "Married to Osnat; five children",
+"mk": "יורם כהן",
+"id": 94
+},
+{
+"field": "education.institution",
+"text": "Harvard University (Kennedy School)",
+"mk": "אורית פרקש הכהן",
+"id": 100
+},
+{
+"field": "career.role",
+"text": "Head of litigation team",
+"mk": "אורית פרקש הכהן",
+"id": 103
+},
+{
+"field": "career.role",
+"text": "Chair",
+"mk": "אורית פרקש הכהן",
+"id": 107
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Minister of Tourism",
+"mk": "אורית פרקש הכהן",
+"id": 112
+},
+{
+"field": "career.role",
+"text": "Founder",
+"mk": "עדי אלטשולר",
+"id": 118
+},
+{
+"field": "career.organization",
+"text": "Inclu (inclusive education nonprofit)",
+"mk": "עדי אלטשולר",
+"id": 122
+},
+{
+"field": "career.role",
+"text": "Combat soldier",
+"mk": "מתן כהנא",
+"id": 128
+},
+{
+"field": "career.organization",
+"text": "Israeli Air Force",
+"mk": "מתן כהנא",
+"id": 131
+},
+{
+"field": "career.role",
+"text": "Director, Diaspora Initiative",
+"mk": "מתן כהנא",
+"id": 132
+},
+{
+"field": "family_status",
+"text": "Married to Lisa; four children",
+"mk": "מתן כהנא",
+"id": 138
+},
+{
+"field": "education.institution",
+"text": "Open University of Israel",
+"mk": "יחיאל משה טרופר",
+"id": 145
+},
+{
+"field": "military_service",
+"text": "Served in IDF including Duvdevan unit (details/years not stated)",
+"mk": "יחיאל משה טרופר",
+"id": 162
+},
+{
+"field": "career.role",
+"text": "Director-General",
+"mk": "שאול מרידור",
+"id": 170
+},
+{
+"field": "career.organization",
+"text": "Ministry of Energy",
+"mk": "שאול מרידור",
+"id": 171
+},
+{
+"field": "career.organization",
+"text": "Lightricks",
+"mk": "שאול מרידור",
+"id": 174
+},
+{
+"field": "education.field",
+"text": "Political science and international relations",
+"mk": "תאיר סולי איפרגן",
+"id": 177
+},
+{
+"field": "education.field",
+"text": "Public policy",
+"mk": "תאיר סולי איפרגן",
+"id": 178
+},
+{
+"field": "education.field",
+"text": "Atidim for the Public Sector program",
+"mk": "תאיר סולי איפרגן",
+"id": 179
+},
+{
+"field": "career.role",
+"text": "Civil servant (rose through the ranks; incl. head of vocational training / technological colleges)",
+"mk": "תאיר סולי איפרגן",
+"id": 181
+},
+{
+"field": "notes",
+"text": "Birth date/place not found (Hamichlol article exists but could not be fetched). Degree institutions not named. Name spelling in English (Osherat/Oshrat) uncertain. Hebrew Wikipedia URL taken from search-result listing; page itself not fetched (he.wikipedia.org blocked from this environment), so its content was not used.",
+"mk": "אושרת גני גונן",
+"id": 191
+},
+{
+"field": "education.field",
+"text": "Art history",
+"mk": "שירה שפירא",
+"id": 195
+},
+{
+"field": "career.organization",
+"text": "Israel Planning Administration",
+"mk": "שירה שפירא",
+"id": 200
+},
+{
+"field": "career.organization",
+"text": "Ministry of Heritage",
+"mk": "שירה שפירא",
+"id": 202
+},
+{
+"field": "career.role",
+"text": "Deputy Director-General (Tkuma heritage project)",
+"mk": "שירה שפירא",
+"id": 203
+},
+{
+"field": "career.organization",
+"text": "Acharai! (Aharai) nonprofit",
+"mk": "עינבר הרוש גיטי",
+"id": 207
+},
+{
+"field": "career.organization",
+"text": "Ministry of Defense",
+"mk": "עינבר הרוש גיטי",
+"id": 210
+},
+{
+"field": "family_status",
+"text": "Married; four children",
+"mk": "עינבר הרוש גיטי",
+"id": 212
+},
+{
+"field": "career.role",
+"text": "Officer; commander of 226th Brigade, Bahad 1, and Education and Youth Corps",
+"mk": "אלעזר שטרן",
+"id": 219
+},
+{
+"field": "career.role",
+"text": "Head of Manpower Directorate",
+"mk": "אלעזר שטרן",
+"id": 220
+},
+{
+"field": "career.role",
+"text": "Officer; deputy COGAT; head of Civil Administration",
+"mk": "כמיל אבו רוקן",
+"id": 231
+},
+{
+"field": "family_status",
+"text": "Married; three children",
+"mk": "כמיל אבו רוקן",
+"id": 237
+},
+{
+"field": "military_service",
+"text": "Aluf (Major General); enlisted 1977, COGAT 2018-2021, retired April 2021",
+"mk": "כמיל אבו רוקן",
+"id": 238
+},
+{
+"field": "career.role",
+"text": "Field operative (counter-terrorism team)",
+"mk": "דבורה בכר",
+"id": 240
+},
+{
+"field": "career.organization",
+"text": "Mossad",
+"mk": "דבורה בכר",
+"id": 242
+},
+{
+"field": "languages",
+"text": "Persian",
+"mk": "דבורה בכר",
+"id": 249
+},
+{
+"field": "career.role",
+"text": "Founder and CEO",
+"mk": "אלקס ריף",
+"id": 255
+},
+{
+"field": "career.organization",
+"text": "The Cultural Brigade (Generation 1.5 movement)",
+"mk": "אלקס ריף",
+"id": 256
+},
+{
+"field": "career.role",
+"text": "Poet and author (poetry collection, 2018)",
+"mk": "אלקס ריף",
+"id": 259
+},
+{
+"field": "residence.note",
+"text": "Yad Eliyahu neighborhood, Tel Aviv (per 2024 article); grew up in Netanya",
+"mk": "אלקס ריף",
+"id": 263
+},
+{
+"field": "education.field",
+"text": "Law (human rights specialization)",
+"mk": "ענבר יחזקאלי בליליוס",
+"id": 264
+},
+{
+"field": "career.organization",
+"text": "Community Rights Centers",
+"mk": "ענבר יחזקאלי בליליוס",
+"id": 270
+},
+{
+"field": "education.field",
+"text": "Economics, Islam and Middle Eastern studies",
+"mk": "רועי שמואל פולקמן",
+"id": 277
+},
+{
+"field": "career.role",
+"text": "Student union chair",
+"mk": "רועי שמואל פולקמן",
+"id": 280
+},
+{
+"field": "career.role",
+"text": "Member of Knesset and faction chair (Kulanu)",
+"mk": "רועי שמואל פולקמן",
+"id": 283
+},
+{
+"field": "family_status",
+"text": "Married; two children",
+"mk": "רועי שמואל פולקמן",
+"id": 285
+},
+{
+"field": "residence.note",
+"text": "Moshav Nes Harim (per English Wikipedia; date of info not stated)",
+"mk": "רועי שמואל פולקמן",
+"id": 287
+},
+{
+"field": "career.organization",
+"text": "Israel Scouts",
+"mk": "ישראל זרי",
+"id": 293
+},
+{
+"field": "career.role",
+"text": "Personal advisor to the Minister of Transport",
+"mk": "ישראל זרי",
+"id": 295
+},
+{
+"field": "career.role",
+"text": "Deputy Mayor; head of the Diamond Exchange district administration",
+"mk": "ישראל זרי",
+"id": 299
+},
+{
+"field": "notes",
+"text": "Israel Hayom (4.8.2026) gives age 36 → born ~1990, not recorded. 'Minhelet HaBorsa' translated as Diamond Exchange district administration (the Ramat Gan 'Bursa' district); exact title per Hebrew: ראש מנהלת הבורסה. Kipa site listed name as 'ישראל זרין' (likely typo).",
+"mk": "ישראל זרי",
+"id": 300
+},
+{
+"field": "career.role",
+"text": "Council member; deputy and acting head of council",
+"mk": "טל אוחנה",
+"id": 306
+},
+{
+"field": "career.role",
+"text": "Project coordinator, rehabilitation of northern communities",
+"mk": "טל אוחנה",
+"id": 308
+},
+{
+"field": "notes",
+"text": "IDI list marks him as representing 'Yesodot Israel' (Tropper) on the joint list. Age not stated in 2026 sources; Mako (Apr 2026) implies ~39, Makor Rishon (2019) age 32 → inconsistent; birth year left null. 'HaAchim Shelanu' start year inferred from 'active for 8 years' (Apr 2026) → ~2018. Jerusalem Municipality role 'past six years' as of July 2026 → ~2020. Family details from 2019 article.",
+"mk": "אליסף פרץ",
+"id": 319
+},
+{
+"field": "family_status",
+"text": "Married; two children (as of 2019); son of Miriam Peretz; brother of fallen soldiers Uriel and Eliraz Peretz",
+"mk": "אליסף פרץ",
+"id": 320
+},
+{
+"field": "military_service",
+"text": "Reservist; combat soldier in the Oded Brigade, 450+ reserve days since October 2023",
+"mk": "אליסף פרץ",
+"id": 321
+},
+{
+"field": "education.field",
+"text": "Criminology and governance",
+"mk": "יפה טבג'ה",
+"id": 323
+},
+{
+"field": "career.organization",
+"text": "National Union of Israeli Students",
+"mk": "יפה טבג'ה",
+"id": 327
+},
+{
+"field": "career.role",
+"text": "Founder and director",
+"mk": "יפה טבג'ה",
+"id": 328
+},
+{
+"field": "career.role",
+"text": "Party leader",
+"mk": "נפתלי בנט",
+"id": 341
+},
+{
+"field": "career.organization",
+"text": "New Right",
+"mk": "נפתלי בנט",
+"id": 343
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Minister of Education",
+"mk": "נפתלי בנט",
+"id": 347
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Minister of Defense",
+"mk": "נפתלי בנט",
+"id": 348
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Prime Minister",
+"mk": "נפתלי בנט",
+"id": 350
+},
+{
+"field": "career.organization",
+"text": "Maariv",
+"mk": "יאיר לפיד",
+"id": 358
+},
+{
+"field": "career.role",
+"text": "TV presenter and news anchor",
+"mk": "יאיר לפיד",
+"id": 362
+},
+{
+"field": "career.role",
+"text": "Founder and leader",
+"mk": "יאיר לפיד",
+"id": 364
+},
+{
+"field": "education.field",
+"text": "finance and accounting",
+"mk": "קרן אייל טרנר",
+"id": 373
+},
+{
+"field": "career.role",
+"text": "Budget Division (transport sector); coordinator for foreign-worker affairs",
+"mk": "קרן אייל טרנר",
+"id": 374
+},
+{
+"field": "military_service",
+"text": "IDF training officer in the Moran unit; First Lieutenant",
+"mk": "קרן אייל טרנר",
+"id": 381
+},
+{
+"field": "education.field",
+"text": "business administration",
+"mk": "מירב בן ארי",
+"id": 384
+},
+{
+"field": "career.role",
+"text": "Opposition coordinator; Yesh Atid faction chair",
+"mk": "מירב בן ארי",
+"id": 389
+},
+{
+"field": "notes",
+"text": "City council end year 2015 inferred from Knesset entry. Committee chair end year not stated. wikipedia_he null (not verified).",
+"mk": "מירב בן ארי",
+"id": 390
+},
+{
+"field": "family_status",
+"text": "Single, one child",
+"mk": "מירב בן ארי",
+"id": 391
+},
+{
+"field": "career.organization",
+"text": "Attorney General's Office",
+"mk": "לירן אבישר בן חורין",
+"id": 399
+},
+{
+"field": "career.organization",
+"text": "Jewish Agency for Israel",
+"mk": "לירן אבישר בן חורין",
+"id": 401
+},
+{
+"field": "career.organization",
+"text": "Masa Israel Journey",
+"mk": "לירן אבישר בן חורין",
+"id": 404
+},
+{
+"field": "education.institution",
+"text": "Harvard University (Wexner program)",
+"mk": "נעם משה תיבון",
+"id": 411
+},
+{
+"field": "education.institution",
+"text": "IDF Command and Staff College",
+"mk": "נעם משה תיבון",
+"id": 413
+},
+{
+"field": "notes",
+"text": "Main detailed source is cyclowiki (a Russian-language wiki), lower reliability than Wikipedia; birth year 1962 consistent with ToI (age 63 in Dec 2025) but israel21c gives age 62 in Oct 2023 (would imply 1961). No English Wikipedia article found; Hebrew Wikipedia page exists but could not be fetched. 'Defensive Shield' forum Hebrew name not verified.",
+"mk": "נעם משה תיבון",
+"id": 420
+},
+{
+"field": "family_status",
+"text": "Married (to Gali Mir-Tibon), two sons",
+"mk": "נעם משה תיבון",
+"id": 421
+},
+{
+"field": "residence.note",
+"text": "שכונת הדר יוסף (לפי cyclowiki); אתר המפלגה: Tel Aviv Yafo",
+"mk": "נעם משה תיבון",
+"id": 423
+},
+{
+"field": "career.organization",
+"text": "Kochav Yair-Tzur Yigal local council",
+"mk": "מיכל הירש נגרי",
+"id": 426
+},
+{
+"field": "career.role",
+"text": "Municipal Director-General",
+"mk": "מיכל הירש נגרי",
+"id": 428
+},
+{
+"field": "education.field",
+"text": "government",
+"mk": "איתן גינזבורג",
+"id": 434
+},
+{
+"field": "career.role",
+"text": "Member of Ra'anana City Council",
+"mk": "איתן גינזבורג",
+"id": 436
+},
+{
+"field": "career.role",
+"text": "Advisor to Deputy Minister of Defense Matan Vilnai",
+"mk": "איתן גינזבורג",
+"id": 437
+},
+{
+"field": "career.role",
+"text": "Mayor",
+"mk": "איתן גינזבורג",
+"id": 439
+},
+{
+"field": "notes",
+"text": "25th Knesset: entered as replacement in July 2025 (after Gadi Eisenkot resigned); not elected in 2022. Minister of Communications end year not stated in source (left null). Family status not stated in source. wikipedia_he null (not verified).",
+"mk": "איתן גינזבורג",
+"id": 441
+},
+{
+"field": "career.role",
+"text": "Socio-economic spokesperson",
+"mk": "מירב כהן",
+"id": 443
+},
+{
+"field": "military_service",
+"text": "Maglan unit (2021); reservist from 2024",
+"mk": "יונתן שלו",
+"id": 455
+},
+{
+"field": "career.role",
+"text": "VP Community Relations (light rail project)",
+"mk": "ברוריה נעים ארמן",
+"id": 459
+},
+{
+"field": "career.organization",
+"text": "Ministry of Intelligence Services",
+"mk": "רם בן ברק",
+"id": 472
+},
+{
+"field": "career.role",
+"text": "Visiting fellow",
+"mk": "רם בן ברק",
+"id": 474
+},
+{
+"field": "notes",
+"text": "Mossad end year (2011) and DG years not stated in source. Military rank not stated. Committee chairmanships (e.g. Foreign Affairs and Defense) not confirmed in fetched source, omitted. wikipedia_he null (not verified).",
+"mk": "רם בן ברק",
+"id": 476
+},
+{
+"field": "education.institution",
+"text": "Georgetown University Law Center",
+"mk": "יוסף ג'בארין",
+"id": 479
+},
+{
+"field": "career.role",
+"text": "Lecturer",
+"mk": "יוסף ג'בארין",
+"id": 482
+},
+{
+"field": "career.organization",
+"text": "University of Haifa / Tel Aviv University",
+"mk": "יוסף ג'בארין",
+"id": 484
+},
+{
+"field": "career.organization",
+"text": "Hadash",
+"mk": "יוסף ג'בארין",
+"id": 491
+},
+{
+"field": "career.organization",
+"text": "Hadassah Hospital",
+"mk": "אחמד טיבי",
+"id": 497
+},
+{
+"field": "notes",
+"text": "Continuous service since 1999 implies Knesset 15–25; 15–21 and 22–25 confirmed via ar.wikipedia term list and en.wikipedia member lists. Listed as MK 'continuously since 1999' on maki.org.il. 'Deputy Speaker' recorded under government_roles as a Knesset role (not executive). Residence conflict noted. Arabic Wikipedia URL given in sources (he.wikipedia not fetchable). he.wikipedia/ar.wikipedia pages could not be fetched from this environment, so wikipedia_he is null; knesset.gov.il not consulted (geo-blocked).",
+"mk": "אחמד טיבי",
+"id": 504
+},
+{
+"field": "education.field",
+"text": "Philosophy (studies)",
+"mk": "פאתן גטאס",
+"id": 507
+},
+{
+"field": "career.organization",
+"text": "Coalition Against Racism",
+"mk": "בכר עואודה",
+"id": 520
+},
+{
+"field": "notes",
+"text": "'30+ years of activity in Arab civil society' per Maki page. Israel Hayom: social entrepreneur, manager in civil-society organizations. No birth date or education found. Residence conflict (Kafr Kanna vs voting in Shefa-Amr per sonara.net). Name variants: Bakr/Bachar Awawdeh, Awada. he.wikipedia/ar.wikipedia pages could not be fetched from this environment, so wikipedia_he is null; knesset.gov.il not consulted (geo-blocked).",
+"mk": "בכר עואודה",
+"id": 526
+},
+{
+"field": "education.institution",
+"text": "London School of Economics",
+"mk": "עופר כסיף",
+"id": 530
+},
+{
+"field": "career.role",
+"text": "Postdoctoral researcher",
+"mk": "עופר כסיף",
+"id": 533
+},
+{
+"field": "career.role",
+"text": "Lecturer in political science/philosophy",
+"mk": "עופר כסיף",
+"id": 535
+},
+{
+"field": "military_service",
+"text": "Served in the IDF (Nahal / Nahal paratroopers); jailed four times as a conscientious objector during the First Intifada.",
+"mk": "עופר כסיף",
+"id": 542
+},
+{
+"field": "residence.note",
+"text": "Hura per Maki/Hadash candidate pages and br7news.",
+"mk": "יוסף עטאונה",
+"id": 549
+},
+{
+"field": "career.role",
+"text": "Postdoctoral fellow",
+"mk": "מהא כרכבי סבאח",
+"id": 550
+},
+{
+"field": "career.organization",
+"text": "Centre for Gender Studies, SOAS University of London",
+"mk": "מהא כרכבי סבאח",
+"id": 551
+},
+{
+"field": "career.role",
+"text": "Head of research unit",
+"mk": "מהא כרכבי סבאח",
+"id": 556
+},
+{
+"field": "career.role",
+"text": "Elected 3rd on Balad slate (June 2026)",
+"mk": "מהא כרכבי סבאח",
+"id": 558
+},
+{
+"field": "career.role",
+"text": "Director-general",
+"mk": "אחמד דראושה",
+"id": 562
+},
+{
+"field": "career.role",
+"text": "Member of political bureau; member of negotiating team",
+"mk": "אחמד דראושה",
+"id": 564
+},
+{
+"field": "notes",
+"text": "Doctorate inferred only from the title 'Dr.' used by Maki, Makor Rishon and Bokra; field/institution not found. Israel Hayom describes her as an activist for the status of women in Arab society. Local council named as 'local council' (Ar'ara implied). Spelling variants: Washahi/Wishahy. he.wikipedia/ar.wikipedia pages could not be fetched from this environment, so wikipedia_he is null; knesset.gov.il not consulted (geo-blocked).",
+"mk": "נהאיה ושאחי",
+"id": 571
+},
+{
+"field": "career.role",
+"text": "Teacher and school principal (Abu Ubayda school, Rahat)",
+"mk": "חסן אלנסאסרה",
+"id": 573
+},
+{
+"field": "career.role",
+"text": "Member of central committee; elected 4th on Balad slate (June 2026)",
+"mk": "חסן אלנסאסרה",
+"id": 577
+},
+{
+"field": "residence.note",
+"text": "Rahat per Israel Hayom and br7news.",
+"mk": "חסן אלנסאסרה",
+"id": 579
+},
+{
+"field": "career.role",
+"text": "Deputy head of local council",
+"mk": "האיתם זחאלקה",
+"id": 581
+},
+{
+"field": "residence.note",
+"text": "Resident of Kafr Qara per Israel Hayom.",
+"mk": "האיתם זחאלקה",
+"id": 584
+},
+{
+"field": "career.role",
+"text": "Commander, Home Front Command",
+"mk": "יאיר גולן",
+"id": 586
+},
+{
+"field": "notes",
+"text": "Northern Command end year (2014) inferred from Deputy Chief of Staff appointment Dec 2014. Not an MK in the 25th Knesset (Meretz below threshold in 2022). he.wikipedia URL from search, not fetched.",
+"mk": "יאיר גולן",
+"id": 592
+},
+{
+"field": "career.role",
+"text": "Parliamentary adviser to MK Shelly Yachimovich",
+"mk": "נעמה לזימי",
+"id": 596
+},
+{
+"field": "career.organization",
+"text": "Haifa Municipality",
+"mk": "נעמה לזימי",
+"id": 598
+},
+{
+"field": "career.organization",
+"text": "Jewish National Fund",
+"mk": "נעמה לזימי",
+"id": 600
+},
+{
+"field": "education.institution",
+"text": "Lady Davis High School, Tel Aviv",
+"mk": "גלעד קריב",
+"id": 604
+},
+{
+"field": "education.institution",
+"text": "Hebrew Union College, Jerusalem",
+"mk": "גלעד קריב",
+"id": 607
+},
+{
+"field": "career.organization",
+"text": "Israel Religious Action Center",
+"mk": "גלעד קריב",
+"id": 610
+},
+{
+"field": "career.organization",
+"text": "Congregation Beit Daniel, Tel Aviv",
+"mk": "גלעד קריב",
+"id": 612
+},
+{
+"field": "notes",
+"text": "English Wikipedia text says 'elected to the 25th Knesset in 2021' (inconsistent); Knesset member lists show him in both the 24th and 25th. Lead claims he chaired the Constitution Committee in the 36th government, unconfirmed in body text; omitted. Executive director end year 2021 inferred from succession note.",
+"mk": "גלעד קריב",
+"id": 618
+},
+{
+"field": "career.organization",
+"text": "Darkenu",
+"mk": "יאיר פינק",
+"id": 634
+},
+{
+"field": "residence.note",
+"text": "ויקיפדיה האנגלית: Yokneam (לא צוין אם יקנעם עילית או המושבה)",
+"mk": "יאיר פינק",
+"id": 638
+},
+{
+"field": "career.role",
+"text": "Secretary General",
+"mk": "גבריאלה לסקי שוץ",
+"id": 641
+},
+{
+"field": "career.role",
+"text": "Legal adviser",
+"mk": "גבריאלה לסקי שוץ",
+"id": 645
+},
+{
+"field": "career.organization",
+"text": "Israel Bar Association",
+"mk": "גבריאלה לסקי שוץ",
+"id": 648
+},
+{
+"field": "education.field",
+"text": "political science and political communication",
+"mk": "מיכל רוזין",
+"id": 658
+},
+{
+"field": "notes",
+"text": "Residence, education and family come from an undated OpenState PDF bio (likely from her earlier Knesset terms) - residence may be outdated. 24th Knesset: entered 16 June 2021 replacing Nitzan Horowitz. Rape-crisis association CEO years not found. Military service not found.",
+"mk": "מיכל רוזין",
+"id": 662
+},
+{
+"field": "education.degree",
+"text": "DMD",
+"mk": "מנסור עבאס",
+"id": 663
+},
+{
+"field": "education.field",
+"text": "Dentistry",
+"mk": "מנסור עבאס",
+"id": 664
+},
+{
+"field": "career.role",
+"text": "Imam",
+"mk": "מנסור עבאס",
+"id": 667
+},
+{
+"field": "career.role",
+"text": "Chairman",
+"mk": "מנסור עבאס",
+"id": 673
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Minister without portfolio (36th government)",
+"mk": "מנסור עבאס",
+"id": 674
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Chair, Special Committee on Arab Society Affairs (Knesset)",
+"mk": "מנסור עבאס",
+"id": 675
+},
+{
+"field": "career.role",
+"text": "Commander, Eilat police",
+"mk": "יואב סגלוביץ",
+"id": 681
+},
+{
+"field": "notes",
+"text": "Degree type: en.wikipedia says he 'studied law at Tel Aviv University' without naming a degree; LLB assumed from police-prosecutor career — uncertain. Eilat command start Sep 2002, left ~18 months later (end 2004 approximate). Reported as not formally a Ra'am party member (Al Jazeera, Aug 2026). Roster spells name without geresh (סגלוביץ). he.wikipedia/ar.wikipedia pages could not be fetched from this environment, so wikipedia_he is null; knesset.gov.il not consulted (geo-blocked).",
+"mk": "יואב סגלוביץ",
+"id": 686
+},
+{
+"field": "career.role",
+"text": "Head of Kafr Qasim branch",
+"mk": "ווליד טאהא",
+"id": 691
+},
+{
+"field": "career.role",
+"text": "City council member; director of education",
+"mk": "ווליד טאהא",
+"id": 693
+},
+{
+"field": "career.organization",
+"text": "Israel Football Association",
+"mk": "ואליד אל הואשלה",
+"id": 700
+},
+{
+"field": "career.role",
+"text": "Director and spokesperson, Ra'am Knesset faction",
+"mk": "ואליד אל הואשלה",
+"id": 702
+},
+{
+"field": "education.institution",
+"text": "Mandel School for Leadership",
+"mk": "אימאן ח'טיב יאסין",
+"id": 710
+},
+{
+"field": "career.role",
+"text": "Director, community centre",
+"mk": "אימאן ח'טיב יאסין",
+"id": 711
+},
+{
+"field": "family_status",
+"text": "Four children.",
+"mk": "אימאן ח'טיב יאסין",
+"id": 714
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Chair, Knesset Science and Technology Committee",
+"mk": "יאסר חוג'יראת",
+"id": 718
+},
+{
+"field": "notes",
+"text": "PhD field ('genetic engineering') taken from the headline of an Al-Quds Al-Arabi article (seen in search results; full article could not be fetched); institution unknown. 'Geneticist' per en.wikipedia lead. Committee chair as of May 2026 per kul-alarab (start year unknown). Birthplace not found. Note: en.wikipedia birth date (19 Dec) coincides with Ahmad Tibi's birthday — verify against Knesset site. he.wikipedia/ar.wikipedia pages could not be fetched from this environment, so wikipedia_he is null; knesset.gov.il not consulted (geo-blocked).",
+"mk": "יאסר חוג'יראת",
+"id": 719
+},
+{
+"field": "career.role",
+"text": "Pharmacist",
+"mk": "איברהים אל טורי",
+"id": 721
+},
+{
+"field": "notes",
+"text": "Very thinly sourced (local news only). No birth date, education or detailed career found; search budget exhausted. he.wikipedia/ar.wikipedia pages could not be fetched from this environment, so wikipedia_he is null; knesset.gov.il not consulted (geo-blocked).",
+"mk": "עבד אל כרים מסרי",
+"id": 724
+},
+{
+"field": "career.organization",
+"text": "Likud",
+"mk": "אביגדור ליברמן",
+"id": 731
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Minister of National Infrastructure",
+"mk": "אביגדור ליברמן",
+"id": 733
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Deputy Prime Minister and Minister of Foreign Affairs",
+"mk": "אביגדור ליברמן",
+"id": 736
+},
+{
+"field": "family_status",
+"text": "Married (to Ella), three children",
+"mk": "אביגדור ליברמן",
+"id": 738
+},
+{
+"field": "military_service",
+"text": "IDF Artillery Corps (one year active duty, served in Hebron military government); Corporal",
+"mk": "אביגדור ליברמן",
+"id": 739
+},
+{
+"field": "career.organization",
+"text": "Beit She'an Municipality",
+"mk": "רפאל בן שטרית",
+"id": 743
+},
+{
+"field": "career.organization",
+"text": "Likud, Beit She'an",
+"mk": "רפאל בן שטרית",
+"id": 745
+},
+{
+"field": "career.role",
+"text": "National security adviser, lecturer and TV panelist",
+"mk": "טליה לנקרי",
+"id": 761
+},
+{
+"field": "career.organization",
+"text": "Channel 12 News",
+"mk": "טליה לנקרי",
+"id": 762
+},
+{
+"field": "military_service",
+"text": "Armored Corps and Operations Directorate; Colonel (res.)",
+"mk": "טליה לנקרי",
+"id": 764
+},
+{
+"field": "education.field",
+"text": "law and administration",
+"mk": "עודד פורר",
+"id": 765
+},
+{
+"field": "career.organization",
+"text": "Israeli Council for Culture and Arts",
+"mk": "עודד פורר",
+"id": 769
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Minister for the Development of the Periphery, the Negev and the Galilee",
+"mk": "עודד פורר",
+"id": 774
+},
+{
+"field": "career.role",
+"text": "Manpower officer",
+"mk": "יוליה מלינובסקי קונין",
+"id": 778
+},
+{
+"field": "notes",
+"text": "20th Knesset: replacement for Lieberman 30 May 2016 - 18 Nov 2018. Law degree is described as BA (Ukrainian system); highest_education_level kept as BA. Police role: source says only 'a local police force' (location/years unstated). Military service not found. wikipedia_he null (not verified).",
+"mk": "יוליה מלינובסקי קונין",
+"id": 782
+},
+{
+"field": "family_status",
+"text": "Brother of Eli Sharabi (former hostage) and Yossi Sharabi (killed in captivity)",
+"mk": "שרון שרעבי",
+"id": 785
+},
+{
+"field": "career.role",
+"text": "Member of local council",
+"mk": "חמד עמאר",
+"id": 790
+},
+{
+"field": "career.organization",
+"text": "Druze youth movement",
+"mk": "חמד עמאר",
+"id": 793
+},
+{
+"field": "education.degree",
+"text": "law studies (degree not specified)",
+"mk": "איתמר בן גביר",
+"id": 797
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Minister of National Security (reappointed March 2025)",
+"mk": "איתמר בן גביר",
+"id": 805
+},
+{
+"field": "military_service",
+"text": "Did not serve; not drafted by the IDF at 18",
+"mk": "איתמר בן גביר",
+"id": 808
+},
+{
+"field": "career.role",
+"text": "Candidate for chair of the Israel Bar Association",
+"mk": "טלי גוטליב",
+"id": 811
+},
+{
+"field": "career.role",
+"text": "Panelist, 'Shishi'",
+"mk": "טלי גוטליב",
+"id": 813
+},
+{
+"field": "career.role",
+"text": "Member, Foreign Affairs and Defense Committee",
+"mk": "טלי גוטליב",
+"id": 815
+},
+{
+"field": "education.degree",
+"text": "yeshiva",
+"mk": "יצחק וסרלאוף",
+"id": 819
+},
+{
+"field": "career.organization",
+"text": "Hesder Yeshiva Oz VeEmuna, Tel Aviv",
+"mk": "יצחק וסרלאוף",
+"id": 824
+},
+{
+"field": "notes",
+"text": "Hesder yeshiva where he studied not named in the fetched source (a Hebrew Wikipedia search result hinted at Netiv Meir; not verified). No academic degree mentioned.",
+"mk": "יצחק וסרלאוף",
+"id": 827
+},
+{
+"field": "career.role",
+"text": "Chair, Knesset Health Committee",
+"mk": "לימור סון הר-מלך",
+"id": 837
+},
+{
+"field": "education.institution",
+"text": "Technion – Israel Institute of Technology",
+"mk": "יצחק קרויזר",
+"id": 840
+},
+{
+"field": "career.role",
+"text": "Construction company operator",
+"mk": "יצחק קרויזר",
+"id": 842
+},
+{
+"field": "family_status",
+"text": "Married to Adi Kroizer; three children",
+"mk": "יצחק קרויזר",
+"id": 847
+},
+{
+"field": "residence.note",
+"text": "Golan Heights",
+"mk": "יצחק קרויזר",
+"id": 849
+},
+{
+"field": "military_service",
+"text": "Received IDF exemption at age 16 on medical grounds (per Zman Yisrael)",
+"mk": "חנמאל שיראי דורפמן",
+"id": 858
+},
+{
+"field": "residence.note",
+"text": "Per a Dec 2024 ynet report cited by Zman Yisrael (Oct 2026); not independently verified",
+"mk": "חנמאל שיראי דורפמן",
+"id": 859
+},
+{
+"field": "education.field",
+"text": "Kollel",
+"mk": "יעקב אשר",
+"id": 863
+},
+{
+"field": "education.institution",
+"text": "Beit Yehuda Kollel, Bnei Brak",
+"mk": "יעקב אשר",
+"id": 864
+},
+{
+"field": "career.organization",
+"text": "Bnei Brak Municipality",
+"mk": "יעקב אשר",
+"id": 866
+},
+{
+"field": "career.role",
+"text": "Deputy council head",
+"mk": "יעקב אשר",
+"id": 869
+},
+{
+"field": "career.role",
+"text": "Chair, Knesset Interior and Environment Committee (25th Knesset)",
+"mk": "יעקב אשר",
+"id": 874
+},
+{
+"field": "family_status",
+"text": "Married; ten children",
+"mk": "יצחק יששכר גולדקנופ",
+"id": 884
+},
+{
+"field": "career.role",
+"text": "Adviser to the council head",
+"mk": "יצחק זאב פינדרוס",
+"id": 886
+},
+{
+"field": "career.organization",
+"text": "Beitar Illit",
+"mk": "יצחק זאב פינדרוס",
+"id": 888
+},
+{
+"field": "career.role",
+"text": "Mayoral candidate",
+"mk": "מאיר פרוש",
+"id": 894
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Deputy Minister of Housing",
+"mk": "מאיר פרוש",
+"id": 896
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Deputy Minister of Education",
+"mk": "מאיר פרוש",
+"id": 898
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Minister of Jerusalem Affairs and Jewish Tradition",
+"mk": "מאיר פרוש",
+"id": 899
+},
+{
+"field": "notes",
+"text": "Knesset terms 14,16,17,18 derived from English Wikipedia infobox year ranges (1996–2011); 15, 19–23, 25 confirmed via Knesset member lists. 18th: resigned Feb 2011; 20th: stood down May 2016 (rotation); 23rd: resigned June 2020; 25th: entered July 2025. Yeshiva not named. Wikipedia infobox lists only the 2023–2025 ministerial post; deputy-minister roles from article body.",
+"mk": "מאיר פרוש",
+"id": 900
+},
+{
+"field": "military_service",
+"text": "Served in the IDF after leaving yeshiva",
+"mk": "מאיר פרוש",
+"id": 902
+},
+{
+"field": "career.role",
+"text": "Head of the Education Administration",
+"mk": "משה עזריאל רוזנטל",
+"id": 904
+},
+{
+"field": "notes",
+"text": "Headed Bnei Brak education administration for about 3–3.5 years before Sept 2026 (start c.2023, not exact). Middle name 'עזריאל' appears in roster and Israel Hayom, not in other sources. Age, residence, yeshiva not found. Israel Hayom describes him as a public/business figure – not corroborated. Family: Emess mentions his wife (married).",
+"mk": "משה עזריאל רוזנטל",
+"id": 905
+},
+{
+"field": "notes",
+"text": "Roster lists 'אלי שטארק'; most outlets use 'אליקים שטארק'. Age 34 (ynet, 15 Oct 2026) vs 35 (Kikar, 24 Oct 2026); birth year not determinable (c.1991–1992). Residence not found. Replaces Yisrael Eichler as Belz representative.",
+"mk": "אלי שטארק",
+"id": 912
+},
+{
+"field": "education.institution",
+"text": "Porat Yosef Yeshiva, Jerusalem",
+"mk": "אריה מכלוף דרעי",
+"id": 917
+},
+{
+"field": "education.institution",
+"text": "Hebron Yeshiva",
+"mk": "אריה מכלוף דרעי",
+"id": 919
+},
+{
+"field": "career.role",
+"text": "Administrative manager",
+"mk": "אריה מכלוף דרעי",
+"id": 920
+},
+{
+"field": "career.organization",
+"text": "Ministry of Interior",
+"mk": "אריה מכלוף דרעי",
+"id": 924
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Minister of the Interior",
+"mk": "אריה מכלוף דרעי",
+"id": 931
+},
+{
+"field": "military_service",
+"text": "Shortened three-month IDF service (1986)",
+"mk": "אריה מכלוף דרעי",
+"id": 935
+},
+{
+"field": "family_status",
+"text": "Son of former Minister of Religious Services David Azulai",
+"mk": "ינון אזולאי",
+"id": 940
+},
+{
+"field": "education.field",
+"text": "Education and Israel Heritage",
+"mk": "מיכאל משה מלכיאלי",
+"id": 942
+},
+{
+"field": "education.institution",
+"text": "Bayit VeGan College",
+"mk": "מיכאל משה מלכיאלי",
+"id": 943
+},
+{
+"field": "career.organization",
+"text": "Neve Yaakov",
+"mk": "מיכאל משה מלכיאלי",
+"id": 949
+},
+{
+"field": "notes",
+"text": "Entered 20th Knesset 2 Nov 2016 replacing Aryeh Deri. Wikipedia lists ministry as 'Religious Affairs'; recorded as Religious Services. Military service not mentioned. Years of degrees not given.",
+"mk": "מיכאל משה מלכיאלי",
+"id": 954
+},
+{
+"field": "career.organization",
+"text": "Jerusalem Religious Council",
+"mk": "יואב בן צור",
+"id": 966
+},
+{
+"field": "family_status",
+"text": "Married to Ofra; seven children",
+"mk": "יואב בן צור",
+"id": 973
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Minister in the Ministry of Education",
+"mk": "חיים ביטון",
+"id": 979
+},
+{
+"field": "career.role",
+"text": "Logistics officer (about 25 years)",
+"mk": "דרור דוד עמוס",
+"id": 981
+},
+{
+"field": "career.organization",
+"text": "Chesed Chaim VeEmet (support for bereaved families)",
+"mk": "דרור דוד עמוס",
+"id": 982
+},
+{
+"field": "career.organization",
+"text": "Haifa Religious Council",
+"mk": "דרור דוד עמוס",
+"id": 984
+},
+{
+"field": "education.degree",
+"text": "MA studies, not completed",
+"mk": "בצלאל סמוטריץ'",
+"id": 989
+},
+{
+"field": "gov_roles_profile.role",
+"text": "Minister of Transport",
+"mk": "בצלאל סמוטריץ'",
+"id": 993
+},
+{
+"field": "notes",
+"text": "25th Knesset: elected 2022, resigned seat Feb 2023 under Norwegian Law while remaining minister. Wikipedia also lists 'Yashlatz' among religious schooling. Did not complete the HUJI master's per Wikipedia.",
+"mk": "בצלאל סמוטריץ'",
+"id": 995
+},
+{
+"field": "career.role",
+"text": "Owner/operator, rope-access construction company",
+"mk": "משה פייגלין",
+"id": 999
+},
+{
+"field": "career.role",
+"text": "Founder and head",
+"mk": "אורית מלכה סטרוק",
+"id": 1014
+},
+{
+"field": "notes",
+"text": "Machon Meir studies recorded as 'yeshiva' level; no academic degree listed. Military/national service not mentioned.",
+"mk": "אורית מלכה סטרוק",
+"id": 1017
+},
+{
+"field": "residence.note",
+"text": "Avraham Avinu neighborhood, Hebron",
+"mk": "אורית מלכה סטרוק",
+"id": 1019
+},
+{
+"field": "military_service",
+"text": "13 months as religious-affairs NCO at the IDF Military Engineering School (volunteered after medical discharge)",
+"mk": "שמחה רוטמן",
+"id": 1026
+},
+{
+"field": "career.role",
+"text": "Chairman / leader",
+"mk": "צבי מור",
+"id": 1031
+},
+{
+"field": "notes",
+"text": "Age 48 in July 2024 (Maariv) → born c.1975–1976; not exact, left null. Doctorate reported as in progress in 2024; institution not named; completion unknown, so highest level 'unknown'. A Hebrew Wikipedia article 'צביקה מור' appeared in search but could not be fetched. Wife's name Efrat from INN photo caption ('צביקה ואפרת מור') — low confidence.",
+"mk": "צבי מור",
+"id": 1033
+},
+{
+"field": "residence.note",
+"text": "Grew up in Bnei Brak; moved to Kiryat Arba after marriage (Maariv, July 2024)",
+"mk": "צבי מור",
+"id": 1035
+},
+{
+"field": "career.role",
+"text": "Reconnaissance battalion commander (reserves)",
+"mk": "איתמר מרדכי איתם",
+"id": 1040
+}
+]
