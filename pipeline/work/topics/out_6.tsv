@@ -698,3 +698,363 @@
 9187	security	
 9188	security	economy
 9189	security	health
+9190	security	education
+9191	security	economy
+9192	security	economy
+9193	security	economy
+9194	security	governance
+9195	security	governance
+9196	governance	
+9197	governance	
+9198	governance	economy
+9199	criminal	governance
+9200	justice	governance
+9201	governance	economy
+9202	environment	education
+9203	security	labor
+9204	security	labor
+9205	security	labor
+9206	security	labor
+9207	security	labor
+9208	security	labor
+9209	security	labor
+9210	security	labor
+9211	security	welfare
+9212	security	labor
+9213	security	labor
+9214	security	welfare
+9215	security	justice
+9216	security	labor
+9217	labor	welfare
+9218	labor	
+9219	labor	
+9220	labor	
+9221	labor	transport
+9222	labor	
+9223	labor	
+9224	labor	arab
+9225	welfare	
+9226	security	
+9227	security	
+9228	security	
+9229	immigration	security
+9230	security	
+9231	security	
+9232	security	
+9233	security	
+9234	security	
+9235	security	
+9236	economy	
+9237	economy	
+9238	security	
+9239	security	labor
+9240	security	labor
+9241	economy	security
+9242	health	
+9243	health	
+9244	security	religion
+9245	religion	
+9246	religion	labor
+9247	religion	
+9248	religion	
+9249	religion	
+9250	religion	
+9251	religion	
+9252	religion	
+9253	religion	
+9254	religion	
+9255	religion	
+9256	religion	
+9257	religion	
+9258	religion	consumer
+9259	religion	
+9260	religion	
+9261	religion	
+9262	religion	
+9263	religion	
+9264	religion	
+9265	religion	
+9266	religion	
+9267	religion	rights
+9268	religion	rights
+9269	religion	
+9270	religion	
+9271	religion	
+9272	religion	
+9273	religion	
+9274	religion	
+9275	religion	
+9276	religion	
+9277	religion	
+9278	religion	
+9279	religion	
+9280	religion	
+9281	religion	labor
+9282	religion	
+9283	religion	
+9284	religion	
+9285	religion	consumer
+9286	religion	labor
+9287	health	local
+9288	economy	
+9289	welfare	
+9290	welfare	
+9291	welfare	
+9292	welfare	
+9293	welfare	
+9294	welfare	
+9295	welfare	
+9296	welfare	
+9297	welfare	
+9298	welfare	rights
+9299	welfare	rights
+9300	welfare	rights
+9301	welfare	
+9302	economy	
+9303	economy	
+9304	economy	
+9305	economy	consumer
+9306	economy	
+9307	consumer	transport
+9308	consumer	transport
+9309	consumer	transport
+9310	consumer	transport
+9311	consumer	transport
+9312	consumer	transport
+9313	consumer	transport
+9314	consumer	transport
+9315	consumer	transport
+9316	consumer	welfare
+9317	consumer	economy
+9318	housing	consumer
+9319	housing	consumer
+9320	labor	governance
+9321	security	labor
+9322	labor	
+9323	labor	transport
+9324	security	labor
+9325	security	labor
+9326	security	labor
+9327	labor	
+9328	labor	
+9329	labor	
+9330	labor	
+9331	labor	
+9332	labor	
+9333	labor	
+9334	labor	governance
+9335	labor	
+9336	labor	
+9337	labor	
+9338	labor	
+9339	labor	welfare
+9340	labor	
+9341	security	labor
+9342	governance	
+9343	governance	
+9344	governance	
+9345	governance	
+9346	labor	rights
+9347	labor	rights
+9348	labor	rights
+9349	labor	rights
+9350	religion	
+9351	immigration	security
+9352	immigration	security
+9353	governance	security
+9354	security	governance
+9355	security	welfare
+9356	security	welfare
+9357	governance	
+9358	heritage	security
+9359	education	rights
+9360	education	security
+9361	governance	security
+9362	governance	security
+9363	governance	security
+9364	housing	economy
+9365	security	immigration
+9366	settlement	housing
+9367	heritage	
+9368	environment	security
+9369	environment	
+9370	environment	
+9371	environment	
+9372	environment	
+9373	environment	consumer
+9374	environment	consumer
+9375	environment	
+9376	environment	
+9377	environment	
+9378	environment	
+9379	environment	
+9380	environment	
+9381	environment	
+9382	environment	
+9383	environment	
+9384	environment	
+9385	environment	
+9386	environment	
+9387	religion	heritage
+9388	settlement	rights
+9389	security	welfare
+9390	transport	
+9391	religion	rights
+9392	security	education
+9393	labor	
+9394	labor	governance
+9395	labor	
+9396	labor	
+9397	labor	health
+9398	labor	
+9399	settlement	labor
+9400	labor	agriculture
+9401	labor	religion
+9402	labor	religion
+9403	labor	
+9404	labor	
+9405	labor	
+9406	labor	
+9407	labor	religion
+9408	labor	
+9409	religion	labor
+9410	religion	labor
+9411	religion	labor
+9412	religion	labor
+9413	labor	
+9414	labor	
+9415	labor	religion
+9416	labor	
+9417	labor	
+9418	labor	
+9419	labor	religion
+9420	labor	
+9421	labor	
+9422	labor	
+9423	labor	religion
+9424	labor	
+9425	labor	
+9426	labor	
+9427	labor	
+9428	labor	
+9429	labor	
+9430	labor	
+9431	labor	religion
+9432	heritage	rights
+9433	governance	heritage
+9434	governance	
+9435	governance	
+9436	governance	media
+9437	environment	economy
+9438	governance	
+9439	rights	
+9440	security	governance
+9441	local	environment
+9442	environment	
+9443	environment	economy
+9444	local	environment
+9445	local	environment
+9446	local	environment
+9447	environment	
+9448	environment	consumer
+9449	environment	consumer
+9450	environment	
+9451	housing	environment
+9452	welfare	environment
+9453	local	
+9454	local	
+9455	local	environment
+9456	consumer	environment
+9457	environment	
+9458	environment	
+9459	local	environment
+9460	economy	environment
+9461	environment	
+9462	environment	local
+9463	local	environment
+9464	economy	environment
+9465	environment	religion
+9466	heritage	economy
+9467	environment	local
+9468	welfare	security
+9469	security	welfare
+9470	security	education
+9471	economy	labor
+9472	economy	labor
+9473	heritage	
+9474	security	
+9475	economy	labor
+9476	heritage	welfare
+9477	welfare	heritage
+9478	welfare	heritage
+9479	welfare	heritage
+9480	welfare	heritage
+9481	heritage	welfare
+9482	welfare	security
+9483	welfare	security
+9484	welfare	security
+9485	security	welfare
+9486	security	welfare
+9487	security	welfare
+9488	security	welfare
+9489	security	welfare
+9490	criminal	welfare
+9491	welfare	
+9492	justice	consumer
+9493	justice	consumer
+9494	justice	consumer
+9495	justice	consumer
+9496	justice	environment
+9497	justice	consumer
+9498	justice	rights
+9499	justice	consumer
+9500	education	
+9501	education	
+9502	labor	
+9503	security	labor
+9504	health	
+9505	education	security
+9506	justice	
+9507	agriculture	welfare
+9508	agriculture	welfare
+9509	governance	
+9510	agriculture	consumer
+9511	agriculture	consumer
+9512	agriculture	consumer
+9513	agriculture	consumer
+9514	economy	
+9515	environment	
+9516	education	health
+9517	welfare	health
+9518	security	welfare
+9519	security	
+9520	heritage	economy
+9521	welfare	
+9522	health	security
+9523	governance	
+9524	security	education
+9525	security	
+9526	welfare	labor
+9527	consumer	health
+9528	transport	consumer
+9529	transport	consumer
+9530	security	
+9531	security	governance
+9532	labor	welfare
+9533	governance	
+9534	governance	
+9535	education	
+9536	education	local
+9537	governance	
+9538	governance	
+9539	governance	
+9540	health	
+9541	health	
+9542	health	
+9543	health	
+9544	health	
+9545	health	
+9546	welfare	health
+9547	welfare	health
+9548	consumer	health
+9549	consumer	health
