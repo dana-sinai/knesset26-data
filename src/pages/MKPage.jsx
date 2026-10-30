@@ -30,8 +30,7 @@ function Tabs({ tabs, value, onChange }) {
   );
 }
 
-export default function MKPage() {
-  const { id } = useParams();
+export function MKProfile({ id, compact = false }) {
   const { data: mks } = useMKs();
   const { data: parties } = useParties();
   const { data: parl } = useData('parliament.json');
@@ -39,7 +38,7 @@ export default function MKPage() {
   const m = useMemo(() => mks?.find((x) => x.id === id), [mks, id]);
   const party = parties?.find((p) => p.id === m?.party);
   if (!mks || !parties) return <Loading />;
-  if (!m) return <Page><p>לא נמצא חבר כנסת. <Link className="underline" to="/mks">לרשימה</Link></p></Page>;
+  if (!m) return <p>לא נמצא חבר כנסת. <Link className="underline" to="/mks">לרשימה</Link></p>;
 
   const pr = m.person_id ? parl?.[String(m.person_id)] : null;
   const s = m.sources || {};
@@ -50,14 +49,14 @@ export default function MKPage() {
   tabs.push(['sources', 'מקורות']);
 
   return (
-    <Page>
-      <header className="grid sm:grid-cols-[auto_1fr] gap-5 items-center">
-        <Initials name={m.name_he} color={party?.color} size={84} />
+    <div className={compact ? 'grid gap-6' : 'grid gap-10'}>
+      <header className="grid grid-cols-[auto_1fr] gap-5 items-center">
+        <Initials name={m.name_he} color={party?.color} size={compact ? 64 : 84} />
         <div className="grid gap-1">
           <Link to={`/party/${party.id}`} className="text-sm font-semibold hover:underline" style={{ color: party.color }}>
             {party.name_he} · מקום {m.list_position} ברשימה
           </Link>
-          <h1 className="text-4xl font-black">{m.name_he}</h1>
+          <h1 className={compact ? 'text-3xl font-black' : 'text-4xl font-black'}>{m.name_he}</h1>
           {m.name_en && <p className="text-sub" dir="ltr" style={{ textAlign: 'right' }}>{m.name_en}</p>}
           <div className="flex flex-wrap gap-2 text-xs mt-1">
             {m.is_new ? <span className="px-2 py-0.5 rounded-full bg-gold/20 text-ink">חדש/ה בכנסת</span>
@@ -78,7 +77,7 @@ export default function MKPage() {
       <Tabs tabs={tabs} value={tab} onChange={setTab} />
 
       {tab === 'profile' && (
-        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-10">
+        <div className={compact ? 'grid gap-8' : 'grid lg:grid-cols-[1fr_1.2fr] gap-10'}>
           <div className="grid gap-6 content-start">
             {m.bio_he && <p className="leading-relaxed">{m.bio_he}</p>}
             <dl>
@@ -252,6 +251,11 @@ export default function MKPage() {
           )}
         </div>
       )}
-    </Page>
+    </div>
   );
+}
+
+export default function MKPage() {
+  const { id } = useParams();
+  return <Page><MKProfile id={id} /></Page>;
 }
