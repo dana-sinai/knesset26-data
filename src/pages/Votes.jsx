@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useMKs, useParties, useData, VOTE_CODE, VOTE_CLASS } from '@/lib/data';
+import { ExternalLink, ArrowRight } from 'lucide-react';
+import { useMKs, useParties, useData, useBillTopics, VOTE_CODE, VOTE_CLASS, knessetBillUrl } from '@/lib/data';
+import TopicChips, { TopicSelect } from '@/components/TopicChips';
 import { Loading, Page } from '@/components/bits';
 import { MKLink } from '@/components/MKDrawer';
 
@@ -35,7 +37,7 @@ function VoteDetail({ vote, k, mks, partyById }) {
   const [on, setOn] = useState({ 1: true, 2: true, 3: true });
   if (!month) return <p className="text-sub text-sm">טוען…</p>;
   const rec = new Map(month[vote.id] || []);
-  const served = mks.filter((m) => m.prior_terms.includes(k));
+  const served = mks.filter((m) => m.prior_terms.includes(k) || (m.person_id && rec.has(m.person_id)));
   const voters = served
     .map((m) => ({ m, code: m.person_id ? rec.get(m.person_id) : undefined }))
     .filter((r) => SHOWN.includes(r.code));
@@ -118,57 +120,80 @@ function VoteDetail({ vote, k, mks, partyById }) {
   );
 }
 
+const fmtD = (d) => d.slice(0, 10).split('-').reverse().join('.');
+
 export default function Votes() {
   const { data: mks } = useMKs();
   const { data: parties } = useParties();
+  const { data: bt } = useBillTopics();
   const [sp, setSp] = useSearchParams();
   const k = Number(sp.get('k') || 25);
   const selId = sp.get('id') ? Number(sp.get('id')) : null;
+  const billParam = sp.get('bill') ? Number(sp.get('bill')) : null;
   const [q, setQ] = useState('');
   const [n, setN] = useState(60);
   const [type, setType] = useState('all');
+  const [topic, setTopic] = useState('');
   const { data: meta } = useData(`votes/meta_k${k}.json`);
   const { data: idx } = useData('votes/index.json');
+  const { data: meaning } = useData('topics/vote_meaning.json', { retry: false });
   const KS = Object.keys(idx || { 25: 1 }).map(Number).sort((a, b) => b - a);
   const partyById = useMemo(() => Object.fromEntries((parties || []).map((p) => [p.id, p])), [parties]);
-  const all = useMemo(() => (meta ? meta.votes.map((v) => ({ id: v[0], dt: v[1], title: v[2], subject: v[3], f: v[4], a: v[5], ab: v[6] })).map((v) => ({ ...v, type: voteType(v) })).reverse() : []), [meta]);
+  const all = useMemo(() => (meta ? meta.votes.map((v) => ({ id: v[0], dt: v[1], title: v[2], subject: v[3], f: v[4], a: v[5], ab: v[6], item: v[7] }))
+    .map((v) => ({ ...v, type: voteType(v), topics: (bt && v.item != null && bt[v.item]) || [] })).reverse() : []), [meta, bt]);
+  const set = (patch) => {
+    const o = Object.fromEntries(sp.entries());
+    Object.entries(patch).forEach(([a, b]) => (b == null || b === '' ? delete o[a] : (o[a] = String(b))));
+    setSp(o);
+  };
   const list = useMemo(() => {
     const qq = q.trim();
-    return all.filter((v) => (type === 'all' || v.type === type) && (!qq || `${v.title} ${v.subject}`.includes(qq)));
-  }, [all, q, type]);
+    return all.filter((v) => (!billParam || v.item === billParam) && (type === 'all' || v.type === type)
+      && (!topic || v.topics.includes(topic)) && (!qq || `${v.title} ${v.subject}`.includes(qq)));
+  }, [all, q, type, topic, billParam]);
   const typeCounts = useMemo(() => {
     const c = { all: all.length };
     all.forEach((v) => (c[v.type] = (c[v.type] || 0) + 1));
     return c;
   }, [all]);
-  const sel = selId ? all.find((v) => v.id === selId) : null;
+  const topicCounts = useMemo(() => {
+    const c = {};
+    all.forEach((v) => v.topics.forEach((t) => t && (c[t] = (c[t] || 0) + 1)));
+    return c;
+  }, [all]);
+  const sel = selId ? all.find((v) => v.id === selId) : (billParam ? list[0] : null);
+  const sameBill = sel?.item != null ? all.filter((v) => v.item === sel.item) : [];
   if (!mks || !parties) return <Loading />;
 
   return (
     <Page>
       <header className="grid gap-2 max-w-3xl">
-        <h1 className="text-4xl font-black">הצבעות במליאה</h1>
-        <p className="text-sub">כל הצבעות המליאה מהכנסת ה-16 (2003, תחילת הרישום השמי) ועד היום: הצבעות על הצעות חוק בקריאותיהן, על סעיפים והסתייגויות, הצעות לסדר היום, אי-אמון, מינויים והרכבי ועדות. ההצבעות בתוך הוועדות עצמן אינן מפורסמות במאגר הפתוח של הכנסת ולכן אינן כאן. בחרו הצבעה כדי לראות איך הצביעו חברי הכנסת הנבחרים שכיהנו אז. סיווג נושאי (תקציב, ביטחון, דת ומדינה…) יתווסף בהמשך.</p>
+        <h1 className="text-4xl">הצבעות במליאה</h1>
+        <p className="text-sub">כל הצבעות המליאה מהכנסת ה-16 (2003, תחילת הרישום השמי) ועד היום: הצעות חוק בקריאותיהן, סעיפים והסתייגויות, הצעות לסדר היום, אי-אמון, מינויים והרכבי ועדות. ההצבעות בתוך הוועדות אינן נרשמות בשמות ולכן אינן כאן. בחרו הצבעה כדי לראות איך הצביעו חברי הכנסת הנבחרים שכיהנו אז.</p>
       </header>
       <div className="flex flex-wrap gap-2 items-center text-sm">
         <select value={k} onChange={(e) => setSp({ k: e.target.value })} className="rounded-md border border-rule bg-paper px-2 py-1.5">
           {KS.map((x) => <option key={x} value={x}>הכנסת ה-{x}</option>)}
         </select>
-        <input value={q} onChange={(e) => { setQ(e.target.value); setN(60); }} placeholder="חיפוש בנושא ההצבעה…" className="flex-1 min-w-[220px] rounded-md border border-rule bg-paper px-3 py-1.5" />
+        <input value={q} onChange={(e) => { setQ(e.target.value); setN(60); }} placeholder="חיפוש בשם הצעת החוק או הנושא…" className="flex-1 min-w-[200px] rounded-md border border-rule bg-paper px-3 py-1.5" />
         <select value={type} onChange={(e) => { setType(e.target.value); setN(60); }} className="rounded-md border border-rule bg-paper px-2 py-1.5">
           {VOTE_TYPES.map(([v, l]) => <option key={v} value={v}>{l} ({(typeCounts[v] || 0).toLocaleString('he-IL')})</option>)}
         </select>
+        <TopicSelect value={topic} onChange={(t) => { setTopic(t); setN(60); }} counts={topicCounts} />
         <span className="text-sub num">{list.length.toLocaleString('he-IL')} הצבעות</span>
+        {billParam && <button onClick={() => set({ bill: null, id: null })} className="text-xs underline text-sub">הצגת כל ההצבעות (כרגע: הצבעות על הצעת חוק אחת)</button>}
       </div>
       <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] gap-6 items-start">
-        <ul className="grid gap-1 max-h-[75vh] overflow-auto pl-1">
+        <ul className={`grid gap-1 max-h-[75vh] overflow-auto pl-1 ${sel ? 'hidden lg:grid' : ''}`}>
           {!meta && <li className="text-sub text-sm">טוען…</li>}
+          {meta && !list.length && <li className="text-sub text-sm">אין הצבעות שתואמות לסינון.</li>}
           {list.slice(0, n).map((v) => (
             <li key={v.id}>
-              <button onClick={() => setSp({ k: String(k), id: String(v.id) })}
-                className={`w-full text-right rounded-lg border px-3 py-2 text-sm grid gap-0.5 ${selId === v.id ? 'border-ink bg-sand' : 'border-rule hover:border-ink/40'}`}>
+              <button onClick={() => set({ id: v.id })}
+                className={`w-full text-right rounded-lg border px-3 py-2 text-sm grid gap-1 ${sel?.id === v.id ? 'border-ink bg-sand' : 'border-rule hover:border-ink/40'}`}>
                 <span>{v.title || '(ללא כותרת)'}</span>
-                <span className="text-xs text-sub num">{v.dt.slice(0, 10).split('-').reverse().join('.')} · בעד {v.f} · נגד {v.a}{v.ab ? ` · נמנעו ${v.ab}` : ''}{v.subject ? ` · ${v.subject}` : ''}</span>
+                <span className="text-xs text-sub num">{fmtD(v.dt)} · בעד {v.f} · נגד {v.a}{v.ab ? ` · נמנעו ${v.ab}` : ''}{v.subject ? ` · ${v.subject}` : ''}</span>
+                <TopicChips billId={v.item} />
               </button>
             </li>
           ))}
@@ -177,11 +202,33 @@ export default function Votes() {
         <div className="lg:sticky lg:top-20">
           {sel ? (
             <div className="grid gap-3">
-              <h2 className="text-2xl font-bold leading-snug">{sel.title}</h2>
-              <p className="text-sm text-sub">{sel.dt.slice(0, 10).split('-').reverse().join('.')} {sel.subject && `· ${sel.subject}`} · הצבעה #{sel.id}</p>
-              <VoteDetail vote={sel} k={k} mks={mks} partyById={partyById} />
+              <button onClick={() => set({ id: null, bill: null })} className="lg:hidden flex items-center gap-1 text-sm text-sub justify-self-start"><ArrowRight size={15} />לרשימת ההצבעות</button>
+              <h2 className="text-3xl leading-snug">{sel.title}</h2>
+              <p className="text-sm text-sub">{fmtD(sel.dt)} {sel.subject && `· ${sel.subject}`} · הכנסת ה-{k} · הצבעה #{sel.id}</p>
+              {meaning?.[sel.id] && <p className="text-sm rounded-lg bg-sand px-3 py-2">{meaning[sel.id]}</p>}
+              {sel.item != null && bt?.[sel.item] && (
+                <div className="flex flex-wrap items-center gap-2 text-xs">
+                  <TopicChips billId={sel.item} />
+                  <a href={knessetBillUrl(sel.item)} target="_blank" rel="noreferrer" className="flex items-center gap-1 underline text-sub hover:text-ink">דף הצעת החוק באתר הכנסת<ExternalLink size={11} /></a>
+                </div>
+              )}
+              {sameBill.length > 1 && (
+                <details className="text-sm rounded-lg border border-rule px-3 py-2">
+                  <summary className="cursor-pointer text-sub">{sameBill.length} הצבעות על הצעת החוק הזו בכנסת ה-{k}</summary>
+                  <ul className="grid gap-1 mt-2">
+                    {sameBill.map((v) => (
+                      <li key={v.id}>
+                        <button onClick={() => set({ id: v.id })} className={`text-right hover:underline ${v.id === sel.id ? 'font-semibold' : ''}`}>
+                          {fmtD(v.dt)} · {v.subject || 'הצבעה'} · בעד {v.f} נגד {v.a}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )}
+              <VoteDetail key={sel.id} vote={sel} k={k} mks={mks} partyById={partyById} />
             </div>
-          ) : <p className="text-sub text-sm border border-dashed border-rule rounded-xl p-8 text-center">בחרו הצבעה מהרשימה</p>}
+          ) : <p className="hidden lg:block text-sub text-sm border border-dashed border-rule rounded-xl p-8 text-center">בחרו הצבעה מהרשימה</p>}
         </div>
       </div>
     </Page>
