@@ -94,7 +94,8 @@ for f in glob.glob(f"{D}/votes/meta_k*.json"):
             continue
         if not WHOLE.match((subject or "").strip()):
             continue
-        stage = "final" if (subject or "").strip() in ("אישור החוק", "קריאה שלישית") else "early"
+        sj = (subject or "").strip()
+        stage = "final" if sj in ("אישור החוק", "קריאה שלישית") else ("whole" if sj == "" else "early")
         rows.append(dict(vid=vid, k=k, dt=dt[:10], bill=int(item), stage=stage, f=fo, a=ag, ab=ab))
 V = pd.DataFrame(rows)
 V["n"] = V.f + V.a
@@ -305,7 +306,7 @@ tc = Counter(t for t, _ in bill_topic.values())
 vc = C.topic.value_counts().to_dict()
 json.dump(dict(labels=TOPICS, bills=dict(tc), contested_votes={k: int(v) for k, v in vc.items()},
                definitions=dict(contested="לפחות 20 מצביעים בעד ונגד, ולפחות רבע מהם בכל צד",
-                                whole_bill="הצבעה על הצעת חוק בשלמותה: קריאה טרומית, העברה לוועדה בקריאה ראשונה, או אישור סופי (קריאה שלישית)",
+                                whole_bill="הצבעה על הצעת חוק בשלמותה (קריאה טרומית, קריאה ראשונה או אישור סופי) – לא על סעיפים או הסתייגויות",
                                 agreement="חלק ההצבעות השנויות במחלוקת שבהן הצביע/ה כמו רוב חברי המפלגה (בהרכבה הנוכחי) שהצביעו בהן")),
           open(f"{OUT}/topics.json", "w"), ensure_ascii=False)
 print("topics with clusters:", list(clusters))

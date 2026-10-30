@@ -124,7 +124,7 @@ export default function Topics() {
                     <td className="px-3 py-2">
                       <Link to={`/votes?k=${k}&id=${vid}`} className="hover:underline">{name}</Link>
                       {meaning && <div className="text-xs text-ink/80 mt-0.5">{meaning}</div>}
-                      <div className="text-[11px] text-sub">{stage === 'final' ? 'אישור סופי' : 'קריאה מוקדמת / ראשונה'}</div>
+                      <div className="text-[11px] text-sub">{{ final: 'אישור סופי', early: 'קריאה טרומית / ראשונה', whole: 'הצבעה על ההצעה' }[stage]}</div>
                     </td>
                     <td className="px-3 py-2 num text-sub whitespace-nowrap">{fmtDate(date)}</td>
                     {shares.map((s, i) => <td key={i} className="px-3 py-2 num">{Math.round(s * 100)}%</td>)}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import { useData, useParties, VOTE_CODE, VOTE_CLASS, fmt } from '@/lib/data';
 
-const STAGE = { final: 'אישור סופי', early: 'קריאה מוקדמת / ראשונה' };
+const STAGE = { final: 'אישור סופי', early: 'קריאה טרומית / ראשונה', whole: 'הצבעה על ההצעה' };
 const fmtDate = (d) => (d ? d.split('-').reverse().join('.') : '');
 
 function TopicBars({ counts, labels, unit = '' }) {
