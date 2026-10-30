@@ -43,9 +43,10 @@ if 26 not in set(kterm.KnessetNum):
     kterm = pd.concat([kterm, pd.DataFrame([dict(KnessetNum=26, start=K26_START, finish=pd.NaT)])], ignore_index=True)
 
 def knesset_of(dates):
+    """Knesset in session on each date = the last Knesset whose first plenum started on or before it (no gaps)."""
     k = pd.Series(np.nan, index=dates.index)
-    for _, r in kterm.iterrows():
-        k[(dates >= r.start) & ((dates <= r.finish) | pd.isna(r.finish))] = r.KnessetNum
+    for _, r in kterm.sort_values("start").iterrows():
+        k[dates >= r.start] = r.KnessetNum
     return k
 
 # ---------- positions
