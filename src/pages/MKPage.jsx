@@ -4,6 +4,7 @@ import { ExternalLink, AlertTriangle } from 'lucide-react';
 import { useMKs, useParties, useData, EDU_LABEL, SECTOR_LABEL, FIELD_HE, sourceName, pct, fmt } from '@/lib/data';
 import { Initials, Src, Loading, Page, Section } from '@/components/bits';
 import VoteTable from '@/components/VoteTable';
+import { METRICS, metricValue } from '@/lib/filters';
 import BillList from '@/components/BillList';
 import { CommitteeSummary, CommitteeSessions } from '@/components/CommitteeActivity';
 
@@ -140,6 +141,17 @@ export function MKProfile({ id, compact = false }) {
             <p className="text-sub">{m.is_new ? 'חבר/ת כנסת חדש/ה – אין עדיין רשומות פעילות בכנסת. נתוני ועדות ותפקידים יתווספו אחרי השבעת הכנסת ה-26.' : 'אין נתונים זמינים.'}</p>
           ) : (
             <>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {METRICS.map((d) => {
+                  const v = metricValue(m, d);
+                  return (
+                    <div key={d.key} className="rounded-xl border border-rule p-3 grid gap-1">
+                      <span className="text-xs text-sub leading-snug">{d.label}</span>
+                      <span className="font-title text-3xl leading-none num">{v == null ? '—' : d.pct ? `${Math.round(v)}%` : Math.round(v * 10) / 10}</span>
+                    </div>
+                  );
+                })}
+              </div>
               {pr.vote_stats && (
                 <Section title="הצבעות במליאה לפי כנסת">
                   <div className="overflow-x-auto rounded-xl border border-rule">

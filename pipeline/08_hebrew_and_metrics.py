@@ -90,3 +90,23 @@ json.dump(mks, open("public/data/mks.json", "w"), ensure_ascii=False)
 print("untranslated strings:", len(missing))
 for s in list(missing)[:15]:
     print("  ", s[:120])
+
+
+# ---- Hebrew CSV for download
+import csv
+EDU = {"PhD": "דוקטורט", "MD": "רפואה", "LLB/LLM": "משפטים", "MA": "תואר שני", "BA": "תואר ראשון",
+       "post_secondary": "על-תיכונית", "yeshiva": "ישיבה / כולל", "high_school": "תיכונית", "unknown": "לא ידוע"}
+parties = {p["id"]: p["name_he"] for p in json.load(open("public/data/parties.json"))}
+cols = [("שם", lambda m: m["name_he"]), ("מפלגה", lambda m: parties.get(m["party"])), ("מקום ברשימה", lambda m: m["list_position"]),
+        ("מגדר", lambda m: {"female": "אישה", "male": "גבר"}.get(m["gender"], "")), ("גיל", lambda m: m.get("age")),
+        ("מקום מגורים", lambda m: (m.get("residence") or {}).get("name")), ("מקום לידה", lambda m: m.get("birthplace")),
+        ("השכלה", lambda m: EDU.get(m.get("education_level"))), ("כנסות קודמות", lambda m: " ".join(map(str, m.get("prior_terms") or []))),
+        ("חדש/ה", lambda m: "כן" if m.get("is_new") else "לא")]
+labels = {"faction_rate": "הצבעה כמו רוב הסיעה", "participation": "השתתפות בהצבעות", "bills_per_k": "הצעות חוק לכנסת",
+          "bills_passed": "הפכו לחוק", "cmt_rate": "נוכחות בוועדות", "cmt_per_k": "ישיבות ועדה לכנסת"}
+with open("public/data/mks.csv", "w", encoding="utf-8-sig", newline="") as fh:
+    w = csv.writer(fh)
+    w.writerow([c for c, _ in cols] + list(labels.values()))
+    for m in mks:
+        w.writerow([f(m) for _, f in cols] + [m["metrics"].get(k) for k in labels])
+print("wrote mks.csv")
