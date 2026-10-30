@@ -1,0 +1,121 @@
+﻿id,person_id,name_he,name_en,party,list_position,gender,birth_year,age,residence,residence_code,education_level,sectors,is_new,prior_terms,k25_participation,k25_with_faction,k25_bills_initiated
+965,965,בנימין נתניהו,Benjamin Netanyahu,likud,1,male,1949,77,בית אגיון,,MA,business;civil_society_ngo;politics_party;public_service,False,12;13;14;15;16;17;18;19;20;21;22;23;24;25,0.211,0.9975,
+30083,30083,אליהו כהן,Eli Cohen,likud,2,male,1972,54,חולון,6600,MA,business,False,20;21;22;23;24;25,0.572,1.0,
+30300,30300,אמיר אוחנה,Amir Ohana,likud,3,male,1976,50,תל אביב-יפו,5000,LLB/LLM,law;politics_party;security_services,False,20;21;22;23;24;25,0.519,0.9954,2
+12951,12951,יריב גדעון לוין,Yariv Levin,likud,4,male,1969,57,מודיעין-מכבים-רעות,1200,LLB/LLM,law;politics_party,False,18;19;20;21;22;23;24;25,0.611,1.0,
+12959,12959,מירי רגב,Miri Regev,likud,5,female,1965,61,ראש העין,2640,MA,military,False,18;19;20;21;22;23;24;25,0.589,1.0,
+468,468,ישראל כץ,Israel Katz,likud,6,male,1955,71,,,MA,education,False,14;15;16;17;18;19;20;21;22;23;24;25,0.439,0.9994,
+1027,1027,גדעון סער,Gideon Sa'ar,likud,7,male,1966,59,נס ציונה,7200,unknown,politics_party;public_service,False,16;17;18;19;21;22;23;24;25,0.465,0.9942,16
+30701,30701,אופיר כץ,Ofir Katz,likud,8,male,1980,46,עפולה,7700,unknown,politics_party;public_service,False,21;22;23;24;25,0.86,0.9997,160
+30935,30935,טלי גואילי,Talik Gvili,likud,9,female,,,מיתר,1268,unknown,civil_society_ngo;law,True,,,,
+30057,30057,יואב קיש,Yoav Kisch,likud,10,male,1968,57,רמת גן,8600,MA,business;military,False,20;21;22;23;24;25,0.603,1.0,1
+30936,30936,יעקב ברדוגו,Yaakov Bardugo,likud,11,male,1965,61,תל אביב-יפו,5000,LLB/LLM,law;local_government;media;public_service,True,,,,
+30058,30058,מכלוף זוהר,"Makhlouf ""Miki"" Zohar",likud,12,male,1980,46,,,MA,business;local_government;politics_party,False,20;21;22;23;24;25,0.976,1.0,22
+30833,30833,אלמוג כהן,Almog Cohen,likud,13,male,1988,38,אופקים,31,yeshiva,business;civil_society_ngo;police;politics_party,False,25,0.636,0.997,43
+30786,30786,עמיחי שיקלי,Amichai Chikli,likud,14,male,1981,45,הנתון,,BA,education;military,False,24;25,0.923,1.0,
+30938,30938,אלישע מדן,Elisha Medan,likud,15,male,,,,,unknown,military;other,True,,,,
+30939,30939,דוד פטר,David Peter,likud,16,male,,,,,MA,civil_society_ngo;law;media;public_service,True,,,,
+30853,30853,משה סעדה,Moshe Saada,likud,17,male,1972,54,מזכרת בתיה,28,unknown,law,False,25,0.655,0.9994,131
+556,556,חיים כץ,Haim Katz,likud,18,male,1947,78,שוהם,1304,unknown,business;civil_society_ngo,False,15;16;17;18;19;20;21;22;23;24;25,0.958,1.0,
+23564,23564,דוד אמסלם,David (Dudi) Amsalem,likud,19,male,1960,66,מעלה אדומים,3616,BA,politics_party,False,20;21;22;23;24;25,0.566,1.0,17
+30702,30702,חוה עטייה,Eti Hava Atiya,likud,20,female,1960,66,רמת גן,8600,MA,civil_society_ngo;politics_party;public_service,False,21;22;23;24;25,0.71,0.9996,262
+30835,30835,בעז ביסמוט,Boaz Bismuth,likud,21,male,1964,61,תל אביב-יפו,5000,MA,media;politics_party;public_service,False,25,0.644,0.9998,102
+23558,23558,דוד ביטן,David Bitan,likud,22,male,1960,66,ראשון לציון,8300,LLB/LLM,civil_society_ngo;law;local_government;politics_party,False,20;21;22;23;24;25,0.489,1.0,82
+30704,30704,שלמה קרעי,Shlomo Karhi,likud,23,male,1982,44,בית הגדי,723,PhD,academia,False,21;22;23;24;25,0.585,0.9995,4
+30700,30700,ניר ברקת,Nir Barkat,likud,24,male,1959,67,ירושלים,3000,BA,business;high_tech;local_government,False,21;22;23;24;25,0.554,0.9998,
+1025,1025,גילה גמליאל דמרי,Gila Gamliel,likud,25,female,1974,52,תל אביב-יפו,5000,MA,civil_society_ngo;education,False,16;18;19;20;21;22;23;24;25,0.491,0.9986,
+860,860,אלי גולדשמידט,Eli Goldschmidt,likud,26,male,1953,73,,,LLB/LLM,business;law;media;politics_party,False,13;14;15,,,
+30941,30941,ארז תדמור,Erez Tadmor,likud,27,male,1980,46,אפרת,3650,unknown,civil_society_ngo;media;politics_party,True,,,,
+30836,30836,גדי איזנקוט,Gadi Eisenkot,yashar,1,male,1960,66,הרצליה,,MA,military;politics_party,False,25,0.495,0.9964,5
+30957,30957,יורם כהן,Yoram Cohen,yashar,2,male,1960,66,ירושלים,3000,MA,academia;military;security_services,True,,,,
+30685,30685,אורית פרקש הכהן,Orit Farkash-Hacohen,yashar,3,female,1970,55,ירושלים,3000,LLB/LLM,law;politics_party;public_service,False,21;22;23;24;25,0.545,0.9963,81
+30958,30958,עדי אלטשולר,Adi Altschuler,yashar,4,female,1986,39,,,unknown,civil_society_ngo;high_tech,True,,,,
+30662,30662,מתן כהנא,Matan Kahana,yashar,5,male,1972,54,בית גמליאל,571,LLB/LLM,education;military;politics_party,False,22;23;24;25,0.546,0.9973,24
+30683,30683,יחיאל משה טרופר,Yehiel Moshe (Hili) Tropper,yashar,6,male,1978,48,נס הרים,825,MA,education;local_government;politics_party;public_service,False,21;22;23;24;25,0.572,0.9991,37
+30959,30959,שאול מרידור,Shaul Meridor,yashar,7,male,1976,50,ירושלים,3000,BA,business;high_tech;public_service,True,,,,
+30960,30960,תאיר סולי איפרגן,Tair Soli Ifargan,yashar,8,female,,,,,MA,public_service,True,,,,
+30961,30961,אושרת גני גונן,Osherat Gani Gonen,yashar,9,female,1971,55,נווה ימין,686,MA,local_government,True,,,,
+30962,30962,שירה שפירא,Shira Shapira,yashar,10,female,,,,,MA,education;other;public_service,True,,,,
+30963,30963,עינבר הרוש גיטי,Inbar Harush Gity,yashar,11,female,,,שוהם,1304,MA,civil_society_ngo;public_service,True,,,,
+23591,23591,אלעזר שטרן,Elazar Stern,yashar,12,male,1956,70,מצפה הושעיה,58,MA,civil_society_ngo;military;politics_party,False,19;20;21;22;23;24;25,0.588,0.9944,49
+30964,30964,כמיל אבו רוקן,Kamil Abu Rokon,yashar,13,male,1958,68,עספיא,534,unknown,civil_society_ngo;military;public_service,True,,,,
+30965,30965,דבורה בכר,Dvora Sharifian Bachar,yashar,14,female,,,אילות,1126,unknown,education;military;security_services,True,,,,
+30966,30966,אלקס ריף,Alex Rif,yashar,15,female,1986,40,תל אביב-יפו,5000,MA,civil_society_ngo;media;public_service,True,,,,
+30967,30967,ענבר יחזקאלי בליליוס,Inbar Yehezkeli Blilius,yashar,16,female,1977,49,ירושלים,3000,LLB/LLM,civil_society_ngo;public_service,True,,,,
+30084,30084,רועי שמואל פולקמן,Roy Folkman,yashar,17,male,1975,51,נס הרים,825,MA,local_government;other;politics_party,False,20;21,,,
+30968,30968,ישראל זרי,Israel Zari,yashar,18,male,,,רמת גן,8600,BA,civil_society_ngo;local_government;public_service,True,,,,
+30969,30969,טל אוחנה,Tal Ohana (Hachmon),yashar,19,female,1984,42,ירוחם,831,MA,civil_society_ngo;local_government,True,,,,
+30970,30970,אליסף פרץ,Elisaf Peretz,yashar,20,male,1987,38,ירושלים,3000,unknown,business;civil_society_ngo;education;local_government,True,,,,
+30971,30971,יפה טבג'ה,Yafa Tabja,yashar,21,female,1989,37,אשקלון,7100,MA,civil_society_ngo;education;local_government,True,,,,
+23511,23511,נפתלי בנט,Naftali Bennett,beyachad,1,male,1972,54,רעננה,8700,LLB/LLM,civil_society_ngo;high_tech;politics_party,False,19;20;22;23;24,,,
+23594,23594,יאיר לפיד,Yair Lapid,beyachad,2,male,1963,62,תל אביב-יפו,5000,high_school,media;politics_party,False,19;20;21;22;23;24;25,0.472,0.9955,85
+30924,30924,קרן אייל טרנר,Keren Terner Eyal,beyachad,3,female,,,הדר עם,191,MA,business;public_service,True,,,,
+30102,30102,מירב בן ארי,Meirav Ben-Ari,beyachad,4,female,1975,50,תל אביב-יפו,5000,MA,education;local_government;politics_party,False,20;24;25,0.722,0.9991,286
+30925,30925,לירן אבישר בן חורין,Liran Avisar Ben-Horin,beyachad,5,female,1976,50,כפר סירקין,249,LLB/LLM,civil_society_ngo;law;public_service,True,,,,
+30926,30926,נעם משה תיבון,Noam Tibon,beyachad,6,male,1962,64,תל אביב-יפו,5000,MA,civil_society_ngo;military,True,,,,
+30927,30927,מיכל הירש נגרי,Michal Nagari,beyachad,7,female,1966,60,הרצליה,,MA,civil_society_ngo;local_government,True,,,,
+30693,30693,איתן גינזבורג,Eitan Ginzburg,beyachad,8,male,1977,49,רעננה,8700,MA,local_government;public_service,False,21;22;23;24;25,0.652,0.9976,71
+30686,30686,מירב כהן,Meirav Cohen,beyachad,9,female,1983,43,ירושלים,3000,MA,civil_society_ngo;local_government;public_service,False,21;22;23;24;25,0.619,0.9996,154
+30928,30928,יונתן שלו,Yonatan Shalev,beyachad,10,male,2002,24,זכרון יעקב,9300,post_secondary,civil_society_ngo,True,,,,
+new-beyachad-11,,ברוריה נעים ארמן,Bruria Naim Erman,beyachad,11,female,1972,54,ראש העין,2640,MA,business;civil_society_ngo;politics_party;public_service,True,,,,
+30691,30691,רם בן ברק,Ram Ben-Barak,beyachad,12,male,1958,68,נהלל,80,MA,academia;public_service;security_services,False,21;22;23;24;25,0.555,0.9981,128
+30069,30069,יוסף ג'בארין,Yousef Jabareen,joint,1,male,1972,54,אום אל-פחם,2710,PhD,academia;civil_society_ngo;politics_party,False,20;21;22;23,,,
+560,560,אחמד טיבי,Ahmad Tibi,joint,2,male,1958,67,טייבה,497,MD,health;politics_party,False,15;16;17;18;19;20;21;22;23;24;25,0.5,0.9976,391
+30949,30949,פאתן גטאס,Faten Ghattas,joint,3,male,1960,66,ראמה,543,PhD,civil_society_ngo;health;politics_party,True,,,,
+30950,30950,בכר עואודה,Bakr Awawdeh,joint,4,male,,,כפר כנא,509,unknown,civil_society_ngo;local_government;politics_party,True,,,,
+30719,30719,עופר כסיף,Ofer Cassif,joint,5,male,1964,61,רחובות,8400,PhD,academia;politics_party,False,21;22;23;24;25,0.502,0.9976,216
+30558,30558,יוסף עטאונה,Youssef Atauna,joint,6,male,1966,60,חורה,1303,unknown,education;law;politics_party,False,20;25,0.581,0.9962,83
+30951,30951,מהא כרכבי סבאח,Maha Karkabi-Sabbah,joint,7,male,1971,55,שפרעם,8800,PhD,academia;civil_society_ngo;politics_party,True,,,,
+new-joint-8,,אחמד דראושה,Ahmad Darawshe,joint,8,male,,,,,unknown,law;local_government;politics_party,True,,,,
+new-joint-9,,נהאיה ושאחי,Nihaya Washahi,joint,9,female,1975,51,ערערה,637,PhD,civil_society_ngo;education;local_government,True,,,,
+new-joint-10,,חסן אלנסאסרה,Hassan Nasasra,joint,10,male,,,רהט,1161,unknown,education;local_government;politics_party,True,,,,
+new-joint-11,,האיתם זחאלקה,Haitham Zahalka,joint,11,male,,,כפר קרע,654,unknown,education;local_government,True,,,,
+30743,30743,יאיר גולן,Yair Golan,democrats,1,male,1962,64,ראש העין,2640,MA,military;politics_party,False,22;23;24,,,
+30106,30106,נעמה לזימי,Naama Lazimi,democrats,2,female,1986,40,חולון,6600,unknown,civil_society_ngo;local_government;politics_party,False,24;25,0.588,0.9993,335
+30807,30807,גלעד קריב,Gilad Kariv,democrats,3,male,1973,52,גבעתיים,6300,LLB/LLM,civil_society_ngo;media;politics_party;religious,False,24;25,0.603,0.9952,200
+30808,30808,אפרת רייטן מרום,Efrat Rayten,democrats,4,female,1972,54,תל אביב-יפו,5000,LLB/LLM,law;media;politics_party,False,24;25,0.551,0.9983,131
+30929,30929,יאיר פינק,Yair Fink,democrats,5,male,1984,42,יקנעם עילית,240,MA,civil_society_ngo;politics_party,True,,,,
+30818,30818,גבריאלה לסקי שוץ,Gaby Lasky,democrats,6,female,1967,59,תל אביב-יפו,5000,unknown,civil_society_ngo;law;local_government,False,24,,,
+30930,30930,עמרי רונן,Omri Ronen,democrats,7,male,1992,34,,,LLB/LLM,civil_society_ngo;law,True,,,,
+23653,23653,מיכל רוזין,Michal Rozin,democrats,8,female,1969,57,פתח תקווה,7900,MA,civil_society_ngo;politics_party,False,19;20;21;24,,,
+30713,30713,מנסור עבאס,Mansour Abbas,raam,1,male,1974,52,מגאר,481,MD,civil_society_ngo;health;politics_party;religious,False,21;22;23;24;25,0.426,0.9923,219
+30695,30695,יואב סגלוביץ,Yoav Segalovitz,raam,2,male,1959,67,תל אביב-יפו,5000,LLB/LLM,police;politics_party,False,21;22;23;24;25,0.596,0.9984,69
+30752,30752,ווליד טאהא,Walid Taha,raam,3,male,1968,58,כפר קאסם,634,MA,education;local_government;politics_party;religious,False,22;23;24;25,0.458,0.994,220
+30840,30840,ואליד אל הואשלה,Waleed Alhwashla,raam,4,male,1981,45,סעוה,,MA,other;politics_party,False,25,0.507,0.9932,399
+30758,30758,אימאן ח'טיב יאסין,Iman Khatib-Yasin,raam,5,female,1964,62,יפיע,499,MA,health;local_government;politics_party,False,23;24;25,0.444,0.9925,320
+30843,30843,יאסר חוג'יראת,Yasser Hujirat,raam,6,male,1965,60,ביר אל-מכסור,998,PhD,academia;politics_party,False,25,0.495,0.9967,152
+new-raam-7,,איברהים אל טורי,Ibrahim al-Turi,raam,7,male,,,רהט,1161,unknown,health,True,,,,
+new-raam-8,,עבד אל כרים מסרי,Abd al-Karim Masri,raam,8,male,,,כפר קרע,654,unknown,education,True,,,,
+427,427,אביגדור ליברמן,Avigdor Lieberman,yb,1,male,1958,68,נוקדים,3726,BA,civil_society_ngo;politics_party;public_service,False,15;16;17;18;19;20;21;22;23;24;25,0.401,0.9993,301
+30973,30973,רפאל בן שטרית,Rafi Ben Shitrit,yb,2,male,1966,60,בית שאן,9200,unknown,civil_society_ngo;local_government;politics_party,True,,,,
+30974,30974,טליה לנקרי,Talia Lankri,yb,3,female,,,,,unknown,local_government;media;military;public_service;security_services,True,,,,
+30121,30121,עודד פורר,Oded Forer,yb,4,male,1977,49,רחובות,8400,MA,business;politics_party;public_service,False,20;21;22;23;24;25,0.547,0.9985,357
+23560,23560,יוליה מלינובסקי קונין,Yulia Malinovsky,yb,5,female,1975,51,חולון,6600,BA,local_government;police,False,20;21;22;23;24;25,0.496,0.9984,379
+30975,30975,שרון שרעבי,Sharon Sharabi,yb,6,male,1975,51,אלפי מנשה,3750,unknown,civil_society_ngo,True,,,,
+12938,12938,חמד עמאר,Hamad Amar,yb,7,male,1964,61,שפרעם,8800,LLB/LLM,civil_society_ngo;local_government;public_service,False,18;19;20;22;23;24;25,0.508,0.9984,309
+30811,30811,איתמר בן גביר,Itamar Ben-Gvir,otzma,1,male,1976,50,קריית ארבע,3611,LLB/LLM,law;politics_party,False,24;25,0.448,0.9985,2
+30860,30860,טלי גוטליב,Tally Gotliv,otzma,2,female,1975,50,גבעת שמואל,681,LLB/LLM,law;media;politics_party;public_service,False,25,0.715,1.0,114
+30847,30847,יצחק וסרלאוף,Yitzhak Wasserlauf,otzma,3,male,1992,34,תל אביב-יפו,5000,yeshiva,education;politics_party,False,25,0.541,1.0,2
+30857,30857,עמיחי אליהו,Amihai Eliyahu,otzma,4,male,1979,47,רימונים,3565,yeshiva,,False,25,0.667,0.9977,
+30849,30849,לימור סון הר-מלך,Limor Son Har-Melech,otzma,5,female,1979,47,שבי שומרון,3571,unknown,civil_society_ngo;public_service,False,25,0.66,0.9913,221
+30867,30867,יצחק קרויזר,Yitzhak Kroizer,otzma,6,male,1985,41,נטור,4014,unknown,agriculture;business;public_service,False,25,0.646,0.9989,296
+30981,30981,חנמאל שיראי דורפמן,Hanamel Dorfman,otzma,7,male,1995,31,שבות רחל,10146,LLB/LLM,law;politics_party;public_service,True,,,,
+23641,23641,יעקב אשר,Yaakov Asher,utj,1,male,1965,61,בני ברק,6100,yeshiva,local_government;politics_party;public_service,False,19;20;21;22;23;24;25,0.503,0.9989,291
+30846,30846,יצחק יששכר גולדקנופ,Yitzhak Goldknopf,utj,2,male,1950,75,ירושלים,3000,unknown,education;local_government;politics_party;religious,False,25,0.35,0.8872,1
+30672,30672,יצחק זאב פינדרוס,Yitzhak Pindrus,utj,3,male,1971,55,ירושלים,3000,yeshiva,local_government,False,21;23;24;25,0.632,0.9993,47
+563,563,מאיר פרוש,Meir Porush,utj,4,male,1955,71,ירושלים,3000,yeshiva,local_government;politics_party,False,14;15;16;17;18;19;20;21;22;23;24;25,0.476,0.9885,45
+30953,30953,משה עזריאל רוזנטל,Moshe Rosenthal,utj,5,male,1975,51,,,unknown,education;local_government,True,,,,
+30954,30954,אלי שטארק,Elyakim Shtark,utj,6,male,,,,,yeshiva,education;religious,True,,,,
+30955,30955,יהודה לייב וויספיש,Yehuda Leib Weissfish,utj,7,male,,,מודיעין עילית,3797,unknown,business;civil_society_ngo,True,,,,
+2291,2291,אריה מכלוף דרעי,Aryeh Deri,shas,1,male,1959,67,ירושלים,3000,yeshiva,education;politics_party;public_service;religious,False,13;14;19;20;21;22;23;24;25,0.245,0.9995,6
+30601,30601,ינון אזולאי,Yinon Azulai,shas,2,male,1979,47,אשדוד,70,unknown,,False,20;21;22;23;24;25,0.8,0.999,269
+30470,30470,מיכאל משה מלכיאלי,Michael Malchieli,shas,3,male,1982,44,ירושלים,3000,MA,education;local_government;public_service,False,20;21;22;23;24;25,0.563,0.9998,6
+28513,28513,יואב בן צור,Yoav Ben-Tzur,shas,4,male,1958,68,ירושלים,3000,MA,business;education;public_service;religious,False,19;20;21;22;23;24;25,0.57,0.9975,6
+30804,30804,חיים ביטון,Haim Biton,shas,5,male,1978,48,גבעת זאב,3730,unknown,education;local_government;politics_party,False,24;25,0.49,1.0,1
+30989,30989,דרור דוד עמוס,Dror Amos,shas,6,male,,,,,unknown,civil_society_ngo;military;religious,True,,,,
+30055,30055,בצלאל סמוטריץ',Bezalel Smotrich,rzp,1,male,1980,46,קדומים,3557,LLB/LLM,civil_society_ngo;law;politics_party,False,20;21;22;23;24;25,0.893,1.0,
+23556,23556,משה פייגלין,Moshe Feiglin,rzp,2,male,1962,64,קרני שומרון,3640,yeshiva,business;civil_society_ngo;politics_party;public_service,False,19,,,
+23551,23551,אורית מלכה סטרוק,Orit Strook,rzp,3,female,1960,66,חברון,3400,yeshiva,civil_society_ngo,False,19;24;25,0.624,0.9996,
+30812,30812,שמחה רוטמן,Simcha Rothman,rzp,4,male,1980,46,לוד,7000,LLB/LLM,civil_society_ngo;law;public_service,False,24;25,0.608,0.9998,142
+30947,30947,צבי מור,Tzvika (Tzvi) Mor,rzp,5,male,,,קריית ארבע,3611,unknown,civil_society_ngo;education;health,True,,,,
+30948,30948,איתמר מרדכי איתם,Itamar Eitam,rzp,6,male,,,,,MA,civil_society_ngo;education;military,True,,,,
