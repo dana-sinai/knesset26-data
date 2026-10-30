@@ -111,11 +111,13 @@ if os.path.exists("pipeline/input/bill_meaning.tsv"):
         p_ = line.rstrip("\n").split("\t")
         if len(p_) >= 2 and p_[0].strip().isdigit() and p_[1].strip():
             bill_meaning[int(p_[0])] = p_[1].strip()
+# a line that only says "no purpose stated in the title" adds nothing next to the title itself -> not shown
+shown_meaning = {b_: v for b_, v in bill_meaning.items() if "ללא פירוט מטרה" not in v}
 for r in C.itertuples():
-    if r.bill in bill_meaning and str(r.vid) not in meaning:
-        meaning[str(r.vid)] = "בעד = " + bill_meaning[r.bill]
+    if r.bill in shown_meaning and str(r.vid) not in meaning:
+        meaning[str(r.vid)] = "בעד = " + shown_meaning[r.bill]
 json.dump(meaning, open(f"{OUT}/vote_meaning.json", "w"), ensure_ascii=False, separators=(",", ":"))
-json.dump({str(k): v for k, v in bill_meaning.items()}, open(f"{OUT}/bill_meaning.json", "w"), ensure_ascii=False, separators=(",", ":"))
+json.dump({str(k): v for k, v in shown_meaning.items()}, open(f"{OUT}/bill_meaning.json", "w"), ensure_ascii=False, separators=(",", ":"))
 missing_meaning = sorted(set(C.bill) - set(bill_meaning))
 with open("pipeline/work/new_meaning_needed.tsv", "w", encoding="utf-8") as fh:
     for b_ in missing_meaning:
