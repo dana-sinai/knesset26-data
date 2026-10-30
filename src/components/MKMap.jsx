@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
 import { Link } from 'react-router-dom';
+import { MKLink } from '@/components/MKDrawer';
 
 /**
  * Locality-level map. MKs are grouped by home locality (or birthplace), never placed below locality level.
@@ -45,7 +46,7 @@ export default function MKMap({ mks, partyById, height = 520, mode = 'residence'
                     {g.items.map((m) => (
                       <li key={m.id} className="flex items-center gap-1.5">
                         <span className="inline-block w-2 h-2 rounded-full" style={{ background: partyById[m.party]?.color }} />
-                        <Link to={`/mk/${m.id}`}>{m.name_he}</Link>
+                        <MKLink id={m.id}>{m.name_he}</MKLink>
                         <span className="text-[11px] text-gray-500">{partyById[m.party]?.name_he}</span>
                       </li>
                     ))}

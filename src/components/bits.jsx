@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { hostname } from '@/lib/data';
+import { MKLink } from '@/components/MKDrawer';
 
 export function PartyDot({ party, size = 10 }) {
   return <span className="inline-block rounded-full shrink-0" style={{ width: size, height: size, background: party?.color }} />;
@@ -41,7 +42,7 @@ export function Stat({ label, value, hint }) {
 
 export function MKCard({ m, party }) {
   return (
-    <Link to={`/mk/${m.id}`} className="group flex gap-3 items-center rounded-xl border border-rule bg-paper p-3 hover:border-ink/40 transition-colors">
+    <MKLink id={m.id} className="group flex gap-3 items-center rounded-xl border border-rule bg-paper p-3 hover:border-ink/40 transition-colors">
       <Initials name={m.name_he} color={party?.color} />
       <div className="min-w-0">
         <div className="font-semibold truncate group-hover:underline">{m.name_he}</div>
@@ -55,7 +56,7 @@ export function MKCard({ m, party }) {
             : <span className="text-sub">כנסות קודמות: {m.prior_terms.join(', ')}</span>}
         </div>
       </div>
-    </Link>
+    </MKLink>
   );
 }
 

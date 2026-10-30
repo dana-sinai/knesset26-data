@@ -1,6 +1,7 @@
 import { NavLink, Link, Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import MKDrawer from '@/components/MKDrawer';
 
 const NAV = [
   ['/', 'סקירה'],
@@ -48,6 +49,7 @@ export default function Layout() {
       <main className="flex-1">
         <Outlet />
       </main>
+      <MKDrawer />
       <footer className="border-t border-rule mt-16">
         <div className="mx-auto max-w-7xl px-4 py-8 text-sm text-sub grid gap-2">
           <p>

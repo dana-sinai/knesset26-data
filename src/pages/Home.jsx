@@ -5,6 +5,7 @@ import { useMKFilters } from '@/lib/filters';
 import FilterPanel from '@/components/FilterPanel';
 import { Stat, Loading, Page, Section } from '@/components/bits';
 import { HBar, StackedH, VBar, Card } from '@/components/charts';
+import { MKLink } from '@/components/MKDrawer';
 
 function median(a) {
   const s = a.filter((x) => x != null).sort((x, y) => x - y);
@@ -137,7 +138,7 @@ export default function Home() {
                   {sel.slice().sort((a, b) => a.party.localeCompare(b.party) || a.list_position - b.list_position).map((m) => (
                     <li key={m.id} className="flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full" style={{ background: partyById[m.party]?.color }} />
-                      <Link className="hover:underline" to={`/mk/${m.id}`}>{m.name_he}</Link>
+                      <MKLink className="hover:underline" id={m.id}>{m.name_he}</MKLink>
                       <span className="text-xs text-sub">{partyById[m.party]?.name_he}</span>
                     </li>
                   ))}

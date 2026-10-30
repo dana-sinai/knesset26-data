@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useMKs, useParties, useData, VOTE_CODE, VOTE_CLASS } from '@/lib/data';
 import { Loading, Page } from '@/components/bits';
+import { MKLink } from '@/components/MKDrawer';
 
 const KS = [25, 24, 23, 22, 21, 20];
 
@@ -28,7 +29,7 @@ function VoteDetail({ vote, k, mks, partyById }) {
             <div className="flex items-center gap-1.5 font-semibold text-sm"><span className="w-2.5 h-2.5 rounded-sm" style={{ background: partyById[pid]?.color }} />{partyById[pid]?.name_he}</div>
             {list.map(({ m, code }) => (
               <div key={m.id} className="flex items-center justify-between gap-2 text-sm">
-                <Link to={`/mk/${m.id}`} className="hover:underline truncate">{m.name_he}</Link>
+                <MKLink id={m.id} className="hover:underline truncate">{m.name_he}</MKLink>
                 {code ? <span className={`px-2 py-0.5 rounded text-xs ${VOTE_CLASS[code]}`}>{VOTE_CODE[code]}</span>
                   : <span className="text-xs text-sub">לא נרשמה הצבעה</span>}
               </div>

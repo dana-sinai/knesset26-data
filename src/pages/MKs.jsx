@@ -5,6 +5,7 @@ import { useMKs, useParties, EDU_LABEL, pct } from '@/lib/data';
 import { useMKFilters } from '@/lib/filters';
 import FilterPanel from '@/components/FilterPanel';
 import { MKCard, Loading, Page } from '@/components/bits';
+import { MKLink } from '@/components/MKDrawer';
 
 const SORTS = {
   party: (a, b) => a.party.localeCompare(b.party) || a.list_position - b.list_position,
@@ -65,7 +66,7 @@ export default function MKs() {
                 <tbody>
                   {list.map((m) => (
                     <tr key={m.id} className="border-t border-rule hover:bg-sand/40">
-                      <td className="px-3 py-1.5 whitespace-nowrap"><Link className="hover:underline font-medium" to={`/mk/${m.id}`}>{m.name_he}</Link></td>
+                      <td className="px-3 py-1.5 whitespace-nowrap"><MKLink className="hover:underline font-medium" id={m.id}>{m.name_he}</MKLink></td>
                       <td className="px-3 py-1.5 whitespace-nowrap"><span className="inline-block w-2 h-2 rounded-full ml-1" style={{ background: partyById[m.party]?.color }} />{partyById[m.party]?.name_he}</td>
                       <td className="px-3 py-1.5 num">{m.list_position}</td>
                       <td className="px-3 py-1.5">{m.gender === 'female' ? 'אישה' : m.gender === 'male' ? 'גבר' : '—'}</td>
