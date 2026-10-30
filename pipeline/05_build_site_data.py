@@ -55,6 +55,7 @@ LOC_ALIAS = {"תלאביביפו": "תלאביביפו", "תלאביב": "תלא
              "יקנעם": "יקנעםעילית", "מודיעין": "מודיעיןמכביםרעות", "מודיעיןמכביםרעות": "מודיעיןמכביםרעות",
              "הרצליהפיתוח": "הרצליה", "באקאלע'רביה": "באקהאלגרביה", "באקהאלע'רביה": "באקהאלגרביה",
              "כפרקאסם": "כפרקאסם", "שפרעם": "שפרעם", "גבעתעדה": "בנימינהגבעתעדה", "בנימינה": "בנימינהגבעתעדה",
+             "הרצליה": "הרצלייה", "ביתאגיון": "ירושלים",
              "פרדסחנה": "פרדסחנהכרכור", "כרכור": "פרדסחנהכרכור", "קדימה": "קדימהצורן", "אורעקיבא": "אורעקיבא"}
 
 def find_loc(name):
@@ -96,9 +97,15 @@ for r in roster.itertuples():
     gender = p.get("gender")
     if pid and pid in mk_ind.index:
         g = {"זכר": "male", "נקבה": "female"}.get(mk_ind.loc[pid].GenderDesc)
+        served = bool(pr.get("terms"))
         if g and gender and g != gender:
-            conflicts.append(f"מגדר: פרופיל מחקר={gender}, רשומת הכנסת={g} (נבחרה רשומת הכנסת)")
-        gender = g or gender
+            # records created in Oct 2026 for first-time MKs are not yet verified by the Knesset;
+            # for them the referenced research profile wins, for serving MKs the Knesset record wins
+            keep = g if served else gender
+            conflicts.append(f"מגדר: פרופיל המחקר={gender}, רשומת הכנסת={g}; מוצג: {keep}")
+            gender = keep
+        else:
+            gender = g or gender
         sources.setdefault("gender", []).append(f"Knesset OData KNS_Person #{pid}")
 
     bd, by = p.get("birth_date"), p.get("birth_year")
@@ -119,6 +126,8 @@ for r in roster.itertuples():
     res_name = p.get("residence_locality_he")
     if not res_name and use_w and w.get("residence"):
         res_name = w["residence"][0]
+        if res_name == "בית אגיון":
+            res_name = "ירושלים"
         filled.append("residence")
         sources.setdefault("residence_locality_he", []).append(w["wikidata_url"])
     L = find_loc(res_name)
