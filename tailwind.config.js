@@ -11,6 +11,12 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+  			paper: 'rgb(var(--paper) / <alpha-value>)',
+  			ink: 'rgb(var(--ink) / <alpha-value>)',
+  			sub: 'rgb(var(--sub) / <alpha-value>)',
+  			rule: 'rgb(var(--rule) / <alpha-value>)',
+  			sand: 'rgb(var(--sand) / <alpha-value>)',
+  			gold: 'rgb(var(--gold) / <alpha-value>)',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
