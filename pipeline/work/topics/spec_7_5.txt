@@ -1,0 +1,146 @@
+10905-10909	economy	
+10910	local	economy
+10911	transport	
+10912-10914	criminal	justice
+10915	governance	
+10916	economy	
+10917	justice	economy
+10918	health	
+10919	welfare	security
+10920	labor	governance
+10921	governance	
+10922-10923	criminal	rights
+10924	health	security
+10925	health	
+10926	heritage	governance
+10927	education	
+10928	economy	consumer
+10929	consumer	
+10930	agriculture	
+10931	rights	criminal
+10932	health	rights
+10933	economy	
+10934-10935	security	welfare
+10936-10938	governance	
+10939	housing	
+10940-10948	economy	housing
+10949-10950	economy	environment
+10951-10952	governance	economy
+10953	consumer	health
+10954	consumer	transport
+10955	economy	
+10956	governance	
+10957	education	security
+10958	environment	
+10959	security	justice
+10960-10963	media	security
+10964-10976	economy	
+10977	welfare	health
+10978-10979	welfare	
+10980	foreign	immigration
+10981	welfare	economy
+10982	labor	economy
+10983	economy	
+10984	economy	
+10985-10986	environment	
+10987	housing	
+10988	housing	criminal
+10989-10990	heritage	
+10991	immigration	
+10992	health	
+10993	governance	heritage
+10994	welfare	
+10995	security	welfare
+10996	economy	consumer
+10997	environment	
+10998	economy	environment
+10999	environment	
+11000-11002	economy	environment
+11003-11006	environment	
+11007	justice	rights
+11008	immigration	rights
+11009	health	rights
+11010	economy	
+11011-11013	welfare	
+11014-11016	welfare	justice
+11017-11019	justice	
+11020	economy	consumer
+11021	transport	
+11022-11033	criminal	justice
+11034-11036	criminal	security
+11037-11041	criminal	justice
+11042	settlement	justice
+11043	education	welfare
+11044	welfare	security
+11045	welfare	labor
+11046	education	security
+11047	criminal	welfare
+11048	security	local
+11049	criminal	transport
+11050-11052	economy	consumer
+11053	security	immigration
+11054	criminal	media
+11055-11056	security	criminal
+11057-11059	health	
+11060	transport	
+11061-11063	labor	
+11064	governance	
+11065	welfare	
+11066-11067	labor	immigration
+11068	security	justice
+11069	criminal	security
+11070	justice	foreign
+11071	housing	local
+11072	education	
+11073-11074	welfare	agriculture
+11075-11076	economy	governance
+11077	economy	
+11078	economy	local
+11079	economy	heritage
+11080	housing	
+11081	health	welfare
+11082-11083	labor	
+11084	security	welfare
+11085	consumer	transport
+11086-11088	criminal	
+11089	education	
+11090-11092	governance	media
+11093	justice	
+11094	welfare	education
+11095	religion	health
+11096	health	
+11097-11099	environment	
+11100-11101	economy	
+11102	consumer	health
+11103-11105	economy	consumer
+11106-11109	justice	criminal
+11110-11111	security	welfare
+11112	welfare	security
+11113	education	foreign
+11114	economy	
+11115	economy	heritage
+11116	economy	
+11117-11118	economy	local
+11119	transport	consumer
+11120	security	
+11121	housing	economy
+11122	housing	
+11123	transport	
+11124	transport	economy
+11125	heritage	
+11126	media	
+11127-11128	transport	
+11129	housing	
+11130-11132	transport	
+11133-11134	immigration	criminal
+11135	labor	rights
+11136-11138	rights	welfare
+11139-11143	criminal	
+11144	media	rights
+11145-11146	media	governance
+11147	rights	
+11148	education	
+11149	labor	welfare
+11150-11151	religion	justice
+11152	transport	justice
+11153-11154	religion	justice
