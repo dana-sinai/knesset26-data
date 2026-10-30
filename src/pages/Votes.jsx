@@ -16,7 +16,7 @@ export const VOTE_TYPES = [
 ];
 export function voteType(v) {
   const t = `${v.title || ''} ${v.subject || ''}`;
-  if (/הסתייגו|סעיף|סעיפים/.test(v.subject || '') || /הסתייגות/.test(v.title || '')) return 'part';
+  if (/הסתייגו|סעיף|סעיפים/.test(v.subject || '') || /הסתייגות|^\s*סעיפ/.test(v.title || '')) return 'part';
   if (/אי-אמון|אי אמון|הבעת אמון/.test(t)) return 'confidence';
   if (/לסדר היום|הצעה לסדר/.test(t)) return 'agenda';
   if (/^\s*(הצעת חוק|הצעת חוק-יסוד)/.test(v.title || '')) return 'bill';
