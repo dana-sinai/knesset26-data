@@ -157,10 +157,11 @@ for r in roster.itertuples():
             born_abroad = False
         else:
             last = bp[-1].strip()
-            if last in ("ישראל", "ארץ ישראל") or find_loc(last):
+            # unrecognised Bedouin villages / small places not in the CBS list are still in Israel
+            if last in ("ישראל", "ארץ ישראל", "סעוה", "הנתון") or find_loc(last):
                 born_abroad = False
             else:
-                born_abroad, born_country = True, last
+                born_abroad, born_country = True, re.sub(r"\s*\(.*\)", " (לשעבר)", last) if last.startswith("ברית המועצות") else last
 
     terms = pr.get("terms") or p.get("prior_knesset_terms") or []
     prior = [t for t in terms if t < 26]
