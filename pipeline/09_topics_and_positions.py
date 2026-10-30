@@ -115,6 +115,7 @@ for r in C.itertuples():
     if r.bill in bill_meaning and str(r.vid) not in meaning:
         meaning[str(r.vid)] = "בעד = " + bill_meaning[r.bill]
 json.dump(meaning, open(f"{OUT}/vote_meaning.json", "w"), ensure_ascii=False, separators=(",", ":"))
+json.dump({str(k): v for k, v in bill_meaning.items()}, open(f"{OUT}/bill_meaning.json", "w"), ensure_ascii=False, separators=(",", ":"))
 missing_meaning = sorted(set(C.bill) - set(bill_meaning))
 with open("pipeline/work/new_meaning_needed.tsv", "w", encoding="utf-8") as fh:
     for b_ in missing_meaning:

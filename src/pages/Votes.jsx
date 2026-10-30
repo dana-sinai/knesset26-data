@@ -139,6 +139,7 @@ export default function Votes() {
   const { data: meta } = useData(`votes/meta_k${k}.json`);
   const { data: idx } = useData('votes/index.json');
   const { data: meaning } = useData('topics/vote_meaning.json', { retry: false });
+  const { data: billMeaning } = useData('topics/bill_meaning.json', { retry: false });
   const KS = Object.keys(idx || { 25: 1 }).map(Number).sort((a, b) => b - a);
   const partyById = useMemo(() => Object.fromEntries((parties || []).map((p) => [p.id, p])), [parties]);
   const all = useMemo(() => (meta ? meta.votes.map((v) => ({ id: v[0], dt: v[1], title: v[2], subject: v[3], f: v[4], a: v[5], ab: v[6], item: v[7] }))
@@ -211,7 +212,12 @@ export default function Votes() {
               <button onClick={() => set({ id: null, bill: null })} className="lg:hidden flex items-center gap-1 text-sm text-sub justify-self-start"><ArrowRight size={15} />לרשימת ההצבעות</button>
               <p role="heading" aria-level={2} className="text-2xl font-semibold leading-snug">{sel.title}</p>
               <p className="text-sm text-sub">{fmtD(sel.dt)} {sel.subject && `· ${sel.subject}`} · הכנסת ה-{k} · הצבעה #{sel.id}</p>
-              {meaning?.[sel.id] && <p className="text-sm rounded-lg bg-sand px-3 py-2">{meaning[sel.id]}</p>}
+              {(meaning?.[sel.id] || (sel.item != null && billMeaning?.[sel.item])) && (
+                <p className="text-sm rounded-lg bg-sand px-3 py-2">
+                  {meaning?.[sel.id] || `ההצעה: ${billMeaning[sel.item]}`}
+                  <span className="block text-[11px] text-sub mt-0.5">ניסוח קצר לפי שם ההצעה ותקציר הכנסת בלבד. בהצבעה על סעיף או הסתייגות, ״בעד״ מתייחס לסעיף ולא להצעה כולה.</span>
+                </p>
+              )}
               {sel.item != null && summaries?.[sel.item] && (
                 <div className="text-sm rounded-lg bg-sand/70 px-3 py-2 leading-relaxed">
                   <span className="block text-[11px] text-sub mb-0.5">תקציר החוק, כפי שפורסם במאגר הכנסת</span>
