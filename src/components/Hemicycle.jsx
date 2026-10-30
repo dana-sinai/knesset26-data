@@ -23,21 +23,15 @@ function layout(total) {
       seats.push({ t, r, x: CX + r * Math.cos(t), y: CY - r * Math.sin(t) });
     }
   });
-  // Sweep by angle so each party occupies a wedge; inner rows first within the same angle.
   return seats.sort((a, b) => a.t - b.t || a.r - b.r);
 }
 
-const HIGHLIGHT = [
-  ['', 'ללא הדגשה'],
-  ['female', 'נשים'],
-  ['new', 'חדשים בכנסת'],
-  ['returning', 'כיהנו בעבר'],
-];
-const match = (m, h) => !h || (h === 'female' ? m.gender === 'female' : h === 'new' ? m.is_new : !m.is_new);
-
-export default function Hemicycle({ mks, parties, groups }) {
+/**
+ * Controlled chamber chart. `match` (optional) is a predicate on an MK; non-matching seats are dimmed.
+ * Clicking a seat opens the member drawer.
+ */
+export default function Hemicycle({ mks, parties, groups, match, label }) {
   const openMK = useOpenMK();
-  const [hl, setHl] = useState('');
   const [hover, setHover] = useState(null);
 
   const { seats, gs } = useMemo(() => {
@@ -56,57 +50,52 @@ export default function Hemicycle({ mks, parties, groups }) {
     };
   }, [mks, parties, groups]);
 
-  const n = seats.filter((s) => match(s.m, hl)).length;
+  const on = (m) => !match || match(m);
+  const n = seats.filter((s) => on(s.m)).length;
+  const byParty = {};
+  seats.forEach((s) => { if (on(s.m)) byParty[s.p.id] = (byParty[s.p.id] || 0) + 1; });
+  const hov = hover && seats.find((x) => x.m.id === hover);
 
   return (
     <div className="grid gap-4">
-      <div className="flex flex-wrap items-center gap-2 text-xs">
-        <span className="text-sub">הדגשה:</span>
-        {HIGHLIGHT.map(([v, l]) => (
-          <button key={v} onClick={() => setHl(v)} aria-pressed={hl === v}
-            className={`px-2.5 py-1 rounded-md border transition-colors ${hl === v ? 'border-ink bg-ink text-paper' : 'border-rule text-sub hover:border-ink/40'}`}>{l}</button>
-        ))}
-      </div>
-
       <div className="relative mx-auto w-full max-w-[640px]">
         <svg viewBox="0 0 420 216" className="w-full h-auto" role="img" aria-label="מושבי הכנסת ה-26 לפי מפלגות">
-          {seats.map((s) => {
-            const on = match(s.m, hl);
-            return (
-              <circle key={s.m.id} cx={s.x} cy={s.y} r={8.2}
-                fill={s.p.color} opacity={on ? 1 : 0.16}
-                stroke={hover === s.m.id ? 'rgb(var(--ink))' : 'none'} strokeWidth={2}
-                className="cursor-pointer transition-opacity"
-                onMouseEnter={() => setHover(s.m.id)} onMouseLeave={() => setHover(null)}
-                onClick={() => openMK(s.m.id)}>
-                <title>{`${s.m.name_he} · ${s.p.name_he}`}</title>
-              </circle>
-            );
-          })}
-          <text x={CX} y={CY - 26} textAnchor="middle" className="fill-ink" style={{ font: '400 44px var(--font-title)' }}>
-            {hl ? n : 120}
-          </text>
-          <text x={CX} y={CY - 6} textAnchor="middle" className="fill-[rgb(var(--sub))]" style={{ font: '400 11px var(--font-body)' }}>
-            {hl ? HIGHLIGHT.find((h) => h[0] === hl)[1] : 'חברי כנסת'}
+          {seats.map((s) => (
+            <circle key={s.m.id} cx={s.x} cy={s.y} r={8.2}
+              fill={s.p.color} opacity={on(s.m) ? 1 : 0.13}
+              stroke={hover === s.m.id ? 'rgb(var(--ink))' : 'none'} strokeWidth={2}
+              className="cursor-pointer transition-opacity duration-300"
+              onMouseEnter={() => setHover(s.m.id)} onMouseLeave={() => setHover(null)}
+              onClick={() => openMK(s.m.id)}>
+              <title>{`${s.m.name_he} · ${s.p.name_he}`}</title>
+            </circle>
+          ))}
+          <text x={CX} y={CY - 30} textAnchor="middle" className="fill-ink" style={{ font: '400 46px var(--font-title)' }}>{n}</text>
+          <text x={CX} y={CY - 8} textAnchor="middle" style={{ font: '400 11px var(--font-body)', fill: 'rgb(var(--sub))' }}>
+            {match ? `מתוך 120${label ? ` · ${label}` : ''}` : 'חברי כנסת'}
           </text>
         </svg>
         <div className="h-5 text-center text-xs text-sub -mt-1">
-          {hover ? (() => { const s = seats.find((x) => x.m.id === hover); return `${s.m.name_he} · ${s.p.name_he} · מקום ${s.m.list_position}`; })() : 'לחצו על מושב לפרטים'}
+          {hov ? `${hov.m.name_he} · ${hov.p.name_he} · מקום ${hov.m.list_position}` : 'לחצו על מושב לפרטים'}
         </div>
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-3 text-xs">
-        {gs.map((g) => (
-          <div key={g.id} className="grid gap-1 content-start border-t-2 pt-2" style={{ borderColor: g.color }}>
-            <span className="num font-semibold text-sm">{g.parties.reduce((s, p) => s + p.seats, 0)} מושבים</span>
-            {g.parties.map((p) => (
-              <Link key={p.id} to={`/party/${p.id}`} className="hover:underline flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full" style={{ background: p.color }} />{p.name_he}
-                <span className="text-sub num mr-auto">{p.seats}</span>
-              </Link>
-            ))}
-          </div>
-        ))}
+        {gs.map((g) => {
+          const tot = g.parties.reduce((s, p) => s + p.seats, 0);
+          const sel = g.parties.reduce((s, p) => s + (byParty[p.id] || 0), 0);
+          return (
+            <div key={g.id} className="grid gap-1 content-start border-t-2 pt-2" style={{ borderColor: g.color }}>
+              <span className="num font-semibold text-sm">{match ? <>{sel} <span className="text-sub font-normal">מתוך {tot}</span></> : `${tot} מושבים`}</span>
+              {g.parties.map((p) => (
+                <Link key={p.id} to={`/party/${p.id}`} className="hover:underline flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full" style={{ background: p.color }} />{p.name_he}
+                  <span className="text-sub num mr-auto">{match ? `${byParty[p.id] || 0}/${p.seats}` : p.seats}</span>
+                </Link>
+              ))}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
