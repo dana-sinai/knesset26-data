@@ -24,8 +24,8 @@ export default function VoteShareMap({ partyId, color, height = 460, mks = [] })
     <div className="grid gap-2">
       <div className="rounded-xl overflow-hidden border border-rule" style={{ height }}>
         <MapContainer center={[31.75, 34.95]} zoom={8} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
-          <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" subdomains="abcd" />
+          <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" referrerPolicy="strict-origin-when-cross-origin" />
           {pts.map((p) => (
             <CircleMarker key={p.code} center={[p.lat, p.lon]} radius={2 + 22 * Math.sqrt(p.v / maxV)}
               pathOptions={{ stroke: false, fillColor: color, fillOpacity: 0.15 + 0.75 * Math.min(1, p.share / 0.6) }}>
