@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Search, RotateCcw } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { EDU_LABEL, EDU_ORDER, SECTOR_LABEL } from '@/lib/data';
-import { SES_LABEL, PER_LABEL, POP_LABEL, placeOf } from '@/lib/filters';
+import { SES_LABEL, PER_LABEL, POP_LABEL, METRICS, placeOf } from '@/lib/filters';
 
 function Chip({ on, onClick, children, color }) {
   return (
@@ -109,6 +109,31 @@ export default function FilterPanel({ mks, parties, filters, count, hideParty = 
             </select>
           </div>
         )}
+      </div>
+      <div className="grid gap-4 rounded-lg border border-rule p-3 bg-paper">
+        <div className="grid gap-1">
+          <div className="text-xs font-semibold">פעילות בכנסות קודמות</div>
+          <p className="text-[11px] text-sub">סינון לפי מדד מציג רק מי שיש לו/ה נתונים (מי שכיהן/ה בכנסות 20–25). חוץ ממספר הכנסות.</p>
+        </div>
+        {METRICS.map((d) => {
+          const cur = f.met[d.key] || [0, d.max];
+          const on = !!f.met[d.key];
+          return (
+            <div key={d.key} className="grid gap-2">
+              <div className={`text-xs flex justify-between gap-2 ${on ? 'text-ink font-semibold' : 'text-sub'}`}>
+                <span>{d.label}</span>
+                <span className="num whitespace-nowrap">{cur[0]}–{cur[1]}{d.unit || ''}</span>
+              </div>
+              <Slider dir="rtl" min={0} max={d.max} step={d.step} value={cur}
+                onValueChange={(v) => {
+                  const full = v[0] <= 0 && v[1] >= d.max;
+                  const met = { ...f.met };
+                  if (full) delete met[d.key]; else met[d.key] = v;
+                  set({ met });
+                }} />
+            </div>
+          );
+        })}
       </div>
       <Group title="ארץ לידה">
         {[['', 'הכול'], ['no', 'נולדו בישראל'], ['yes', 'נולדו בחו״ל']].map(([v, l]) => (

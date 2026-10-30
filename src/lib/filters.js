@@ -2,7 +2,22 @@ import { useMemo, useState } from 'react';
 
 export const EMPTY = {
   q: '', parties: [], gender: '', ageMin: 20, ageMax: 90, edu: [], sectors: [], tenure: '', district: '',
-  place: 'residence', ses: [], periphery: [], popType: [], haredi: '', bornAbroad: '',
+  place: 'residence', ses: [], periphery: [], popType: [], haredi: '', bornAbroad: '', met: {},
+};
+
+/** Numbers we know about each MK's record (m.metrics). Every one is a filter and a sort key. */
+export const METRICS = [
+  { key: 'faction_rate', label: 'הצבעה כמו רוב הסיעה', unit: '%', pct: true, max: 100, step: 1 },
+  { key: 'participation', label: 'השתתפות בהצבעות במליאה', unit: '%', pct: true, max: 100, step: 1 },
+  { key: 'bills_per_k', label: 'הצעות חוק שיזם/ה, בממוצע לכנסת', max: 400, step: 5 },
+  { key: 'bills_passed', label: 'הצעות חוק שיזם/ה והפכו לחוק', max: 120, step: 1 },
+  { key: 'cmt_rate', label: 'נוכחות בוועדות שבהן היה/תה חבר/ה', unit: '%', pct: true, max: 100, step: 1 },
+  { key: 'cmt_per_k', label: 'ישיבות ועדה, בממוצע לכנסת', max: 650, step: 10 },
+  { key: 'terms', label: 'מספר כנסות קודמות', max: 14, step: 1, all: true },
+];
+export const metricValue = (m, def) => {
+  const v = m.metrics?.[def.key];
+  return v == null ? null : def.pct ? v * 100 : v;
 };
 
 // Locality-level buckets (CBS). Used for MKs' home locality / birthplace and for voters.
@@ -45,6 +60,11 @@ export function useMKFilters(mks, initial = {}) {
       if (f.ses.length && !f.ses.includes(SES_B(P?.socioeconomic_cluster))) return false;
       if (f.periphery.length && !f.periphery.includes(PER_B(P?.periphery_cluster))) return false;
       if (f.popType.length && !f.popType.includes(POP_B(P?.arab_pct))) return false;
+      for (const [key, [lo, hi]] of Object.entries(f.met)) {
+        const def = METRICS.find((d) => d.key === key);
+        const v = def && metricValue(m, def);
+        if (v == null || v < lo || v > hi) return false;
+      }
       if (f.haredi === 'yes' && !((P?.haredi_hh_pct ?? 0) >= 50 || P?.religiosity_main === 'Haredi')) return false;
       return true;
     });
