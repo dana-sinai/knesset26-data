@@ -134,6 +134,16 @@ m = m.join(fsize, on=["VoteID", "FactionName"])
 m["with_faction"] = np.where(m.fsize >= 2, m.c == m.faction_c, np.nan)
 
 vk = votes.set_index("Id").knesset
+
+# votes grouped by month: how every elected MK who served then voted -> votes/by_month/YYYY-MM.json
+os.makedirs(f"{OUT}/votes/by_month", exist_ok=True)
+mine_all = res[res.MkId.isin(pids)].copy()
+mine_all["ym"] = mine_all.dt.dt.strftime("%Y-%m")
+for ym, g in mine_all.groupby("ym"):
+    d = {}
+    for vid, gg in g.groupby("VoteID"):
+        d[int(vid)] = [[int(a), int(b)] for a, b in zip(gg.MkId, gg.c)]
+    json.dump(d, open(f"{OUT}/votes/by_month/{ym}.json", "w"), separators=(",", ":"))
 for pid in pids:
     mine = res[res.MkId == pid]
     if mine.empty:
