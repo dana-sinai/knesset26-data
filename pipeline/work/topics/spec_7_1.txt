@@ -1,0 +1,154 @@
+9905	governance	security
+9906-9908	governance	
+9909	governance	justice
+9910	governance	security
+9911-9914	governance	
+9915-9916	governance	security
+9917-9918	governance	
+9919	justice	
+9920	heritage	
+9921	arab	rights
+9922	environment	
+9923	governance	
+9924	security	rights
+9925-9926	arab	rights
+9927-9929	rights	
+9930	arab	rights
+9931	religion	
+9932	security	
+9933	governance	
+9934	settlement	security
+9935	criminal	religion
+9936	security	housing
+9937-9938	media	
+9939-9940	environment	
+9941-9942	welfare	
+9943	economy	
+9944	local	
+9945-9946	welfare	
+9947-9949	criminal	heritage
+9950	religion	consumer
+9951	criminal	rights
+9952-9954	criminal	economy
+9955	education	security
+9956	rights	consumer
+9957	rights	labor
+9958	rights	
+9959	economy	foreign
+9960-9962	health	
+9963	rights	criminal
+9964-9965	security	criminal
+9966	consumer	
+9967	transport	environment
+9968	criminal	
+9969	welfare	justice
+9970	education	consumer
+9971	media	rights
+9972	health	consumer
+9973-9974	criminal	rights
+9975	labor	
+9976	immigration	criminal
+9977	media	
+9978-9981	foreign	economy
+9982-9983	security	immigration
+9984	security	
+9985-9986	labor	
+9987-9988	education	welfare
+9989-9993	health	
+9994	education	consumer
+9995	labor	justice
+9996	heritage	
+9997	foreign	heritage
+9998-10000	heritage	
+10001	economy	
+10002	religion	rights
+10003	religion	
+10004	justice	
+10005	religion	justice
+10006-10007	religion	
+10008	arab	religion
+10009-10011	justice	
+10012	heritage	security
+10013	justice	
+10014-10015	security	heritage
+10016	rights	
+10017	labor	
+10018-10019	labor	welfare
+10020	security	criminal
+10021-10022	media	security
+10023-10024	environment	
+10025	heritage	
+10026-10027	justice	
+10028	economy	
+10029	security	rights
+10030	security	welfare
+10031	criminal	governance
+10032	health	
+10033-10035	labor	health
+10036	labor	health
+10037	criminal	rights
+10038	immigration	
+10039-10040	immigration	security
+10041	welfare	
+10042	education	heritage
+10043	education	criminal
+10044	economy	
+10045	welfare	
+10046-10049	economy	
+10050	governance	
+10051	housing	
+10052	economy	
+10053	housing	
+10054	economy	heritage
+10055	justice	
+10056	justice	economy
+10057-10064	governance	
+10065-10067	welfare	
+10068	consumer	
+10069	welfare	
+10070-10071	welfare	labor
+10072-10080	welfare	
+10081	security	welfare
+10082-10090	welfare	
+10091-10092	economy	
+10093	economy	consumer
+10094	consumer	economy
+10095	economy	
+10096	criminal	rights
+10097	labor	criminal
+10098-10099	health	
+10100	health	consumer
+10101	health	
+10102	health	consumer
+10103-10105	criminal	transport
+10106	health	rights
+10107	criminal	
+10108	housing	
+10109	security	justice
+10110	economy	
+10111-10113	economy	welfare
+10114-10115	economy	
+10116	rights	media
+10117	economy	
+10118-10119	health	agriculture
+10120	labor	religion
+10121-10122	criminal	
+10123	heritage	rights
+10124	welfare	justice
+10125	economy	security
+10126	labor	rights
+10127-10131	labor	security
+10132-10135	environment	
+10136	rights	
+10137	consumer	
+10138-10139	labor	
+10140	agriculture	economy
+10141-10142	heritage	
+10143	media	
+10144-10145	welfare	housing
+10146	housing	
+10147	religion	justice
+10148	immigration	
+10149	transport	
+10150-10151	economy	
+10152-10154	justice	
