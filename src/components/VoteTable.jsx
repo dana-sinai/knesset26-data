@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useData, VOTE_CODE, VOTE_CLASS } from '@/lib/data';
+import { useData, useBillTopics, VOTE_CODE, VOTE_CLASS } from '@/lib/data';
+import TopicChips, { TopicSelect } from '@/components/TopicChips';
 
 const PAGE = 50;
 
@@ -9,6 +10,8 @@ export default function VoteTable({ personId, knessets }) {
   const [k, setK] = useState(knessets[knessets.length - 1]);
   const [q, setQ] = useState('');
   const [res, setRes] = useState('');
+  const [topic, setTopic] = useState('');
+  const { data: bt } = useBillTopics();
   const [page, setPage] = useState(0);
   const { data: mine } = useData(`votes/mk_${personId}.json`);
   const { data: meta } = useData(`votes/meta_k${k}.json`);
@@ -20,15 +23,20 @@ export default function VoteTable({ personId, knessets }) {
     for (const v of meta.votes) {
       const code = my.get(v[0]);
       if (code == null) continue;
-      out.push({ id: v[0], dt: v[1], title: v[2], subject: v[3], f: v[4], a: v[5], ab: v[6], code });
+      out.push({ id: v[0], dt: v[1], title: v[2], subject: v[3], f: v[4], a: v[5], ab: v[6], item: v[7], code, topics: (bt && v[7] != null && bt[v[7]]) || [] });
     }
     return out.reverse();
-  }, [mine, meta]);
+  }, [mine, meta, bt]);
 
   const filtered = useMemo(() => {
     const qq = q.trim();
-    return rows.filter((r) => (!res || String(r.code) === res) && (!qq || `${r.title} ${r.subject}`.includes(qq)));
-  }, [rows, q, res]);
+    return rows.filter((r) => (!res || String(r.code) === res) && (!topic || r.topics.includes(topic)) && (!qq || `${r.title} ${r.subject}`.includes(qq)));
+  }, [rows, q, res, topic]);
+  const topicCounts = useMemo(() => {
+    const c = {};
+    rows.forEach((r) => r.topics.forEach((t) => t && (c[t] = (c[t] || 0) + 1)));
+    return c;
+  }, [rows]);
 
   const counts = useMemo(() => {
     const c = { 1: 0, 2: 0, 3: 0, 4: 0 };
@@ -48,6 +56,7 @@ export default function VoteTable({ personId, knessets }) {
           <option value="">כל ההצבעות</option>
           {[1, 2, 3, 4].map((c) => <option key={c} value={c}>{VOTE_CODE[c]}</option>)}
         </select>
+        <TopicSelect value={topic} onChange={(t) => { setTopic(t); setPage(0); }} counts={topicCounts} />
       </div>
       <div className="flex flex-wrap gap-2 text-xs">
         <span className="text-sub">{filtered.length.toLocaleString('he-IL')} הצבעות:</span>
@@ -71,6 +80,7 @@ export default function VoteTable({ personId, knessets }) {
                   <td className="px-3 py-2">
                     <Link to={`/votes?id=${r.id}&k=${k}`} className="hover:underline">{r.title || '(ללא כותרת)'}</Link>
                     {r.subject && <div className="text-xs text-sub">{r.subject}</div>}
+                    <TopicChips billId={r.item} className="mt-1" />
                   </td>
                   <td className="px-3 py-2"><span className={`px-2 py-0.5 rounded text-xs whitespace-nowrap ${VOTE_CLASS[r.code]}`}>{VOTE_CODE[r.code]}</span></td>
                   <td className="px-3 py-2 num whitespace-nowrap text-xs">{r.f}–{r.a}{r.ab ? ` (${r.ab} נמנעו)` : ''}</td>

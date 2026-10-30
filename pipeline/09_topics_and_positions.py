@@ -80,6 +80,7 @@ with open("pipeline/work/new_bills_unclassified.tsv", "w", encoding="utf-8") as 
 print("new bills waiting for a topic:", len(new_bills))
 json.dump(bill_topic, open(f"{OUT}/bill_topics.json", "w"), separators=(",", ":"))
 meaning = json.load(open("pipeline/input/vote_meaning.json")) if os.path.exists("pipeline/input/vote_meaning.json") else {}
+json.dump(meaning, open(f"{OUT}/vote_meaning.json", "w"), ensure_ascii=False, separators=(",", ":"))
 print("bills with topic:", len(bill_topic), "| unclassified names:", sum(1 for n in set(bills.norm) if n not in topic_of_name))
 
 # ---------------- whole-bill votes
