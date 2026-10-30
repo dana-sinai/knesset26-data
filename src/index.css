@@ -42,10 +42,10 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --font-heading: 'Frank Ruhl Libre', 'Heebo', serif;
+    --font-heading: 'OH AmitMan', 'Heebo', sans-serif;
     --font-body: 'Heebo', ui-sans-serif, system-ui, sans-serif;
-    --font-display: 'Frank Ruhl Libre', 'Heebo', serif;
-    --font-title: 'OH AmitMan', 'Frank Ruhl Libre', 'Heebo', serif;
+    --font-display: 'OH AmitMan', 'Heebo', sans-serif;
+    --font-title: 'OH AmitMan', 'Heebo', sans-serif;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -110,8 +110,12 @@
     @apply bg-paper text-ink font-body antialiased;
     font-feature-settings: "tnum" 1;
   }
-  h1, h2, h3 { @apply font-display; }
-  h1, .font-title { font-family: var(--font-title); font-weight: 400 !important; letter-spacing: 0; }
+  /* Every heading level uses the Amit Man handwriting font. It has a single weight, so never synthesize bold. */
+  h1, h2, h3, h4, h5, h6, .font-title, .font-display, .font-heading {
+    font-family: var(--font-title); font-weight: 400 !important; letter-spacing: 0; font-synthesis: none;
+  }
+  h3 { font-size: 1.35em; }
+  h4 { font-size: 1.2em; }
 }
 
 .leaflet-container { font-family: var(--font-body); background: rgb(var(--sand)); }

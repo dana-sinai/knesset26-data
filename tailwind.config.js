@@ -72,6 +72,7 @@ module.exports = {
   			heading: ['var(--font-heading)'],
   			body: ['var(--font-body)'],
   			display: ['var(--font-display)'],
+  			title: ['var(--font-title)'],
   			mono: ['var(--font-mono)']
   		},
   		keyframes: {
