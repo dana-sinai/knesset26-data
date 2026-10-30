@@ -5,6 +5,7 @@ import { useMKs, useParties, useData, EDU_LABEL, SECTOR_LABEL, pct, fmt } from '
 import { Initials, Src, Loading, Page, Section } from '@/components/bits';
 import VoteTable from '@/components/VoteTable';
 import BillList from '@/components/BillList';
+import { CommitteeSummary, CommitteeSessions } from '@/components/CommitteeActivity';
 
 const fmtDate = (d) => (d ? d.slice(0, 10).split('-').reverse().join('.') : '');
 const yrs = (s, e) => [s, e].filter(Boolean).join('–') || '';
@@ -46,6 +47,7 @@ export function MKProfile({ id, compact = false }) {
   const tabs = [['profile', 'פרופיל'], ['knesset', 'פעילות בכנסת']];
   if (m.has_votes) tabs.push(['votes', 'הצבעות במליאה']);
   if (m.has_bills) tabs.push(['bills', 'הצעות חוק']);
+  if (!m.is_new && m.person_id) tabs.push(['committees', 'ישיבות ועדה']);
   tabs.push(['sources', 'מקורות']);
 
   return (
@@ -57,7 +59,6 @@ export function MKProfile({ id, compact = false }) {
             {party.name_he} · מקום {m.list_position} ברשימה
           </Link>
           <h1 className={compact ? 'text-3xl font-black' : 'text-4xl font-black'}>{m.name_he}</h1>
-          {m.name_en && <p className="text-sub" dir="ltr" style={{ textAlign: 'right' }}>{m.name_en}</p>}
           <div className="flex flex-wrap gap-2 text-xs mt-1">
             {m.is_new ? <span className="px-2 py-0.5 rounded-full bg-gold/20 text-ink">חדש/ה בכנסת</span>
               : <span className="px-2 py-0.5 rounded-full bg-sand">כנסות קודמות: {m.prior_terms.join(', ')}</span>}
@@ -187,28 +188,9 @@ export function MKProfile({ id, compact = false }) {
                   ))}</ul>
                 </Section>
               )}
-              {pr.committees?.length > 0 && (
-                <Section title="ועדות">
-                  {[...new Set(pr.committees.map((c) => c.knesset))].sort((a, b) => b - a).map((k) => {
-                    const cs = {};
-                    pr.committees.filter((c) => c.knesset === k).forEach((c) => {
-                      if (!cs[c.committee] || c.role === 'chair') cs[c.committee] = c.role;
-                    });
-                    return (
-                      <div key={k} className="grid gap-1">
-                        <h4 className="font-semibold text-sm">הכנסת ה-{k}</h4>
-                        <div className="flex flex-wrap gap-1.5">
-                          {Object.entries(cs).sort((a, b) => (a[1] === 'chair' ? -1 : 1)).map(([c, r]) => (
-                            <span key={c} className={`text-xs px-2 py-1 rounded-md ${r === 'chair' ? 'bg-ink text-paper' : 'bg-sand'}`}>
-                              {r === 'chair' ? 'יו״ר · ' : r === 'alternate' ? 'ממלא/ת מקום · ' : ''}{c}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </Section>
-              )}
+              <Section title="ועדות">
+                <CommitteeSummary personId={m.person_id} />
+              </Section>
               {pr.factions?.length > 0 && (
                 <Section title="סיעות">
                   <ul className="grid gap-1 text-sm">{pr.factions.map((f, i) => (
@@ -224,6 +206,7 @@ export function MKProfile({ id, compact = false }) {
 
       {tab === 'votes' && m.has_votes && <VoteTable personId={m.person_id} knessets={voteKs} />}
       {tab === 'bills' && m.has_bills && <BillList personId={m.person_id} />}
+      {tab === 'committees' && <CommitteeSessions personId={m.person_id} />}
 
       {tab === 'sources' && (
         <div className="grid gap-6 text-sm">
