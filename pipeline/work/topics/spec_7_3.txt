@@ -1,0 +1,124 @@
+10405	heritage	
+10406	religion	arab
+10407-10409	heritage	
+10410	justice	labor
+10411	environment	
+10412	security	labor
+10413	environment	health
+10414-10419	religion	
+10420	local	environment
+10421-10425	local	governance
+10426-10428	local	arab
+10429	local	justice
+10430	local	rights
+10431	local	education
+10432	local	justice
+10433-10437	local	governance
+10438-10439	local	education
+10440-10441	local	
+10442	security	
+10443	education	heritage
+10444-10445	transport	
+10446	criminal	local
+10447	welfare	
+10448-10449	heritage	
+10450	criminal	health
+10451-10452	heritage	
+10453	housing	
+10454-10455	media	
+10456	transport	
+10457-10458	criminal	health
+10459-10461	economy	local
+10462	heritage	local
+10463	criminal	
+10464	heritage	justice
+10465	education	
+10466	welfare	
+10467-10469	media	
+10470-10471	security	justice
+10472	housing	
+10473	labor	
+10474-10475	rights	
+10476	economy	
+10477-10478	health	
+10479	agriculture	
+10480	security	economy
+10481	rights	media
+10482-10483	security	welfare
+10484	transport	
+10485-10488	economy	
+10489-10490	economy	security
+10491	economy	
+10492	labor	economy
+10493	economy	health
+10494	housing	
+10495	economy	
+10496	health	
+10497-10511	housing	
+10512-10518	economy	
+10519	welfare	
+10520-10522	economy	welfare
+10523-10526	security	media
+10527-10528	transport	
+10529-10535	governance	
+10536	economy	consumer
+10537-10538	welfare	education
+10539-10555	economy	
+10556-10561	media	
+10562-10563	governance	justice
+10564	heritage	
+10565	heritage	security
+10566-10567	housing	welfare
+10568	health	rights
+10569-10573	education	
+10574-10575	labor	rights
+10576	heritage	rights
+10577	criminal	rights
+10578-10579	education	rights
+10580	health	rights
+10581-10582	heritage	economy
+10583	heritage	
+10584	heritage	religion
+10585-10589	justice	economy
+10590	consumer	
+10591-10592	governance	foreign
+10593	agriculture	security
+10594-10599	governance	economy
+10600	consumer	
+10601	economy	
+10602-10605	criminal	security
+10606	governance	rights
+10607-10608	labor	
+10609	economy	rights
+10610	security	labor
+10611	criminal	media
+10612	education	health
+10613-10614	education	welfare
+10615	education	
+10616	transport	welfare
+10617	justice	health
+10618	criminal	media
+10619	foreign	
+10620	governance	
+10621	foreign	justice
+10622-10623	economy	media
+10624	health	
+10625	heritage	
+10626	health	heritage
+10627	heritage	
+10628-10630	heritage	security
+10631	heritage	foreign
+10632	heritage	immigration
+10633-10634	heritage	
+10635	heritage	immigration
+10636-10639	heritage	
+10640	heritage	arab
+10641	justice	
+10642	economy	criminal
+10643	governance	rights
+10644-10645	settlement	
+10646	justice	
+10647-10651	economy	governance
+10652	criminal	rights
+10653	transport	
+10654	criminal	security
