@@ -1,0 +1,1415 @@
+0	security	housing
+1	security	education
+2	security	
+3	education	welfare
+4	local	governance
+5	security	local
+6	security	rights
+7	security	rights
+8	consumer	
+9	justice	consumer
+10	justice	consumer
+11	settlement	
+12	criminal	media
+13	justice	
+14	local	
+15	local	
+16	governance	
+17	welfare	education
+18	education	security
+19	security	
+20	security	
+21	housing	environment
+22	environment	
+23	environment	
+24	environment	
+25	environment	
+26	environment	
+27	environment	
+28	environment	
+29	welfare	
+30	welfare	
+31	welfare	
+32	welfare	
+33	welfare	
+34	welfare	
+35	health	
+36	economy	local
+37	economy	local
+38	economy	local
+39	economy	local
+40	economy	security
+41	economy	security
+42	economy	
+43	economy	
+44	economy	settlement
+45	economy	local
+46	security	
+47	security	
+48	transport	local
+49	transport	criminal
+50	education	
+51	environment	economy
+52	consumer	
+53	labor	
+54	labor	
+55	environment	
+56	consumer	
+57	media	justice
+58	settlement	
+59	justice	
+60	settlement	
+61	local	
+62	local	environment
+63	heritage	local
+64	local	
+65	welfare	justice
+66	welfare	justice
+67	welfare	justice
+68	welfare	justice
+69	welfare	justice
+70	welfare	
+71	welfare	religion
+72	welfare	religion
+73	welfare	justice
+74	welfare	justice
+75	welfare	justice
+76	welfare	justice
+77	welfare	justice
+78	welfare	
+79	labor	
+80	environment	
+81	environment	
+82	environment	
+83	environment	education
+84	criminal	heritage
+85	rights	heritage
+86	rights	heritage
+87	criminal	heritage
+88	criminal	heritage
+89	criminal	heritage
+90	criminal	heritage
+91	security	
+92	security	criminal
+93	consumer	economy
+94	criminal	heritage
+95	religion	consumer
+96	religion	consumer
+97	religion	consumer
+98	religion	consumer
+99	religion	consumer
+100	religion	consumer
+101	religion	consumer
+102	religion	consumer
+103	religion	consumer
+104	religion	consumer
+105	religion	consumer
+106	religion	consumer
+107	religion	consumer
+108	religion	consumer
+109	religion	consumer
+110	religion	consumer
+111	religion	consumer
+112	religion	consumer
+113	religion	consumer
+114	health	
+115	criminal	
+116	criminal	heritage
+117	heritage	rights
+118	criminal	heritage
+119	criminal	heritage
+120	criminal	heritage
+121	criminal	heritage
+122	security	religion
+123	economy	criminal
+124	criminal	economy
+125	criminal	economy
+126	criminal	economy
+127	criminal	economy
+128	criminal	economy
+129	environment	
+130	foreign	security
+131	security	foreign
+132	security	foreign
+133	rights	criminal
+134	rights	housing
+135	rights	
+136	rights	
+137	rights	
+138	rights	
+139	rights	
+140	rights	education
+141	rights	education
+142	rights	
+143	rights	
+144	rights	
+145	rights	
+146	rights	
+147	rights	
+148	rights	
+149	rights	
+150	rights	
+151	rights	
+152	rights	
+153	rights	
+154	rights	
+155	rights	
+156	rights	
+157	rights	
+158	rights	
+159	rights	
+160	rights	health
+161	rights	
+162	rights	
+163	education	rights
+164	rights	welfare
+165	rights	welfare
+166	rights	security
+167	rights	welfare
+168	rights	welfare
+169	rights	welfare
+170	rights	welfare
+171	rights	welfare
+172	education	rights
+173	governance	settlement
+174	governance	criminal
+175	criminal	heritage
+176	criminal	heritage
+177	criminal	heritage
+178	environment	
+179	economy	foreign
+180	economy	environment
+181	consumer	
+182	security	
+183	criminal	rights
+184	health	rights
+185	health	rights
+186	environment	consumer
+187	environment	consumer
+188	governance	
+189	education	
+190	governance	
+191	labor	
+192	foreign	settlement
+193	environment	
+194	environment	
+195	justice	media
+196	justice	media
+197	justice	media
+198	justice	media
+199	justice	media
+200	justice	media
+201	justice	media
+202	justice	media
+203	justice	media
+204	justice	media
+205	justice	media
+206	justice	security
+207	justice	media
+208	justice	security
+209	justice	media
+210	justice	media
+211	justice	media
+212	security	heritage
+213	criminal	consumer
+214	environment	consumer
+215	labor	settlement
+216	governance	
+217	transport	environment
+218	transport	environment
+219	media	security
+220	consumer	welfare
+221	consumer	welfare
+222	consumer	welfare
+223	consumer	welfare
+224	criminal	rights
+225	environment	
+226	environment	
+227	governance	
+228	governance	
+229	rights	criminal
+230	rights	criminal
+231	justice	rights
+232	media	security
+233	health	consumer
+234	health	consumer
+235	health	consumer
+236	health	consumer
+237	health	consumer
+238	health	consumer
+239	health	consumer
+240	health	consumer
+241	health	consumer
+242	criminal	rights
+243	criminal	rights
+244	criminal	rights
+245	criminal	rights
+246	criminal	rights
+247	criminal	rights
+248	labor	
+249	labor	
+250	labor	
+251	foreign	governance
+252	security	foreign
+253	security	foreign
+254	criminal	security
+255	settlement	
+256	security	justice
+257	governance	heritage
+258	education	consumer
+259	immigration	criminal
+260	media	security
+261	criminal	media
+262	criminal	rights
+263	education	
+264	immigration	
+265	rights	health
+266	criminal	environment
+267	criminal	environment
+268	health	criminal
+269	criminal	heritage
+270	education	
+271	governance	religion
+272	governance	religion
+273	media	criminal
+274	health	
+275	immigration	rights
+276	foreign	security
+277	consumer	transport
+278	settlement	foreign
+279	settlement	foreign
+280	criminal	rights
+281	local	environment
+282	environment	
+283	security	welfare
+284	foreign	
+285	immigration	foreign
+286	media	health
+287	environment	
+288	economy	security
+289	environment	
+290	health	criminal
+291	health	criminal
+292	environment	
+293	labor	
+294	health	
+295	education	welfare
+296	education	welfare
+297	education	welfare
+298	education	welfare
+299	education	welfare
+300	education	welfare
+301	education	welfare
+302	education	
+303	education	
+304	local	
+305	health	
+306	consumer	
+307	settlement	
+308	labor	
+309	transport	health
+310	labor	justice
+311	economy	security
+312	security	foreign
+313	governance	labor
+314	governance	labor
+315	governance	labor
+316	labor	health
+317	local	consumer
+318	health	
+319	health	
+320	health	
+321	health	
+322	health	
+323	health	
+324	health	welfare
+325	health	
+326	health	
+327	health	
+328	health	
+329	health	
+330	health	education
+331	health	
+332	health	
+333	health	education
+334	health	education
+335	health	
+336	health	
+337	health	
+338	health	
+339	health	education
+340	health	
+341	health	
+342	health	
+343	health	security
+344	health	
+345	health	
+346	health	education
+347	health	
+348	health	education
+349	health	welfare
+350	health	labor
+351	health	
+352	health	
+353	health	
+354	health	
+355	health	
+356	health	
+357	health	
+358	health	
+359	health	
+360	health	
+361	health	
+362	health	welfare
+363	health	
+364	health	
+365	health	education
+366	health	
+367	health	immigration
+368	health	education
+369	health	education
+370	health	
+371	health	immigration
+372	health	welfare
+373	health	
+374	health	
+375	health	
+376	health	
+377	health	
+378	health	
+379	health	
+380	health	
+381	health	
+382	health	welfare
+383	health	economy
+384	health	economy
+385	health	
+386	health	welfare
+387	health	
+388	health	
+389	health	
+390	health	
+391	health	
+392	health	
+393	health	
+394	health	
+395	health	welfare
+396	health	
+397	health	
+398	health	
+399	health	
+400	health	
+401	health	economy
+402	health	
+403	health	
+404	health	rights
+405	health	criminal
+406	health	
+407	health	
+408	health	
+409	health	
+410	health	
+411	health	rights
+412	health	welfare
+413	health	
+414	health	
+415	health	
+416	health	
+417	health	
+418	health	welfare
+419	health	
+420	health	
+421	health	
+422	health	
+423	health	
+424	health	
+425	health	security
+426	health	economy
+427	health	economy
+428	health	welfare
+429	health	economy
+430	health	welfare
+431	health	welfare
+432	health	welfare
+433	health	
+434	health	welfare
+435	health	welfare
+436	health	welfare
+437	health	education
+438	health	
+439	health	
+440	health	welfare
+441	health	welfare
+442	health	
+443	health	welfare
+444	health	
+445	health	
+446	health	
+447	health	
+448	health	
+449	health	
+450	health	
+451	health	
+452	health	rights
+453	health	
+454	health	economy
+455	health	
+456	health	welfare
+457	health	welfare
+458	health	welfare
+459	health	welfare
+460	health	
+461	health	
+462	health	economy
+463	health	
+464	health	
+465	health	criminal
+466	health	education
+467	health	welfare
+468	health	education
+469	health	welfare
+470	health	welfare
+471	health	
+472	health	
+473	health	
+474	health	
+475	health	welfare
+476	health	immigration
+477	health	
+478	health	
+479	health	
+480	health	
+481	health	
+482	health	
+483	health	
+484	health	
+485	health	economy
+486	health	
+487	health	
+488	health	
+489	health	
+490	health	welfare
+491	health	
+492	health	
+493	health	
+494	health	
+495	health	
+496	health	
+497	health	welfare
+498	health	
+499	health	
+500	health	
+501	health	
+502	health	
+503	health	
+504	welfare	health
+505	welfare	health
+506	welfare	health
+507	economy	
+508	labor	economy
+509	consumer	religion
+510	criminal	justice
+511	governance	foreign
+512	settlement	
+513	media	heritage
+514	religion	
+515	health	
+516	criminal	justice
+517	justice	
+518	governance	
+519	criminal	
+520	media	
+521	media	heritage
+522	justice	health
+523	housing	
+524	housing	
+525	housing	
+526	criminal	rights
+527	education	environment
+528	education	heritage
+529	governance	
+530	labor	security
+531	labor	justice
+532	labor	justice
+533	labor	justice
+534	justice	
+535	justice	
+536	justice	rights
+537	justice	rights
+538	justice	
+539	justice	
+540	justice	
+541	justice	
+542	heritage	justice
+543	justice	
+544	justice	
+545	heritage	
+546	foreign	heritage
+547	health	
+548	housing	
+549	housing	
+550	health	
+551	economy	
+552	economy	
+553	economy	rights
+554	economy	governance
+555	economy	governance
+556	economy	rights
+557	economy	
+558	economy	
+559	economy	
+560	housing	justice
+561	settlement	
+562	settlement	
+563	health	
+564	health	
+565	health	
+566	health	
+567	rights	religion
+568	rights	religion
+569	rights	religion
+570	rights	religion
+571	rights	religion
+572	rights	religion
+573	heritage	
+574	religion	consumer
+575	religion	justice
+576	religion	justice
+577	religion	justice
+578	religion	justice
+579	religion	rights
+580	religion	rights
+581	religion	rights
+582	religion	rights
+583	religion	rights
+584	religion	rights
+585	religion	rights
+586	religion	rights
+587	religion	rights
+588	religion	rights
+589	religion	rights
+590	religion	rights
+591	religion	rights
+592	religion	rights
+593	religion	rights
+594	religion	rights
+595	religion	rights
+596	arab	religion
+597	arab	religion
+598	arab	religion
+599	arab	religion
+600	justice	governance
+601	justice	
+602	justice	
+603	justice	
+604	justice	
+605	justice	
+606	justice	
+607	justice	
+608	justice	governance
+609	justice	media
+610	justice	media
+611	justice	media
+612	justice	media
+613	justice	
+614	justice	
+615	justice	governance
+616	justice	
+617	justice	
+618	justice	rights
+619	justice	security
+620	justice	criminal
+621	justice	criminal
+622	justice	governance
+623	justice	
+624	justice	media
+625	justice	
+626	justice	governance
+627	justice	
+628	criminal	justice
+629	criminal	justice
+630	justice	
+631	criminal	justice
+632	justice	health
+633	justice	
+634	justice	rights
+635	justice	
+636	justice	governance
+637	justice	governance
+638	justice	governance
+639	criminal	justice
+640	criminal	justice
+641	justice	
+642	justice	governance
+643	justice	governance
+644	justice	governance
+645	justice	governance
+646	justice	governance
+647	justice	governance
+648	justice	
+649	justice	
+650	justice	
+651	justice	media
+652	justice	media
+653	justice	media
+654	justice	media
+655	justice	media
+656	justice	media
+657	justice	
+658	justice	
+659	justice	
+660	justice	
+661	justice	
+662	justice	governance
+663	justice	governance
+664	justice	
+665	justice	
+666	justice	governance
+667	justice	criminal
+668	justice	governance
+669	justice	governance
+670	justice	governance
+671	justice	governance
+672	justice	
+673	justice	security
+674	justice	governance
+675	justice	governance
+676	justice	governance
+677	justice	governance
+678	justice	governance
+679	justice	governance
+680	justice	security
+681	justice	
+682	justice	
+683	justice	
+684	justice	governance
+685	justice	governance
+686	justice	
+687	justice	
+688	justice	
+689	justice	
+690	religion	security
+691	religion	security
+692	religion	security
+693	religion	immigration
+694	religion	security
+695	religion	security
+696	religion	security
+697	religion	security
+698	religion	immigration
+699	local	
+700	education	
+701	security	
+702	security	
+703	security	
+704	security	
+705	settlement	
+706	settlement	
+707	settlement	
+708	settlement	
+709	settlement	
+710	settlement	
+711	settlement	
+712	religion	immigration
+713	rights	justice
+714	labor	
+715	labor	rights
+716	labor	welfare
+717	labor	
+718	labor	
+719	labor	
+720	labor	rights
+721	labor	health
+722	labor	rights
+723	labor	rights
+724	labor	welfare
+725	labor	education
+726	labor	
+727	labor	security
+728	labor	
+729	labor	
+730	labor	
+731	labor	rights
+732	labor	
+733	labor	
+734	labor	
+735	labor	rights
+736	governance	
+737	governance	
+738	immigration	security
+739	security	criminal
+740	security	criminal
+741	security	criminal
+742	security	education
+743	local	
+744	security	
+745	security	
+746	labor	
+747	governance	welfare
+748	environment	economy
+749	environment	housing
+750	heritage	environment
+751	settlement	environment
+752	heritage	
+753	environment	
+754	environment	
+755	environment	
+756	heritage	environment
+757	heritage	
+758	heritage	
+759	heritage	
+760	local	governance
+761	economy	security
+762	security	economy
+763	security	economy
+764	security	education
+765	consumer	economy
+766	economy	
+767	rights	governance
+768	rights	security
+769	governance	foreign
+770	security	governance
+771	criminal	education
+772	education	
+773	education	
+774	economy	foreign
+775	environment	governance
+776	housing	
+777	housing	welfare
+778	welfare	housing
+779	welfare	housing
+780	housing	welfare
+781	housing	welfare
+782	housing	welfare
+783	housing	welfare
+784	settlement	justice
+785	local	governance
+786	labor	
+787	justice	religion
+788	welfare	labor
+789	labor	
+790	labor	
+791	labor	
+792	labor	
+793	labor	
+794	labor	
+795	labor	
+796	labor	
+797	labor	
+798	labor	
+799	labor	
+800	labor	
+801	labor	
+802	labor	
+803	labor	
+804	labor	
+805	labor	
+806	labor	
+807	labor	health
+808	labor	security
+809	labor	
+810	labor	
+811	labor	
+812	labor	
+813	labor	
+814	labor	
+815	labor	
+816	labor	
+817	labor	
+818	labor	
+819	labor	
+820	labor	
+821	labor	
+822	labor	
+823	labor	
+824	labor	
+825	labor	
+826	labor	
+827	labor	health
+828	labor	health
+829	labor	health
+830	labor	
+831	labor	
+832	labor	
+833	labor	health
+834	labor	health
+835	labor	
+836	labor	
+837	labor	
+838	labor	
+839	labor	health
+840	labor	health
+841	transport	education
+842	transport	labor
+843	security	
+844	security	
+845	security	
+846	justice	
+847	local	governance
+848	foreign	
+849	rights	criminal
+850	criminal	rights
+851	criminal	rights
+852	criminal	rights
+853	criminal	rights
+854	immigration	security
+855	immigration	security
+856	immigration	security
+857	immigration	security
+858	immigration	security
+859	immigration	
+860	immigration	
+861	immigration	
+862	immigration	
+863	immigration	
+864	immigration	
+865	immigration	
+866	immigration	rights
+867	immigration	security
+868	immigration	security
+869	immigration	justice
+870	immigration	criminal
+871	immigration	criminal
+872	immigration	
+873	immigration	
+874	immigration	
+875	immigration	
+876	immigration	
+877	immigration	
+878	immigration	
+879	immigration	
+880	immigration	
+881	immigration	
+882	immigration	security
+883	immigration	security
+884	immigration	rights
+885	immigration	rights
+886	immigration	rights
+887	immigration	rights
+888	immigration	rights
+889	immigration	rights
+890	immigration	rights
+891	immigration	rights
+892	immigration	rights
+893	immigration	rights
+894	immigration	rights
+895	immigration	security
+896	welfare	
+897	welfare	local
+898	welfare	transport
+899	welfare	
+900	welfare	consumer
+901	welfare	
+902	welfare	local
+903	welfare	local
+904	welfare	heritage
+905	welfare	health
+906	welfare	
+907	welfare	health
+908	welfare	transport
+909	welfare	transport
+910	welfare	transport
+911	welfare	health
+912	welfare	housing
+913	welfare	
+914	welfare	local
+915	welfare	transport
+916	welfare	transport
+917	welfare	health
+918	welfare	heritage
+919	welfare	consumer
+920	welfare	consumer
+921	welfare	transport
+922	welfare	housing
+923	welfare	heritage
+924	welfare	local
+925	welfare	transport
+926	welfare	transport
+927	welfare	
+928	welfare	
+929	welfare	
+930	welfare	
+931	welfare	
+932	welfare	consumer
+933	welfare	
+934	welfare	heritage
+935	welfare	education
+936	welfare	education
+937	welfare	
+938	welfare	
+939	welfare	local
+940	welfare	media
+941	welfare	consumer
+942	welfare	heritage
+943	welfare	local
+944	religion	arab
+945	welfare	justice
+946	health	justice
+947	health	religion
+948	justice	economy
+949	justice	economy
+950	justice	economy
+951	welfare	justice
+952	justice	environment
+953	education	
+954	environment	
+955	heritage	governance
+956	heritage	governance
+957	heritage	governance
+958	security	justice
+959	economy	health
+960	economy	heritage
+961	welfare	
+962	local	economy
+963	welfare	health
+964	justice	
+965	justice	
+966	justice	
+967	justice	
+968	governance	media
+969	governance	media
+970	governance	media
+971	rights	governance
+972	governance	media
+973	governance	media
+974	governance	media
+975	governance	media
+976	governance	media
+977	governance	criminal
+978	governance	media
+979	governance	media
+980	governance	foreign
+981	governance	media
+982	governance	media
+983	governance	
+984	governance	
+985	governance	security
+986	governance	security
+987	governance	
+988	governance	
+989	governance	labor
+990	governance	labor
+991	governance	
+992	governance	
+993	governance	
+994	governance	religion
+995	governance	
+996	governance	labor
+997	governance	
+998	governance	criminal
+999	governance	
+1000	governance	welfare
+1001	governance	foreign
+1002	governance	foreign
+1003	governance	foreign
+1004	governance	security
+1005	governance	security
+1006	governance	education
+1007	governance	education
+1008	governance	welfare
+1009	governance	
+1010	governance	labor
+1011	governance	foreign
+1012	governance	labor
+1013	governance	
+1014	governance	
+1015	governance	
+1016	governance	
+1017	governance	
+1018	governance	
+1019	governance	
+1020	governance	
+1021	governance	
+1022	governance	
+1023	governance	
+1024	governance	
+1025	governance	
+1026	governance	labor
+1027	governance	transport
+1028	governance	foreign
+1029	governance	
+1030	welfare	security
+1031	welfare	
+1032	welfare	
+1033	welfare	
+1034	welfare	
+1035	welfare	
+1036	welfare	
+1037	welfare	
+1038	welfare	
+1039	welfare	
+1040	welfare	
+1041	welfare	
+1042	welfare	
+1043	welfare	
+1044	welfare	
+1045	welfare	security
+1046	welfare	education
+1047	welfare	education
+1048	welfare	
+1049	welfare	
+1050	welfare	
+1051	welfare	
+1052	welfare	
+1053	welfare	
+1054	welfare	
+1055	welfare	
+1056	welfare	
+1057	welfare	
+1058	welfare	
+1059	welfare	
+1060	welfare	
+1061	welfare	
+1062	welfare	
+1063	welfare	
+1064	welfare	
+1065	welfare	
+1066	welfare	
+1067	welfare	
+1068	welfare	
+1069	welfare	
+1070	welfare	
+1071	welfare	
+1072	welfare	
+1073	welfare	
+1074	welfare	
+1075	welfare	
+1076	welfare	
+1077	welfare	
+1078	welfare	
+1079	welfare	
+1080	welfare	education
+1081	welfare	health
+1082	welfare	rights
+1083	welfare	
+1084	welfare	
+1085	welfare	
+1086	welfare	rights
+1087	welfare	
+1088	welfare	
+1089	welfare	
+1090	welfare	immigration
+1091	welfare	
+1092	welfare	
+1093	welfare	
+1094	welfare	education
+1095	welfare	
+1096	welfare	immigration
+1097	welfare	
+1098	welfare	
+1099	welfare	
+1100	welfare	
+1101	welfare	security
+1102	welfare	
+1103	welfare	
+1104	welfare	
+1105	welfare	education
+1106	welfare	
+1107	welfare	
+1108	labor	immigration
+1109	labor	immigration
+1110	welfare	
+1111	welfare	
+1112	welfare	
+1113	housing	rights
+1114	housing	rights
+1115	welfare	justice
+1116	welfare	justice
+1117	welfare	foreign
+1118	economy	environment
+1119	labor	welfare
+1120	welfare	
+1121	labor	welfare
+1122	welfare	rights
+1123	welfare	health
+1124	labor	welfare
+1125	labor	welfare
+1126	welfare	
+1127	welfare	
+1128	welfare	
+1129	welfare	
+1130	welfare	health
+1131	welfare	rights
+1132	welfare	
+1133	welfare	
+1134	welfare	education
+1135	labor	security
+1136	welfare	rights
+1137	welfare	security
+1138	welfare	security
+1139	welfare	security
+1140	welfare	labor
+1141	welfare	labor
+1142	welfare	security
+1143	welfare	labor
+1144	welfare	
+1145	welfare	
+1146	welfare	security
+1147	welfare	security
+1148	welfare	rights
+1149	welfare	
+1150	welfare	
+1151	welfare	
+1152	welfare	
+1153	welfare	rights
+1154	welfare	health
+1155	welfare	health
+1156	welfare	health
+1157	labor	welfare
+1158	labor	welfare
+1159	welfare	justice
+1160	welfare	labor
+1161	welfare	labor
+1162	welfare	justice
+1163	welfare	rights
+1164	welfare	security
+1165	welfare	economy
+1166	welfare	economy
+1167	welfare	economy
+1168	welfare	labor
+1169	labor	welfare
+1170	welfare	
+1171	welfare	
+1172	welfare	health
+1173	welfare	health
+1174	welfare	health
+1175	welfare	health
+1176	welfare	rights
+1177	welfare	rights
+1178	welfare	
+1179	welfare	
+1180	welfare	
+1181	welfare	
+1182	welfare	health
+1183	welfare	health
+1184	welfare	health
+1185	welfare	health
+1186	welfare	
+1187	welfare	
+1188	welfare	health
+1189	welfare	health
+1190	welfare	health
+1191	welfare	health
+1192	welfare	
+1193	welfare	
+1194	welfare	
+1195	welfare	justice
+1196	labor	welfare
+1197	labor	welfare
+1198	labor	welfare
+1199	labor	security
+1200	labor	welfare
+1201	labor	welfare
+1202	labor	security
+1203	labor	welfare
+1204	labor	welfare
+1205	labor	welfare
+1206	labor	welfare
+1207	labor	welfare
+1208	labor	welfare
+1209	labor	welfare
+1210	labor	economy
+1211	labor	economy
+1212	welfare	education
+1213	welfare	education
+1214	welfare	
+1215	labor	welfare
+1216	labor	welfare
+1217	labor	welfare
+1218	labor	welfare
+1219	labor	welfare
+1220	labor	welfare
+1221	labor	welfare
+1222	welfare	
+1223	welfare	security
+1224	labor	security
+1225	welfare	health
+1226	welfare	
+1227	welfare	
+1228	welfare	health
+1229	welfare	
+1230	welfare	
+1231	welfare	
+1232	welfare	
+1233	welfare	health
+1234	welfare	security
+1235	labor	welfare
+1236	labor	welfare
+1237	labor	welfare
+1238	labor	agriculture
+1239	labor	welfare
+1240	welfare	economy
+1241	welfare	justice
+1242	welfare	
+1243	welfare	justice
+1244	welfare	
+1245	welfare	
+1246	welfare	
+1247	welfare	
+1248	welfare	
+1249	welfare	
+1250	welfare	
+1251	welfare	
+1252	welfare	
+1253	welfare	
+1254	welfare	
+1255	welfare	
+1256	welfare	
+1257	welfare	
+1258	welfare	
+1259	welfare	
+1260	welfare	economy
+1261	welfare	labor
+1262	welfare	labor
+1263	welfare	
+1264	labor	
+1265	labor	security
+1266	welfare	health
+1267	labor	transport
+1268	labor	welfare
+1269	welfare	
+1270	labor	welfare
+1271	welfare	foreign
+1272	welfare	security
+1273	welfare	
+1274	welfare	
+1275	welfare	
+1276	welfare	
+1277	welfare	security
+1278	welfare	rights
+1279	welfare	rights
+1280	welfare	rights
+1281	welfare	health
+1282	welfare	
+1283	welfare	
+1284	welfare	security
+1285	labor	welfare
+1286	welfare	
+1287	welfare	security
+1288	welfare	security
+1289	labor	welfare
+1290	welfare	
+1291	welfare	
+1292	welfare	
+1293	welfare	
+1294	welfare	
+1295	welfare	
+1296	welfare	health
+1297	welfare	security
+1298	welfare	
+1299	welfare	
+1300	welfare	
+1301	welfare	
+1302	welfare	
+1303	welfare	
+1304	welfare	
+1305	welfare	
+1306	welfare	
+1307	welfare	
+1308	welfare	
+1309	welfare	
+1310	welfare	
+1311	welfare	
+1312	welfare	
+1313	welfare	
+1314	welfare	
+1315	welfare	
+1316	welfare	
+1317	welfare	
+1318	welfare	
+1319	welfare	
+1320	welfare	
+1321	welfare	
+1322	welfare	governance
+1323	welfare	
+1324	welfare	security
+1325	labor	welfare
+1326	welfare	rights
+1327	labor	welfare
+1328	welfare	
+1329	welfare	
+1330	welfare	
+1331	welfare	
+1332	welfare	
+1333	welfare	
+1334	welfare	
+1335	welfare	
+1336	welfare	
+1337	welfare	
+1338	welfare	
+1339	welfare	labor
+1340	labor	welfare
+1341	welfare	immigration
+1342	welfare	immigration
+1343	labor	welfare
+1344	labor	welfare
+1345	labor	welfare
+1346	labor	welfare
+1347	labor	welfare
+1348	labor	welfare
+1349	labor	welfare
+1350	labor	welfare
+1351	labor	welfare
+1352	welfare	security
+1353	welfare	labor
+1354	welfare	labor
+1355	welfare	security
+1356	welfare	health
+1357	welfare	
+1358	labor	welfare
+1359	welfare	
+1360	welfare	
+1361	welfare	
+1362	welfare	
+1363	welfare	security
+1364	welfare	
+1365	welfare	
+1366	welfare	rights
+1367	welfare	rights
+1368	welfare	
+1369	welfare	
+1370	welfare	
+1371	welfare	
+1372	welfare	
+1373	welfare	
+1374	welfare	transport
+1375	welfare	
+1376	security	welfare
+1377	security	welfare
+1378	security	welfare
+1379	security	welfare
+1380	security	welfare
+1381	labor	welfare
+1382	welfare	health
+1383	welfare	
+1384	welfare	health
+1385	welfare	
+1386	labor	security
+1387	welfare	
+1388	welfare	
+1389	security	welfare
+1390	welfare	
+1391	welfare	health
+1392	welfare	transport
+1393	welfare	health
+1394	welfare	education
+1395	welfare	health
+1396	security	welfare
+1397	welfare	rights
+1398	welfare	foreign
+1399	welfare	economy
+1400	welfare	
+1401	security	economy
+1402	welfare	labor
+1403	welfare	security
+1404	welfare	security
+1405	labor	security
+1406	welfare	
+1407	welfare	
+1408	welfare	
+1409	welfare	education
+1410	welfare	education
+1411	welfare	education
+1412	labor	agriculture
+1413	welfare	
+1414	welfare	
