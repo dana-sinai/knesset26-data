@@ -193,7 +193,7 @@ for party in parties:
         if pty != party or vid not in Cidx.index:
             continue
         r = Cidx.loc[vid]
-        by_topic[r.topic].append([int(vid), int(r.k), r.dt, bill_name.get(int(r.bill), ""), r.stage, f_, a_, int(r.f), int(r.a), meaning.get(str(vid))])
+        by_topic[r["topic"]].append([int(vid), int(r["k"]), r["dt"], bill_name.get(int(r["bill"]), ""), r["stage"], f_, a_, int(r["f"]), int(r["a"]), meaning.get(str(vid))])
     for t in by_topic:
         by_topic[t].sort(key=lambda x: x[2], reverse=True)
     json.dump(dict(members_with_record=len(voters), initiated=dict(ini), votes=by_topic),
@@ -258,7 +258,7 @@ def cluster_topic(vids, min_votes=15, min_shared=10):
             if any(pd.isna(x) for x in vals):
                 continue
             r = Cidx.loc[vid]
-            sig.append((max(vals) - min(vals), int(vid), int(r.k), r.dt, bill_name.get(int(r.bill), ""), r.stage,
+            sig.append((max(vals) - min(vals), int(vid), int(r["k"]), r["dt"], bill_name.get(int(r["bill"]), ""), r["stage"],
                         [round(float(x), 2) for x in vals], meaning.get(str(vid))))
         sig.sort(key=lambda x: (-x[0], x[3]))
     return dict(points=[[int(pids[i]), round(float(xy[i, 0]), 3), round(float(xy[i, 1]), 3), int(lab[i]),
