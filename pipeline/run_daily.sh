@@ -54,6 +54,11 @@ cd ..
 python3 pipeline/07_committees.py | tail -1
 python3 pipeline/08_hebrew_and_metrics.py | tail -3
 python3 pipeline/09_topics_and_positions.py | tail -4
+# small local model: topics for new bills (confident ones) + "בעד =" from "(תיקון - …)" titles
+if python3 pipeline/10_classify_new.py | tee /dev/stderr | grep -q RERUN_09; then
+  python3 pipeline/09_topics_and_positions.py | tail -2
+fi
+echo "left for review: $(wc -l < pipeline/work/new_bills_unclassified.tsv) bill topics, $(wc -l < pipeline/work/new_meaning_needed.tsv) 'בעד =' lines"
 python3 - <<'PY'
 import json
 b = json.load(open("pipeline/work/votes_index_before.json")) if __import__("os").path.exists("pipeline/work/votes_index_before.json") else {}
