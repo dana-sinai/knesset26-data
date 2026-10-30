@@ -1,4 +1,5 @@
-"""Step 2: parliamentary record for every elected MK who served before (Knesset 20-25).
+"""Step 2: parliamentary record for every elected MK (Knesset 16 onward — named plenum votes start in 2003 —
+including the 26th Knesset as soon as its data appears).
 
 Sources (official Knesset OData tables, via the oKnesset mirror production.oknesset.org,
 plus the ZeAlenu/knesset-data mirror on Hugging Face for lookup tables):
@@ -19,7 +20,9 @@ OUT = os.path.join(ROOT, "..", "public", "data")
 for d in ("", "votes", "bills"):
     os.makedirs(os.path.join(OUT, d), exist_ok=True)
 RAW = f"{ROOT}/raw"
-KMIN = 20
+KMIN = int(os.environ.get("KMIN", 16))
+OPEN = pd.Timestamp.today().normalize()      # open-ended positions / the current term run to today
+K26_START = pd.Timestamp("2026-11-10")        # swearing-in of the 26th Knesset
 
 def hf(table):
     rows = []
@@ -35,7 +38,9 @@ kd = hf("KNS_KnessetDates")
 kd["Start"] = pd.to_datetime(kd.PlenumStart.str[:10])
 kd["Finish"] = pd.to_datetime(kd.PlenumFinish.str[:10], errors="coerce")
 kterm = kd.groupby("KnessetNum").agg(start=("Start", "min"), finish=("Finish", "max")).reset_index()
-kterm.loc[kterm.KnessetNum == 25, "finish"] = pd.Timestamp("2026-07-31")
+kterm.loc[(kterm.KnessetNum == 25) & kterm.finish.isna(), "finish"] = pd.Timestamp("2026-10-26")
+if 26 not in set(kterm.KnessetNum):
+    kterm = pd.concat([kterm, pd.DataFrame([dict(KnessetNum=26, start=K26_START, finish=pd.NaT)])], ignore_index=True)
 
 def knesset_of(dates):
     k = pd.Series(np.nan, index=dates.index)
@@ -81,10 +86,10 @@ for pid, g in p2p.groupby("PersonID"):
 # serving intervals (for attendance denominators)
 serve = p2p[p2p.PositionID.isin([43, 61])][["PersonID", "KnessetNum", "start", "finish"]].copy()
 serve["s"] = pd.to_datetime(serve.start)
-serve["f"] = pd.to_datetime(serve.finish).fillna(pd.Timestamp("2026-07-31"))
+serve["f"] = pd.to_datetime(serve.finish).fillna(OPEN)
 fac = p2p[p2p.PositionID == 54][["PersonID", "FactionName", "start", "finish"]].copy()
 fac["s"] = pd.to_datetime(fac.start)
-fac["f"] = pd.to_datetime(fac.finish).fillna(pd.Timestamp("2026-07-31"))
+fac["f"] = pd.to_datetime(fac.finish).fillna(OPEN)
 
 # ---------- votes
 votes = pd.read_csv(f"{RAW}/ok/kns_plenumvote.csv", low_memory=False)
@@ -115,13 +120,16 @@ for k, g in votes.groupby("knesset"):
     json.dump(dict(fields=["id", "datetime", "title", "subject", "for", "against", "abstain", "item_id", "no_confidence"],
                    votes=meta), open(f"{OUT}/votes/meta_k{int(k)}.json", "w"), ensure_ascii=False, separators=(",", ":"))
 
+json.dump({str(int(k)): int(n) for k, n in votes.groupby("knesset").size().items()},
+          open(f"{OUT}/votes/index.json", "w"))
+
 # faction majority per vote (party-line conformity): assign each voter to faction at vote time
 vd = votes.set_index("Id").dt
 res["dt"] = res.VoteID.map(vd)
 allfac = pd.read_csv(f"{RAW}/ok/kns_persontoposition.csv", low_memory=False)
 allfac = allfac[(allfac.PositionID == 54) & (allfac.KnessetNum >= KMIN)][["PersonID", "FactionName", "StartDate", "FinishDate"]].copy()
 allfac["s"] = pd.to_datetime(allfac.StartDate.str[:10])
-allfac["f"] = pd.to_datetime(allfac.FinishDate.str[:10]).fillna(pd.Timestamp("2026-07-31"))
+allfac["f"] = pd.to_datetime(allfac.FinishDate.str[:10]).fillna(OPEN)
 m = res[res.c.isin([1, 2, 3])].merge(allfac, left_on="MkId", right_on="PersonID", how="left")
 m = m[(m.dt >= m.s) & (m.dt <= m.f + pd.Timedelta(days=1))]
 m = m.drop_duplicates(["VoteID", "MkId"])
@@ -194,5 +202,5 @@ for pid, g in b.groupby("PersonID"):
         for k in sorted(g.KnessetNum.unique().astype(int))}
 
 json.dump(parl, open(f"{OUT}/parliament.json", "w"), ensure_ascii=False, separators=(",", ":"))
-print("MKs with records:", len(parl), "| votes K20+:", len(votes), "| per-MK vote files:", len(glob.glob(f"{OUT}/votes/mk_*.json")),
+print("MKs with records:", len(parl), f"| votes K{KMIN}+:", len(votes), "| per-MK vote files:", len(glob.glob(f"{OUT}/votes/mk_*.json")),
       "| bill files:", len(glob.glob(f"{OUT}/bills/mk_*.json")))
