@@ -58,7 +58,7 @@ export default function Layout() {
           </p>
           <p className="text-xs">
             הכותרות באתר כתובות בגופן <a className="underline" href="https://www.ot-hayim.co.il/fonts/amit-man/" target="_blank" rel="noreferrer">״עמית מן״</a>,
-            {' '}שנוצר מכתב ידו של עמית מן ז״ל במסגרת <a className="underline" href="https://www.ot-hayim.co.il/" target="_blank" rel="noreferrer">מיזם אות.חיים</a>. לזכרו.
+            {' '}שנוצר מכתב ידה של עמית מן ז״ל, פרמדיקית שנרצחה בבארי ב-7 באוקטובר 2023 בעודה מטפלת בפצועים, במסגרת <a className="underline" href="https://www.ot-hayim.co.il/" target="_blank" rel="noreferrer">מיזם אות.חיים</a>. לזכרה.
           </p>
           <p dir="ltr" className="text-xs text-left">
             Independent analysis by Dr. Dana Sinai, done in a personal capacity. It does not represent, and is not affiliated
