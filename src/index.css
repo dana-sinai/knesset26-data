@@ -4,6 +4,12 @@
 
 @layer base {
   :root {
+    --paper: 250 247 241;
+    --ink: 24 32 51;
+    --sub: 98 104 118;
+    --rule: 226 220 208;
+    --sand: 239 233 222;
+    --gold: 196 140 46;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -29,9 +35,9 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --font-heading: ui-sans-serif, system-ui, sans-serif;
-    --font-body: ui-sans-serif, system-ui, sans-serif;
-    --font-display: ui-sans-serif, system-ui, sans-serif;
+    --font-heading: 'Frank Ruhl Libre', 'Heebo', serif;
+    --font-body: 'Heebo', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Frank Ruhl Libre', 'Heebo', serif;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -44,6 +50,12 @@
   }
 
   .dark {
+    --paper: 18 21 28;
+    --ink: 236 232 224;
+    --sub: 160 164 174;
+    --rule: 52 56 66;
+    --sand: 34 38 47;
+    --gold: 222 172 82;
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
