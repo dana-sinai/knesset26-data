@@ -1,22 +1,23 @@
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 
-const tick = { fontSize: 12, fill: 'rgb(var(--sub))' };
+const tick = { fontSize: 12, fill: '#626876' };
+const INK = '#3B4A6B';
 const tip = { contentStyle: { background: 'rgb(var(--paper))', border: '1px solid rgb(var(--rule))', borderRadius: 8, direction: 'rtl', fontSize: 12 } };
 
 /** Horizontal bar of counts. data: [{label, value, color?}] */
 export function HBar({ data, height, unit = '', max }) {
   const h = height || Math.max(120, data.length * 30 + 20);
   return (
-    <ResponsiveContainer width="100%" height={h}>
+    <div dir="ltr"><ResponsiveContainer width="100%" height={h}>
       <BarChart data={data} layout="vertical" margin={{ top: 4, right: 8, left: 8, bottom: 4 }}>
-        <CartesianGrid horizontal={false} stroke="rgb(var(--rule))" />
+        <CartesianGrid horizontal={false} stroke="#e2dcd0" />
         <XAxis type="number" tick={tick} reversed domain={[0, max || 'auto']} allowDecimals={false} unit={unit} />
         <YAxis type="category" dataKey="label" tick={tick} width={120} orientation="right" interval={0} />
-        <Tooltip {...tip} formatter={(v) => [`${v}${unit}`, '']} cursor={{ fill: 'rgb(var(--sand))' }} />
-        <Bar dataKey="value" radius={[4, 0, 0, 4]} fill="rgb(var(--ink))" isAnimationActive={false}
-          shape={(p) => <rect x={p.x} y={p.y} width={p.width} height={p.height} rx={3} fill={p.payload.color || 'rgb(var(--ink))'} />} />
+        <Tooltip {...tip} formatter={(v) => [`${v}${unit}`, '']} cursor={{ fill: 'rgba(0,0,0,0.04)' }} />
+        <Bar dataKey="value" radius={[4, 0, 0, 4]} fill={INK} isAnimationActive={false}
+          shape={(p) => <rect x={p.x} y={p.y} width={p.width} height={p.height} rx={3} fill={p.payload.color || INK} />} />
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }
 
@@ -32,31 +33,31 @@ export function StackedH({ rows, keys, height, percent = false }) {
     })
     : rows;
   return (
-    <ResponsiveContainer width="100%" height={h}>
+    <div dir="ltr"><ResponsiveContainer width="100%" height={h}>
       <BarChart data={data} layout="vertical" margin={{ top: 4, right: 8, left: 8, bottom: 4 }}>
-        <CartesianGrid horizontal={false} stroke="rgb(var(--rule))" />
+        <CartesianGrid horizontal={false} stroke="#e2dcd0" />
         <XAxis type="number" tick={tick} reversed domain={percent ? [0, 100] : [0, 'auto']} unit={percent ? '%' : ''} allowDecimals={false} />
         <YAxis type="category" dataKey="label" tick={tick} width={120} orientation="right" interval={0} />
-        <Tooltip {...tip} formatter={(v, n) => [percent ? `${v}%` : v, n]} cursor={{ fill: 'rgb(var(--sand))' }} />
+        <Tooltip {...tip} formatter={(v, n) => [percent ? `${v}%` : v, n]} cursor={{ fill: 'rgba(0,0,0,0.04)' }} />
         <Legend wrapperStyle={{ fontSize: 12, direction: 'rtl' }} />
         {keys.map((k) => <Bar key={k.key} dataKey={k.key} name={k.name} stackId="s" fill={k.color} isAnimationActive={false} />)}
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }
 
 /** Vertical histogram. data: [{label, value}] */
-export function VBar({ data, height = 220, color = 'rgb(var(--ink))' }) {
+export function VBar({ data, height = 220, color = INK }) {
   return (
-    <ResponsiveContainer width="100%" height={height}>
+    <div dir="ltr"><ResponsiveContainer width="100%" height={height}>
       <BarChart data={data} margin={{ top: 8, right: 8, left: 8, bottom: 4 }}>
-        <CartesianGrid vertical={false} stroke="rgb(var(--rule))" />
+        <CartesianGrid vertical={false} stroke="#e2dcd0" />
         <XAxis dataKey="label" tick={tick} reversed interval={0} />
         <YAxis tick={tick} orientation="right" allowDecimals={false} width={30} />
-        <Tooltip {...tip} formatter={(v) => [v, 'חברי כנסת']} cursor={{ fill: 'rgb(var(--sand))' }} />
+        <Tooltip {...tip} formatter={(v) => [v, 'חברי כנסת']} cursor={{ fill: 'rgba(0,0,0,0.04)' }} />
         <Bar dataKey="value" fill={color} radius={[3, 3, 0, 0]} isAnimationActive={false} />
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }
 
