@@ -227,6 +227,7 @@ for r in parties.itertuples():
     v = int(cec.get(r.id, r.votes))
     plist.append(dict(id=r.id, name_he=r.name_he, full_name_he=r.full_name_he, letters=r.letters, leader_he=r.leader_he,
                       seats=int(r.seats), votes=v, pct=round(100 * v / VALID, 2), color=r.color,
+                      group=r.group if isinstance(r.group, str) else None,
                       votes_source="CEC ballot-box file" if r.id in cec else "Wikipedia"))
 json.dump(plist, open(f"{OUT}/parties.json", "w"), ensure_ascii=False, separators=(",", ":"))
 
@@ -240,6 +241,11 @@ meta = dict(
     roster_source="i24NEWS – רשימת 120 הנבחרים לפי תוצאות ועדת הבחירות (29–30.10.2026); טרם הושווה לפרסום ברשומות",
     roster_source_url="https://www.i24news.tv/he/news/israel-elections-2026/artc-12604d2f",
     swearing_in="2026-11-10",
+    # Groups are unnamed on purpose; the legend lists the member parties. Split follows the
+    # 53 / 48 / 19 bloc count in post-election coverage, with the Haredi parties shown separately.
+    groups=[dict(id="g1", color="#C08A2E"), dict(id="g2", color="#7656A8"),
+            dict(id="g3", color="#2A8C8C"), dict(id="g4", color="#C2577A")],
+    groups_source="חלוקה לגושים כפי שדווחה בסיקור תוצאות הבחירות (53 / 48 / 19), כשהמפלגות החרדיות מוצגות בנפרד",
 )
 json.dump(meta, open(f"{OUT}/meta.json", "w"), ensure_ascii=False, indent=1)
 print("mks:", len(mks), "| with residence coords:", sum(1 for m in mks if m["residence"] and m["residence"]["lat"]),
