@@ -1,0 +1,101 @@
+11155-11156	religion	justice
+11157	housing	security
+11158	health	welfare
+11159	local	security
+11160	economy	consumer
+11161-11162	security	welfare
+11163-11165	security	
+11166-11168	security	criminal
+11169-11177	security	
+11178	security	
+11179	labor	governance
+11180-11181	governance	
+11182	security	
+11183-11184	governance	
+11185-11188	security	labor
+11189	labor	
+11190-11193	security	
+11194	economy	consumer
+11195	labor	security
+11196-11198	religion	
+11199	consumer	transport
+11200	welfare	
+11201-11203	welfare	rights
+11204	welfare	
+11205-11208	transport	consumer
+11209-11210	economy	consumer
+11211-11212	labor	
+11213	labor	rights
+11214	governance	criminal
+11215-11216	housing	economy
+11217-11221	environment	criminal
+11222	environment	
+11223	labor	
+11224	environment	local
+11225	economy	labor
+11226	welfare	heritage
+11227-11228	security	welfare
+11229	justice	consumer
+11230	security	welfare
+11231	health	economy
+11232-11233	agriculture	economy
+11234	transport	
+11235	security	governance
+11236-11239	economy	
+11240	governance	media
+11241	health	
+11242	economy	
+11243-11246	security	welfare
+11247	environment	economy
+11248-11254	governance	
+11255	justice	
+11256	settlement	
+11257	rights	heritage
+11258	religion	education
+11259-11260	governance	
+11261-11262	economy	governance
+11263	governance	
+11264-11269	economy	governance
+11270	governance	
+11271-11272	economy	governance
+11273	security	labor
+11274	security	economy
+11275-11276	education	security
+11277	labor	economy
+11278	environment	housing
+11279	economy	
+11280	economy	local
+11281	economy	
+11282	agriculture	economy
+11283	economy	
+11284-11285	security	economy
+11286	other	
+11287	economy	
+11288	housing	economy
+11289	economy	
+11290	security	economy
+11291	health	economy
+11292	economy	housing
+11293	media	economy
+11294	agriculture	
+11295	welfare	
+11296	welfare	economy
+11297	economy	
+11298	welfare	
+11299	media	
+11300	welfare	
+11301-11302	economy	
+11303	economy	education
+11304	economy	
+11305	economy	education
+11306	local	
+11307	welfare	
+11308-11309	housing	
+11310	health	economy
+11311	economy	environment
+11312	economy	
+11313	housing	
+11314	economy	transport
+11315	security	
+11316	security	economy
+11317	security	welfare
