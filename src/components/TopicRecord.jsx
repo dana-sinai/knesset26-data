@@ -79,7 +79,7 @@ function TopicVotes({ votes, labels, party }) {
     const f = party ? list.filter((x) => x[5] > x[6]).length : v.for_;
     const a = party ? list.filter((x) => x[6] > x[5]).length : v.against;
     return { t, list, f, a, n: list.length };
-  }).sort((x, y) => y.n - x.n);
+  }).sort((x, y) => (x.t === 'other') - (y.t === 'other') || y.n - x.n);
   if (!rows.length) return <p className="text-sm text-sub">אין הצבעות שנויות במחלוקת ברשומות.</p>;
   return (
     <div className="grid gap-1">

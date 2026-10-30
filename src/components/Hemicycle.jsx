@@ -59,7 +59,7 @@ export default function Hemicycle({ mks, parties, groups, match, label }) {
   return (
     <div className="grid gap-4">
       <div className="relative mx-auto w-full max-w-[640px]">
-        <svg viewBox="0 0 420 216" className="w-full h-auto" role="img" aria-label="מושבי הכנסת ה-26 לפי מפלגות">
+        <svg viewBox="0 0 420 228" className="w-full h-auto" role="img" aria-label="מושבי הכנסת ה-26 לפי מפלגות">
           {seats.map((s) => (
             <circle key={s.m.id} cx={s.x} cy={s.y} r={8.2}
               fill={s.p.color} opacity={on(s.m) ? 1 : 0.13}
@@ -70,8 +70,8 @@ export default function Hemicycle({ mks, parties, groups, match, label }) {
               <title>{`${s.m.name_he} · ${s.p.name_he}`}</title>
             </circle>
           ))}
-          <text x={CX} y={CY - 30} textAnchor="middle" className="fill-ink" style={{ font: '400 46px var(--font-title)' }}>{n}</text>
-          <text x={CX} y={CY - 8} textAnchor="middle" style={{ font: '400 11px var(--font-body)', fill: 'rgb(var(--sub))' }}>
+          <text x={CX} y={CY - 6} textAnchor="middle" className="fill-ink" style={{ font: '300 38px var(--font-body)' }}>{n}</text>
+          <text x={CX} y={CY + 14} textAnchor="middle" style={{ font: '400 11px var(--font-body)', fill: 'rgb(var(--sub))' }}>
             {match ? `מתוך 120${label ? ` · ${label}` : ''}` : 'חברי כנסת'}
           </text>
         </svg>

@@ -22,7 +22,7 @@ export default function Parties() {
               <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-sm" style={{ background: p.color }} /><h2 className="text-xl font-bold">{p.name_he}</h2></div>
               <p className="text-xs text-sub">{p.full_name_he} · אותיות: {p.letters}</p>
               <div className="flex items-baseline gap-4">
-                <span className="font-display text-3xl font-black num">{p.seats}</span><span className="text-sub text-sm">מנדטים</span>
+                <span className="text-3xl font-light num">{p.seats}</span><span className="text-sub text-sm">מנדטים</span>
                 <span className="text-sm num mr-auto">{fmt(p.votes)} קולות · {p.pct.toFixed(2)}%</span>
               </div>
               {p.seats > 0 && <p className="text-xs text-sub">{w} נשים · {n} חדשים · בראשות {p.leader_he}</p>}

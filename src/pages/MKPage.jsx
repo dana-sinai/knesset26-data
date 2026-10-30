@@ -157,7 +157,7 @@ export function MKProfile({ id, compact = false }) {
                   return (
                     <div key={d.key} className="rounded-xl border border-rule p-3 grid gap-1">
                       <span className="text-xs text-sub leading-snug">{d.label}</span>
-                      <span className="font-title text-3xl leading-none num">{v == null ? '—' : d.pct ? `${Math.round(v)}%` : Math.round(v * 10) / 10}</span>
+                      <span className="text-3xl font-light leading-none num">{v == null ? '—' : d.pct ? `${Math.round(v)}%` : Math.round(v * 10) / 10}</span>
                     </div>
                   );
                 })}

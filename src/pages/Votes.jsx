@@ -203,7 +203,7 @@ export default function Votes() {
           {sel ? (
             <div className="grid gap-3">
               <button onClick={() => set({ id: null, bill: null })} className="lg:hidden flex items-center gap-1 text-sm text-sub justify-self-start"><ArrowRight size={15} />לרשימת ההצבעות</button>
-              <h2 className="text-3xl leading-snug">{sel.title}</h2>
+              <p role="heading" aria-level={2} className="text-2xl font-semibold leading-snug">{sel.title}</p>
               <p className="text-sm text-sub">{fmtD(sel.dt)} {sel.subject && `· ${sel.subject}`} · הכנסת ה-{k} · הצבעה #{sel.id}</p>
               {meaning?.[sel.id] && <p className="text-sm rounded-lg bg-sand px-3 py-2">{meaning[sel.id]}</p>}
               {sel.item != null && bt?.[sel.item] && (

@@ -15,7 +15,7 @@ export function Initials({ name, color, size = 44, photo }) {
   const parts = (name || '').split(' ').filter(Boolean);
   const ini = (parts[0]?.[0] || '') + (parts.length > 1 ? parts[parts.length - 1][0] : '');
   return (
-    <div className="rounded-full grid place-items-center font-display font-semibold text-ink bg-sand shrink-0"
+    <div className="rounded-full grid place-items-center font-medium text-ink bg-sand shrink-0"
       style={{ width: size, height: size, boxShadow: `inset 0 0 0 2px ${color || 'transparent'}`, fontSize: size * 0.36 }} aria-hidden>
       {ini}
     </div>
@@ -39,7 +39,7 @@ export function Stat({ label, value, hint }) {
   return (
     <div className="rounded-xl border border-rule bg-paper p-4">
       <div className="text-xs text-sub">{label}</div>
-      <div className="font-display text-3xl font-bold num mt-1">{value}</div>
+      <div className="text-3xl font-light num mt-1">{value}</div>
       {hint && <div className="text-[11px] text-sub mt-1">{hint}</div>}
     </div>
   );
