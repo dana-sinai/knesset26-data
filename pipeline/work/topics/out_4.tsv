@@ -1,0 +1,1415 @@
+5660	economy	
+5661	settlement	economy
+5662	settlement	economy
+5663	settlement	
+5664	justice	rights
+5665	transport	settlement
+5666	transport	
+5667	transport	
+5668	transport	
+5669	transport	
+5670	transport	consumer
+5671	transport	
+5672	transport	consumer
+5673	transport	
+5674	transport	consumer
+5675	transport	
+5676	transport	
+5677	transport	security
+5678	transport	
+5679	transport	
+5680	transport	consumer
+5681	transport	
+5682	transport	
+5683	transport	
+5684	transport	
+5685	transport	
+5686	transport	
+5687	transport	
+5688	governance	
+5689	security	governance
+5690	security	governance
+5691	criminal	
+5692	criminal	
+5693	criminal	security
+5694	criminal	
+5695	criminal	
+5696	criminal	
+5697	criminal	
+5698	security	criminal
+5699	security	criminal
+5700	criminal	
+5701	criminal	
+5702	criminal	
+5703	security	criminal
+5704	criminal	security
+5705	security	criminal
+5706	security	criminal
+5707	religion	arab
+5708	education	
+5709	consumer	
+5710	consumer	
+5711	consumer	
+5712	consumer	
+5713	consumer	
+5714	economy	consumer
+5715	economy	consumer
+5716	consumer	
+5717	rights	heritage
+5718	security	
+5719	security	health
+5720	health	
+5721	security	
+5722	foreign	economy
+5723	heritage	local
+5724	education	
+5725	foreign	justice
+5726	criminal	health
+5727	immigration	security
+5728	immigration	security
+5729	security	welfare
+5730	settlement	housing
+5731	settlement	housing
+5732	settlement	housing
+5733	criminal	
+5734	criminal	
+5735	foreign	settlement
+5736	settlement	housing
+5737	arab	housing
+5738	arab	housing
+5739	criminal	rights
+5740	local	
+5741	heritage	
+5742	local	religion
+5743	housing	
+5744	security	
+5745	governance	local
+5746	welfare	
+5747	consumer	
+5748	settlement	justice
+5749	settlement	justice
+5750	housing	
+5751	housing	
+5752	housing	
+5753	labor	
+5754	housing	welfare
+5755	economy	
+5756	economy	
+5757	arab	housing
+5758	arab	housing
+5759	consumer	health
+5760	education	
+5761	environment	economy
+5762	education	
+5763	education	
+5764	labor	economy
+5765	labor	economy
+5766	justice	economy
+5767	housing	economy
+5768	labor	
+5769	labor	
+5770	labor	
+5771	labor	
+5772	labor	
+5773	labor	
+5774	labor	
+5775	labor	
+5776	labor	
+5777	labor	
+5778	labor	
+5779	labor	
+5780	economy	
+5781	economy	
+5782	economy	
+5783	economy	
+5784	economy	consumer
+5785	economy	consumer
+5786	economy	consumer
+5787	economy	consumer
+5788	housing	local
+5789	housing	
+5790	education	housing
+5791	housing	welfare
+5792	welfare	labor
+5793	welfare	labor
+5794	welfare	labor
+5795	welfare	labor
+5796	welfare	labor
+5797	welfare	labor
+5798	welfare	labor
+5799	welfare	labor
+5800	welfare	labor
+5801	welfare	labor
+5802	welfare	labor
+5803	welfare	labor
+5804	welfare	labor
+5805	welfare	labor
+5806	welfare	labor
+5807	welfare	labor
+5808	welfare	labor
+5809	welfare	labor
+5810	welfare	labor
+5811	security	foreign
+5812	foreign	justice
+5813	environment	
+5814	security	foreign
+5815	criminal	
+5816	justice	economy
+5817	heritage	
+5818	heritage	
+5819	heritage	
+5820	heritage	arab
+5821	environment	
+5822	environment	
+5823	environment	
+5824	environment	
+5825	environment	
+5826	environment	
+5827	environment	criminal
+5828	environment	
+5829	environment	
+5830	local	economy
+5831	labor	
+5832	welfare	health
+5833	health	economy
+5834	education	heritage
+5835	education	heritage
+5836	health	economy
+5837	heritage	rights
+5838	heritage	rights
+5839	heritage	rights
+5840	security	criminal
+5841	security	criminal
+5842	health	consumer
+5843	heritage	education
+5844	heritage	
+5845	heritage	
+5846	heritage	religion
+5847	heritage	religion
+5848	heritage	religion
+5849	heritage	religion
+5850	heritage	religion
+5851	heritage	religion
+5852	heritage	religion
+5853	heritage	
+5854	heritage	
+5855	heritage	
+5856	heritage	
+5857	heritage	
+5858	heritage	
+5859	heritage	
+5860	heritage	
+5861	heritage	
+5862	economy	heritage
+5863	justice	
+5864	justice	
+5865	education	labor
+5866	education	labor
+5867	justice	consumer
+5868	economy	
+5869	settlement	
+5870	welfare	
+5871	environment	consumer
+5872	environment	consumer
+5873	agriculture	housing
+5874	environment	
+5875	environment	
+5876	environment	
+5877	environment	
+5878	environment	local
+5879	environment	
+5880	environment	
+5881	environment	
+5882	environment	
+5883	agriculture	
+5884	agriculture	
+5885	agriculture	
+5886	transport	
+5887	justice	
+5888	health	
+5889	arab	housing
+5890	settlement	
+5891	housing	
+5892	housing	
+5893	economy	
+5894	health	labor
+5895	economy	
+5896	agriculture	
+5897	housing	consumer
+5898	religion	consumer
+5899	media	economy
+5900	labor	local
+5901	criminal	education
+5902	health	
+5903	welfare	
+5904	economy	
+5905	economy	
+5906	security	housing
+5907	welfare	
+5908	environment	
+5909	transport	environment
+5910	consumer	economy
+5911	transport	consumer
+5912	transport	consumer
+5913	foreign	security
+5914	foreign	security
+5915	foreign	security
+5916	foreign	security
+5917	economy	
+5918	settlement	
+5919	economy	housing
+5920	education	
+5921	education	
+5922	education	
+5923	education	arab
+5924	justice	arab
+5925	justice	foreign
+5926	governance	justice
+5927	education	
+5928	foreign	
+5929	education	arab
+5930	immigration	
+5931	education	health
+5932	security	
+5933	health	
+5934	security	economy
+5935	security	economy
+5936	security	economy
+5937	security	economy
+5938	security	economy
+5939	security	economy
+5940	security	economy
+5941	security	economy
+5942	security	welfare
+5943	labor	welfare
+5944	arab	rights
+5945	rights	labor
+5946	rights	labor
+5947	arab	labor
+5948	rights	labor
+5949	criminal	heritage
+5950	religion	justice
+5951	justice	welfare
+5952	economy	
+5953	criminal	
+5954	heritage	
+5955	heritage	
+5956	health	foreign
+5957	agriculture	criminal
+5958	education	rights
+5959	justice	rights
+5960	justice	labor
+5961	settlement	
+5962	economy	
+5963	security	rights
+5964	criminal	rights
+5965	criminal	
+5966	environment	
+5967	health	
+5968	health	
+5969	health	
+5970	security	health
+5971	economy	health
+5972	local	criminal
+5973	criminal	
+5974	local	transport
+5975	consumer	security
+5976	labor	religion
+5977	security	economy
+5978	security	
+5979	security	
+5980	security	
+5981	welfare	economy
+5982	immigration	education
+5983	education	
+5984	education	
+5985	education	
+5986	education	
+5987	education	
+5988	education	
+5989	education	
+5990	education	
+5991	education	
+5992	education	
+5993	education	
+5994	education	
+5995	education	
+5996	education	
+5997	education	
+5998	education	
+5999	education	
+6000	education	transport
+6001	education	religion
+6002	education	
+6003	education	
+6004	education	
+6005	education	
+6006	education	
+6007	education	
+6008	education	
+6009	education	
+6010	education	
+6011	education	
+6012	education	
+6013	education	
+6014	education	
+6015	education	
+6016	education	
+6017	education	
+6018	education	
+6019	education	
+6020	education	welfare
+6021	education	
+6022	education	
+6023	education	religion
+6024	education	
+6025	education	local
+6026	education	heritage
+6027	education	health
+6028	education	
+6029	education	
+6030	education	
+6031	economy	consumer
+6032	education	criminal
+6033	criminal	rights
+6034	criminal	security
+6035	environment	housing
+6036	health	education
+6037	criminal	health
+6038	criminal	health
+6039	criminal	
+6040	criminal	rights
+6041	criminal	rights
+6042	criminal	rights
+6043	criminal	rights
+6044	criminal	rights
+6045	criminal	rights
+6046	criminal	rights
+6047	criminal	rights
+6048	criminal	rights
+6049	criminal	rights
+6050	criminal	rights
+6051	criminal	rights
+6052	criminal	rights
+6053	criminal	rights
+6054	criminal	rights
+6055	labor	criminal
+6056	criminal	rights
+6057	criminal	rights
+6058	criminal	rights
+6059	criminal	rights
+6060	criminal	rights
+6061	criminal	rights
+6062	criminal	rights
+6063	criminal	rights
+6064	criminal	rights
+6065	criminal	rights
+6066	criminal	rights
+6067	criminal	rights
+6068	criminal	health
+6069	media	criminal
+6070	immigration	economy
+6071	labor	rights
+6072	rights	criminal
+6073	rights	criminal
+6074	rights	criminal
+6075	education	rights
+6076	rights	criminal
+6077	rights	criminal
+6078	rights	criminal
+6079	labor	rights
+6080	labor	rights
+6081	labor	rights
+6082	labor	rights
+6083	labor	rights
+6084	labor	rights
+6085	labor	rights
+6086	media	rights
+6087	rights	local
+6088	rights	local
+6089	rights	criminal
+6090	rights	criminal
+6091	labor	rights
+6092	rights	media
+6093	health	rights
+6094	rights	criminal
+6095	immigration	criminal
+6096	immigration	criminal
+6097	immigration	criminal
+6098	immigration	criminal
+6099	immigration	criminal
+6100	immigration	criminal
+6101	immigration	criminal
+6102	health	
+6103	health	
+6104	health	
+6105	health	
+6106	health	
+6107	health	
+6108	criminal	education
+6109	labor	criminal
+6110	criminal	labor
+6111	criminal	labor
+6112	criminal	labor
+6113	criminal	education
+6114	criminal	labor
+6115	criminal	labor
+6116	criminal	labor
+6117	criminal	labor
+6118	criminal	labor
+6119	media	rights
+6120	education	
+6121	settlement	security
+6122	media	rights
+6123	labor	
+6124	labor	
+6125	criminal	transport
+6126	education	rights
+6127	criminal	
+6128	health	environment
+6129	environment	health
+6130	environment	religion
+6131	environment	
+6132	environment	
+6133	environment	religion
+6134	environment	religion
+6135	environment	
+6136	transport	environment
+6137	environment	religion
+6138	heritage	environment
+6139	environment	
+6140	religion	rights
+6141	rights	
+6142	rights	education
+6143	rights	economy
+6144	rights	economy
+6145	rights	economy
+6146	consumer	
+6147	environment	agriculture
+6148	justice	
+6149	media	consumer
+6150	governance	
+6151	security	welfare
+6152	security	health
+6153	health	labor
+6154	security	welfare
+6155	labor	
+6156	security	economy
+6157	governance	security
+6158	health	economy
+6159	economy	welfare
+6160	environment	
+6161	environment	agriculture
+6162	economy	
+6163	arab	
+6164	housing	environment
+6165	housing	environment
+6166	housing	environment
+6167	governance	economy
+6168	labor	welfare
+6169	environment	
+6170	health	
+6171	labor	welfare
+6172	agriculture	labor
+6173	economy	
+6174	security	housing
+6175	environment	economy
+6176	transport	labor
+6177	environment	economy
+6178	housing	economy
+6179	housing	economy
+6180	economy	
+6181	economy	
+6182	economy	rights
+6183	economy	arab
+6184	economy	agriculture
+6185	economy	
+6186	economy	
+6187	economy	
+6188	economy	
+6189	economy	
+6190	economy	
+6191	economy	
+6192	economy	
+6193	economy	
+6194	economy	
+6195	economy	
+6196	economy	
+6197	economy	
+6198	economy	environment
+6199	economy	settlement
+6200	economy	security
+6201	economy	security
+6202	economy	local
+6203	economy	
+6204	economy	
+6205	economy	
+6206	agriculture	economy
+6207	agriculture	economy
+6208	agriculture	economy
+6209	welfare	labor
+6210	agriculture	environment
+6211	economy	
+6212	economy	
+6213	economy	
+6214	economy	
+6215	economy	
+6216	economy	
+6217	labor	economy
+6218	labor	arab
+6219	education	labor
+6220	transport	environment
+6221	economy	
+6222	economy	
+6223	transport	
+6224	transport	
+6225	transport	
+6226	economy	
+6227	welfare	environment
+6228	criminal	security
+6229	governance	
+6230	governance	
+6231	settlement	housing
+6232	media	consumer
+6233	economy	security
+6234	security	justice
+6235	security	justice
+6236	health	education
+6237	health	consumer
+6238	education	consumer
+6239	labor	economy
+6240	agriculture	consumer
+6241	agriculture	consumer
+6242	housing	local
+6243	housing	security
+6244	heritage	
+6245	heritage	arab
+6246	heritage	
+6247	heritage	
+6248	economy	
+6249	economy	
+6250	economy	
+6251	economy	
+6252	environment	consumer
+6253	environment	consumer
+6254	environment	consumer
+6255	governance	security
+6256	economy	
+6257	economy	
+6258	justice	economy
+6259	religion	labor
+6260	religion	labor
+6261	education	environment
+6262	governance	local
+6263	rights	religion
+6264	rights	religion
+6265	governance	labor
+6266	welfare	
+6267	heritage	
+6268	housing	
+6269	housing	religion
+6270	housing	
+6271	housing	
+6272	housing	arab
+6273	housing	
+6274	education	heritage
+6275	environment	
+6276	rights	
+6277	foreign	security
+6278	economy	
+6279	economy	
+6280	media	
+6281	rights	welfare
+6282	environment	consumer
+6283	economy	
+6284	health	
+6285	economy	welfare
+6286	governance	criminal
+6287	economy	consumer
+6288	education	
+6289	economy	
+6290	local	economy
+6291	governance	consumer
+6292	governance	consumer
+6293	security	housing
+6294	justice	
+6295	justice	
+6296	justice	
+6297	justice	
+6298	justice	
+6299	justice	
+6300	justice	
+6301	justice	
+6302	justice	consumer
+6303	justice	
+6304	justice	
+6305	justice	
+6306	justice	
+6307	justice	
+6308	justice	
+6309	justice	
+6310	justice	
+6311	justice	housing
+6312	justice	religion
+6313	justice	
+6314	justice	
+6315	justice	
+6316	justice	
+6317	justice	
+6318	justice	
+6319	justice	
+6320	justice	
+6321	justice	labor
+6322	housing	consumer
+6323	health	
+6324	governance	local
+6325	justice	welfare
+6326	justice	religion
+6327	justice	welfare
+6328	justice	welfare
+6329	justice	welfare
+6330	justice	welfare
+6331	justice	welfare
+6332	justice	welfare
+6333	labor	
+6334	economy	justice
+6335	justice	criminal
+6336	justice	criminal
+6337	justice	criminal
+6338	justice	criminal
+6339	justice	criminal
+6340	local	religion
+6341	criminal	
+6342	economy	
+6343	justice	
+6344	health	
+6345	environment	
+6346	immigration	education
+6347	economy	
+6348	criminal	
+6349	settlement	justice
+6350	criminal	
+6351	health	
+6352	settlement	
+6353	economy	local
+6354	economy	education
+6355	justice	criminal
+6356	justice	criminal
+6357	justice	criminal
+6358	justice	
+6359	governance	
+6360	governance	
+6361	governance	
+6362	governance	
+6363	governance	
+6364	governance	
+6365	governance	
+6366	transport	
+6367	consumer	transport
+6368	consumer	transport
+6369	consumer	transport
+6370	consumer	transport
+6371	consumer	transport
+6372	health	
+6373	health	
+6374	health	
+6375	health	
+6376	health	
+6377	health	
+6378	health	labor
+6379	health	labor
+6380	health	labor
+6381	health	labor
+6382	health	labor
+6383	health	labor
+6384	health	labor
+6385	health	labor
+6386	health	
+6387	health	
+6388	health	
+6389	health	
+6390	health	
+6391	health	
+6392	health	
+6393	health	
+6394	health	labor
+6395	health	
+6396	health	religion
+6397	health	religion
+6398	health	religion
+6399	religion	health
+6400	health	environment
+6401	health	
+6402	health	
+6403	health	religion
+6404	health	consumer
+6405	religion	health
+6406	health	
+6407	health	
+6408	health	
+6409	health	
+6410	health	welfare
+6411	health	
+6412	health	
+6413	health	
+6414	health	
+6415	health	labor
+6416	health	labor
+6417	health	
+6418	consumer	health
+6419	health	consumer
+6420	consumer	health
+6421	health	consumer
+6422	consumer	health
+6423	consumer	health
+6424	consumer	health
+6425	consumer	health
+6426	consumer	health
+6427	consumer	health
+6428	criminal	
+6429	criminal	security
+6430	criminal	rights
+6431	criminal	
+6432	criminal	
+6433	criminal	
+6434	criminal	
+6435	security	criminal
+6436	criminal	labor
+6437	criminal	rights
+6438	criminal	
+6439	security	criminal
+6440	criminal	justice
+6441	criminal	
+6442	criminal	
+6443	security	foreign
+6444	criminal	rights
+6445	criminal	
+6446	criminal	religion
+6447	criminal	
+6448	criminal	labor
+6449	criminal	justice
+6450	criminal	media
+6451	criminal	
+6452	criminal	
+6453	criminal	
+6454	criminal	
+6455	security	criminal
+6456	security	criminal
+6457	security	criminal
+6458	security	criminal
+6459	security	criminal
+6460	criminal	arab
+6461	criminal	
+6462	criminal	
+6463	security	criminal
+6464	criminal	rights
+6465	criminal	labor
+6466	economy	
+6467	economy	
+6468	housing	rights
+6469	housing	
+6470	housing	
+6471	housing	
+6472	agriculture	housing
+6473	foreign	security
+6474	labor	
+6475	labor	
+6476	labor	
+6477	economy	governance
+6478	consumer	governance
+6479	economy	
+6480	consumer	economy
+6481	consumer	economy
+6482	consumer	governance
+6483	economy	
+6484	consumer	
+6485	consumer	economy
+6486	consumer	
+6487	consumer	governance
+6488	consumer	
+6489	consumer	economy
+6490	economy	governance
+6491	economy	governance
+6492	environment	agriculture
+6493	environment	agriculture
+6494	environment	agriculture
+6495	environment	agriculture
+6496	environment	agriculture
+6497	economy	justice
+6498	economy	justice
+6499	labor	economy
+6500	foreign	security
+6501	health	criminal
+6502	media	economy
+6503	transport	economy
+6504	environment	
+6505	environment	
+6506	environment	
+6507	environment	
+6508	health	environment
+6509	health	environment
+6510	health	environment
+6511	criminal	
+6512	local	governance
+6513	local	governance
+6514	local	governance
+6515	local	governance
+6516	local	rights
+6517	local	heritage
+6518	local	labor
+6519	economy	
+6520	economy	
+6521	economy	
+6522	economy	religion
+6523	environment	economy
+6524	economy	foreign
+6525	economy	justice
+6526	economy	
+6527	economy	
+6528	economy	
+6529	justice	economy
+6530	economy	rights
+6531	economy	
+6532	economy	
+6533	economy	
+6534	economy	
+6535	economy	
+6536	criminal	
+6537	criminal	rights
+6538	criminal	rights
+6539	criminal	governance
+6540	criminal	governance
+6541	criminal	governance
+6542	criminal	rights
+6543	criminal	
+6544	criminal	rights
+6545	criminal	rights
+6546	criminal	rights
+6547	criminal	rights
+6548	criminal	justice
+6549	criminal	rights
+6550	criminal	heritage
+6551	criminal	governance
+6552	criminal	justice
+6553	criminal	justice
+6554	criminal	labor
+6555	criminal	education
+6556	criminal	education
+6557	criminal	rights
+6558	criminal	labor
+6559	criminal	rights
+6560	criminal	governance
+6561	criminal	justice
+6562	criminal	rights
+6563	criminal	
+6564	criminal	governance
+6565	criminal	labor
+6566	criminal	governance
+6567	criminal	security
+6568	criminal	governance
+6569	criminal	
+6570	criminal	security
+6571	criminal	
+6572	criminal	justice
+6573	criminal	
+6574	criminal	governance
+6575	criminal	
+6576	criminal	rights
+6577	criminal	justice
+6578	criminal	
+6579	criminal	rights
+6580	criminal	rights
+6581	criminal	rights
+6582	criminal	rights
+6583	criminal	labor
+6584	justice	
+6585	local	justice
+6586	justice	rights
+6587	justice	rights
+6588	security	justice
+6589	justice	
+6590	justice	rights
+6591	religion	rights
+6592	religion	justice
+6593	religion	criminal
+6594	religion	rights
+6595	religion	rights
+6596	transport	criminal
+6597	transport	economy
+6598	transport	economy
+6599	transport	economy
+6600	transport	economy
+6601	governance	
+6602	rights	governance
+6603	governance	
+6604	education	governance
+6605	local	governance
+6606	rights	governance
+6607	governance	criminal
+6608	governance	
+6609	health	criminal
+6610	criminal	health
+6611	criminal	health
+6612	health	criminal
+6613	criminal	health
+6614	criminal	health
+6615	agriculture	criminal
+6616	criminal	health
+6617	health	criminal
+6618	criminal	health
+6619	criminal	health
+6620	criminal	health
+6621	criminal	health
+6622	health	criminal
+6623	criminal	health
+6624	criminal	health
+6625	religion	
+6626	religion	
+6627	religion	
+6628	religion	
+6629	religion	
+6630	religion	
+6631	religion	security
+6632	local	
+6633	local	security
+6634	local	economy
+6635	local	labor
+6636	local	economy
+6637	local	criminal
+6638	local	rights
+6639	local	economy
+6640	local	economy
+6641	local	governance
+6642	local	housing
+6643	local	justice
+6644	local	justice
+6645	local	governance
+6646	local	governance
+6647	local	governance
+6648	local	governance
+6649	local	governance
+6650	local	governance
+6651	local	governance
+6652	local	immigration
+6653	local	rights
+6654	local	rights
+6655	local	economy
+6656	local	economy
+6657	local	governance
+6658	local	governance
+6659	local	governance
+6660	local	economy
+6661	local	economy
+6662	local	heritage
+6663	local	education
+6664	local	governance
+6665	local	religion
+6666	local	governance
+6667	local	
+6668	local	religion
+6669	local	religion
+6670	local	health
+6671	local	housing
+6672	local	health
+6673	local	immigration
+6674	local	governance
+6675	local	governance
+6676	local	welfare
+6677	local	transport
+6678	local	governance
+6679	local	economy
+6680	local	economy
+6681	local	governance
+6682	local	governance
+6683	local	religion
+6684	local	governance
+6685	local	governance
+6686	local	governance
+6687	local	transport
+6688	local	governance
+6689	local	environment
+6690	local	economy
+6691	local	environment
+6692	rights	local
+6693	rights	heritage
+6694	arab	local
+6695	rights	local
+6696	local	governance
+6697	local	health
+6698	local	governance
+6699	local	governance
+6700	local	governance
+6701	local	governance
+6702	local	governance
+6703	local	governance
+6704	settlement	local
+6705	settlement	local
+6706	local	environment
+6707	local	governance
+6708	local	economy
+6709	local	governance
+6710	rights	economy
+6711	local	economy
+6712	local	housing
+6713	local	governance
+6714	local	economy
+6715	local	economy
+6716	local	housing
+6717	local	governance
+6718	local	governance
+6719	local	governance
+6720	local	governance
+6721	local	economy
+6722	local	economy
+6723	local	heritage
+6724	local	transport
+6725	local	governance
+6726	local	criminal
+6727	local	economy
+6728	local	economy
+6729	local	governance
+6730	local	media
+6731	local	justice
+6732	local	economy
+6733	local	economy
+6734	local	governance
+6735	local	governance
+6736	local	media
+6737	local	media
+6738	local	housing
+6739	local	
+6740	local	economy
+6741	local	justice
+6742	local	economy
+6743	local	labor
+6744	local	governance
+6745	local	economy
+6746	media	economy
+6747	media	rights
+6748	media	rights
+6749	media	foreign
+6750	media	rights
+6751	housing	rights
+6752	housing	
+6753	housing	
+6754	housing	
+6755	justice	criminal
+6756	justice	criminal
+6757	justice	criminal
+6758	justice	health
+6759	justice	
+6760	justice	criminal
+6761	media	justice
+6762	health	justice
+6763	economy	justice
+6764	justice	criminal
+6765	justice	criminal
+6766	criminal	justice
+6767	governance	justice
+6768	governance	justice
+6769	justice	criminal
+6770	justice	criminal
+6771	justice	criminal
+6772	justice	criminal
+6773	justice	security
+6774	justice	criminal
+6775	health	foreign
+6776	health	
+6777	health	labor
+6778	health	
+6779	health	
+6780	health	
+6781	health	
+6782	health	labor
+6783	health	labor
+6784	health	labor
+6785	health	criminal
+6786	health	criminal
+6787	health	
+6788	health	
+6789	health	
+6790	health	
+6791	health	
+6792	consumer	health
+6793	consumer	health
+6794	rights	health
+6795	health	rights
+6796	health	consumer
+6797	health	criminal
+6798	health	consumer
+6799	health	consumer
+6800	health	economy
+6801	health	
+6802	health	rights
+6803	health	environment
+6804	economy	
+6805	economy	consumer
+6806	transport	
+6807	transport	welfare
+6808	transport	rights
+6809	transport	
+6810	transport	rights
+6811	local	transport
+6812	criminal	transport
+6813	transport	
+6814	local	transport
+6815	transport	consumer
+6816	immigration	transport
+6817	transport	environment
+6818	transport	environment
+6819	transport	
+6820	transport	
+6821	health	transport
+6822	health	transport
+6823	transport	
+6824	transport	consumer
+6825	transport	
+6826	transport	
+6827	transport	
+6828	local	transport
+6829	transport	
+6830	transport	
+6831	transport	
+6832	transport	criminal
+6833	local	transport
+6834	transport	health
+6835	transport	health
+6836	transport	
+6837	transport	
+6838	transport	criminal
+6839	transport	
+6840	transport	health
+6841	transport	health
+6842	transport	
+6843	transport	
+6844	transport	
+6845	health	consumer
+6846	health	consumer
+6847	health	consumer
+6848	transport	religion
+6849	transport	
+6850	transport	economy
+6851	religion	transport
+6852	transport	
+6853	health	consumer
+6854	health	consumer
+6855	transport	consumer
+6856	transport	
+6857	transport	consumer
+6858	local	transport
+6859	education	transport
+6860	transport	
+6861	transport	
+6862	transport	
+6863	transport	justice
+6864	transport	security
+6865	transport	consumer
+6866	transport	consumer
+6867	consumer	transport
+6868	consumer	transport
+6869	transport	
+6870	local	transport
+6871	local	transport
+6872	education	transport
+6873	transport	
+6874	local	transport
+6875	education	transport
+6876	transport	
+6877	transport	consumer
+6878	transport	
+6879	transport	welfare
+6880	transport	health
+6881	transport	
+6882	transport	
+6883	transport	
+6884	transport	
+6885	consumer	transport
+6886	transport	
+6887	local	transport
+6888	transport	consumer
+6889	transport	
+6890	transport	education
+6891	education	transport
+6892	transport	
+6893	transport	criminal
+6894	transport	
+6895	transport	
+6896	transport	rights
+6897	transport	
+6898	transport	
+6899	transport	
+6900	transport	
+6901	transport	
+6902	transport	
+6903	transport	
+6904	transport	
+6905	transport	
+6906	transport	
+6907	transport	
+6908	transport	
+6909	education	transport
+6910	education	transport
+6911	transport	
+6912	transport	
+6913	transport	welfare
+6914	transport	
+6915	transport	health
+6916	transport	health
+6917	transport	health
+6918	transport	health
+6919	transport	health
+6920	transport	criminal
+6921	transport	
+6922	transport	security
+6923	transport	criminal
+6924	transport	
+6925	transport	
+6926	transport	justice
+6927	transport	labor
+6928	transport	rights
+6929	transport	rights
+6930	transport	rights
+6931	consumer	transport
+6932	consumer	transport
+6933	transport	rights
+6934	local	transport
+6935	transport	
+6936	transport	rights
+6937	transport	
+6938	consumer	transport
+6939	transport	
+6940	transport	labor
+6941	criminal	transport
+6942	criminal	transport
+6943	criminal	transport
+6944	consumer	transport
+6945	consumer	transport
+6946	consumer	transport
+6947	consumer	transport
+6948	transport	governance
+6949	transport	
+6950	transport	
+6951	transport	
+6952	transport	consumer
+6953	consumer	transport
+6954	transport	
+6955	transport	
+6956	consumer	transport
+6957	consumer	transport
+6958	transport	
+6959	transport	criminal
+6960	transport	
+6961	transport	
+6962	transport	justice
+6963	transport	justice
+6964	transport	
+6965	transport	
+6966	transport	
+6967	transport	
+6968	transport	rights
+6969	transport	environment
+6970	transport	
+6971	transport	criminal
+6972	local	transport
+6973	transport	criminal
+6974	transport	environment
+6975	transport	consumer
+6976	transport	environment
+6977	transport	security
+6978	economy	welfare
+6979	media	welfare
+6980	local	religion
+6981	health	transport
+6982	criminal	transport
+6983	transport	consumer
+6984	transport	consumer
+6985	criminal	transport
+6986	transport	consumer
+6987	criminal	transport
+6988	consumer	transport
+6989	transport	health
+6990	transport	
+6991	transport	economy
+6992	transport	consumer
+6993	transport	consumer
+6994	transport	consumer
+6995	transport	consumer
+6996	transport	health
+6997	transport	
+6998	transport	
+6999	transport	
+7000	transport	
+7001	education	transport
+7002	transport	
+7003	transport	
+7004	transport	arab
+7005	consumer	transport
+7006	consumer	transport
+7007	transport	
+7008	transport	welfare
+7009	transport	economy
+7010	criminal	transport
+7011	criminal	transport
+7012	transport	
+7013	transport	
+7014	transport	
+7015	transport	consumer
+7016	transport	
+7017	transport	criminal
+7018	education	transport
+7019	education	transport
+7020	criminal	transport
+7021	transport	economy
+7022	consumer	transport
+7023	consumer	transport
+7024	transport	
+7025	transport	
+7026	consumer	transport
+7027	consumer	transport
+7028	transport	consumer
+7029	transport	consumer
+7030	media	security
+7031	economy	heritage
+7032	economy	
+7033	economy	
+7034	economy	criminal
+7035	economy	criminal
+7036	economy	criminal
+7037	agriculture	health
+7038	environment	agriculture
+7039	agriculture	
+7040	security	criminal
+7041	security	criminal
+7042	security	criminal
+7043	economy	welfare
+7044	economy	
+7045	economy	religion
+7046	economy	governance
+7047	economy	
+7048	economy	labor
+7049	economy	welfare
+7050	economy	health
+7051	economy	
+7052	welfare	economy
+7053	economy	local
+7054	economy	governance
+7055	economy	
+7056	economy	
+7057	economy	
+7058	economy	
+7059	economy	security
+7060	economy	security
+7061	economy	
+7062	economy	
+7063	economy	welfare
+7064	economy	health
+7065	economy	local
+7066	economy	
+7067	economy	
+7068	economy	
+7069	economy	welfare
+7070	economy	
+7071	economy	rights
+7072	economy	rights
+7073	economy	security
+7074	economy	labor
