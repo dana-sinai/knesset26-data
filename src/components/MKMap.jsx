@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
-import { Link } from 'react-router-dom';
 import { MKLink } from '@/components/MKDrawer';
 
 /**
