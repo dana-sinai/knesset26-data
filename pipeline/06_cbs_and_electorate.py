@@ -80,22 +80,24 @@ for r in little.itertuples():
 # ---------- assemble locality profiles (start from existing map layer for coords)
 locs = json.load(open(f"{OUT}/localities.json"))
 locs = {int(k): v for k, v in locs.items()}
-for r in by.itertuples():
-    code = int(r.code)
-    L = locs.setdefault(code, dict(code=code, name=str(r._1).strip()))
-    if L.get("lat") is None and pd.notna(r.קואורדינטות):
-        s = str(int(r.קואורדינטות))
+for _, r in by.iterrows():
+    code = int(r["code"])
+    L = locs.setdefault(code, dict(code=code, name=str(r["שם יישוב"]).strip()))
+    if L.get("lat") is None and pd.notna(r["קואורדינטות"]):
+        s = str(int(r["קואורדינטות"]))
         if len(s) in (10, 12):
             h = len(s) // 2
             x, y = int(s[:h]) * (10 if h == 5 else 1), int(s[h:]) * (10 if h == 5 else 1)
             lon, lat = tr.transform(x, y)
             L.update(lat=round(lat, 5), lon=round(lon, 5))
-    pop_total = num(r._13); jews = num(r.יהודים_ואחרים); arabs = num(r.ערבים)
-    L.update(district_he=r._5, subdistrict_he=r._7, form_code=int(r._19) if pd.notna(r._19) else None,
-             form=form_group(r._19), religion_code=int(r._12) if pd.notna(r._12) else None,
+    pop_total = num(r["סך הכל אוכלוסייה 2024"]); jews = num(r["יהודים ואחרים"]); arabs = num(r["ערבים"])
+    form = r["צורת ישוב שוטפת"]
+    L.update(district_he=r["שם מחוז"], subdistrict_he=r["שם נפה"],
+             form_code=int(form) if pd.notna(form) else None, form=form_group(form),
+             religion_code=int(r["דת יישוב"]) if pd.notna(r["דת יישוב"]) else None,
              population_2024=int(pop_total) if pd.notna(pop_total) else None,
-             arab_pct=round(100 * arabs / (jews + arabs), 1) if pd.notna(arabs) and pd.notna(jews) and (jews + arabs) > 0 else None,
-             authority_cluster=r._27 if isinstance(r._27, str) else None)
+             arab_pct=round(100 * arabs / (jews + arabs), 1) if pd.notna(arabs) and pd.notna(jews) and (jews + arabs) > 0 else (0.0 if pd.notna(jews) and pd.isna(arabs) else None),
+             authority_cluster=r["שם אשכול רשויות מקומיות"] if isinstance(r["שם אשכול רשויות מקומיות"], str) else None)
 for code, L in locs.items():
     if code in ses: L.update(ses[code]); L["socioeconomic_cluster"] = ses[code]["ses_cluster"]
     if code in per: L["periphery_cluster"] = per[code]
