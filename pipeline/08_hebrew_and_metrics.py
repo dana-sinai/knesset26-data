@@ -19,6 +19,7 @@ FIX = {  # manual corrections after review
 
 tr = json.load(open("pipeline/input/translations_he.json"))
 tr.update(FIX)
+GEN = json.load(open("pipeline/input/translations_he_gendered.json"))  # strings whose Hebrew depends on the MK's gender
 mks = json.load(open("public/data/mks.json"))
 parl = json.load(open("public/data/parliament.json"))
 cmt = json.load(open("public/data/committees/summary.json"))
@@ -26,9 +27,11 @@ LAT = re.compile("[A-Za-z]")
 missing = set()
 
 
-def he(s):
+def he(s, gender=None):
     if not isinstance(s, str) or not LAT.search(s) or s.startswith("http"):
         return s
+    if gender and s in GEN:
+        return GEN[s].get(gender) or GEN[s]["male"]
     if s in tr:
         return tr[s]
     missing.add(s)
@@ -45,12 +48,12 @@ for m in mks:
             e[f] = he(e.get(f))
     for c in m["career"]:
         for f in ("role", "organization"):
-            c[f] = he(c.get(f))
+            c[f] = he(c.get(f), m.get("gender"))
     for r in m.get("gov_roles_profile") or []:
         if isinstance(r, dict):
-            r["role"] = he(r.get("role"))
+            r["role"] = he(r.get("role"), m.get("gender"))
     for f in ("notes", "family_status", "military_service", "bio_he", "birthplace"):
-        m[f] = he(m.get(f))
+        m[f] = he(m.get(f), m.get("gender"))
     if m.get("residence"):
         m["residence"]["note"] = he(m["residence"].get("note"))
     m["languages"] = [he(x) for x in (m.get("languages") or [])]

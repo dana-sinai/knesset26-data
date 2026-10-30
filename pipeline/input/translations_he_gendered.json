@@ -1,0 +1,17 @@
+{
+ "CEO": {"male": "מנכ\"ל", "female": "מנכ\"לית"},
+ "Chair": {"male": "יושב ראש", "female": "יושבת ראש"},
+ "Co-founder": {"male": "מייסד שותף", "female": "מייסדת שותפה"},
+ "Deputy Director-General": {"male": "סגן המנהל הכללי", "female": "סגנית המנהל הכללי"},
+ "Director-General": {"male": "מנכ\"ל", "female": "מנכ\"לית"},
+ "Founder": {"male": "מייסד", "female": "מייסדת"},
+ "Founder and director": {"male": "מייסד ומנהל", "female": "מייסדת ומנהלת"},
+ "Lawyer": {"male": "עורך דין", "female": "עורכת דין"},
+ "Married": {"male": "נשוי", "female": "נשואה"},
+ "Married, three children": {"male": "נשוי, שלושה ילדים", "female": "נשואה, שלושה ילדים"},
+ "Married, two children": {"male": "נשוי, שני ילדים", "female": "נשואה, שני ילדים"},
+ "Member of Knesset": {"male": "חבר הכנסת", "female": "חברת הכנסת"},
+ "Member of Knesset (Blue and White / National Unity)": {"male": "חבר הכנסת (כחול לבן / המחנה הממלכתי)", "female": "חברת הכנסת (כחול לבן / המחנה הממלכתי)"},
+ "Social worker": {"male": "עובד סוציאלי", "female": "עובדת סוציאלית"},
+ "Teacher": {"male": "מורה", "female": "מורה"}
+}
