@@ -6,6 +6,7 @@ import { PER_B } from '@/lib/filters';
 import { Loading, Page, Section } from '@/components/bits';
 import { MKLink, useOpenMK } from '@/components/MKDrawer';
 import Hemicycle from '@/components/Hemicycle';
+import ClusterExplorer from '@/components/ClusterExplorer';
 
 /* ---------- the one filter on this page: the chips above the chamber + a party/bloc pick ---------- */
 const CHIPS = [
@@ -105,7 +106,7 @@ const DOORS = [
   ['/parties', 'מפלגות', 'הרכב כל רשימה, ומי הצביע לה: פרופיל הבוחרים לפי נתוני הלמ״ס'],
   ['/represent', 'את מי הם מייצגים', 'מאיפה מגיעים חברי הכנסת ומאיפה מגיעים הבוחרים שלהם'],
   ['/votes', 'הצבעות במליאה', 'כל הצבעה מאז 2003 (הכנסת ה-16), ואיך הצביע כל מי שחוזר לכנסת'],
-  ['/topics', 'מי מצביע עם מי', 'קבוצות לפי דפוסי הצבעה בכל נושא, ואיך המפלגות מתחלקות ביניהן'],
+  ['/map', 'מפה', 'מקומות המגורים והלידה של חברי הכנסת, ברמת יישוב'],
 ];
 
 export default function Home() {
@@ -179,6 +180,14 @@ export default function Home() {
         <Hemicycle mks={mks} parties={parties} groups={meta?.groups} match={match} label={label} />
         {meta?.groups_source && <p className="text-[11px] text-sub text-center">{meta.groups_source}. הקבוצות מוצגות בצבעים בלבד, ללא שמות.</p>}
       </section>
+
+      <Section title="מי מצביע עם מי">
+        <p className="text-sm text-sub -mt-2 max-w-3xl leading-relaxed">
+          חברי הכנסת שכיהנו בעבר, מקובצים לפי איך שהצביעו בפועל על חוקים שנויים במחלוקת – בלי לדעת לאיזו מפלגה הם שייכים.
+          בחרו נושא, ולחצו על מפלגה בתוך קבוצה כדי לראות מי בדיוק נמצא שם.
+        </p>
+        <ClusterExplorer compact />
+      </Section>
 
       <Section title={match ? `${label}: ${facts.N} חברי כנסת` : 'מי בכנסת ה-26'}>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
