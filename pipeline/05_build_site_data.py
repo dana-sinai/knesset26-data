@@ -69,6 +69,16 @@ def find_loc(name):
     cands.sort(key=lambda l: -(l.get("population") or 0))
     return cands[0] if cands else None
 
+def loc_profile(L):
+    """Locality-level CBS characteristics attached to an MK's home locality or birthplace (never below locality)."""
+    if not L:
+        return dict(code=None, lat=None, lon=None)
+    keep = ("code", "lat", "lon", "district_he", "population_2024", "socioeconomic_cluster", "periphery_cluster",
+            "arab_pct", "haredi_hh_pct", "religiosity_main", "form", "academic_pct", "median_wage")
+    d = {k: L.get(k) for k in keep}
+    d["district"] = L.get("district_he") or L.get("district")
+    return d
+
 def age_at(bd, by):
     if bd and len(bd) >= 10 and bd[5:7] != "00":
         b = dt.date.fromisoformat(bd[:10])
@@ -138,6 +148,19 @@ for r in roster.itertuples():
     if not birthplace and use_w and w.get("birthplace"):
         birthplace = w["birthplace"][0]; filled.append("birthplace")
         sources.setdefault("birthplace", []).append(w["wikidata_url"])
+    # birthplace: an Israeli locality (mapped + CBS profile) or a country abroad
+    BL, born_abroad, born_country = None, None, None
+    if birthplace:
+        bp = re.split(r"[,،]", birthplace)
+        BL = find_loc(bp[0].strip())
+        if BL:
+            born_abroad = False
+        else:
+            last = bp[-1].strip()
+            if last in ("ישראל", "ארץ ישראל") or find_loc(last):
+                born_abroad = False
+            else:
+                born_abroad, born_country = True, last
 
     terms = pr.get("terms") or p.get("prior_knesset_terms") or []
     prior = [t for t in terms if t < 26]
@@ -163,8 +186,9 @@ for r in roster.itertuples():
         party=party_by_roster[r.party_he], list_position=int(r.list_position),
         gender=gender, birth_date=bd, birth_year=by, age=age, age_approx=approx, age_group=age_group(age),
         birthplace=birthplace,
-        residence=dict(name=res_name, code=L["code"] if L else None, lat=L["lat"] if L else None, lon=L["lon"] if L else None,
-                       district=L.get("district") if L else None, note=p.get("residence_note")) if res_name else None,
+        residence=dict(name=res_name, note=p.get("residence_note"), **loc_profile(L)) if res_name else None,
+        birthplace_loc=dict(name=BL["name"], **loc_profile(BL)) if BL else None,
+        born_abroad=born_abroad, born_country=born_country,
         education=p.get("education") or [], education_level=edu_level,
         career=p.get("career") or [], sectors=sectors, military_service=p.get("military_service"),
         languages=p.get("languages"), family_status=p.get("family_status"),
