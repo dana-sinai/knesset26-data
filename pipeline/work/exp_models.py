@@ -62,3 +62,22 @@ elif mode == "eval":
     E = np.load(f"{W}/emb/{model_id.replace('/', '__')}.npy")
     clf = LogisticRegression(C=10, max_iter=3000).fit(E[tr], y[tr])
     report(f"embed {model_id} + LR", clf.predict_proba(E[te]), clf.classes_)
+elif mode == "combo":
+    # text features (TF-IDF SVM) + meaning features (embedding LR), probabilities averaged
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.svm import LinearSVC
+    from sklearn.calibration import CalibratedClassifierCV
+    from scipy.sparse import hstack
+    t = [texts[i] for i in tr]; s = [texts[i] for i in te]
+    vecs = [TfidfVectorizer(analyzer="char_wb", ngram_range=(2, 5), min_df=2, sublinear_tf=True),
+            TfidfVectorizer(analyzer="word", ngram_range=(1, 2), min_df=1, sublinear_tf=True)]
+    Xt = hstack([v.fit_transform(t) for v in vecs]).tocsr(); Xs = hstack([v.transform(s) for v in vecs]).tocsr()
+    svm = CalibratedClassifierCV(LinearSVC(C=1.0), cv=3).fit(Xt, y[tr])
+    Ps = svm.predict_proba(Xs)
+    for model_id in sys.argv[2:]:
+        E = np.load(f"{W}/emb/{model_id.replace('/', '__')}.npy")
+        lr = LogisticRegression(C=10, max_iter=3000).fit(E[tr], y[tr])
+        assert list(lr.classes_) == list(svm.classes_)
+        Pe = lr.predict_proba(E[te])
+        for w in (0.5, 0.7):
+            report(f"combo SVM*{w} + {model_id}*{1-w:.1f}", w * Ps + (1 - w) * Pe, svm.classes_)
