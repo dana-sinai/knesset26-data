@@ -1,6 +1,35 @@
-import { Link } from 'react-router-dom';
-import { useMKs, useParties, fmt } from '@/lib/data';
-import { Loading, Page } from '@/components/bits';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useMKs, useParties, useData, fmt } from '@/lib/data';
+import { Loading, Page, Section } from '@/components/bits';
+import LeadMap from '@/components/LeadMap';
+import { CorrTable, SectorSelect } from '@/pages/VoterProfile';
+
+// "מי בחר בהם" overview: the map of localities, every list against every CBS characteristic, then one card per list.
+function VotersOverview() {
+  const { data } = useData('voter_profile.json');
+  const { data: parties } = useParties();
+  const [sector, setSector] = useState('jewish');
+  const nav = useNavigate();
+  return (
+    <>
+      <Section title="מפת היישובים">
+        <p className="text-sm text-sub -mt-2 max-w-3xl">כל יישוב בצבע הרשימה הגדולה בו, בגודל לפי מספר הקולות. מפה לכל מפלגה בנפרד – בעמוד המפלגה ובעמוד „מה מאפיין את הבוחרים״.</p>
+        <LeadMap height={520} />
+      </Section>
+      {data && parties && (
+        <Section title="כל המפלגות מול כל המאפיינים" aside={<Link to="/represent" className="text-xs underline text-sub hover:text-ink">ניתוח לכל מפלגה ←</Link>}>
+          <p className="text-sm text-sub -mt-2 max-w-3xl">
+            המתאם (r) בין שיעור ההצבעה למפלגה ברשות לבין כל מאפיין של הרשות לפי הלמ״ס. כחול = המפלגה חזקה יותר ברשויות שבהן המאפיין גבוה,
+            אדום = חלשה יותר, לבן = קשר חלש מאוד. הנתונים של רשויות ולא של אנשים. לחצו על משבצת לפירוט.
+          </p>
+          <SectorSelect data={data} value={sector} onChange={setSector} />
+          <CorrTable data={data} parties={parties} sector={sector} onPick={(pid, k) => nav(`/represent?p=${pid}&x=${k}&g=${sector}`)} />
+        </Section>
+      )}
+    </>
+  );
+}
 
 // mode "people": who was elected on each list (default). mode "voters": who voted for each list.
 export default function Parties({ mode = 'people' }) {
@@ -13,13 +42,15 @@ export default function Parties({ mode = 'people' }) {
     <Page>
       <header className="grid gap-2 max-w-3xl">
         <p className="text-sm text-gold font-semibold">{voters ? 'מי בחר בהם' : 'מי הם'}</p>
-        <h1 className="text-4xl">{voters ? 'מצביעי המפלגות' : 'הרכב המפלגות'}</h1>
+        <h1 className="text-4xl">{voters ? 'מי בחר בכל מפלגה' : 'הרכב המפלגות'}</h1>
         <p className="text-sub leading-relaxed">
           {voters
-            ? 'מי הצביע לכל רשימה: פרופיל המצביעים לפי נתוני הלמ״ס על היישובים שבהם הצביעו, מפת הקולות, והיישובים החזקים של כל מפלגה. כולל גם רשימות שלא עברו את אחוז החסימה.'
+            ? 'איפה כל רשימה חזקה, ומה מאפיין את הרשויות שבהן הצביעו לה לפי נתוני הלמ״ס. למטה – כרטיס לכל רשימה, כולל רשימות שלא עברו את אחוז החסימה.'
             : '11 רשימות עברו את אחוז החסימה (3.25%). לחצו על מפלגה כדי לראות את כל הנבחרים שלה.'}
         </p>
       </header>
+      {voters && <VotersOverview />}
+      {voters && <h2 className="text-2xl -mb-4">לכל רשימה</h2>}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {list.map((p) => {
           const g = mks.filter((m) => m.party === p.id);
