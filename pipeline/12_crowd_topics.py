@@ -44,7 +44,8 @@ with open(EXTRA, "a", encoding="utf-8") as fh:
         cnt = Counter(choices.values())
         top, n = cnt.most_common(1)[0]
         if n >= MIN_AGREE and n / sum(cnt.values()) >= 2 / 3:
-            fh.write(f"{b}\t{top}\t\t{help_[b]['name']}\tcrowd:{n}\n")
+            for bid in help_[b].get("bills", [b]):  # one answer covers every bill with the same name
+                fh.write(f"{bid}\t{top}\t\t{help_[b]['name']}\tcrowd:{n}\n")
             added += 1
 print(f"crowd topics: {len(votes)} votes on {len(by_bill)} bills, {added} bills decided")
 if added:

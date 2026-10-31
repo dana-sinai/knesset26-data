@@ -105,15 +105,37 @@ if os.path.exists("pipeline/input/bill_topics_extra.tsv"):
         p = line.rstrip("\n").split("\t")
         if len(p) > 4 and p[4].startswith("crowd:"):
             crowd_done.add(p[0])
-items = []
+# one entry per law name: the same bill is often tabled several times (different Knessets / initiators) —
+# a single answer applies to all of them. Each entry carries what helps to decide: the official summary (when the
+# Knesset published one), the "בעד =" line, the Knesset number, and links to the bill's page on the Knesset site.
+summary = {}
+if os.path.exists("pipeline/raw/ok/kns_bill.csv"):
+    _kb = pd.read_csv("pipeline/raw/ok/kns_bill.csv", usecols=["BillID", "SummaryLaw"], low_memory=False).dropna()
+    summary = {str(int(r.BillID)): re.sub(r"\s+", " ", str(r.SummaryLaw)).strip() for r in _kb.itertuples()}
+elif os.path.exists("public/data/topics/bill_summary.json"):
+    summary = json.load(open("public/data/topics/bill_summary.json"))
+meaning_line = {}
+for line in open("pipeline/input/bill_meaning.tsv", encoding="utf-8"):
+    p = line.rstrip("\n").split("\t")
+    if len(p) >= 2 and p[0].strip().isdigit() and "ללא פירוט מטרה" not in p[1]:
+        meaning_line[p[0].strip()] = p[1].strip()
+knesset_of = dict(zip(b.BillID.astype(str), b.KnessetNum))
+groups = {}
 for k_, nm in waiting.items():
     if k_ in crowd_done or not str(nm).strip():
         continue
-    sc = _clf.decision_function(_vec.transform([norm(nm)]))[0]
+    groups.setdefault(norm(nm), []).append(k_)
+items = []
+for key, ids in groups.items():
+    ids = sorted(ids, key=int, reverse=True)
+    sc = _clf.decision_function(_vec.transform([key]))[0]
     order = [c for c in _clf.classes_[np.argsort(-sc)] if c != "other"][:3]
-    items.append(dict(bill=int(k_), name=str(nm), guesses=list(order)))
+    summ = next((summary[i] for i in ids if summary.get(i)), "")
+    items.append(dict(bill=int(ids[0]), bills=[int(i) for i in ids], name=str(waiting[ids[0]]), guesses=list(order),
+                      knessets=sorted({int(knesset_of[i]) for i in ids if i in knesset_of}),
+                      summary=summ[:700], meaning=next((meaning_line[i] for i in ids if i in meaning_line), "")))
 json.dump(sorted(items, key=lambda x: -x["bill"]), open("public/data/topics/needs_help.json", "w"), ensure_ascii=False, separators=(",", ":"))
-print(f"needs_help.json: {len(items)} bills waiting for a topic")
+print(f"needs_help.json: {len(items)} law names ({sum(len(x['bills']) for x in items)} bills) waiting for a topic")
 
 # ---------------- mechanism / who (title + "בעד =" line), from the reviewed essence labels
 ess_path = "pipeline/input/bill_essence.tsv"
