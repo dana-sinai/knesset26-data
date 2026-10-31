@@ -107,7 +107,7 @@ export default function MKs() {
                 <tbody>
                   {list.map((m) => (
                     <tr key={m.id} className="border-t border-rule hover:bg-sand/40">
-                      <td className={`px-3 py-1.5 whitespace-nowrap ${STICKY[0]} z-10 bg-paper`}><MKLink className="hover:underline font-medium" id={m.id}>{m.name_he}</MKLink></td>
+                      <td className={`px-3 py-1.5 whitespace-nowrap overflow-hidden text-ellipsis ${STICKY[0]} z-10 bg-paper`}><MKLink className="hover:underline font-medium" id={m.id}>{m.name_he}</MKLink></td>
                       <td className={`px-3 py-1.5 whitespace-nowrap ${STICKY[1]} z-10 bg-paper border-l border-rule`}><span className="inline-block w-2 h-2 rounded-full ml-1" style={{ background: partyById[m.party]?.color }} />{partyById[m.party]?.name_he}</td>
                       <td className="px-3 py-1.5 num">{m.list_position}</td>
                       <td className="px-3 py-1.5">{m.gender === 'female' ? 'אישה' : m.gender === 'male' ? 'גבר' : '—'}</td>
