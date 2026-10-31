@@ -190,7 +190,7 @@ export function VoterAnalysis({ partyId, onParty = null, initialSector = null, i
       rows.forEach((r) => { const v = r.x[k]; if (v != null) sq += r.v * (v - avg) ** 2; });
       const sd = Math.sqrt(sq / bw) || 1;
       return { k, label, unit, pm, all: avg, d: (pm - avg) / sd };
-    }).sort((x, y) => Math.abs(y.d) - Math.abs(x.d));
+    }).filter((x) => Number.isFinite(x.pm) && Number.isFinite(x.all)).sort((x, y) => Math.abs(y.d) - Math.abs(x.d)); // no data for these authorities -> left out
   }, [data, rows, P]);
 
   const reg = useMemo(() => (data && P ? ridge(rows, Object.keys(data.vars), P) : null), [data, rows, P]);

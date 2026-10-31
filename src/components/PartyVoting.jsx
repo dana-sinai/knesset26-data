@@ -102,10 +102,11 @@ export default function PartyVoting({ partyId }) {
       <Section title="כמה הרשימה מצביעה כגוש">
         {coh && (coh.n >= MIN_SHARED ? (
           <div className="grid gap-2 max-w-2xl">
-            <p className="text-sm">
-              בממוצע, <strong className="font-title text-3xl"><Pct v={coh.share} /></strong> מחברי הרשימה שהצביעו הצביעו כמו רוב חבריהם לרשימה
-              <span className="text-sub"> · {fmt(coh.n)} הצבעות שבהן הצביעו לפחות שניים מהם</span>
-            </p>
+            <div className="flex flex-wrap items-baseline gap-x-3">
+              <span className="font-title text-5xl"><Pct v={coh.share} /></span>
+              <span className="text-sm">בממוצע, מחברי הרשימה שהצביעו הצביעו כמו רוב חבריהם לרשימה</span>
+            </div>
+            <p className="text-xs text-sub">מתוך {fmt(coh.n)} הצבעות שבהן הצביעו לפחות שניים מהם.</p>
             {loy.length > 1 && (
               <div className="grid gap-1.5 mt-2">
                 <p className="text-xs text-sub">כל חבר/ת כנסת: באיזה חלק מההצבעות הצביע/ה כמו רוב שאר חברי הרשימה (מהנמוך לגבוה).</p>
