@@ -14,14 +14,45 @@ const SORTS = {
 };
 METRICS.forEach((d) => { SORTS[d.key] = (a, b) => (metricValue(b, d) ?? -1) - (metricValue(a, d) ?? -1); });
 
+const EDU_RANK = { PhD: 7, MD: 6, 'LLB/LLM': 5, MA: 4, BA: 3, yeshiva: 2, 'post-secondary': 1, secondary: 0 };
+// table columns: [header, value used for sorting, text = sort A→Z first (otherwise high→low first)]
+const COLS = [
+  ['שם', (m) => m.name_he, true],
+  ['מפלגה', (m) => m.party, true],
+  ['מקום', (m) => m.list_position, true],
+  ['מגדר', (m) => m.gender, true],
+  ['גיל', (m) => m.age],
+  ['מגורים', (m) => m.residence?.name, true],
+  ['השכלה', (m) => EDU_RANK[m.education_level]],
+  ['כנסות קודמות', (m) => m.prior_terms.length],
+  ['כמו הסיעה', (m) => m.metrics?.faction_rate],
+  ['השתתפות במליאה', (m) => m.metrics?.participation],
+  ['הצעות חוק לכנסת', (m) => m.metrics?.bills_per_k],
+  ['הפכו לחוק', (m) => m.metrics?.bills_passed],
+  ['נוכחות בוועדות', (m) => m.metrics?.cmt_rate],
+  ['ישיבות ועדה לכנסת', (m) => m.metrics?.cmt_per_k],
+];
+function byColumn(i, dir) {
+  const [, get, text] = COLS[i];
+  return (a, b) => {
+    const x = get(a), y = get(b);
+    if (x == null || x === '') return y == null || y === '' ? 0 : 1; // empty values always last
+    if (y == null || y === '') return -1;
+    const c = text && typeof x === 'string' ? x.localeCompare(y, 'he') : x - y;
+    return dir === 'asc' ? c : -c;
+  };
+}
+
 export default function MKs() {
   const { data: mks } = useMKs();
   const { data: parties } = useParties();
   const filters = useMKFilters(mks);
   const [view, setView] = useState('cards');
   const [sort, setSort] = useState('party');
+  const [col, setCol] = useState(null); // { i, dir } when sorted by clicking a table header
+  const clickCol = (i) => setCol((c) => (c && c.i === i ? { i, dir: c.dir === 'asc' ? 'desc' : 'asc' } : { i, dir: COLS[i][2] ? 'asc' : 'desc' }));
   const partyById = useMemo(() => Object.fromEntries((parties || []).map((p) => [p.id, p])), [parties]);
-  const list = useMemo(() => filters.filtered.slice().sort(SORTS[sort]), [filters.filtered, sort]);
+  const list = useMemo(() => filters.filtered.slice().sort(col ? byColumn(col.i, col.dir) : SORTS[sort]), [filters.filtered, sort, col]);
   if (!mks || !parties) return <Loading />;
 
   return (
@@ -38,7 +69,7 @@ export default function MKs() {
           <div className="flex flex-wrap items-center gap-2 justify-between">
             <div className="flex items-center gap-2 text-sm">
               <span className="text-sub">מיון:</span>
-              <select value={sort} onChange={(e) => setSort(e.target.value)} className="rounded-md border border-rule bg-paper px-2 py-1">
+              <select value={sort} onChange={(e) => { setSort(e.target.value); setCol(null); }} className="rounded-md border border-rule bg-paper px-2 py-1">
                 <option value="party">מפלגה ומקום ברשימה</option>
                 <option value="name">שם</option>
                 <option value="age">גיל</option>
@@ -59,7 +90,13 @@ export default function MKs() {
             <div className="overflow-x-auto rounded-xl border border-rule">
               <table className="w-full text-sm">
                 <thead className="bg-sand/60 text-xs text-sub">
-                  <tr>{['שם', 'מפלגה', 'מקום', 'מגדר', 'גיל', 'מגורים', 'השכלה', 'כנסות קודמות', 'כמו הסיעה', 'השתתפות במליאה', 'הצעות חוק לכנסת', 'הפכו לחוק', 'נוכחות בוועדות', 'ישיבות ועדה לכנסת'].map((h) => <th key={h} className="text-right font-medium px-3 py-2 whitespace-nowrap">{h}</th>)}</tr>
+                  <tr>{COLS.map(([h], i) => (
+                    <th key={h} aria-sort={col?.i === i ? (col.dir === 'asc' ? 'ascending' : 'descending') : 'none'} className="text-right font-medium p-0 whitespace-nowrap">
+                      <button onClick={() => clickCol(i)} title="לחצו למיון" className={`w-full text-right px-3 py-2 hover:text-ink ${col?.i === i ? 'text-ink' : ''}`}>
+                        {h}<span className="mr-1 inline-block w-3">{col?.i === i ? (col.dir === 'asc' ? '▲' : '▼') : ''}</span>
+                      </button>
+                    </th>
+                  ))}</tr>
                 </thead>
                 <tbody>
                   {list.map((m) => (
