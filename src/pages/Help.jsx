@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useData, useTopics } from '@/lib/data';
+import { ExternalLink } from 'lucide-react';
+import { useData, useTopics, knessetBillUrl } from '@/lib/data';
 import { Loading, Page } from '@/components/bits';
 import { addRecord, APP_ID } from '@/components/Report';
 
@@ -74,7 +75,23 @@ export default function Help() {
             const my = mine[it.bill];
             return (
               <li key={it.bill} className="rounded-xl border border-rule p-4 grid gap-3">
-                <p className="font-medium leading-relaxed">{it.name}</p>
+                <div className="grid gap-1.5">
+                  <p className="font-medium leading-relaxed">{it.name}</p>
+                  {it.meaning && <p className="text-sm text-ink/85">{it.meaning}</p>}
+                  {it.summary ? (
+                    <details className="text-sm text-ink/85">
+                      <summary className="cursor-pointer text-sub">דברי ההסבר (תקציר רשמי)</summary>
+                      <p className="mt-1 leading-relaxed">{it.summary}{it.summary.length >= 700 ? '…' : ''}</p>
+                    </details>
+                  ) : null}
+                  <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-sub">
+                    {it.knessets?.length > 0 && <span>הכנסת ה-{it.knessets.join(', ה-')}</span>}
+                    {(it.bills?.length || 1) > 1 && <span>הוגשה {it.bills.length} פעמים · התשובה תחול על כולן</span>}
+                    <a href={knessetBillUrl(it.bill)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 underline hover:text-ink">
+                      ההצעה באתר הכנסת<ExternalLink size={11} />
+                    </a>
+                  </p>
+                </div>
                 {my ? (
                   <p className="text-sm text-sub">תודה! בחרת: <strong className="text-ink">{my === 'unsure' ? 'לא בטוח/ה' : L[my]}</strong>
                     {best ? ` · עד עכשיו: ${L[best[0]]} (${best[1]} מתוך ${NEED} הנדרשים)` : ''}</p>
