@@ -29,7 +29,7 @@ function Legend() {
   return (
     <div className="flex items-center gap-2 text-[11px] text-sub">
       <span>רוב נגד</span>
-      <span className="h-2.5 w-40 rounded-full" style={{ background: `linear-gradient(to left, ${heat(1)}, ${heat(0.5)}, ${heat(0)})` }} />
+      <span className="h-2.5 w-40 rounded-full" style={{ background: `linear-gradient(to left, ${heat(0)}, ${heat(0.5)}, ${heat(1)})` }} />
       <span>רוב בעד</span>
     </div>
   );
