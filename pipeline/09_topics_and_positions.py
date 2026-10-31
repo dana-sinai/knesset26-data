@@ -306,7 +306,23 @@ def cluster_topic(vids, min_votes=15, min_shared=10):
             seen.add(x[4])
             uniq.append(x)
         sig = uniq
-    return dict(points=[[int(pids[i]), round(float(xy[i, 0]), 3), round(float(xy[i, 1]), 3), int(lab[i]),
+    # detail for exploring the map (loaded only when someone opens the topic): every vote used, with each group's
+    # share "for", and each member's own vote as one character per vote ("1" for, "2" against, "0" didn't vote)
+    vids = list(piv.columns)
+    gshare = []
+    for vid in vids:
+        row = []
+        for c in sorted(set(lab)):
+            col = piv.iloc[[i for i in range(n) if lab[i] == c]][vid]
+            nn = int(col.notna().sum())
+            row.append([round(float((col == 1).sum() / nn), 2) if nn else None, nn])
+        gshare.append(row)
+    detail = dict(
+        votes=[[int(v), int(Cidx.loc[v]["k"]), Cidx.loc[v]["dt"], bill_name.get(int(Cidx.loc[v]["bill"]), ""), Cidx.loc[v]["stage"],
+                meaning.get(str(v)), int(Cidx.loc[v]["bill"]), gshare[j]] for j, v in enumerate(vids)],
+        mk={str(int(pids[i])): "".join("1" if X[i, j] == 1 else "2" if X[i, j] == -1 else "0" for j in range(len(vids))) for i in range(n)},
+    )
+    return dict(detail=detail, points=[[int(pids[i]), round(float(xy[i, 0]), 3), round(float(xy[i, 1]), 3), int(lab[i]),
                          int(obs[i].sum())] for i in range(n)],
                 clusters=clusters, silhouette=round(float(best), 3) if best > -1 else None,
                 separating=[list(x[1:]) for x in sig[:12]], n_votes=int(piv.shape[1]))
@@ -320,6 +336,9 @@ for t in TOPICS:
         if r:
             clusters[t] = r
 clusters["all"] = cluster_topic(set(C.vid), min_votes=40, min_shared=25)
+for t_, r_ in clusters.items():
+    if r_ and "detail" in r_:
+        json.dump(r_.pop("detail"), open(f"{OUT}/cluster_votes_{t_}.json", "w"), ensure_ascii=False, separators=(",", ":"))
 json.dump(clusters, open(f"{OUT}/clusters.json", "w"), ensure_ascii=False, separators=(",", ":"))
 
 tc = Counter(t for t, _ in bill_topic.values())
