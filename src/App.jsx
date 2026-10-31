@@ -17,6 +17,7 @@ import About from './pages/About';
 import Topics from './pages/Topics';
 import Record from './pages/Record';
 import Classify from './pages/Classify';
+import Who from './pages/Who';
 
 // Public, read-only site: no sign-in required; all data is static JSON under /public/data.
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/who" element={<Who />} />
             <Route path="/mks" element={<MKs />} />
             <Route path="/mk/:id" element={<MKPage />} />
             <Route path="/parties" element={<Parties />} />

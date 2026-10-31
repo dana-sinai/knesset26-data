@@ -18,7 +18,7 @@ function Bars({ rows, n = 4 }) {
         <li key={r.key} className="grid grid-cols-[minmax(120px,auto)_1fr_auto] items-center gap-2 text-sm">
           <span className={i === 0 ? 'font-medium' : 'text-sub'}>{r.label}</span>
           <span className="h-2.5 rounded-full bg-sand overflow-hidden"><span className="block h-full rounded-full bg-ink/70" style={{ width: `${r.p * 100}%` }} /></span>
-          <span className="num text-xs text-sub w-10 text-left">{Math.round(r.p * 100)}%</span>
+          <span className="num text-xs text-sub w-10 text-left">{r.p > 0.99 ? '99%+' : r.p < 0.01 ? '<1%' : `${Math.round(r.p * 100)}%`}</span>
         </li>
       ))}
     </ul>
