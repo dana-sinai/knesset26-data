@@ -3,7 +3,7 @@ import { useData, useParties, fmt } from '@/lib/data';
 
 // Every locality as a dot, coloured by the list that won the most votes there, sized by the number of valid votes.
 // Plain SVG (no map tiles), so it is light enough for the home page.
-export default function LeadMap({ height = 360 }) {
+export default function LeadMap({ height = 360, stack = false }) {
   const { data: res } = useData('results_by_locality.json');
   const { data: loc } = useData('localities.json');
   const { data: parties } = useParties();
@@ -35,7 +35,7 @@ export default function LeadMap({ height = 360 }) {
   const winners = Object.entries(pts.reduce((a, p) => ({ ...a, [p.best]: (a[p.best] || 0) + 1 }), {})).sort((a, b) => b[1] - a[1]);
 
   return (
-    <div className="grid grid-cols-[auto_1fr] gap-4 items-center rounded-xl bg-sand/50 p-3">
+    <div className={`grid gap-4 items-center rounded-xl bg-sand/50 p-3 ${stack ? 'justify-items-center' : 'grid-cols-[auto_1fr]'}`}>
       <svg viewBox={`0 0 ${W + pad * 2} ${H + pad * 2}`} style={{ height }} className="w-auto" role="img" aria-label="מפת היישובים לפי הרשימה הגדולה בכל יישוב">
         {pts.map((p) => (
           <circle key={p.code} cx={X(p)} cy={Y(p)} r={1.2 + 9 * Math.sqrt(p.valid / maxV)}

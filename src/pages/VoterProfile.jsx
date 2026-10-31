@@ -182,8 +182,8 @@ export default function VoterProfile() {
   const shown = reg ? (all ? reg.items : reg.items.slice(0, TOP)) : [];
   const bmax = reg ? Math.max(...Object.values(reg.beta).map(Math.abs)) : 1;
   const regRow = (k, sub) => (
-    <div key={k} className={`grid grid-cols-[minmax(170px,1fr)_2fr_auto] items-center gap-3 text-sm ${sub ? 'pr-4' : ''}`}>
-      <button onClick={() => setXv(k)} className="text-right hover:underline">{sub ? V[k][0].replace('מוצא ', '') : V[k][0]}</button>
+    <div key={k} className={`grid grid-cols-[minmax(170px,1fr)_2fr_auto] items-center gap-3 text-sm`}>
+      <button onClick={() => setXv(k)} className={`text-right hover:underline ${sub ? 'pr-4' : ''}`}>{sub ? V[k][0].replace('מוצא ', '') : V[k][0]}</button>
       <Bar v={reg.beta[k]} max={bmax} />
       <span dir="ltr" className="num text-xs w-10 text-left">{reg.beta[k].toFixed(2)}</span>
     </div>

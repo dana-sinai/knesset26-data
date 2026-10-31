@@ -23,7 +23,7 @@ export default function VoteShareMap({ partyId, color, height = 560, mks = [] })
   return (
     <div className="grid gap-2 max-w-xl">
       <div className="rounded-xl overflow-hidden border border-rule" style={{ height }}>
-        <MapContainer bounds={[[29.5, 34.25], [33.3, 35.85]]} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
+        <MapContainer bounds={[[29.5, 34.25], [33.3, 35.85]]} zoomSnap={0.25} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
           <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" referrerPolicy="strict-origin-when-cross-origin" />
           {pts.map((p) => (
