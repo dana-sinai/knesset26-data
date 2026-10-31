@@ -130,7 +130,13 @@ export function FindMK({ mks, partyById }) {
 
 
 export default function Who() {
-  const { data: mks } = useMKs();
+  return <Composition />;
+}
+
+/** The composition explorer. With `party`, it covers only that list's members (used on the party page). */
+export function Composition({ party = null }) {
+  const { data: allMks } = useMKs();
+  const mks = useMemo(() => (allMks && party ? allMks.filter((m) => m.party === party) : allMks), [allMks, party]);
   const { data: parties } = useParties();
   const { data: meta } = useMeta();
   const [f, setF] = useState({}); // facet -> value
@@ -173,17 +179,18 @@ export default function Who() {
   if (!mks || !parties || !facts) return <Loading />;
   const seated = parties.filter((p) => p.seats > 0);
 
+  const Wrap = party ? 'div' : Page;
   return (
-    <Page>
-      <header className="grid gap-3 max-w-3xl">
+    <Wrap className={party ? 'grid gap-8' : undefined}>
+      {!party && <header className="grid gap-3 max-w-3xl">
         <p className="text-sm text-gold font-semibold">מי הם</p>
         <h1 className="text-4xl sm:text-5xl leading-tight">מי בכנסת ה-26: תמונה כללית</h1>
         <p className="text-sub leading-relaxed">נשים וגברים, חדשים וותיקים, גיל, השכלה, רקע מקצועי ומקום מגורים. כל עמודה היא גם מסנן: לחצו כדי לראות מי עונה עליה.</p>
-      </header>
+      </header>}
 
       {/* The chamber is the page's only filter. */}
       <section className="grid gap-5">
-        <div className="flex flex-wrap items-center justify-center gap-2">
+        {!party && <div className="flex flex-wrap items-center justify-center gap-2">
           <button onClick={() => setF({})} aria-pressed={!active.length}
             className={`px-3.5 py-1.5 rounded-full border text-sm transition-colors ${!active.length ? 'border-ink bg-ink text-paper' : 'border-rule text-sub hover:border-ink/40 hover:text-ink'}`}>כל הכנסת</button>
           {CHIPS.map(([k, v, l]) => (
@@ -195,7 +202,7 @@ export default function Who() {
             <option value="">כל המפלגות</option>
             {seated.map((p) => <option key={p.id} value={p.id}>{p.name_he}</option>)}
           </select>
-        </div>
+        </div>}
         {active.length > 0 && (
           <div className="flex flex-wrap items-center justify-center gap-1.5 text-xs -mt-2">
             <span className="text-sub">מסונן לפי:</span>
@@ -207,8 +214,8 @@ export default function Who() {
             <button onClick={() => setF({})} className="underline text-sub">ניקוי הכל</button>
           </div>
         )}
-        <Hemicycle mks={mks} parties={parties} groups={meta?.groups} match={match} label={label} />
-        {meta?.groups_source && <p className="text-[11px] text-sub text-center">{meta.groups_source}. הקבוצות מוצגות בצבעים בלבד, ללא שמות.</p>}
+        {!party && <Hemicycle mks={mks} parties={parties} groups={meta?.groups} match={match} label={label} />}
+        {!party && meta?.groups_source && <p className="text-[11px] text-sub text-center">{meta.groups_source}. הקבוצות מוצגות בצבעים בלבד, ללא שמות.</p>}
         {match && (
           <div id="names" className="grid gap-2 scroll-mt-24">
             <h2 className="text-xl">{label}: {sel.length} חברי כנסת</h2>
@@ -225,7 +232,7 @@ export default function Who() {
         )}
       </section>
 
-      <Section title={match ? `הפרופיל של: ${label}` : 'מי בכנסת ה-26'}
+      <Section title={match ? `הפרופיל של: ${label}` : party ? 'מי ברשימה' : 'מי בכנסת ה-26'}
         aside={match
           ? <button onClick={() => document.getElementById('names')?.scrollIntoView({ behavior: 'smooth' })} className="text-xs underline text-sub hover:text-ink">↑ לרשימת השמות</button>
           : <span className="text-xs text-sub">לחצו על כל עמודה כדי לסנן את העמוד</span>}>
@@ -258,6 +265,6 @@ export default function Who() {
 
 
 
-    </Page>
+    </Wrap>
   );
 }

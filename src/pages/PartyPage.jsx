@@ -6,6 +6,7 @@ import { MKCard, Loading, Page, Section, Stat } from '@/components/bits';
 import Electorate from '@/components/Electorate';
 import VoteShareMap from '@/components/VoteShareMap';
 import TopicRecord from '@/components/TopicRecord';
+import { Composition } from '@/pages/Who';
 
 function MKvsVoters({ mks, e, color }) {
   // compares where the party's MKs live with where its voters voted (both by CBS socio-economic cluster of the locality)
@@ -68,12 +69,7 @@ export default function PartyPage() {
 
             {tab === 'people' && (
               <>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  <Stat label="נבחרים" value={p.seats} />
-                  <Stat label="נשים" value={g.filter((m) => m.gender === 'female').length} hint={`מתוך ${g.length}`} />
-                  <Stat label="חדשים בכנסת" value={g.filter((m) => m.is_new).length} />
-                  <Stat label="גיל חציוני" value={med ?? '—'} />
-                </div>
+                <Composition party={id} />
                 <Section title={`הנבחרים (${g.length})`}>
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">{g.map((m) => <MKCard key={m.id} m={m} party={p} />)}</div>
                   <div className="flex flex-wrap gap-2 text-xs">
