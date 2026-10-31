@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { LayoutGrid, Table2, Download } from 'lucide-react';
-import { useMKs, useParties, EDU_LABEL, pct } from '@/lib/data';
+import { useMKs, useParties, EDU_LABEL, EDU_ORDER, pct } from '@/lib/data';
 import { useMKFilters, METRICS, metricValue } from '@/lib/filters';
 import FilterPanel from '@/components/FilterPanel';
 import { MKCard, Loading, Page } from '@/components/bits';
@@ -14,7 +14,6 @@ const SORTS = {
 };
 METRICS.forEach((d) => { SORTS[d.key] = (a, b) => (metricValue(b, d) ?? -1) - (metricValue(a, d) ?? -1); });
 
-const EDU_RANK = { PhD: 7, MD: 6, 'LLB/LLM': 5, MA: 4, BA: 3, yeshiva: 2, 'post-secondary': 1, secondary: 0 };
 // table columns: [header, value used for sorting, text = sort A→Z first (otherwise high→low first)]
 const COLS = [
   ['שם', (m) => m.name_he, true],
@@ -23,7 +22,7 @@ const COLS = [
   ['מגדר', (m) => m.gender, true],
   ['גיל', (m) => m.age],
   ['מגורים', (m) => m.residence?.name, true],
-  ['השכלה', (m) => EDU_RANK[m.education_level]],
+  ['השכלה', (m) => (m.education_level && m.education_level !== 'unknown' ? EDU_ORDER.length - EDU_ORDER.indexOf(m.education_level) : null)],
   ['כנסות קודמות', (m) => m.prior_terms.length],
   ['כמו הסיעה', (m) => m.metrics?.faction_rate],
   ['השתתפות במליאה', (m) => m.metrics?.participation],
@@ -67,7 +66,7 @@ export default function MKs() {
         </aside>
         <div className="grid gap-4 content-start">
           <div className="flex flex-wrap items-center gap-2 justify-between">
-            <div className="flex items-center gap-2 text-sm">
+            {view === 'table' ? <span className="text-xs text-sub">לחצו על כותרת עמודה כדי למיין לפיה</span> : <div className="flex items-center gap-2 text-sm">
               <span className="text-sub">מיון:</span>
               <select value={sort} onChange={(e) => { setSort(e.target.value); setCol(null); }} className="rounded-md border border-rule bg-paper px-2 py-1">
                 <option value="party">מפלגה ומקום ברשימה</option>
@@ -75,7 +74,7 @@ export default function MKs() {
                 <option value="age">גיל</option>
                 {METRICS.map((d) => <option key={d.key} value={d.key}>{d.label} (מהגבוה)</option>)}
               </select>
-            </div>
+            </div>}
             <div className="flex items-center gap-1">
               <a href="/data/mks.csv" download className="flex items-center gap-1 text-xs border border-rule rounded-md px-2 py-1.5 hover:bg-sand"><Download size={14} />CSV</a>
               <button onClick={() => setView('cards')} aria-label="כרטיסים" className={`p-1.5 rounded-md ${view === 'cards' ? 'bg-ink text-paper' : 'hover:bg-sand'}`}><LayoutGrid size={16} /></button>
