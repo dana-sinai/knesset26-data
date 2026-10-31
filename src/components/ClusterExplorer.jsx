@@ -58,7 +58,6 @@ export default function ClusterExplorer({ topic, onTopic, compact = false }) {
   const { data: topics } = useData('topics/topics.json');
   const { data: mks } = useMKs();
   const { data: parties } = useParties();
-  const openMK = useOpenMK();
   const [own, setOwn] = useState('all');
   const t = topic ?? own;
   const setT = (k) => { setSel(null); (onTopic || setOwn)(k); };
@@ -73,11 +72,8 @@ export default function ClusterExplorer({ topic, onTopic, compact = false }) {
   const selMembers = sel ? membersOf(sel.cl, sel.party) : [];
   const highlight = sel ? new Set(d.points.filter((p) => p[3] === sel.cl && pidToMK[p[0]]?.party === sel.party).map((p) => p[0])) : null;
 
-  const pick = (cl, party) => {
-    const mem = membersOf(cl, party);
-    if (mem.length === 1) { openMK(mem[0].id); return; }
-    setSel(sel && sel.cl === cl && sel.party === party ? null : { cl, party });
-  };
+  // always show the names first (even a single one); the name itself opens the member card
+  const pick = (cl, party) => setSel(sel && sel.cl === cl && sel.party === party ? null : { cl, party });
 
   return (
     <div className="grid gap-5">
@@ -107,7 +103,7 @@ export default function ClusterExplorer({ topic, onTopic, compact = false }) {
                     const active = sel && sel.cl === c.id && sel.party === p;
                     return (
                       <button key={p} onClick={() => pick(c.id, p)} aria-pressed={active}
-                        title={n === 1 ? `מי זה? ${membersOf(c.id, p)[0]?.name_he}` : `מי הם ${n} חברי ${partyById[p]?.name_he} בקבוצה?`}
+                        title={`מי ${n === 1 ? 'זה' : 'הם'}? הצגת השמות`}
                         className={`flex items-center gap-1 rounded-full border px-2 py-0.5 ${active ? 'border-ink bg-sand' : 'border-rule hover:border-ink/40'}`}>
                         <span className="w-2 h-2 rounded-full" style={{ background: partyById[p]?.color }} />{partyById[p]?.name_he} <span className="num text-sub">{n}</span>
                       </button>
