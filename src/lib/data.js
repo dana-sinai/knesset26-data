@@ -3,16 +3,34 @@ import { useQuery } from '@tanstack/react-query';
 
 const DATA_VERSION = typeof __DATA_VERSION__ !== 'undefined' ? __DATA_VERSION__ : '';
 
+// The data is rebuilt every morning by a GitHub Action and published on GitHub Pages, so new data reaches the
+// site without republishing it. The copy bundled with the site (/data) is only a fallback.
+const REMOTE = 'https://dana-sinai.github.io/knesset26-data/';
+const LOCAL = '/data/';
+
+// Which source to use, and its version (busts browser caches once a day), decided once per visit.
+const source = fetch(`${REMOTE}version.json?t=${Date.now()}`, { cache: 'no-store' })
+  .then((r) => (r.ok ? r.json() : Promise.reject()))
+  .then((v) => ({ base: REMOTE, v: v.built || v.run || DATA_VERSION }))
+  .catch(() => ({ base: LOCAL, v: DATA_VERSION }));
+
+const get = (base, path, v) => fetch(`${base}${path}?v=${encodeURIComponent(v)}`).then((r) => {
+  if (!r.ok) throw new Error(`לא ניתן לטעון ${path}`);
+  return r.json();
+});
+
 const cache = new Map();
 export async function loadJSON(path) {
   if (!cache.has(path)) {
-    cache.set(path, fetch(`/data/${path}?v=${DATA_VERSION}`).then((r) => {
-      if (!r.ok) throw new Error(`לא ניתן לטעון ${path}`);
-      return r.json();
-    }));
+    cache.set(path, source.then(({ base, v }) => (base === LOCAL
+      ? get(LOCAL, path, v)
+      : get(base, path, v).catch(() => get(LOCAL, path, DATA_VERSION)))));
   }
   return cache.get(path);
 }
+
+/** When the data was last rebuilt (from GitHub), or null when the bundled copy is in use. */
+export const dataBuilt = () => source.then(({ base, v }) => (base === REMOTE ? v : null));
 
 export const useData = (path, opts = {}) =>
   useQuery({ queryKey: ['data', path], queryFn: () => loadJSON(path), staleTime: Infinity, ...opts });
