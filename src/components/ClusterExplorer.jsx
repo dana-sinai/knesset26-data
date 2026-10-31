@@ -77,7 +77,13 @@ export default function ClusterExplorer({ topic, onTopic, compact = false, previ
 
   return (
     <div className="grid gap-5">
-      {!preview && <div className={`flex flex-wrap gap-1.5 ${compact ? 'justify-center' : ''}`}>
+      {!preview && (
+        <select value={t} onChange={(e) => setT(e.target.value)} aria-label="נושא"
+          className="sm:hidden rounded-full border border-ink bg-paper px-4 py-2 text-sm">
+          {avail.map((k) => <option key={k} value={k}>{labels[k]}</option>)}
+        </select>
+      )}
+      {!preview && <div className={`hidden sm:flex flex-wrap gap-1.5 ${compact ? 'justify-center' : ''}`}>
         {avail.map((k) => (
           <button key={k} onClick={() => setT(k)} aria-pressed={t === k}
             className={`px-3 py-1.5 rounded-full border text-sm ${t === k ? 'border-ink bg-ink text-paper' : 'border-rule text-sub hover:border-ink/40'}`}>

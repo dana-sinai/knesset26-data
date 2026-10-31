@@ -116,7 +116,7 @@ export default function PartyPage() {
             )}
 
             {tab === 'record' && (
-              <Section title="בעד ונגד, בפועל" aside={<Link to={`/record?p=${id}`} className="text-xs underline text-sub hover:text-ink">השוואה למפלגות אחרות ←</Link>}>
+              <Section title="בעד ונגד, בפועל" aside={<Link to="/clusters" className="text-xs underline text-sub hover:text-ink">מי מצביע עם מי ←</Link>}>
                 <p className="text-sm text-sub -mt-2">לפי מה שעשו בכנסות קודמות מי שנבחרו היום מטעם המפלגה. רוב המפלגה = רוב חבריה הנוכחיים שהצביעו באותה הצבעה.</p>
                 <TopicRecord partyId={id} />
               </Section>
