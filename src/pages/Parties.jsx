@@ -57,7 +57,7 @@ export default function Parties({ mode = 'people' }) {
           const w = g.filter((m) => m.gender === 'female').length;
           const n = g.filter((m) => m.is_new).length;
           return (
-            <Link key={p.id} to={`/party/${p.id}${voters ? '?tab=voters' : ''}`} className="rounded-xl border border-rule p-4 hover:border-ink/40 grid gap-2 bg-paper">
+            <Link key={p.id} to={`/party/${p.id}?tab=${voters ? 'voters' : 'people'}`} className="rounded-xl border border-rule p-4 hover:border-ink/40 grid gap-2 bg-paper">
               <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-sm" style={{ background: p.color }} /><h2 className="text-xl font-bold">{p.name_he}</h2></div>
               <p className="text-xs text-sub">{p.full_name_he} · בראשות {p.leader_he}</p>
               {voters ? (

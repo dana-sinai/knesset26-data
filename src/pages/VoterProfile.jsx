@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useData, useParties, fmt } from '@/lib/data';
-import { Loading, Page, Section } from '@/components/bits';
+import { Page, Section } from '@/components/bits';
 import VoteShareMap from '@/components/VoteShareMap';
 
 // public/data/voter_profile.json: one row per local authority — sector, valid votes, CBS / census characteristics (x),
@@ -20,11 +20,30 @@ function wstats(pairs) { // pairs [x, y, w]
 // All the characteristics at once. Many of them move together (education, wage and the CBS index; children and median age),
 // so plain least squares gives inflated coefficients with opposite signs. Ridge regression (a small penalty on the size of
 // the coefficients) lets related characteristics share the effect instead. Standardised variables, weighted by valid votes.
+// Each coefficient is the characteristic's own contribution with all the others held constant.
+// "Meaningful" = |coefficient| ≥ 0.1 and a 95% bootstrap interval (authorities resampled 200 times) that does not include 0.
 // Characteristics missing for more than 10% of the selected authorities are left out (and listed); turnout is not a
 // characteristic of the residents, so it is not used.
 const NOT_IN_MODEL = ['t26'];
 export const ORIGIN = ['c_africa', 'c_asia', 'c_europe', 'c_america'];
 const LAMBDA = 0.1; // penalty, as a share of the number of authorities
+const MIN_BETA = 0.1;
+function solve(A, b) { // Gauss-Jordan, in place
+  const p = b.length;
+  for (let i = 0; i < p; i += 1) {
+    let piv = i; for (let r = i + 1; r < p; r += 1) if (Math.abs(A[r][i]) > Math.abs(A[piv][i])) piv = r;
+    [A[i], A[piv]] = [A[piv], A[i]]; [b[i], b[piv]] = [b[piv], b[i]];
+    for (let r = 0; r < p; r += 1) { if (r === i) continue; const f = A[r][i] / A[i][i]; for (let c = i; c < p; c += 1) A[r][c] -= f * A[i][c]; b[r] -= f * b[i]; }
+  }
+  return b.map((v, i) => v / A[i][i]);
+}
+function fitRidge(X, Y, W, idx) {
+  const p = X.length, n = idx.length;
+  const A = Array.from({ length: p }, (_, i) => Array.from({ length: p }, (_, j) => idx.reduce((a, m) => a + W[m] * X[i][m] * X[j][m], 0) + (i === j ? LAMBDA * n : 0)));
+  const b = Array.from({ length: p }, (_, i) => idx.reduce((a, m) => a + W[m] * X[i][m] * Y[m], 0));
+  return solve(A, b);
+}
+function rng(seed) { let t = seed; return () => { t += 0x6d2b79f5; let r = Math.imul(t ^ (t >>> 15), 1 | t); r ^= r + Math.imul(r ^ (r >>> 7), 61 | r); return ((r ^ (r >>> 14)) >>> 0) / 4294967296; }; }
 function ridge(rows, vars, yk) {
   const cand = vars.filter((k) => !NOT_IN_MODEL.includes(k));
   const keys = cand.filter((k) => rows.filter((r) => r.x[k] == null).length <= rows.length * 0.1);
@@ -35,22 +54,21 @@ function ridge(rows, vars, yk) {
   const z = (vals) => { const m = vals.reduce((a, v, i) => a + W[i] * v, 0) / n; const sd = Math.sqrt(vals.reduce((a, v, i) => a + W[i] * (v - m) ** 2, 0) / n) || 1; return vals.map((v) => (v - m) / sd); };
   const X = keys.map((k) => z(data.map((r) => r.x[k])));
   const Y = z(data.map((r) => r.s[yk] ?? 0));
-  const A = Array.from({ length: p }, (_, i) => Array.from({ length: p }, (_, j) => X[i].reduce((a, v, m) => a + W[m] * v * X[j][m], 0) + (i === j ? LAMBDA * n : 0)));
-  const b = Array.from({ length: p }, (_, i) => X[i].reduce((a, v, m) => a + W[m] * v * Y[m], 0));
-  for (let i = 0; i < p; i += 1) { // Gauss-Jordan
-    let piv = i; for (let r = i + 1; r < p; r += 1) if (Math.abs(A[r][i]) > Math.abs(A[piv][i])) piv = r;
-    [A[i], A[piv]] = [A[piv], A[i]]; [b[i], b[piv]] = [b[piv], b[i]];
-    for (let r = 0; r < p; r += 1) { if (r === i) continue; const f = A[r][i] / A[i][i]; for (let c = i; c < p; c += 1) A[r][c] -= f * A[i][c]; b[r] -= f * b[i]; }
-  }
-  const beta = Object.fromEntries(keys.map((k, i) => [k, b[i] / A[i][i]]));
-  const fit = Y.map((_, m) => keys.reduce((a, k, i) => a + beta[k] * X[i][m], 0));
+  const all = Array.from({ length: n }, (_, i) => i);
+  const beta = fitRidge(X, Y, W, all);
+  const fit = Y.map((_, m) => keys.reduce((a, k, i) => a + beta[i] * X[i][m], 0));
   const sse = Y.reduce((a, y, m) => a + W[m] * (y - fit[m]) ** 2, 0), sst = Y.reduce((a, y, m) => a + W[m] * y * y, 0);
-  // what is shown: each characteristic on its own, except the four origin groups, which always appear together
-  const orig = keys.filter((k) => ORIGIN.includes(k));
-  const items = keys.filter((k) => !ORIGIN.includes(k)).map((k) => ({ keys: [k], score: Math.abs(beta[k]) }));
-  if (orig.length) items.push({ keys: orig, score: Math.max(...orig.map((k) => Math.abs(beta[k]))), origin: true });
-  items.sort((x, y) => y.score - x.score);
-  return { beta, items, keys, r2: 1 - sse / sst, n, left: cand.filter((k) => !keys.includes(k)) };
+  const rand = rng(1); const B = 200; const boot = keys.map(() => []);
+  for (let s = 0; s < B; s += 1) {
+    const idx = all.map(() => Math.floor(rand() * n));
+    fitRidge(X, Y, W, idx).forEach((v, i) => boot[i].push(v));
+  }
+  const q = (arr, f) => { const a = [...arr].sort((x, y) => x - y); return a[Math.min(a.length - 1, Math.floor(f * a.length))]; };
+  const coefs = keys.map((k, i) => {
+    const lo = q(boot[i], 0.025), hi = q(boot[i], 0.975);
+    return { k, b: beta[i], lo, hi, meaningful: Math.abs(beta[i]) >= MIN_BETA && (lo > 0 || hi < 0) };
+  }).sort((x, y) => Math.abs(y.b) - Math.abs(x.b));
+  return { coefs, keys, r2: 1 - sse / sst, n, left: cand.filter((k) => !keys.includes(k)) };
 }
 
 // share of each list in a set of authorities -> lists with at least 1% (others would only add noise)
@@ -122,30 +140,42 @@ export function SectorSelect({ data, value, onChange }) {
   );
 }
 
-function Bar({ v, max, color = 'rgb(var(--ink) / 0.7)' }) {
-  const w = Math.min(48, (Math.abs(v) / (max || 1)) * 46);
+// Positive values to the right of the centre line, negative to the left (physical sides, also in the RTL page).
+function Bar({ v, max, color = 'rgb(var(--ink) / 0.7)', lo, hi, faint }) {
+  const x = (u) => Math.max(1, Math.min(99, 50 + (u / (max || 1)) * 46)); // % from the left edge
   return (
     <span className="relative h-3 rounded-full bg-sand">
-      <span className="absolute top-0 bottom-0 w-px bg-ink/40" style={{ right: '50%' }} />
-      <span className="absolute top-0.5 bottom-0.5 rounded-full" style={{ background: color, right: v >= 0 ? `${50 - w}%` : '50%', left: v >= 0 ? '50%' : `${50 - w}%` }} />
+      <span className="absolute top-0 bottom-0 w-px bg-ink/40" style={{ left: '50%' }} />
+      <span className="absolute top-0.5 bottom-0.5 rounded-full" style={{ background: color, opacity: faint ? 0.35 : 1, left: `${Math.min(50, x(v))}%`, width: `${Math.abs(x(v) - 50)}%` }} />
+      {lo != null && <span className="absolute top-1/2 -translate-y-1/2 h-[2px] bg-ink" style={{ left: `${x(lo)}%`, width: `${x(hi) - x(lo)}%`, opacity: faint ? 0.3 : 0.55 }} />}
     </span>
   );
 }
 
-const TOP = 5;
+const share = (rows, pid) => rows.reduce((a, r) => a + r.v * (r.s[pid] || 0), 0);
+/** The authorities a party's own analysis starts from: Arab and Druze authorities for lists most of whose votes come from
+ *  there, Jewish authorities for everyone else. */
+export function homeSector(data, pid) {
+  const tot = share(data.rows, pid) || 1;
+  const ar = share(data.rows.filter((r) => r.g === 'arab' || r.g === 'druze'), pid);
+  return ar / tot > 0.5 ? 'arab' : 'jewish';
+}
 
-export default function VoterProfile() {
+/**
+ * One party's voters, by local authority: where they live compared with all voters, what predicts the vote (regression),
+ * and a scatter for any characteristic. Used on /represent (with party chips) and in the party page's voters tab.
+ */
+export function VoterAnalysis({ partyId, onParty = null, initialSector = null, initialX = null, showMap = false }) {
   const { data } = useData('voter_profile.json');
   const { data: parties } = useParties();
-  const [sp] = useSearchParams();
-  const [party, setParty] = useState(sp.get('p') || 'likud');
-  const [sector, setSector] = useState(sp.get('g') || 'jewish');
-  const [xv, setXv] = useState(sp.get('x') || 'se_index');
+  const [sector0, setSector] = useState(initialSector);
+  const [xv, setXv] = useState(initialX || 'se_index');
   const [all, setAll] = useState(false);
+  const sector = sector0 || (data && partyId ? homeSector(data, partyId) : 'jewish');
 
   const rows = useMemo(() => (data ? data.rows.filter((r) => sector === 'all' || r.g === sector) : []), [data, sector]);
   const pList = useMemo(() => listsIn(rows, parties), [parties, rows]);
-  const P = pList.some((p) => p.id === party) ? party : pList[0]?.id;
+  const P = onParty ? (pList.some((p) => p.id === partyId) ? partyId : pList[0]?.id) : partyId;
 
   const profile = useMemo(() => {
     if (!data || !P) return [];
@@ -165,10 +195,11 @@ export default function VoterProfile() {
 
   const reg = useMemo(() => (data && P ? ridge(rows, Object.keys(data.vars), P) : null), [data, rows, P]);
 
-  if (!data || !parties) return <Loading />;
+  if (!data || !parties) return <p className="text-sub text-sm">טוען…</p>;
   const pById = Object.fromEntries(parties.map((p) => [p.id, p]));
   const p = pById[P];
   const V = data.vars;
+  const partyVotes = rows.reduce((a, r) => a + r.v * (r.s[P] || 0) / 100, 0);
 
   // scatter
   const pts = rows.filter((r) => r.x[xv] != null && r.s[P] != null);
@@ -179,38 +210,29 @@ export default function VoterProfile() {
   const sx = (x) => pad + ((x - x0) / (x1 - x0 || 1)) * (W - 2 * pad), sy = (y) => H - pad - (y / y1) * (H - 2 * pad);
   const maxV = Math.max(...pts.map((r) => r.v), 1);
 
-  const shown = reg ? (all ? reg.items : reg.items.slice(0, TOP)) : [];
-  const bmax = reg ? Math.max(...Object.values(reg.beta).map(Math.abs)) : 1;
-  const regRow = (k, sub) => (
-    <div key={k} className={`grid grid-cols-[minmax(170px,1fr)_2fr_auto] items-center gap-3 text-sm`}>
-      <button onClick={() => setXv(k)} className={`text-right hover:underline ${sub ? 'pr-4' : ''}`}>{sub ? V[k][0].replace('מוצא ', '') : V[k][0]}</button>
-      <Bar v={reg.beta[k]} max={bmax} />
-      <span dir="ltr" className="num text-xs w-10 text-left">{reg.beta[k].toFixed(2)}</span>
-    </div>
-  );
+  const shown = reg ? (all ? reg.coefs : reg.coefs.filter((c) => c.meaningful)) : [];
+  const bmax = reg ? Math.max(0.3, ...reg.coefs.map((c) => Math.max(Math.abs(c.lo), Math.abs(c.hi)))) : 1;
+  const originShown = shown.some((c) => ORIGIN.includes(c.k));
+  const originAll = reg ? reg.coefs.filter((c) => ORIGIN.includes(c.k)) : [];
 
   return (
-    <Page>
-      <header className="grid gap-3 max-w-3xl">
-        <p className="text-sm text-gold font-semibold">מי בחר בהם</p>
-        <h1 className="text-4xl sm:text-5xl">מה מאפיין את מצביעי כל מפלגה</h1>
-        <p className="text-sub leading-relaxed">
-          ההצבעה בכל רשות מקומית, מול נתוני הלמ״ס עליה: השכלה, הכנסה, גיל, מוצא, עלייה, מגורים. הנתונים הם של רשויות ולא של אנשים – כשמפלגה
-          חזקה ברשויות עם הרבה בעלי תואר, זה לא אומר שבעלי התואר עצמם הצביעו לה.
-        </p>
-        <p className="text-sm text-sub">כל המפלגות מול כל המאפיינים, בטבלה אחת: <Link to="/voters" className="underline hover:text-ink">בתמונה הכללית ←</Link></p>
-      </header>
-
+    <div className="grid gap-12">
       <div className="grid gap-3">
-        <div className="flex flex-wrap gap-1.5">
-          {pList.map((x) => (
-            <button key={x.id} onClick={() => setParty(x.id)} aria-pressed={P === x.id}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-full border text-sm ${P === x.id ? 'border-ink bg-ink text-paper' : 'border-rule hover:border-ink/40'}`}>
-              <span className="w-2.5 h-2.5 rounded-full" style={{ background: x.color }} />{x.name_he}
-            </button>
-          ))}
-        </div>
+        {onParty && (
+          <div className="flex flex-wrap gap-1.5">
+            {pList.map((x) => (
+              <button key={x.id} onClick={() => onParty(x.id)} aria-pressed={P === x.id}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-full border text-sm ${P === x.id ? 'border-ink bg-ink text-paper' : 'border-rule hover:border-ink/40'}`}>
+                <span className="w-2.5 h-2.5 rounded-full" style={{ background: x.color }} />{x.name_he}
+              </button>
+            ))}
+          </div>
+        )}
         <SectorSelect data={data} value={sector} onChange={setSector} />
+        <p className="text-xs text-sub">
+          ברשויות שנבחרו: {fmt(Math.round(partyVotes))} קולות ל{p?.name_he}. הנתונים של רשויות ולא של אנשים – כשמפלגה חזקה ברשויות עם הרבה בעלי תואר,
+          זה לא אומר שבעלי התואר עצמם הצביעו לה.
+        </p>
       </div>
 
       <Section title={`איפה גרים מצביעי ${p?.name_he}`}>
@@ -224,39 +246,46 @@ export default function VoterProfile() {
             </div>
           ))}
         </div>
-        <p className="text-[11px] text-sub">פס לשמאל = גבוה מהממוצע, לימין = נמוך מהממוצע (ביחידות של סטיית תקן). לחצו על מאפיין כדי לראות את הרשויות בתרשים למטה.</p>
+        <p className="text-[11px] text-sub">פס ימינה מהקו = גבוה מהממוצע, שמאלה = נמוך מהממוצע (ביחידות של סטיית תקן). לחצו על מאפיין כדי לראות את הרשויות בתרשים למטה.</p>
       </Section>
 
       {reg && (
         <Section title={`מה מנבא את ההצבעה ל${p?.name_he}, כשבודקים הכל יחד`}>
           <div className="text-sm text-sub -mt-2 max-w-3xl grid gap-1.5 leading-relaxed">
             <p>
-              רגרסיה עם כל {reg.keys.length} המאפיינים בבת אחת. המספר הוא המקדם המתוקנן: בכמה סטיות תקן משתנה ההצבעה כשהמאפיין עולה בסטיית תקן אחת,
-              כשכל האחרים קבועים. R² = כמה מההבדלים בין הרשויות המודל מסביר.
+              רגרסיה עם כל {reg.keys.length} המאפיינים בבת אחת. כל מספר הוא התרומה הייחודית של המאפיין כשכל האחרים קבועים: בכמה סטיות תקן משתנה
+              ההצבעה כשהמאפיין עולה בסטיית תקן אחת. R² = כמה מההבדלים בין הרשויות המודל מסביר.
             </p>
             <p>
-              רבים מהמאפיינים קשורים זה לזה (למשל השכלה, שכר ומדד חברתי־כלכלי), ולכן זו רגרסיה מרוסנת (ridge): מאפיינים דומים מתחלקים בהשפעה,
-              במקום שאחד יקבל מקדם מנופח והשני מקדם הפוך. {all ? 'מוצגים כל המאפיינים' : `מוצגים ${TOP} המאפיינים החזקים`}, וקבוצות המוצא תמיד מוצגות יחד.
+              {all ? 'מוצגים כל המאפיינים' : 'מוצגים רק המאפיינים המשמעותיים'}, מהחזק לחלש: מקדם של 0.1 לפחות, שגם בדגימות חוזרות של הרשויות
+              (bootstrap) נשאר באותו כיוון. הקו הדק = טווח של 95%. רבים מהמאפיינים קשורים זה לזה (השכלה, שכר, מדד חברתי־כלכלי), ולכן זו רגרסיה
+              מרוסנת (ridge), שבה מאפיינים דומים מתחלקים בהשפעה במקום לקבל מקדמים מנופחים בכיוונים הפוכים.
             </p>
           </div>
           <div className="grid gap-1.5 max-w-2xl">
-            {shown.map((it) => (it.origin ? (
-              <div key="origin" className="grid gap-1">
-                <span className="text-sm">מוצא (לפי יבשת)</span>
-                {it.keys.map((k) => regRow(k, true))}
+            {shown.map((c) => (
+              <div key={c.k} className="grid grid-cols-[minmax(170px,1fr)_2fr_auto] items-center gap-3 text-sm">
+                <button onClick={() => setXv(c.k)} className={`text-right hover:underline ${c.meaningful ? '' : 'text-sub'}`}>{V[c.k][0]}</button>
+                <Bar v={c.b} max={bmax} lo={c.lo} hi={c.hi} faint={!c.meaningful} />
+                <span dir="ltr" className={`num text-xs w-10 text-left ${c.meaningful ? '' : 'text-sub'}`}>{c.b.toFixed(2)}</span>
               </div>
-            ) : regRow(it.keys[0])))}
+            ))}
+            {!shown.length && <p className="text-sm text-sub">אף מאפיין לא עבר את הסף.</p>}
           </div>
+          {originShown && (
+            <p className="text-xs text-sub max-w-3xl">
+              המוצא נכנס למודל בארבע קבוצות, ומוצגות למעלה רק המשמעותיות. כל הארבע:{' '}
+              {originAll.map((c) => <span key={c.k} className="whitespace-nowrap">{V[c.k][0].replace('מוצא ', '')} <span dir="ltr" className="num">{c.b.toFixed(2)}</span></span>).reduce((a, x) => [...a, a.length ? ' · ' : '', x], [])}.
+            </p>
+          )}
           <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-sm">
             <span>R² = <strong className="num">{reg.r2.toFixed(2)}</strong> · {reg.n} רשויות</span>
-            {reg.items.length > TOP && (
-              <button onClick={() => setAll((v) => !v)} className="text-xs underline text-sub hover:text-ink">
-                {all ? `רק ${TOP} החזקים` : `הצגת כל ${reg.keys.length} המאפיינים`}
-              </button>
-            )}
+            <button onClick={() => setAll((v) => !v)} className="text-xs underline text-sub hover:text-ink">
+              {all ? 'רק המשמעותיים' : `הצגת כל ${reg.keys.length} המאפיינים`}
+            </button>
           </div>
           <p className="text-[11px] text-sub max-w-3xl">
-            לא נכללו: {[...reg.left.filter((k) => k !== 't26').map((k) => `${V[k][0]} (חסר לחלק מהרשויות)`), 'שיעור ההצבעה (הוא חלק מההצבעה עצמה)'].join(' · ')}.
+            לא נכללו: {[...reg.left.map((k) => `${V[k][0]} (חסר לחלק מהרשויות)`), 'שיעור ההצבעה (הוא חלק מההצבעה עצמה)'].join(' · ')}.
           </p>
         </Section>
       )}
@@ -283,8 +312,8 @@ export default function VoterProfile() {
         <p className="text-[11px] text-sub">כל עיגול הוא רשות מקומית, בגודל לפי מספר המצביעים בה. רחפו מעל עיגול לשם הרשות. הקו המקווקו: מגמה ליניארית.</p>
       </Section>
 
-      {p && (
-        <Section title={`מפת הקולות של ${p.name_he}`} aside={<Link to={`/party/${p.id}?tab=voters`} className="text-xs underline text-sub hover:text-ink">עוד על מצביעי {p.name_he} ←</Link>}>
+      {showMap && p && (
+        <Section title={`מפת הקולות של ${p.name_he}`} aside={<Link to={`/party/${p.id}?tab=voters`} className="text-xs underline text-sub hover:text-ink">עמוד המפלגה ←</Link>}>
           <p className="text-sm text-sub -mt-2 max-w-3xl">כל יישוב בארץ (לא רק הרשויות שנבחרו למעלה): גודל העיגול לפי מספר הקולות למפלגה, והכהות לפי השיעור שלה ביישוב.</p>
           <VoteShareMap partyId={p.id} color={p.color} />
         </Section>
@@ -294,6 +323,24 @@ export default function VoterProfile() {
         מקור: {data.source} הניתוח לפי רשות, על הקלפיות הרגילות (המעטפות הכפולות לא משויכות ליישוב). כל החישובים משוקללים לפי מספר הקולות.
         מועצה אזורית נספרת כרשות אחת.
       </p>
+    </div>
+  );
+}
+
+export default function VoterProfile() {
+  const [sp] = useSearchParams();
+  const [party, setParty] = useState(sp.get('p') || 'likud');
+  return (
+    <Page>
+      <header className="grid gap-3 max-w-3xl">
+        <p className="text-sm text-gold font-semibold">מי בחר בהם</p>
+        <h1 className="text-4xl sm:text-5xl">מה מאפיין את מצביעי כל מפלגה</h1>
+        <p className="text-sub leading-relaxed">
+          ההצבעה בכל רשות מקומית, מול נתוני הלמ״ס עליה: השכלה, הכנסה, גיל, מוצא, עלייה, מגורים. אותו ניתוח מופיע גם בעמוד של כל מפלגה, בלשונית „מי בחר בהם״.
+        </p>
+        <p className="text-sm text-sub">כל המפלגות מול כל המאפיינים, בטבלה אחת: <Link to="/voters" className="underline hover:text-ink">בתמונה הכללית ←</Link></p>
+      </header>
+      <VoterAnalysis partyId={party} onParty={setParty} initialSector={sp.get('g') || 'jewish'} initialX={sp.get('x')} showMap />
     </Page>
   );
 }

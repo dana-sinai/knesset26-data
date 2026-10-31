@@ -12,6 +12,7 @@ import Parties from './pages/Parties';
 import PartyPage from './pages/PartyPage';
 import MapPage from './pages/MapPage';
 import VoterProfile from './pages/VoterProfile';
+import PartyVotes from './pages/PartyVotes';
 import Votes from './pages/Votes';
 import About from './pages/About';
 import Topics from './pages/Topics';
@@ -37,6 +38,7 @@ function App() {
             <Route path="/represent" element={<VoterProfile />} />
             <Route path="/map" element={<MapPage />} />
             <Route path="/votes" element={<Votes />} />
+            <Route path="/party-votes" element={<PartyVotes />} />
             <Route path="/clusters" element={<Topics />} />
             <Route path="/topics" element={<Topics />} />
             <Route path="/about" element={<About />} />

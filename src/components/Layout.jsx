@@ -4,7 +4,7 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import MKDrawer from '@/components/MKDrawer';
 import ReportDialog, { ReportLink } from '@/components/Report';
-import { NAV_GROUPS, groupOf } from '@/lib/nav';
+import { NAV_GROUPS, sectionOf } from '@/lib/nav';
 
 const pill = (on) => `px-3 py-1.5 rounded-md transition-colors ${on ? 'bg-ink text-paper' : 'hover:bg-sand'}`;
 
@@ -30,8 +30,8 @@ function GroupMenu({ g, active }) {
 
 export default function Layout() {
   const [open, setOpen] = useState(false);
-  const { pathname } = useLocation();
-  const cur = groupOf(pathname === '/topics' ? '/clusters' : pathname.startsWith('/party/') ? '/parties' : pathname.startsWith('/mk/') ? '/mks' : pathname);
+  const { pathname, search } = useLocation();
+  const cur = sectionOf(pathname, search);
   return (
     <div className="min-h-screen bg-paper text-ink flex flex-col">
       <header className="sticky top-0 z-[1100] border-b border-rule bg-paper/95 backdrop-blur">

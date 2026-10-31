@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useOpenMK } from '@/components/MKDrawer';
+import { usePartyHref } from '@/lib/nav';
 
 const ROWS = 7;
 const R_OUT = 200;
@@ -32,6 +33,7 @@ function layout(total) {
  */
 export default function Hemicycle({ mks, parties, groups, match, label }) {
   const openMK = useOpenMK();
+  const partyHref = usePartyHref();
   const [hover, setHover] = useState(null);
 
   const { seats, gs } = useMemo(() => {
@@ -88,7 +90,7 @@ export default function Hemicycle({ mks, parties, groups, match, label }) {
             <div key={g.id} className="grid gap-1 content-start border-t-2 pt-2" style={{ borderColor: g.color }}>
               <span className="num font-semibold text-sm">{match ? <>{sel} <span className="text-sub font-normal">מתוך {tot}</span></> : `${tot} מושבים`}</span>
               {g.parties.map((p) => (
-                <Link key={p.id} to={`/party/${p.id}`} className="hover:underline flex items-center gap-1.5">
+                <Link key={p.id} to={partyHref(p.id)} className="hover:underline flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full" style={{ background: p.color }} />{p.name_he}
                   <span className="text-sub num mr-auto">{match ? `${byParty[p.id] || 0}/${p.seats}` : p.seats}</span>
                 </Link>

@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
+import { usePartyHref } from '@/lib/nav';
 import { ExternalLink, AlertTriangle } from 'lucide-react';
 import { useMKs, useParties, useData, EDU_LABEL, SECTOR_LABEL, FIELD_HE, sourceName, pct, fmt } from '@/lib/data';
 import { Initials, Src, Loading, Page, Section } from '@/components/bits';
@@ -34,11 +35,13 @@ function Tabs({ tabs, value, onChange }) {
   );
 }
 
-export function MKProfile({ id, compact = false, initialTab = null, initialTopic = null }) {
+export function MKProfile({ id, compact = false, initialTab = null, initialTopic = null, onTab = null }) {
+  const partyHref = usePartyHref();
   const { data: mks } = useMKs();
   const { data: parties } = useParties();
   const { data: parl } = useData('parliament.json');
-  const [tab, setTab] = useState(initialTab || 'profile');
+  const [tab, setTab0] = useState(initialTab || 'profile');
+  const setTab = (k) => { setTab0(k); onTab?.(k); };
   const m = useMemo(() => mks?.find((x) => x.id === id), [mks, id]);
   const party = parties?.find((p) => p.id === m?.party);
   if (!mks || !parties) return <Loading />;
@@ -68,7 +71,7 @@ export function MKProfile({ id, compact = false, initialTab = null, initialTopic
           )}
         </div>
         <div className="grid gap-1">
-          <Link to={`/party/${party.id}`} className="text-sm font-semibold hover:underline" style={{ color: party.color }}>
+          <Link to={partyHref(party.id)} className="text-sm font-semibold hover:underline" style={{ color: party.color }}>
             {party.name_he} · מקום {m.list_position} ברשימה
           </Link>
           <h1 className={compact ? 'text-3xl font-black' : 'text-4xl font-black'}>{m.name_he}</h1>
@@ -273,5 +276,7 @@ export function MKProfile({ id, compact = false, initialTab = null, initialTopic
 
 export default function MKPage() {
   const { id } = useParams();
-  return <Page><MKProfile id={id} /></Page>;
+  const [sp, setSp] = useSearchParams();
+  // the tab is kept in the address, so the header menu can show which section it belongs to
+  return <Page><MKProfile key={id} id={id} initialTab={sp.get('tab')} onTab={(k) => setSp(k === 'profile' ? {} : { tab: k }, { replace: true })} /></Page>;
 }
