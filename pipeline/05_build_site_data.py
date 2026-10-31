@@ -243,8 +243,8 @@ meta = dict(
     swearing_in="2026-11-10",
     # Groups are unnamed on purpose; the legend lists the member parties. Split follows the
     # 53 / 48 / 19 bloc count in post-election coverage, with the Haredi parties shown separately.
-    groups=[dict(id="g1", color="#98606E"), dict(id="g2", color="#4A4359"),
-            dict(id="g3", color="#4E7C78"), dict(id="g4", color="#9C7A45")],
+    groups=[dict(id="g1", color="#9A5B5B"), dict(id="g2", color="#5A4A3E"),
+            dict(id="g3", color="#4A6E8C"), dict(id="g4", color="#5E7F5A")],
     groups_source="חלוקה לגושים כפי שדווחה בסיקור תוצאות הבחירות (53 / 48 / 19), כשהמפלגות החרדיות מוצגות בנפרד",
 )
 json.dump(meta, open(f"{OUT}/meta.json", "w"), ensure_ascii=False, indent=1)
