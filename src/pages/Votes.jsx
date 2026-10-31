@@ -120,6 +120,21 @@ function VoteDetail({ vote, k, mks, partyById }) {
   );
 }
 
+// how much the plenum agreed: share of the larger side among those who voted for or against
+const AGREE = [
+  ['contested', 'שנויות במחלוקת', 'לפחות 20 מצביעים, ולפחות רבע מהם בכל צד'],
+  ['broad', 'רוב גדול', 'הצד הגדול קיבל 75%–95% מהקולות'],
+  ['consensus', 'כמעט פה אחד', 'הצד הגדול קיבל 95% ומעלה'],
+  ['small', 'מעט מצביעים', 'פחות מ-20 הצביעו בעד או נגד'],
+  ['all', 'הכל', ''],
+];
+const agreeOf = (v) => {
+  const n = v.f + v.a;
+  if (n < 20) return 'small';
+  const big = Math.max(v.f, v.a) / n;
+  return big >= 0.95 ? 'consensus' : big > 0.75 ? 'broad' : 'contested';
+};
+
 const fmtD = (d) => d.slice(0, 10).split('-').reverse().join('.');
 
 export default function Votes() {
@@ -135,7 +150,11 @@ export default function Votes() {
   const [n, setN] = useState(60);
   const [type, setType] = useState('all');
   const [topic, setTopic] = useState('');
-  const [contested, setContested] = useState(true);
+  const [agree, setAgree] = useState('contested'); // all | consensus | broad | contested
+  const [outcome, setOutcome] = useState(''); // '' | passed | failed
+  const [mech, setMech] = useState('');
+  const [who, setWho] = useState('');
+  const { data: ess } = useData('topics/bill_essence.json', { retry: false });
   const { data: meta } = useData(`votes/meta_k${k}.json`);
   const { data: idx } = useData('votes/index.json');
   const { data: meaning } = useData('topics/vote_meaning.json', { retry: false });
@@ -143,7 +162,8 @@ export default function Votes() {
   const KS = Object.keys(idx || { 25: 1 }).map(Number).sort((a, b) => b - a);
   const partyById = useMemo(() => Object.fromEntries((parties || []).map((p) => [p.id, p])), [parties]);
   const all = useMemo(() => (meta ? meta.votes.map((v) => ({ id: v[0], dt: v[1], title: v[2], subject: v[3], f: v[4], a: v[5], ab: v[6], item: v[7] }))
-    .map((v) => ({ ...v, type: voteType(v), topics: (bt && v.item != null && bt[v.item]) || [], contested: v.f + v.a >= 20 && Math.min(v.f, v.a) / (v.f + v.a) >= 0.25 })).reverse() : []), [meta, bt]);
+    .map((v) => ({ ...v, type: voteType(v), topics: (bt && v.item != null && bt[v.item]) || [], contested: v.f + v.a >= 20 && Math.min(v.f, v.a) / (v.f + v.a) >= 0.25 }))
+    .map((v) => ({ ...v, agree: agreeOf(v), passed: v.f > v.a })).reverse() : []), [meta, bt]);
   const set = (patch) => {
     const o = Object.fromEntries(sp.entries());
     Object.entries(patch).forEach(([a, b]) => (b == null || b === '' ? delete o[a] : (o[a] = String(b))));
@@ -151,9 +171,13 @@ export default function Votes() {
   };
   const list = useMemo(() => {
     const qq = q.trim();
-    return all.filter((v) => (!billParam || v.item === billParam) && (!contested || billParam || v.contested) && (type === 'all' || v.type === type)
+    const e = (v) => (ess && v.item != null ? ess.bills[String(v.item)] : null);
+    return all.filter((v) => (!billParam || v.item === billParam) && (billParam || agree === 'all' || v.agree === agree) && (type === 'all' || v.type === type)
+      && (!outcome || (outcome === 'passed') === v.passed)
+      && (!mech || [e(v)?.[0], e(v)?.[1]].includes(mech)) && (!who || [e(v)?.[2], e(v)?.[3]].includes(who))
       && (!topic || v.topics.includes(topic)) && (!qq || `${v.title} ${v.subject}`.includes(qq)));
-  }, [all, q, type, topic, billParam, contested]);
+  }, [all, q, type, topic, billParam, agree, outcome, mech, who, ess]);
+  const agreeCounts = useMemo(() => all.reduce((c, v) => ({ ...c, [v.agree]: (c[v.agree] || 0) + 1 }), { all: all.length }), [all]);
   const typeCounts = useMemo(() => {
     const c = { all: all.length };
     all.forEach((v) => (c[v.type] = (c[v.type] || 0) + 1));
@@ -183,12 +207,32 @@ export default function Votes() {
           {VOTE_TYPES.map(([v, l]) => <option key={v} value={v}>{l} ({(typeCounts[v] || 0).toLocaleString('he-IL')})</option>)}
         </select>
         <TopicSelect value={topic} onChange={(t) => { setTopic(t); setN(60); }} counts={topicCounts} />
-        <label className="flex items-center gap-1.5 rounded-md border border-rule px-2 py-1.5 cursor-pointer" title="לפחות 20 מצביעים, ולפחות רבע מהם בכל צד">
-          <input type="checkbox" checked={contested} onChange={(e) => { setContested(e.target.checked); setN(60); }} />
-          רק הצבעות שנויות במחלוקת ({all.filter((v) => v.contested).length.toLocaleString('he-IL')})
-        </label>
+        <select value={outcome} onChange={(e) => { setOutcome(e.target.value); setN(60); }} aria-label="תוצאה" className="rounded-md border border-rule bg-paper px-2 py-1.5">
+          <option value="">התקבלה או לא</option><option value="passed">התקבלה (רוב בעד)</option><option value="failed">לא התקבלה</option>
+        </select>
+        {ess && (
+          <>
+            <select value={mech} onChange={(e) => { setMech(e.target.value); setN(60); }} aria-label="מה החוק עושה" className="rounded-md border border-rule bg-paper px-2 py-1.5">
+              <option value="">מה החוק עושה: הכל</option>
+              {Object.entries(ess.labels.mechanism).filter(([k2]) => k2 !== 'other').map(([k2, l]) => <option key={k2} value={k2}>{l}</option>)}
+            </select>
+            <select value={who} onChange={(e) => { setWho(e.target.value); setN(60); }} aria-label="על מי הוא משפיע" className="rounded-md border border-rule bg-paper px-2 py-1.5">
+              <option value="">על מי הוא משפיע: כולם</option>
+              {Object.entries(ess.labels.who).filter(([k2]) => k2 !== 'other').map(([k2, l]) => <option key={k2} value={k2}>{l}</option>)}
+            </select>
+          </>
+        )}
         <span className="text-sub num">{list.length.toLocaleString('he-IL')} הצבעות</span>
         {billParam && <button onClick={() => set({ bill: null, id: null })} className="text-xs underline text-sub">הצגת כל ההצבעות (כרגע: הצבעות על הצעת חוק אחת)</button>}
+      </div>
+      <div className="flex flex-wrap items-center gap-1.5 text-sm -mt-2">
+        <span className="text-xs text-sub">מידת ההסכמה:</span>
+        {AGREE.map(([key, l, hint]) => (
+          <button key={key} onClick={() => { setAgree(key); setN(60); }} aria-pressed={agree === key} title={hint}
+            className={`px-3 py-1 rounded-full border text-xs ${agree === key ? 'border-ink bg-ink text-paper' : 'border-rule text-sub hover:border-ink/40'}`}>
+            {l} <span className="num opacity-70">{(agreeCounts[key] || 0).toLocaleString('he-IL')}</span>
+          </button>
+        ))}
       </div>
       <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] gap-6 items-start">
         <ul className={`grid gap-1 max-h-[75vh] overflow-auto pl-1 ${sel ? 'hidden lg:grid' : ''}`}>
@@ -200,6 +244,12 @@ export default function Votes() {
                 className={`w-full text-right rounded-lg border px-3 py-2 text-sm grid gap-1 ${sel?.id === v.id ? 'border-ink bg-sand' : 'border-rule hover:border-ink/40'}`}>
                 <span>{v.title || '(ללא כותרת)'}</span>
                 <span className="text-xs text-sub num">{fmtD(v.dt)} · בעד {v.f} · נגד {v.a}{v.ab ? ` · נמנעו ${v.ab}` : ''}{v.subject ? ` · ${v.subject}` : ''}</span>
+                {v.f + v.a > 0 && (
+                  <span className="flex h-1.5 rounded-full overflow-hidden bg-sand" title={`${Math.round((v.f / (v.f + v.a)) * 100)}% בעד`}>
+                    <span style={{ width: `${(v.f / (v.f + v.a)) * 100}%`, background: '#2F4A3A' }} />
+                    <span style={{ width: `${(v.a / (v.f + v.a)) * 100}%`, background: '#6A3036' }} />
+                  </span>
+                )}
                 <TopicChips billId={v.item} />
               </button>
             </li>
