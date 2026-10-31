@@ -59,7 +59,11 @@ python3 pipeline/09_topics_and_positions.py | tail -4
 if python3 pipeline/10_classify_new.py | tee /dev/stderr | grep -q RERUN_09; then
   python3 pipeline/09_topics_and_positions.py | tail -2
 fi
-python3 pipeline/11_export_models.py | tail -3
+# topics that site visitors agreed on, for bills the model was unsure about
+if python3 pipeline/12_crowd_topics.py | tee /dev/stderr | grep -q RERUN_09; then
+  python3 pipeline/09_topics_and_positions.py | tail -2
+fi
+python3 pipeline/11_export_models.py | tail -4
 echo "left for review: $(wc -l < pipeline/work/new_bills_unclassified.tsv) bill topics, $(wc -l < pipeline/work/new_meaning_needed.tsv) 'בעד =' lines"
 python3 - <<'PY'
 import json

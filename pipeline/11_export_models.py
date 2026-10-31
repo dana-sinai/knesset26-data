@@ -84,6 +84,37 @@ texts = [norm(n) for n in b.Name]
 labels = [bt.get(str(i), [None])[0] for i in b.BillID]
 train_export("topic", texts, labels, topics)
 
+# ---------------- bills waiting for a topic (model unsure / "other"), with the model's 3 best guesses, for the
+# "help us classify" page. They stay without a topic until visitors agree (step 12).
+_df = pd.DataFrame({"x": texts, "y": labels}).dropna()
+_vec = TfidfVectorizer(analyzer="char_wb", ngram_range=(2, 5), min_df=2, sublinear_tf=True, max_features=MAX_FEATURES)
+_clf = LinearSVC(C=0.5).fit(_vec.fit_transform(_df.x), _df.y)
+name_of = dict(zip(b.BillID.astype(str), b.Name))
+waiting = {}
+if os.path.exists("pipeline/work/new_bills_unclassified.tsv"):
+    for line in open("pipeline/work/new_bills_unclassified.tsv", encoding="utf-8"):
+        p = line.rstrip("\n").split("\t")
+        if p and p[0].strip().isdigit():
+            waiting[p[0]] = p[1] if len(p) > 1 else name_of.get(p[0], "")
+for k_, v_ in bt.items():
+    if v_[0] == "other":
+        waiting.setdefault(k_, name_of.get(k_, ""))
+crowd_done = set()
+if os.path.exists("pipeline/input/bill_topics_extra.tsv"):
+    for line in open("pipeline/input/bill_topics_extra.tsv", encoding="utf-8"):
+        p = line.rstrip("\n").split("\t")
+        if len(p) > 4 and p[4].startswith("crowd:"):
+            crowd_done.add(p[0])
+items = []
+for k_, nm in waiting.items():
+    if k_ in crowd_done or not str(nm).strip():
+        continue
+    sc = _clf.decision_function(_vec.transform([norm(nm)]))[0]
+    order = [c for c in _clf.classes_[np.argsort(-sc)] if c != "other"][:3]
+    items.append(dict(bill=int(k_), name=str(nm), guesses=list(order)))
+json.dump(sorted(items, key=lambda x: -x["bill"]), open("public/data/topics/needs_help.json", "w"), ensure_ascii=False, separators=(",", ":"))
+print(f"needs_help.json: {len(items)} bills waiting for a topic")
+
 # ---------------- mechanism / who (title + "בעד =" line), from the reviewed essence labels
 ess_path = "pipeline/input/bill_essence.tsv"
 if os.path.exists(ess_path):
