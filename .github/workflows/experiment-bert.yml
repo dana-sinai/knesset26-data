@@ -1,0 +1,22 @@
+# One-off experiment (run by hand): fine-tune DictaBERT on the topic labels and compare with the site's model.
+name: experiment-bert
+on:
+  workflow_dispatch:
+    inputs:
+      model: { description: "Hugging Face model", default: "dicta-il/dictabert" }
+      epochs: { description: "Epochs", default: "3" }
+permissions:
+  contents: read
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install --index-url https://download.pytorch.org/whl/cpu torch && pip install transformers pandas scikit-learn
+      - run: python3 pipeline/experiments/finetune_dictabert.py
+        env:
+          BERT: ${{ inputs.model }}
+          EPOCHS: ${{ inputs.epochs }}
