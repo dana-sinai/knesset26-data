@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { LayoutGrid, Table2, Download } from 'lucide-react';
+import { LayoutGrid, Table2, Download, SlidersHorizontal } from 'lucide-react';
 import { useMKs, useParties, EDU_LABEL, EDU_ORDER, pct } from '@/lib/data';
 import { useMKFilters, METRICS, metricValue } from '@/lib/filters';
 import FilterPanel from '@/components/FilterPanel';
@@ -47,6 +47,7 @@ export default function MKs() {
   const { data: parties } = useParties();
   const filters = useMKFilters(mks);
   const [view, setView] = useState('cards');
+  const [panel, setPanel] = useState(true); // side filter panel (desktop)
   const [sort, setSort] = useState('party');
   const [col, setCol] = useState(null); // { i, dir } when sorted by clicking a table header
   const clickCol = (i) => setCol((c) => (c && c.i === i ? { i, dir: c.dir === 'asc' ? 'desc' : 'asc' } : { i, dir: COLS[i][2] ? 'asc' : 'desc' }));
@@ -60,8 +61,8 @@ export default function MKs() {
         <h1 className="text-4xl font-black">חברי הכנסת ה-26</h1>
         <p className="text-sub">כל מה שידוע על חברי הכנסת אפשר לסנן ולמיין: רקע אישי, מקום מגורים, ולמי שכיהן/ה – הצבעות, הצעות חוק ונוכחות בוועדות.</p>
       </header>
-      <div className="grid lg:grid-cols-[300px_1fr] gap-8 items-start">
-        <aside className="lg:sticky lg:top-20 rounded-xl border border-rule p-4 bg-sand/40">
+      <div className={`grid gap-8 items-start ${panel ? 'lg:grid-cols-[300px_1fr]' : ''}`}>
+        <aside className={`lg:sticky lg:top-20 rounded-xl border border-rule p-4 bg-sand/40 ${panel ? '' : 'lg:hidden'}`}>
           <FilterPanel mks={mks} parties={parties} filters={filters} count={list.length} />
         </aside>
         <div className="grid gap-4 content-start">
@@ -76,6 +77,9 @@ export default function MKs() {
               </select>
             </div>}
             <div className="flex items-center gap-1">
+              <button onClick={() => setPanel(!panel)} className="hidden lg:flex items-center gap-1 text-xs border border-rule rounded-md px-2 py-1.5 hover:bg-sand">
+                <SlidersHorizontal size={14} />{panel ? 'הסתרת הסינון' : `סינון${filters.active ? ' (פעיל)' : ''}`}
+              </button>
               <a href="/data/mks.csv" download className="flex items-center gap-1 text-xs border border-rule rounded-md px-2 py-1.5 hover:bg-sand"><Download size={14} />CSV</a>
               <button onClick={() => setView('cards')} aria-label="כרטיסים" className={`p-1.5 rounded-md ${view === 'cards' ? 'bg-ink text-paper' : 'hover:bg-sand'}`}><LayoutGrid size={16} /></button>
               <button onClick={() => setView('table')} aria-label="טבלה" className={`p-1.5 rounded-md ${view === 'table' ? 'bg-ink text-paper' : 'hover:bg-sand'}`}><Table2 size={16} /></button>
@@ -107,7 +111,9 @@ export default function MKs() {
                       <td className="px-3 py-1.5 num">{m.age != null ? `${m.age_approx ? '~' : ''}${m.age}` : '—'}</td>
                       <td className="px-3 py-1.5 whitespace-nowrap">{m.residence?.name || '—'}</td>
                       <td className="px-3 py-1.5 whitespace-nowrap">{EDU_LABEL[m.education_level]}</td>
-                      <td className="px-3 py-1.5 num">{m.prior_terms.length ? m.prior_terms.join(', ') : 'חדש/ה'}</td>
+                      <td className="px-3 py-1.5 num whitespace-nowrap" title={m.prior_terms.join(', ')}>
+                        {!m.prior_terms.length ? 'חדש/ה' : m.prior_terms.length <= 2 ? m.prior_terms.join(', ') : `${m.prior_terms.length} (${Math.min(...m.prior_terms)}–${Math.max(...m.prior_terms)})`}
+                      </td>
                       <td className="px-3 py-1.5 num">{pct(m.metrics?.faction_rate, 1)}</td>
                       <td className="px-3 py-1.5 num">{pct(m.metrics?.participation)}</td>
                       <td className="px-3 py-1.5 num">{m.metrics?.bills_per_k ?? '—'}</td>
