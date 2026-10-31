@@ -38,7 +38,7 @@ export default function Topics() {
 
       {d?.clusters?.length > 1 && (
         <Section title="מה מבדיל בין הקבוצות">
-          <p className="text-sm text-sub -mt-2 max-w-3xl">ההצבעות שבהן כל קבוצה הצביעה אחרת מהאחרות – מה הקבוצה תמכה בו או התנגדה לו. הכותרת היא מה פירוש ההצבעה "בעד".</p>
+          <p className="text-sm text-sub -mt-2 max-w-3xl">לכל קבוצה: הצעות שרובה תמך בהן ורוב הקבוצות האחרות התנגד להן. השורה הראשונה היא מה פירוש ההצבעה "בעד". לחצו על נקודה במפה כדי לראות איפה חבר/ת כנסת מסוים/ת שונה מכל קבוצה.</p>
           <Sides topic={t} groups={d.clusters.map((c) => ({ id: c.id }))} />
         </Section>
       )}

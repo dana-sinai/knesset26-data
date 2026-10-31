@@ -120,7 +120,7 @@ export function Sides({ topic, groups }) {
       det.votes.forEach((v) => {
         const sides = v[7].map(side);
         const mine = sides[g.id];
-        if (!mine) return;
+        if (mine !== 1) return; // what this group supported while the others opposed
         const others = sides.filter((_, gi) => gi !== g.id);
         if (!others.length || others.some((o) => !o || o === mine)) return;
         const gap = Math.min(...v[7].filter((_, gi) => gi !== g.id).map((o) => Math.abs(o[0] - v[7][g.id][0])));
@@ -136,10 +136,10 @@ export function Sides({ topic, groups }) {
       {cols.map(({ g, list }) => (
         <div key={g.id} className="rounded-xl border border-rule p-4 grid gap-2 content-start">
           <h3 className="text-2xl">{GROUP_NAMES[g.id]}</h3>
-          <p className="text-xs text-sub">הצבעות שבהן רוב {GROUP_NAMES[g.id]} הצביע אחרת מרוב {groups.length > 2 ? 'כל הקבוצות האחרות' : GROUP_NAMES[groups.find((x) => x.id !== g.id).id]} ({list.length})</p>
+          <p className="text-xs text-sub">הצעות שרוב {GROUP_NAMES[g.id]} תמך בהן, ורוב {groups.length > 2 ? 'כל הקבוצות האחרות' : GROUP_NAMES[groups.find((x) => x.id !== g.id).id]} התנגד ({list.length})</p>
           <ul className="grid">
-            {list.slice(0, 10).map(({ v, mine }) => (
-              <VoteLine key={v[0]} v={v} right={<Pill strong>{SIDE[mine]} · <span className="num">{Math.round(v[7][g.id][0] * 100)}%</span></Pill>} />
+            {list.slice(0, 10).map(({ v }) => (
+              <VoteLine key={v[0]} v={v} right={<>{v[7].map((o, gi) => <Pill key={gi} strong={gi === g.id}>{GROUP_NAMES[gi]}: <span className="num">{Math.round(o[0] * 100)}%</span> בעד</Pill>)}</>} />
             ))}
           </ul>
           {!list.length && <p className="text-sm text-sub">אין הצבעות כאלה בנושא.</p>}
