@@ -120,7 +120,7 @@ export default function ClusterExplorer({ topic, onTopic, compact = false }) {
                 )}
               </div>
             ))}
-            {compact && <Link to={`/topics${t !== 'all' ? `?t=${t}` : ''}`} className="text-sm underline text-sub justify-self-start">החוקים שמבדילים בין הקבוצות ←</Link>}
+            {compact && <Link to={`/clusters${t !== 'all' ? `?t=${t}` : ''}`} className="text-sm underline text-sub justify-self-start">החוקים שמבדילים בין הקבוצות ←</Link>}
           </div>
         </div>
       )}
