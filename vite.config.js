@@ -4,6 +4,8 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // changes on every build/publish, so browsers never keep serving yesterday's data files (they are cached for an hour)
+  define: { __DATA_VERSION__: JSON.stringify(String(Date.now())) },
   plugins: [
     base44({
       // Support for legacy code that imports the base44 SDK with @/integrations, @/entities, etc.

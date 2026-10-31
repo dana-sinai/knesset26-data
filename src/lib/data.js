@@ -1,9 +1,12 @@
+/* global __DATA_VERSION__ */
 import { useQuery } from '@tanstack/react-query';
+
+const DATA_VERSION = typeof __DATA_VERSION__ !== 'undefined' ? __DATA_VERSION__ : '';
 
 const cache = new Map();
 export async function loadJSON(path) {
   if (!cache.has(path)) {
-    cache.set(path, fetch(`/data/${path}`).then((r) => {
+    cache.set(path, fetch(`/data/${path}?v=${DATA_VERSION}`).then((r) => {
       if (!r.ok) throw new Error(`לא ניתן לטעון ${path}`);
       return r.json();
     }));
