@@ -32,6 +32,7 @@ function App() {
             <Route path="/represent" element={<Represent />} />
             <Route path="/map" element={<MapPage />} />
             <Route path="/votes" element={<Votes />} />
+            <Route path="/clusters" element={<Topics />} />
             <Route path="/topics" element={<Topics />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<PageNotFound />} />

@@ -236,7 +236,7 @@ export default function Home() {
         )}
       </section>
 
-      <Section title={match ? `${label}: ${sel.length} חברי כנסת` : 'מי בכנסת ה-26'}
+      <Section title={match ? `הפרופיל של: ${label}` : 'מי בכנסת ה-26'}
         aside={match
           ? <button onClick={() => document.getElementById('names')?.scrollIntoView({ behavior: 'smooth' })} className="text-xs underline text-sub hover:text-ink">↑ לרשימת השמות</button>
           : <span className="text-xs text-sub">לחצו על כל עמודה כדי לסנן את העמוד</span>}>
