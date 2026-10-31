@@ -53,7 +53,11 @@ export default function VoterProfile() {
   const [xv, setXv] = useState('se_index');
 
   const rows = useMemo(() => (data ? data.rows.filter((r) => sector === 'all' || r.g === sector) : []), [data, sector]);
-  const pList = useMemo(() => (parties || []).filter((p) => p.seats > 0 && rows.some((r) => r.s[p.id] != null)), [parties, rows]);
+  // lists with at least 1% of the vote in the selected authorities (others would only add noise)
+  const pList = useMemo(() => {
+    const tot = rows.reduce((a, r) => a + r.v, 0) || 1;
+    return (parties || []).filter((p) => p.seats > 0 && rows.reduce((a, r) => a + r.v * (r.s[p.id] || 0) / 100, 0) / tot >= 0.01);
+  }, [parties, rows]);
   const P = pList.some((p) => p.id === party) ? party : pList[0]?.id;
 
   const profile = useMemo(() => {
@@ -152,7 +156,7 @@ export default function VoterProfile() {
           <select value={xv} onChange={(e) => setXv(e.target.value)} className="rounded-md border border-rule bg-paper px-2 py-1">
             {Object.entries(V).map(([k, [l]]) => <option key={k} value={k}>{l}</option>)}
           </select>
-          {st && <span className="text-sub">מתאם r = <strong className="num text-ink">{st.r.toFixed(2)}</strong> · {pts.length} רשויות</span>}
+          {st && <span className="text-sub">מתאם r = <strong dir="ltr" className="num text-ink">{st.r.toFixed(2)}</strong> · {pts.length} רשויות</span>}
         </div>
         <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-3xl h-auto rounded-xl border border-rule bg-paper" style={{ direction: 'ltr' }}>
           <text x={W / 2} y={H - 6} textAnchor="middle" fontSize="11" fill="rgb(var(--sub))">{V[xv][0]}</text>
@@ -183,7 +187,7 @@ export default function VoterProfile() {
                     return (
                       <td key={x.id} className="p-0">
                         <button onClick={() => { setParty(x.id); setXv(k); }} title={`${x.name_he} × ${l}: r = ${r?.toFixed(2)}`}
-                          className={`num w-14 h-7 rounded text-[11px] ${P === x.id && xv === k ? 'ring-2 ring-ink' : ''}`} style={heat(r)}>
+                          dir="ltr" className={`num w-14 h-7 rounded text-[11px] ${P === x.id && xv === k ? 'ring-2 ring-ink' : ''}`} style={heat(r)}>
                           {r == null || Number.isNaN(r) ? '' : r.toFixed(2)}
                         </button>
                       </td>
@@ -210,7 +214,7 @@ export default function VoterProfile() {
                   <span className="absolute top-0 bottom-0 w-px bg-ink/40" style={{ right: '50%' }} />
                   <span className="absolute top-0.5 bottom-0.5 rounded-full bg-ink/70" style={{ right: reg.beta[i] >= 0 ? `${50 - Math.min(48, reg.beta[i] * 45)}%` : '50%', left: reg.beta[i] >= 0 ? '50%' : `${50 - Math.min(48, -reg.beta[i] * 45)}%` }} />
                 </span>
-                <span className="num text-xs w-10 text-left">{reg.beta[i].toFixed(2)}</span>
+                <span dir="ltr" className="num text-xs w-10 text-left">{reg.beta[i].toFixed(2)}</span>
               </div>
             ))}
           </div>
