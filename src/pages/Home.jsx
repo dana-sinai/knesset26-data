@@ -87,7 +87,7 @@ export default function Home() {
           </div>
         </Door>
 
-        <Door g={group('voters')} to="/voters" lead="מי הצביע לכל רשימה ומאיפה, והאם הנבחרים באים מאותם מקומות כמו הבוחרים שלהם.">
+        <Door g={group('voters')} to="/voters" lead="מי הצביע לכל רשימה ומאיפה, ומה מאפיין את הרשויות שבהן כל מפלגה חזקה.">
           <LeadMap height={300} />
         </Door>
 
