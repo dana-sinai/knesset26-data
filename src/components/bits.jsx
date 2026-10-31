@@ -39,7 +39,7 @@ export function Stat({ label, value, hint }) {
   return (
     <div className="rounded-xl border border-rule bg-paper p-4">
       <div className="text-xs text-sub">{label}</div>
-      <div className="text-3xl font-light num mt-1">{value}</div>
+      <div className="font-title text-4xl num mt-1">{value}</div>
       {hint && <div className="text-[11px] text-sub mt-1">{hint}</div>}
     </div>
   );

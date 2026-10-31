@@ -70,7 +70,7 @@ export default function Hemicycle({ mks, parties, groups, match, label }) {
               <title>{`${s.m.name_he} · ${s.p.name_he}`}</title>
             </circle>
           ))}
-          <text x={CX} y={CY - 6} textAnchor="middle" className="fill-ink" style={{ font: '300 38px var(--font-body)' }}>{n}</text>
+          <text x={CX} y={CY - 6} textAnchor="middle" className="fill-ink" style={{ font: '400 46px var(--font-title)' }}>{n}</text>
           <text x={CX} y={CY + 14} textAnchor="middle" style={{ font: '400 11px var(--font-body)', fill: 'rgb(var(--sub))' }}>
             {match ? `מתוך 120${label ? ` · ${label}` : ''}` : 'חברי כנסת'}
           </text>

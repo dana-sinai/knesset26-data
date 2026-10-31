@@ -52,7 +52,7 @@ export default function Electorate({ data, partyId, color }) {
           ['turnout', 'אחוז הצבעה ביישובי המצביעים', (v) => `${v.toFixed(1)}%`]].map(([k, l, f]) => (
           <div key={k} className="rounded-lg border border-rule p-3">
             <div className="text-xs text-sub">{l}</div>
-            <div className="text-2xl font-light num">{e.avg[k] != null ? f(e.avg[k]) : '—'}</div>
+            <div className="font-title text-3xl num">{e.avg[k] != null ? f(e.avg[k]) : '—'}</div>
             <div className="text-[11px] text-sub">כלל המצביעים: {all.avg[k] != null ? f(all.avg[k]) : '—'}</div>
           </div>
         ))}
