@@ -60,7 +60,8 @@ if python3 pipeline/10_classify_new.py | tee /dev/stderr | grep -q RERUN_09; the
   python3 pipeline/09_topics_and_positions.py | tail -2
 fi
 # topics that site visitors agreed on, for bills the model was unsure about
-if python3 pipeline/12_crowd_topics.py | tee /dev/stderr | grep -q RERUN_09; then
+# (off until we decide how to prevent abuse; set pipeline/input/crowd_topics.txt to "on" to enable)
+if [ "$(cat pipeline/input/crowd_topics.txt 2>/dev/null)" = "on" ] && python3 pipeline/12_crowd_topics.py | tee /dev/stderr | grep -q RERUN_09; then
   python3 pipeline/09_topics_and_positions.py | tail -2
 fi
 python3 pipeline/11_export_models.py | tail -4

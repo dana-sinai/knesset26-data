@@ -17,7 +17,6 @@ import About from './pages/About';
 import Topics from './pages/Topics';
 import Record from './pages/Record';
 import Who from './pages/Who';
-import Help from './pages/Help';
 
 // Public, read-only site: no sign-in required; all data is static JSON under /public/data.
 function App() {
@@ -34,7 +33,6 @@ function App() {
             <Route path="/parties" element={<Parties />} />
             <Route path="/voters" element={<Parties mode="voters" />} />
             <Route path="/record" element={<Record />} />
-            <Route path="/help" element={<Help />} />
             <Route path="/party/:id" element={<PartyPage />} />
             <Route path="/represent" element={<Represent />} />
             <Route path="/map" element={<MapPage />} />
