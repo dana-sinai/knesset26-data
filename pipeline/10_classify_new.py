@@ -1,6 +1,8 @@
 """Step 10: small local model for new bills (runs inside the daily build, no AI service needed).
 
-* Topic: a TF-IDF (character n-grams) + linear SVM classifier, trained on the ~21,000 bills already labelled.
+* Topic: a TF-IDF (character n-grams) + linear SVM classifier, retrained on every run (about 3 seconds) from all
+  bills labelled so far — the original ~21,000 plus any labelled later by review (not its own guesses), so it keeps
+  learning, and there is no saved model file to break when the sandbox reinstalls its packages.
   Held-out check (by distinct bill name): 87% agreement overall; 95.6% on the 73% of bills where the model's
   confidence is >= 0.7. Only those confident predictions are written; the rest stay in
   work/new_bills_unclassified.tsv for the daily task to label by hand.
@@ -41,7 +43,11 @@ if new:
     bt = json.load(open("public/data/topics/bill_topics.json"))
     b = pd.read_csv(f"{W}/bills_to_classify.csv")
     b["y"] = b.BillID.astype(str).map(lambda x: bt.get(x, ["other"])[0])
-    b = b.drop_duplicates("norm")
+    # also learn from bills labelled since then by review — but never from the model's own guesses
+    extra = [r for r in read_tsv(f"{I}/bill_topics_extra.tsv") if len(r) >= 4 and not (len(r) > 4 and r[4].startswith("model:"))]
+    if extra:
+        b = pd.concat([b[["norm", "y"]], pd.DataFrame({"norm": [norm(r[3]) for r in extra], "y": [r[1] for r in extra]})])
+    b = b.drop_duplicates("norm", keep="last")
     vec = TfidfVectorizer(analyzer="char_wb", ngram_range=(2, 5), min_df=2, sublinear_tf=True)
     X = vec.fit_transform(list(b.norm.astype(str)))
     clf = CalibratedClassifierCV(LinearSVC(C=0.5), cv=3).fit(X, list(b.y))
