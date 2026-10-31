@@ -46,13 +46,13 @@ jobs:
         run: |
           set -o pipefail
           bash pipeline/run_daily.sh fetch 2>&1 | tee /tmp/fetch.log || { tail -20 /tmp/fetch.log | sed 's/^/::error::/'; exit 1; }
-          grep -E '^(changed|new plenum|left for review|topics by)' /tmp/fetch.log | sed 's/^/::notice::/' || true
+          grep -E '^(changed|new plenum|left for review|topics by|model )' /tmp/fetch.log | sed 's/^/::notice::/' || true
 
       - name: Rebuild the site data
         run: |
           set -o pipefail
           bash pipeline/run_daily.sh build 2>&1 | tee /tmp/build.log || { tail -20 /tmp/build.log | sed 's/^/::error::/'; exit 1; }
-          grep -E '^(changed|new plenum|left for review|topics by)' /tmp/build.log | sed 's/^/::notice::/' || true
+          grep -E '^(changed|new plenum|left for review|topics by|model )' /tmp/build.log | sed 's/^/::notice::/' || true
 
       - name: Stamp the data version
         run: |
