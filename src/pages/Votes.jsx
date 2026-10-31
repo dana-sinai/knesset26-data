@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ExternalLink, ArrowRight } from 'lucide-react';
+import { ReportLink } from '@/components/Report';
 import { useMKs, useParties, useData, useBillTopics, useBillSummaries, VOTE_CODE, VOTE_CLASS, knessetBillUrl } from '@/lib/data';
 import TopicChips, { TopicSelect } from '@/components/TopicChips';
 import { Loading, Page } from '@/components/bits';
@@ -278,6 +279,7 @@ export default function Votes() {
                 <div className="flex flex-wrap items-center gap-2 text-xs">
                   <TopicChips billId={sel.item} />
                   <a href={knessetBillUrl(sel.item)} target="_blank" rel="noreferrer" className="flex items-center gap-1 underline text-sub hover:text-ink">דף הצעת החוק באתר הכנסת<ExternalLink size={11} /></a>
+                  <ReportLink context={`הצבעה ${sel.id} (הכנסת ה-${k}): ${sel.title}`} className="underline text-sub hover:text-ink" />
                 </div>
               )}
               {sameBill.length > 1 && (

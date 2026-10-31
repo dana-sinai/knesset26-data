@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import MKDrawer from '@/components/MKDrawer';
+import ReportDialog, { ReportLink } from '@/components/Report';
 import { NAV_GROUPS, groupOf } from '@/lib/nav';
 
 const pill = (on) => `px-3 py-1.5 rounded-md transition-colors ${on ? 'bg-ink text-paper' : 'hover:bg-sand'}`;
@@ -68,6 +69,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <MKDrawer />
+      <ReportDialog />
       <footer className="border-t border-rule mt-16">
         <div className="mx-auto max-w-7xl px-4 py-8 text-sm text-sub grid gap-2">
           <p className="text-xs">
@@ -77,7 +79,7 @@ export default function Layout() {
           <p className="text-xs">
             ניתוח עצמאי של ד״ר דנה סיני, שנעשה באופן אישי. אינו מייצג, ואינו קשור, לאף מעסיק בהווה או בעבר.
             {' '}כל הנתונים מגיעים ממקורות ציבוריים פתוחים ומתעדכנים אוטומטית. מצאתם טעות?{' '}
-            <Link className="underline" to="/about#report">ספרו לנו</Link>.
+<ReportLink>ספרו לנו</ReportLink>.
           </p>
         </div>
       </footer>
