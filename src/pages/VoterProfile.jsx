@@ -17,59 +17,11 @@ function wstats(pairs) { // pairs [x, y, w]
   return { r: cxy / Math.sqrt(cxx * cyy), slope: cxy / cxx, mx, my };
 }
 
-// All the characteristics at once. Many of them move together (education, wage and the CBS index; children and median age),
-// so plain least squares gives inflated coefficients with opposite signs. Ridge regression (a small penalty on the size of
-// the coefficients) lets related characteristics share the effect instead. Standardised variables, weighted by valid votes.
-// Each coefficient is the characteristic's own contribution with all the others held constant.
-// "Meaningful" = |coefficient| ≥ 0.1 and a 95% bootstrap interval (authorities resampled 200 times) that does not include 0.
-// Characteristics missing for more than 10% of the selected authorities are left out (and listed); turnout is not a
-// characteristic of the residents, so it is not used.
-const NOT_IN_MODEL = ['t26'];
 export const ORIGIN = ['c_africa', 'c_asia', 'c_europe', 'c_america'];
-const LAMBDA = 0.1; // penalty, as a share of the number of authorities
-const MIN_BETA = 0.1;
-function solve(A, b) { // Gauss-Jordan, in place
-  const p = b.length;
-  for (let i = 0; i < p; i += 1) {
-    let piv = i; for (let r = i + 1; r < p; r += 1) if (Math.abs(A[r][i]) > Math.abs(A[piv][i])) piv = r;
-    [A[i], A[piv]] = [A[piv], A[i]]; [b[i], b[piv]] = [b[piv], b[i]];
-    for (let r = 0; r < p; r += 1) { if (r === i) continue; const f = A[r][i] / A[i][i]; for (let c = i; c < p; c += 1) A[r][c] -= f * A[i][c]; b[r] -= f * b[i]; }
-  }
-  return b.map((v, i) => v / A[i][i]);
-}
-function fitRidge(X, Y, W, idx) {
-  const p = X.length, n = idx.length;
-  const A = Array.from({ length: p }, (_, i) => Array.from({ length: p }, (_, j) => idx.reduce((a, m) => a + W[m] * X[i][m] * X[j][m], 0) + (i === j ? LAMBDA * n : 0)));
-  const b = Array.from({ length: p }, (_, i) => idx.reduce((a, m) => a + W[m] * X[i][m] * Y[m], 0));
-  return solve(A, b);
-}
-function rng(seed) { let t = seed; return () => { t += 0x6d2b79f5; let r = Math.imul(t ^ (t >>> 15), 1 | t); r ^= r + Math.imul(r ^ (r >>> 7), 61 | r); return ((r ^ (r >>> 14)) >>> 0) / 4294967296; }; }
-function ridge(rows, vars, yk) {
-  const cand = vars.filter((k) => !NOT_IN_MODEL.includes(k));
-  const keys = cand.filter((k) => rows.filter((r) => r.x[k] == null).length <= rows.length * 0.1);
-  const data = rows.filter((r) => keys.every((k) => r.x[k] != null));
-  const n = data.length, p = keys.length;
-  if (n < 15 || !p) return null;
-  const W0 = data.map((r) => r.v); const mw = W0.reduce((a, b) => a + b, 0) / n; const W = W0.map((w) => w / mw);
-  const z = (vals) => { const m = vals.reduce((a, v, i) => a + W[i] * v, 0) / n; const sd = Math.sqrt(vals.reduce((a, v, i) => a + W[i] * (v - m) ** 2, 0) / n) || 1; return vals.map((v) => (v - m) / sd); };
-  const X = keys.map((k) => z(data.map((r) => r.x[k])));
-  const Y = z(data.map((r) => r.s[yk] ?? 0));
-  const all = Array.from({ length: n }, (_, i) => i);
-  const beta = fitRidge(X, Y, W, all);
-  const fit = Y.map((_, m) => keys.reduce((a, k, i) => a + beta[i] * X[i][m], 0));
-  const sse = Y.reduce((a, y, m) => a + W[m] * (y - fit[m]) ** 2, 0), sst = Y.reduce((a, y, m) => a + W[m] * y * y, 0);
-  const rand = rng(1); const B = 200; const boot = keys.map(() => []);
-  for (let s = 0; s < B; s += 1) {
-    const idx = all.map(() => Math.floor(rand() * n));
-    fitRidge(X, Y, W, idx).forEach((v, i) => boot[i].push(v));
-  }
-  const q = (arr, f) => { const a = [...arr].sort((x, y) => x - y); return a[Math.min(a.length - 1, Math.floor(f * a.length))]; };
-  const coefs = keys.map((k, i) => {
-    const lo = q(boot[i], 0.025), hi = q(boot[i], 0.975);
-    return { k, b: beta[i], lo, hi, meaningful: Math.abs(beta[i]) >= MIN_BETA && (lo > 0 || hi < 0) };
-  }).sort((x, y) => Math.abs(y.b) - Math.abs(x.b));
-  return { coefs, keys, r2: 1 - sse / sst, n, left: cand.filter((k) => !keys.includes(k)) };
-}
+// "What explains the differences" comes precomputed in voter_profile.json["importance"] (pipeline/14_voter_importance.py):
+// relative importance (LMG), i.e. each characteristic's part of the model's R², with overlapping variance split fairly
+// between the characteristics that share it. Items below MIN_PART of the differences are not shown.
+const MIN_PART = 0.02;
 
 // share of each list in a set of authorities -> lists with at least 1% (others would only add noise)
 export function listsIn(rows, parties) {
@@ -193,7 +145,7 @@ export function VoterAnalysis({ partyId, onParty = null, initialSector = null, i
     }).filter((x) => Number.isFinite(x.pm) && Number.isFinite(x.all)).sort((x, y) => Math.abs(y.d) - Math.abs(x.d)); // no data for these authorities -> left out
   }, [data, rows, P]);
 
-  const reg = useMemo(() => (data && P ? ridge(rows, Object.keys(data.vars), P) : null), [data, rows, P]);
+  const imp = data?.importance?.[sector]?.[P] || null;
 
   if (!data || !parties) return <p className="text-sub text-sm">טוען…</p>;
   const pById = Object.fromEntries(parties.map((p) => [p.id, p]));
@@ -210,10 +162,10 @@ export function VoterAnalysis({ partyId, onParty = null, initialSector = null, i
   const sx = (x) => pad + ((x - x0) / (x1 - x0 || 1)) * (W - 2 * pad), sy = (y) => H - pad - (y / y1) * (H - 2 * pad);
   const maxV = Math.max(...pts.map((r) => r.v), 1);
 
-  const shown = reg ? (all ? reg.coefs : reg.coefs.filter((c) => c.meaningful)) : [];
-  const bmax = reg ? Math.max(0.3, ...reg.coefs.map((c) => Math.max(Math.abs(c.lo), Math.abs(c.hi)))) : 1;
-  const originShown = shown.some((c) => ORIGIN.includes(c.k));
-  const originAll = reg ? reg.coefs.filter((c) => ORIGIN.includes(c.k)) : [];
+  const label = (k) => (k === 'origin' ? data.importance_vars?.origin || 'מוצא משפחתי' : V[k]?.[0] || k);
+  const shown = imp ? (all ? imp.items : imp.items.filter((it) => it[1] >= MIN_PART)) : [];
+  const hidden = imp ? imp.items.length - imp.items.filter((it) => it[1] >= MIN_PART).length : 0;
+  const imax = imp ? Math.max(...imp.items.map((it) => it[1]), 0.05) : 1;
 
   return (
     <div className="grid gap-12">
@@ -249,43 +201,40 @@ export function VoterAnalysis({ partyId, onParty = null, initialSector = null, i
         <p className="text-[11px] text-sub">פס ימינה מהקו = גבוה מהממוצע, שמאלה = נמוך מהממוצע (ביחידות של סטיית תקן). לחצו על מאפיין כדי לראות את הרשויות בתרשים למטה.</p>
       </Section>
 
-      {reg && (
-        <Section title={`מה מנבא את ההצבעה ל${p?.name_he}, כשבודקים הכל יחד`}>
+      {imp && (
+        <Section title={`מה מסביר את ההבדלים בהצבעה ל${p?.name_he} בין הרשויות`}>
           <div className="text-sm text-sub -mt-2 max-w-3xl grid gap-1.5 leading-relaxed">
             <p>
-              רגרסיה עם כל {reg.keys.length} המאפיינים בבת אחת. כל מספר הוא התרומה הייחודית של המאפיין כשכל האחרים קבועים: בכמה סטיות תקן משתנה
-              ההצבעה כשהמאפיין עולה בסטיית תקן אחת. R² = כמה מההבדלים בין הרשויות המודל מסביר.
+              כל המאפיינים יחד מסבירים <strong className="text-ink num">{Math.round(imp.r2 * 100)}%</strong> מההבדלים בשיעור ההצבעה ל{p?.name_he} בין {imp.n} הרשויות.
+              הפס מראה כמה מזה שייך לכל מאפיין. מאפיינים רבים חופפים (השכלה, שכר ומדד חברתי־כלכלי הולכים יחד), ולכן החלק המשותף מתחלק ביניהם
+              בשווה: מחשבים כמה כל מאפיין מוסיף להסבר בכל סדר אפשרי של הכנסת המאפיינים, ולוקחים ממוצע (שיטת LMG). החלקים מסתכמים בסך הכל.
             </p>
             <p>
-              {all ? 'מוצגים כל המאפיינים' : 'מוצגים רק המאפיינים המשמעותיים'}, מהחזק לחלש: מקדם של 0.1 לפחות, שגם בדגימות חוזרות של הרשויות
-              (bootstrap) נשאר באותו כיוון. הקו הדק = טווח של 95%. רבים מהמאפיינים קשורים זה לזה (השכלה, שכר, מדד חברתי־כלכלי), ולכן זו רגרסיה
-              מרוסנת (ridge), שבה מאפיינים דומים מתחלקים בהשפעה במקום לקבל מקדמים מנופחים בכיוונים הפוכים.
+              „לבד״ = כמה המאפיין מסביר אם בודקים רק אותו. ↑ = המפלגה חזקה יותר ברשויות שבהן המאפיין גבוה, ↓ = חלשה יותר. מוצא משפחתי נכנס כיחידה אחת
+              (ארבע היבשות יחד), ולכן אין לו כיוון אחד – את הכיוון של כל יבשה רואים בפסים למעלה ובתרשים.
+              {!all && ` מוצגים מאפיינים שמסבירים לפחות ${Math.round(MIN_PART * 100)}% מההבדלים, מהגדול לקטן.`}
             </p>
           </div>
           <div className="grid gap-1.5 max-w-2xl">
-            {shown.map((c) => (
-              <div key={c.k} className="grid grid-cols-[minmax(170px,1fr)_2fr_auto] items-center gap-3 text-sm">
-                <button onClick={() => setXv(c.k)} className={`text-right hover:underline ${c.meaningful ? '' : 'text-sub'}`}>{V[c.k][0]}</button>
-                <Bar v={c.b} max={bmax} lo={c.lo} hi={c.hi} faint={!c.meaningful} />
-                <span dir="ltr" className={`num text-xs w-10 text-left ${c.meaningful ? '' : 'text-sub'}`}>{c.b.toFixed(2)}</span>
+            {shown.map(([k, part, alone, r]) => (
+              <div key={k} className="grid grid-cols-[minmax(170px,1.2fr)_2fr_auto] items-center gap-3 text-sm">
+                {k === 'origin'
+                  ? <span className={part >= MIN_PART ? '' : 'text-sub'}>{label(k)}</span>
+                  : <button onClick={() => setXv(k)} className={`text-right hover:underline ${part >= MIN_PART ? '' : 'text-sub'}`}>{label(k)} <span className="text-sub">{r > 0 ? '↑' : '↓'}</span></button>}
+                <span className="h-3 rounded-full bg-sand overflow-hidden"><span className="block h-full rounded-full bg-ink/70" style={{ width: `${(part / imax) * 100}%`, opacity: part >= MIN_PART ? 1 : 0.35 }} /></span>
+                <span className="text-xs w-28 text-left whitespace-nowrap"><strong className="num">{Math.round(part * 100)}%</strong> <span className="text-sub">· לבד <span className="num">{Math.round(alone * 100)}%</span></span></span>
               </div>
             ))}
-            {!shown.length && <p className="text-sm text-sub">אף מאפיין לא עבר את הסף.</p>}
           </div>
-          {originShown && (
-            <p className="text-xs text-sub max-w-3xl">
-              המוצא נכנס למודל בארבע קבוצות, ומוצגות למעלה רק המשמעותיות. כל הארבע:{' '}
-              {originAll.map((c) => <span key={c.k} className="whitespace-nowrap">{V[c.k][0].replace('מוצא ', '')} <span dir="ltr" className="num">{c.b.toFixed(2)}</span></span>).reduce((a, x) => [...a, a.length ? ' · ' : '', x], [])}.
-            </p>
-          )}
           <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-sm">
-            <span>R² = <strong className="num">{reg.r2.toFixed(2)}</strong> · {reg.n} רשויות</span>
-            <button onClick={() => setAll((v) => !v)} className="text-xs underline text-sub hover:text-ink">
-              {all ? 'רק המשמעותיים' : `הצגת כל ${reg.keys.length} המאפיינים`}
-            </button>
+            {hidden > 0 && (
+              <button onClick={() => setAll((v) => !v)} className="text-xs underline text-sub hover:text-ink">
+                {all ? 'רק העיקריים' : `הצגת כל ${imp.items.length} המאפיינים`}
+              </button>
+            )}
           </div>
           <p className="text-[11px] text-sub max-w-3xl">
-            לא נכללו: {[...reg.left.map((k) => `${V[k][0]} (חסר לחלק מהרשויות)`), 'שיעור ההצבעה (הוא חלק מההצבעה עצמה)'].join(' · ')}.
+            הנתונים של רשויות ולא של אנשים, והקשר אינו בהכרח סיבתי. לא נכללו: שיעור ההצבעה (הוא חלק מההצבעה עצמה), ומאפיינים שחסרים ליותר מעשירית מהרשויות שנבחרו.
           </p>
         </Section>
       )}
