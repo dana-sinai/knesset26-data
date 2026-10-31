@@ -11,7 +11,7 @@ import { FindMK } from '@/pages/Who';
 
 const group = (k) => NAV_GROUPS.find((g) => g.key === k);
 
-function Door({ g, lead, to, children }) {
+function Door({ g, lead, to, children, linkBody = true }) {
   return (
     <section className="rounded-2xl border border-rule p-5 sm:p-6 grid gap-4 content-start bg-paper">
       <div className="grid gap-1">
@@ -21,7 +21,7 @@ function Door({ g, lead, to, children }) {
         </Link>
         <p className="text-sm text-sub leading-relaxed">{lead}</p>
       </div>
-      <Link to={to} className="block">{children}</Link>
+      {linkBody ? <Link to={to} className="block">{children}</Link> : children}
       <ul className="grid gap-1 border-t border-rule pt-3">
         {g.items.map(([href, label, desc]) => (
           <li key={href}>
@@ -91,7 +91,7 @@ export default function Home() {
           <LeadMap height={300} />
         </Door>
 
-        <Door g={group('do')} to="/record" lead="איך הצביעו בפועל, בכל נושא: מי בעד מה, מי מצביע כמו מי, וכל הצבעה במליאה.">
+        <Door g={group('do')} to="/clusters" linkBody={false} lead="איך הצביעו בפועל, בכל נושא: מי בעד מה, מי מצביע כמו מי, וכל הצבעה במליאה.">
           <ClusterExplorer preview />
         </Door>
       </div>

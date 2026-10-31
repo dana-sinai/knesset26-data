@@ -75,34 +75,29 @@ export default function ClusterExplorer({ topic, onTopic, compact = false, previ
   // always show the names first (even a single one); the name itself opens the member card
   const pick = (cl, party) => setSel(sel && sel.cl === cl && sel.party === party ? null : { cl, party });
 
-  if (preview) {
-    // home page: only the map of all topics; the topics and the groups are on the full page
-    return d ? <ClusterMap data={d} pidToMK={pidToMK} partyById={partyById} highlight={null} /> : null;
-  }
-
   return (
     <div className="grid gap-5">
-      <div className={`flex flex-wrap gap-1.5 ${compact ? 'justify-center' : ''}`}>
+      {!preview && <div className={`flex flex-wrap gap-1.5 ${compact ? 'justify-center' : ''}`}>
         {avail.map((k) => (
           <button key={k} onClick={() => setT(k)} aria-pressed={t === k}
             className={`px-3 py-1.5 rounded-full border text-sm ${t === k ? 'border-ink bg-ink text-paper' : 'border-rule text-sub hover:border-ink/40'}`}>
             {labels[k]}
           </button>
         ))}
-      </div>
+      </div>}
       {d && (
-        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-8 items-start">
+        <div className={preview ? 'grid gap-3' : 'grid lg:grid-cols-[1.4fr_1fr] gap-8 items-start'}>
           <div className="grid gap-2">
             <ClusterMap data={d} pidToMK={pidToMK} partyById={partyById} highlight={highlight} />
-            <p className="text-[11px] text-sub">
+            {!preview && <p className="text-[11px] text-sub">
               {d.n_votes.toLocaleString('he-IL')} הצבעות שנויות במחלוקת · {d.points.length} חברי כנסת שכיהנו בעבר, עם מספיק הצבעות בנושא.
               הקבוצות נקבעו מההצבעות בלבד; הצירים אינם מסמנים ימין/שמאל.
-            </p>
+            </p>}
           </div>
-          <div className="grid gap-4">
+          <div className={preview ? 'grid gap-2' : 'grid gap-4'}>
             {d.clusters.map((c) => (
-              <div key={c.id} className="rounded-xl border border-rule p-4 grid gap-2">
-                <div className="flex items-baseline justify-between"><h3 className="text-2xl">{GROUP_NAMES[c.id]}</h3><span className="text-xs text-sub num">{c.size} חברי כנסת</span></div>
+              <div key={c.id} className={`rounded-xl border border-rule grid gap-2 ${preview ? 'p-3' : 'p-4'}`}>
+                <div className="flex items-baseline justify-between"><h3 className={preview ? 'text-xl' : 'text-2xl'}>{GROUP_NAMES[c.id]}</h3><span className="text-xs text-sub num">{c.size} חברי כנסת</span></div>
                 <div className="flex flex-wrap gap-1.5 text-xs">
                   {c.parties.map(([p, n]) => {
                     const active = sel && sel.cl === c.id && sel.party === p;
