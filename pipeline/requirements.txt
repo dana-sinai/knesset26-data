@@ -1,0 +1,6 @@
+pandas>=3.0,<4
+pyarrow>=20
+numpy>=2
+scikit-learn>=1.6
+pyproj>=3.6
+openpyxl>=3.1

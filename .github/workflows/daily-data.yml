@@ -1,0 +1,82 @@
+# Daily data update for the 26th Knesset site.
+# Downloads what changed on the oKnesset mirror of the Knesset open data, rebuilds public/data with the
+# pipeline in pipeline/ (incl. the small local topic classifier), and publishes public/data on GitHub Pages,
+# where the site reads it. No site republish is needed for new data.
+name: daily-data
+
+on:
+  schedule:
+    - cron: "17 3 * * *"   # 05:17 UTC = 07:17 Israel (winter), 06:17 (summer)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-data
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: pipeline/requirements.txt
+
+      - name: Install Python packages
+        run: pip install -r pipeline/requirements.txt
+
+      # Keep the downloaded raw files between runs, so only files that changed upstream are downloaded again.
+      - name: Restore raw downloads
+        uses: actions/cache@v4
+        with:
+          path: pipeline/raw/ok
+          key: oknesset-raw-${{ github.run_id }}
+          restore-keys: oknesset-raw-
+
+      - name: Download changes from the oKnesset mirror
+        run: bash pipeline/run_daily.sh fetch
+
+      - name: Rebuild the site data
+        run: bash pipeline/run_daily.sh build
+
+      - name: Stamp the data version
+        run: |
+          python3 - <<'PY'
+          import json, datetime, os
+          json.dump({"built": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
+                     "run": os.environ.get("GITHUB_RUN_ID")}, open("public/data/version.json", "w"))
+          PY
+
+      # Labels the pipeline learned (new bill topics, "בעד =" lines) are kept in the repo.
+      - name: Save new labels
+        run: |
+          git config user.name "daily-data bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pipeline/input pipeline/work/new_bills_unclassified.tsv pipeline/work/new_meaning_needed.tsv
+          if git diff --cached --quiet; then echo "no label changes"; exit 0; fi
+          git commit -m "Daily data: new labels $(date -u +%F)"
+          for i in 1 2 3; do git pull --rebase -X theirs origin main && git push && break; sleep 10; done
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public/data
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
