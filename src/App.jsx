@@ -11,7 +11,7 @@ import MKPage from './pages/MKPage';
 import Parties from './pages/Parties';
 import PartyPage from './pages/PartyPage';
 import MapPage from './pages/MapPage';
-import Represent from './pages/Represent';
+import VoterProfile from './pages/VoterProfile';
 import Votes from './pages/Votes';
 import About from './pages/About';
 import Topics from './pages/Topics';
@@ -34,7 +34,7 @@ function App() {
             <Route path="/voters" element={<Parties mode="voters" />} />
             <Route path="/record" element={<Record />} />
             <Route path="/party/:id" element={<PartyPage />} />
-            <Route path="/represent" element={<Represent />} />
+            <Route path="/represent" element={<VoterProfile />} />
             <Route path="/map" element={<MapPage />} />
             <Route path="/votes" element={<Votes />} />
             <Route path="/clusters" element={<Topics />} />
