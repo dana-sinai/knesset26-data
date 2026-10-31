@@ -220,18 +220,26 @@ export default function Home() {
         )}
         <Hemicycle mks={mks} parties={parties} groups={meta?.groups} match={match} label={label} />
         {meta?.groups_source && <p className="text-[11px] text-sub text-center">{meta.groups_source}. הקבוצות מוצגות בצבעים בלבד, ללא שמות.</p>}
+        {match && (
+          <div id="names" className="grid gap-2 scroll-mt-24">
+            <h2 className="text-xl">{label}: {sel.length} חברי כנסת</h2>
+            {sel.length ? (
+              <div className="flex flex-wrap gap-1.5 text-sm">
+                {sel.slice().sort((a, b) => a.party.localeCompare(b.party) || a.list_position - b.list_position).map((m) => (
+                  <MKLink key={m.id} id={m.id} className="flex items-center gap-1.5 rounded-full border border-rule px-2.5 py-1 hover:border-ink/40">
+                    <span className="w-2 h-2 rounded-full" style={{ background: partyById[m.party]?.color }} />{m.name_he}
+                  </MKLink>
+                ))}
+              </div>
+            ) : <p className="text-sm text-sub">אין חברי כנסת שעונים על כל הסינונים.</p>}
+          </div>
+        )}
       </section>
 
-      <Section title="מי מצביע עם מי">
-        <p className="text-sm text-sub -mt-2 max-w-3xl leading-relaxed">
-          חברי הכנסת שכיהנו בעבר, מקובצים לפי איך שהצביעו בפועל על חוקים שנויים במחלוקת – בלי לדעת לאיזו מפלגה הם שייכים.
-          בחרו נושא, ולחצו על מפלגה בתוך קבוצה כדי לראות מי בדיוק נמצא שם.
-        </p>
-        <ClusterExplorer compact />
-      </Section>
-
       <Section title={match ? `${label}: ${sel.length} חברי כנסת` : 'מי בכנסת ה-26'}
-        aside={<span className="text-xs text-sub">לחצו על כל עמודה כדי לסנן את העמוד</span>}>
+        aside={match
+          ? <button onClick={() => document.getElementById('names')?.scrollIntoView({ behavior: 'smooth' })} className="text-xs underline text-sub hover:text-ink">↑ לרשימת השמות</button>
+          : <span className="text-xs text-sub">לחצו על כל עמודה כדי לסנן את העמוד</span>}>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Fact title="נשים וגברים" big={facts.gN ? `${Math.round((facts.women / facts.gN) * 100)}%` : '—'} sub="שיעור הנשים">
             <Split a={{ key: 'female', label: 'נשים', value: facts.women }} b={{ key: 'male', label: 'גברים', value: facts.men }} total={facts.gN}
@@ -257,15 +265,14 @@ export default function Home() {
             </div>
           </Fact>
         </div>
-        {match && (
-          <div className="flex flex-wrap gap-1.5 text-sm">
-            {sel.slice().sort((a, b) => a.party.localeCompare(b.party) || a.list_position - b.list_position).map((m) => (
-              <MKLink key={m.id} id={m.id} className="flex items-center gap-1.5 rounded-full border border-rule px-2.5 py-1 hover:border-ink/40">
-                <span className="w-2 h-2 rounded-full" style={{ background: partyById[m.party]?.color }} />{m.name_he}
-              </MKLink>
-            ))}
-          </div>
-        )}
+      </Section>
+
+      <Section title="מי מצביע עם מי" aside={<Link to="/clusters" className="text-xs underline text-sub hover:text-ink">לעמוד המלא ולהסבר איך זה מחושב</Link>}>
+        <p className="text-sm text-sub -mt-2 max-w-3xl leading-relaxed">
+          חברי הכנסת שכיהנו בעבר, מקובצים לפי איך שהצביעו בפועל על חוקים שנויים במחלוקת – בלי לדעת לאיזו מפלגה הם שייכים.
+          בחרו נושא, ולחצו על מפלגה בתוך קבוצה כדי לראות מי בדיוק נמצא שם.
+        </p>
+        <ClusterExplorer compact />
       </Section>
 
       <Section title="להעמיק">
