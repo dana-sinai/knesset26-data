@@ -56,7 +56,6 @@ export default function Home() {
   const partyById = useMemo(() => Object.fromEntries((parties || []).map((p) => [p.id, p])), [parties]);
   if (!mks || !parties) return <Loading />;
 
-  const seated = parties.filter((p) => p.seats > 0);
   const women = mks.filter((m) => m.gender === 'female').length;
   const fresh = mks.filter((m) => m.is_new).length;
   const ages = mks.map((m) => m.age).filter((a) => a != null).sort((a, b) => a - b);
@@ -78,13 +77,6 @@ export default function Home() {
 
       <section className="grid gap-4">
         <Hemicycle mks={mks} parties={parties} groups={meta?.groups} />
-        <div className="flex flex-wrap justify-center gap-1.5">
-          {seated.map((p) => (
-            <Link key={p.id} to={`/party/${p.id}`} className="flex items-center gap-1.5 rounded-full border border-rule px-3 py-1 text-sm hover:border-ink/40">
-              <span className="w-2.5 h-2.5 rounded-full" style={{ background: p.color }} />{p.name_he}<span className="num text-sub">{p.seats}</span>
-            </Link>
-          ))}
-        </div>
       </section>
 
       <div className="grid lg:grid-cols-3 gap-4">
@@ -109,10 +101,7 @@ export default function Home() {
         </Door>
 
         <Door g={group('do')} to="/record" lead="איך הצביעו בפועל, בכל נושא: מי בעד מה, מי מצביע כמו מי, וכל הצבעה במליאה.">
-          <div className="grid gap-1">
-            <ClusterExplorer preview />
-            <span className="text-[11px] text-sub">כל נקודה היא חבר/ת כנסת. קרובים = הצביעו דומה, בלי קשר למפלגה.</span>
-          </div>
+          <ClusterExplorer preview />
         </Door>
       </div>
 
