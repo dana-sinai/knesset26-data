@@ -12,6 +12,7 @@ python3 -c "import pandas, pyarrow, sklearn, pyproj" 2>/dev/null || pip install 
 if [ "$STAGE" = "fetch" ] || [ "$STAGE" = "all" ]; then
 B=https://production.oknesset.org/pipelines/data
 R=pipeline/raw/ok
+mkdir -p "$R"
 declare -A SRC=(
   [kns_plenumvote.csv]=knesset/kns_plenumvote/kns_plenumvote.csv
   [kns_plenumvoteresult.csv]=knesset/kns_plenumvoteresult/kns_plenumvoteresult.csv
@@ -30,9 +31,9 @@ declare -A SRC=(
 changed=()
 for f in "${!SRC[@]}"; do
   tmp="$R/$f.new"
-  code=$(curl -s -L -R -z "$R/$f" -o "$tmp" -w '%{http_code}' -m 600 "$B/${SRC[$f]}" || echo 000)
+  code=$(curl -s -L -R $( [ -f "$R/$f" ] && echo -z "$R/$f" ) -o "$tmp" -w '%{http_code}' -m 900 "$B/${SRC[$f]}" || true)
   if [ "$code" = "200" ] && [ -s "$tmp" ]; then mv "$tmp" "$R/$f"; changed+=("$f"); else rm -f "$tmp"; fi
-  [ "$code" = "000" ] && echo "WARN: could not reach $B/${SRC[$f]}"
+  case "$code" in 200|304) ;; *) echo "::warning::download of $f returned HTTP $code" ;; esac
 done
 echo "changed: ${changed[*]:-none}"
 if printf '%s\n' "${changed[@]:-}" | grep -q '^kns_plenumvoteresult.csv$' || [ ! -f "$R/plenumvoteresult.parquet" ]; then
