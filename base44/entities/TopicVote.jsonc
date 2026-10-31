@@ -1,0 +1,34 @@
+{
+  "name": "TopicVote",
+  "properties": {
+    "bill_id": {
+      "description": "Knesset BillID",
+      "type": "string"
+    },
+    "choice": {
+      "description": "Topic key chosen by the visitor, or 'unsure'",
+      "type": "string"
+    },
+    "voter": {
+      "description": "Random id kept in the visitor's browser (no personal data), to count one vote per browser",
+      "type": "string"
+    }
+  },
+  "required": [
+    "bill_id",
+    "choice"
+  ],
+  "rls": {
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  },
+  "type": "object"
+}

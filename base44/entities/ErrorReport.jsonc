@@ -1,0 +1,51 @@
+{
+  "name": "ErrorReport",
+  "properties": {
+    "contact": {
+      "description": "Optional way to reply (email), given voluntarily",
+      "type": "string"
+    },
+    "context": {
+      "description": "What the report is about (page title, member, vote...)",
+      "type": "string"
+    },
+    "message": {
+      "description": "What is wrong",
+      "type": "string"
+    },
+    "page": {
+      "description": "Page path and query where the report was opened",
+      "type": "string"
+    },
+    "status": {
+      "default": "new",
+      "enum": [
+        "new",
+        "fixed",
+        "not_an_error"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "message"
+  ],
+  "rls": {
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  },
+  "type": "object"
+}
