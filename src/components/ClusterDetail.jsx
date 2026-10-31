@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { X } from 'lucide-react';
 import { useData, useMKs, useParties } from '@/lib/data';
 import { MKLink } from '@/components/MKDrawer';
-import { GROUP_NAMES } from '@/components/ClusterExplorer';
+import { GROUP_NAMES, ClusterMap } from '@/components/ClusterExplorer';
 
 // topics/cluster_votes_{topic}.json: votes = [vid, knesset, date, name, stage, meaning, billId, [[shareFor, n] per group]],
 // mk = {personId: one char per vote: "1" for, "2" against, "0" did not vote}
@@ -69,7 +69,7 @@ export function MKCompare({ topic, pid, groups, onClose }) {
           <MKLink id={m.id} className="text-2xl font-title hover:underline">{m.name_he}</MKLink>
           <span className="text-sm text-sub flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full" style={{ background: p?.color }} />{p?.name_he} · במפה: {GROUP_NAMES[own]}</span>
         </div>
-        <button onClick={onClose} aria-label="סגירה" className="p-1 text-sub hover:text-ink"><X size={18} /></button>
+        {onClose && <button onClick={onClose} aria-label="סגירה" className="p-1 text-sub hover:text-ink"><X size={18} /></button>}
       </div>
       {!res ? <p className="text-sm text-sub">טוען…</p> : (
         <>
@@ -145,6 +145,37 @@ export function Sides({ topic, groups }) {
           {!list.length && <p className="text-sm text-sub">אין הצבעות כאלה בנושא.</p>}
         </div>
       ))}
+    </div>
+  );
+}
+
+/** Member card tab: where this member sits on the vote map, per topic, and where they differ from each group. */
+export function MKClusterTab({ pid, initialTopic }) {
+  const { data: clusters } = useData('topics/clusters.json');
+  const { data: topics } = useData('topics/topics.json');
+  const { data: mks } = useMKs();
+  const { data: parties } = useParties();
+  const avail = useMemo(() => (clusters ? Object.keys(clusters).filter((k) => clusters[k]?.points?.some((p) => p[0] === pid)) : []), [clusters, pid]);
+  const [t, setT] = useState(null);
+  const topic = t || (initialTopic && avail.includes(initialTopic) ? initialTopic : avail.includes('all') ? 'all' : avail[0]);
+  const pidToMK = useMemo(() => Object.fromEntries((mks || []).filter((m) => m.person_id).map((m) => [Number(m.person_id), m])), [mks]);
+  const partyById = useMemo(() => Object.fromEntries((parties || []).map((p) => [p.id, p])), [parties]);
+  if (!clusters || !topics || !mks || !parties) return <p className="text-sm text-sub">טוען…</p>;
+  if (!avail.length) return <p className="text-sm text-sub">אין מספיק הצבעות שנויות במחלוקת כדי למקם את חבר/ת הכנסת במפה.</p>;
+  const d = clusters[topic];
+  const own = d.points.find((x) => x[0] === pid)?.[3];
+  const labels = { all: 'כל הנושאים', ...topics.labels };
+  return (
+    <div className="grid gap-4">
+      <p className="text-sm text-sub leading-relaxed">
+        מפת חברי הכנסת שכיהנו בעבר לפי ההצבעות שלהם בלבד – קרובים = הצביעו דומה. הנקודה המודגשת היא חבר/ת הכנסת הזה/זו.{' '}
+        <Link to={`/clusters${topic !== 'all' ? `?t=${topic}` : ''}`} className="underline hover:text-ink">לעמוד המלא</Link>
+      </p>
+      <select value={topic} onChange={(e) => setT(e.target.value)} aria-label="נושא" className="justify-self-start rounded-full border border-ink bg-paper px-4 py-1.5 text-sm">
+        {avail.map((k) => <option key={k} value={k}>{labels[k]}</option>)}
+      </select>
+      <ClusterMap data={d} pidToMK={pidToMK} partyById={partyById} picked={pid} topic={topic} />
+      <MKCompare key={`${topic}-${pid}`} topic={topic} pid={pid} groups={d.clusters.map((c) => ({ id: c.id, own: own === c.id }))} />
     </div>
   );
 }

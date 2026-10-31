@@ -7,6 +7,7 @@ import VoteTable from '@/components/VoteTable';
 import { METRICS, metricValue } from '@/lib/filters';
 import BillList from '@/components/BillList';
 import TopicRecord from '@/components/TopicRecord';
+import { MKClusterTab } from '@/components/ClusterDetail';
 import { CommitteeSummary, CommitteeSessions } from '@/components/CommitteeActivity';
 
 const fmtDate = (d) => (d ? d.slice(0, 10).split('-').reverse().join('.') : '');
@@ -33,11 +34,11 @@ function Tabs({ tabs, value, onChange }) {
   );
 }
 
-export function MKProfile({ id, compact = false }) {
+export function MKProfile({ id, compact = false, initialTab = null, initialTopic = null }) {
   const { data: mks } = useMKs();
   const { data: parties } = useParties();
   const { data: parl } = useData('parliament.json');
-  const [tab, setTab] = useState('profile');
+  const [tab, setTab] = useState(initialTab || 'profile');
   const m = useMemo(() => mks?.find((x) => x.id === id), [mks, id]);
   const party = parties?.find((p) => p.id === m?.party);
   if (!mks || !parties) return <Loading />;
@@ -51,6 +52,7 @@ export function MKProfile({ id, compact = false }) {
   if (m.has_bills) tabs.push(['bills', 'הצעות חוק']);
   if (!m.is_new && m.person_id) tabs.push(['committees', 'ישיבות ועדה']);
   tabs.push(['practice', 'בעד ונגד, בפועל']);
+  if (!m.is_new && m.person_id) tabs.push(['map', 'מי עם מי']);
   tabs.push(['sources', 'מקורות']);
 
   return (
@@ -236,6 +238,8 @@ export function MKProfile({ id, compact = false }) {
             <Link to={`/party/${m.party}?tab=record`} className="justify-self-start underline text-sub hover:text-ink">איך הצביעו בעבר חברי הרשימה שכיהנו בכנסות קודמות ←</Link>
           </div>
         : <TopicRecord personId={m.person_id} />)}
+
+      {tab === 'map' && <MKClusterTab pid={Number(m.person_id)} initialTopic={initialTopic} />}
 
       {tab === 'sources' && (
         <div className="grid gap-6 text-sm">

@@ -5,9 +5,12 @@ import { X, Maximize2 } from 'lucide-react';
 import { MKProfile } from '@/pages/MKPage';
 
 /** Search string for the current page with ?mk=<id> added (or removed when id is null). */
-export function withMK(search, id) {
+export function withMK(search, id, opts = {}) {
   const sp = new URLSearchParams(search);
+  sp.delete('mktab'); sp.delete('mkt');
   if (id == null) sp.delete('mk'); else sp.set('mk', id);
+  if (id != null && opts.tab) sp.set('mktab', opts.tab);
+  if (id != null && opts.topic) sp.set('mkt', opts.topic);
   const s = sp.toString();
   return s ? `?${s}` : '';
 }
@@ -40,7 +43,8 @@ export const MKLink = forwardRef(function MKLink({ id, children, onClick, ...res
 export function useOpenMK() {
   const loc = useLocation();
   const navigate = useNavigate();
-  return (id) => navigate({ pathname: loc.pathname, search: withMK(loc.search, id) }, { preventScrollReset: true, state: { drawer: true } });
+  // opts: { tab, topic } — open the card on a given tab (e.g. the "who with whom" tab for a topic)
+  return (id, opts) => navigate({ pathname: loc.pathname, search: withMK(loc.search, id, opts) }, { preventScrollReset: true, state: { drawer: true } });
 }
 
 export default function MKDrawer() {
@@ -77,7 +81,7 @@ export default function MKDrawer() {
             </div>
           </div>
           <div className="flex-1 overflow-y-auto px-5 py-6">
-            {id && <MKProfile key={id} id={id} compact />}
+            {id && <MKProfile key={`${id}-${sp.get('mktab') || ''}-${sp.get('mkt') || ''}`} id={id} compact initialTab={sp.get('mktab')} initialTopic={sp.get('mkt')} />}
           </div>
         </Dialog.Content>
       </Dialog.Portal>
