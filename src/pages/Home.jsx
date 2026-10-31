@@ -64,9 +64,11 @@ export default function Home() {
 
   return (
     <Page>
+      {/* desktop: intro and chamber side by side; phones: stacked */}
+      <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-8 lg:gap-12 items-center">
       <header className="grid gap-4 max-w-3xl">
         <p className="text-sm text-gold font-semibold">הבחירות לכנסת ה-26 · 27.10.2026</p>
-        <h1 className="text-4xl sm:text-6xl leading-tight">מי נבחר לכנסת, ומה אנחנו יודעים עליהם</h1>
+        <h1 className="text-4xl sm:text-6xl lg:text-5xl xl:text-6xl leading-tight">מי נבחר לכנסת, ומה אנחנו יודעים עליהם</h1>
         <p className="text-sub leading-relaxed">
           כל מה שידוע בנתונים פתוחים על 120 הנבחרים: מי הם, מי בחר בהם, ומה הם עושים בפועל – כל הצבעה במליאה מאז 2003, הצעות חוק וּועדות.
           כל נתון מקושר למקורו.
@@ -77,6 +79,7 @@ export default function Home() {
       <section className="grid gap-4">
         <Hemicycle mks={mks} parties={parties} groups={meta?.groups} />
       </section>
+      </div>
 
       <div className="grid lg:grid-cols-3 gap-4">
         <Door g={group('who')} to="/who" lead="הרקע של הנבחרים: מגדר, גיל, השכלה, קריירה ומקום מגורים, וכל אחד מהם בנפרד.">
