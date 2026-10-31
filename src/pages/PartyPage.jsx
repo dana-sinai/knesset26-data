@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { useMKs, useParties, useData, fmt, EDU_LABEL, EDU_ORDER } from '@/lib/data';
 import { SES_B } from '@/lib/filters';
 import { MKCard, Loading, Page, Section, Stat } from '@/components/bits';
@@ -35,6 +35,7 @@ function MKvsVoters({ mks, e, color }) {
 
 export default function PartyPage() {
   const { id } = useParams();
+  const [sp, setSp] = useSearchParams();
   const { data: mks } = useMKs();
   const { data: parties } = useParties();
   const { data: el } = useData('electorate.json');
@@ -53,55 +54,80 @@ export default function PartyPage() {
         <h1 className="text-4xl font-black">{p.name_he}</h1>
         <p className="text-sub">{p.full_name_he}</p>
       </header>
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-        <Stat label="מנדטים" value={p.seats} />
-        <Stat label="קולות" value={fmt(p.votes)} hint={`${p.pct.toFixed(2)}% מהקולות הכשרים`} />
-        {p.seats > 0 && <Stat label="נשים" value={g.filter((m) => m.gender === 'female').length} hint={`מתוך ${g.length}`} />}
-        {p.seats > 0 && <Stat label="חדשים בכנסת" value={g.filter((m) => m.is_new).length} />}
-        {p.seats > 0 && <Stat label="גיל חציוני" value={med ?? '—'} />}
-      </div>
-
-      <Section title="מי הצביע למפלגה">
-        {el ? <Electorate data={el} partyId={id} color={p.color} /> : <p className="text-sub text-sm">טוען…</p>}
-      </Section>
-
-      <Section title="מפת קולות">
-        <VoteShareMap partyId={id} color={p.color} mks={g} />
-      </Section>
-
-      {p.seats > 0 && (
-        <>
-          <Section title="נבחרים מול מצביעים">
-            <MKvsVoters mks={g} e={e} color={p.color} />
-          </Section>
-          <Section title={`הנבחרים (${g.length})`}>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">{g.map((m) => <MKCard key={m.id} m={m} party={p} />)}</div>
-            <div className="flex flex-wrap gap-2 text-xs">
-              {EDU_ORDER.map((k) => {
-                const n = g.filter((m) => m.education_level === k).length;
-                return n ? <span key={k} className="px-2 py-1 rounded bg-sand">{EDU_LABEL[k]}: {n}</span> : null;
-              })}
+      {(() => {
+        const tabs = [...(p.seats > 0 ? [['people', 'מי ברשימה']] : []), ['voters', 'מי הצביע לה'], ...(p.seats > 0 ? [['record', 'איך הצביעו']] : [])];
+        const tab = tabs.some(([k]) => k === sp.get('tab')) ? sp.get('tab') : tabs[0][0];
+        return (
+          <>
+            <div role="tablist" className="flex gap-1 border-b border-rule overflow-x-auto">
+              {tabs.map(([k, l]) => (
+                <button key={k} role="tab" aria-selected={tab === k} onClick={() => setSp(k === tabs[0][0] ? {} : { tab: k }, { replace: true })}
+                  className={`px-4 py-2 text-sm whitespace-nowrap border-b-2 -mb-px transition-colors ${tab === k ? 'border-ink text-ink font-medium' : 'border-transparent text-sub hover:text-ink'}`}>{l}</button>
+              ))}
             </div>
-          </Section>
-        </>
-      )}
 
-      {e?.top_localities?.length > 0 && (
-        <Section title="היישובים עם הכי הרבה קולות למפלגה">
-          <div className="overflow-x-auto rounded-xl border border-rule">
-            <table className="w-full text-sm">
-              <thead className="bg-sand/60 text-xs text-sub"><tr><th className="text-right px-3 py-2 font-medium">יישוב</th><th className="text-right px-3 py-2 font-medium">קולות</th><th className="text-right px-3 py-2 font-medium">שיעור ביישוב</th></tr></thead>
-              <tbody>{e.top_localities.map((t) => (
-                <tr key={t.code} className="border-t border-rule num"><td className="px-3 py-1.5">{t.name}</td><td className="px-3 py-1.5">{fmt(t.votes)}</td><td className="px-3 py-1.5">{t.share}%</td></tr>
-              ))}</tbody>
-            </table>
-          </div>
-        </Section>
-      )}
-      <Section title="בעד ונגד, בפועל">
-        <p className="text-sm text-sub -mt-2">לפי מה שעשו בכנסות קודמות מי שנבחרו היום מטעם המפלגה. רוב המפלגה = רוב חבריה הנוכחיים שהצביעו באותה הצבעה.</p>
-        <TopicRecord partyId={id} />
-      </Section>
+            {tab === 'people' && (
+              <>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <Stat label="נבחרים" value={p.seats} />
+                  <Stat label="נשים" value={g.filter((m) => m.gender === 'female').length} hint={`מתוך ${g.length}`} />
+                  <Stat label="חדשים בכנסת" value={g.filter((m) => m.is_new).length} />
+                  <Stat label="גיל חציוני" value={med ?? '—'} />
+                </div>
+                <Section title={`הנבחרים (${g.length})`}>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">{g.map((m) => <MKCard key={m.id} m={m} party={p} />)}</div>
+                  <div className="flex flex-wrap gap-2 text-xs">
+                    {EDU_ORDER.map((k) => {
+                      const n = g.filter((m) => m.education_level === k).length;
+                      return n ? <span key={k} className="px-2 py-1 rounded bg-sand">{EDU_LABEL[k]}: {n}</span> : null;
+                    })}
+                  </div>
+                </Section>
+              </>
+            )}
+
+            {tab === 'voters' && (
+              <>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  <Stat label="קולות" value={fmt(p.votes)} />
+                  <Stat label="מהקולות הכשרים" value={`${p.pct.toFixed(2)}%`} />
+                  <Stat label="מנדטים" value={p.seats} />
+                </div>
+                <Section title="מי הצביע למפלגה">
+                  {el ? <Electorate data={el} partyId={id} color={p.color} /> : <p className="text-sub text-sm">טוען…</p>}
+                </Section>
+                <Section title="מפת קולות">
+                  <VoteShareMap partyId={id} color={p.color} mks={g} />
+                </Section>
+                {p.seats > 0 && (
+                  <Section title="נבחרים מול מצביעים">
+                    <MKvsVoters mks={g} e={e} color={p.color} />
+                  </Section>
+                )}
+                {e?.top_localities?.length > 0 && (
+                  <Section title="היישובים עם הכי הרבה קולות למפלגה">
+                    <div className="overflow-x-auto rounded-xl border border-rule">
+                      <table className="w-full text-sm">
+                        <thead className="bg-sand/60 text-xs text-sub"><tr><th className="text-right px-3 py-2 font-medium">יישוב</th><th className="text-right px-3 py-2 font-medium">קולות</th><th className="text-right px-3 py-2 font-medium">שיעור ביישוב</th></tr></thead>
+                        <tbody>{e.top_localities.map((t) => (
+                          <tr key={t.code} className="border-t border-rule num"><td className="px-3 py-1.5">{t.name}</td><td className="px-3 py-1.5">{fmt(t.votes)}</td><td className="px-3 py-1.5">{t.share}%</td></tr>
+                        ))}</tbody>
+                      </table>
+                    </div>
+                  </Section>
+                )}
+              </>
+            )}
+
+            {tab === 'record' && (
+              <Section title="בעד ונגד, בפועל" aside={<Link to={`/record?p=${id}`} className="text-xs underline text-sub hover:text-ink">השוואה למפלגות אחרות ←</Link>}>
+                <p className="text-sm text-sub -mt-2">לפי מה שעשו בכנסות קודמות מי שנבחרו היום מטעם המפלגה. רוב המפלגה = רוב חבריה הנוכחיים שהצביעו באותה הצבעה.</p>
+                <TopicRecord partyId={id} />
+              </Section>
+            )}
+          </>
+        );
+      })()}
     </Page>
   );
 }
