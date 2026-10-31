@@ -53,7 +53,7 @@ function ClusterMap({ data, pidToMK, partyById, highlight }) {
  * Topic chips + vote-based map + the groups with their party make-up.
  * Clicking a party inside a group lists exactly who it is (one person opens straight in the drawer).
  */
-export default function ClusterExplorer({ topic, onTopic, compact = false }) {
+export default function ClusterExplorer({ topic, onTopic, compact = false, preview = false }) {
   const { data: clusters } = useData('topics/clusters.json');
   const { data: topics } = useData('topics/topics.json');
   const { data: mks } = useMKs();
@@ -74,6 +74,11 @@ export default function ClusterExplorer({ topic, onTopic, compact = false }) {
 
   // always show the names first (even a single one); the name itself opens the member card
   const pick = (cl, party) => setSel(sel && sel.cl === cl && sel.party === party ? null : { cl, party });
+
+  if (preview) {
+    // home page: only the map of all topics; the topics and the groups are on the full page
+    return d ? <ClusterMap data={d} pidToMK={pidToMK} partyById={partyById} highlight={null} /> : null;
+  }
 
   return (
     <div className="grid gap-5">
