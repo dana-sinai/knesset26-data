@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, ArrowLeft } from 'lucide-react';
+import { NAV_GROUPS } from '@/lib/nav';
 import { useMKs, useParties, useMeta, EDU_LABEL, EDU_ORDER, SECTOR_LABEL, fmt } from '@/lib/data';
 import { PER_B } from '@/lib/filters';
 import { Loading, Page, Section } from '@/components/bits';
@@ -130,12 +131,6 @@ function FindMK({ mks, partyById }) {
   );
 }
 
-const DOORS = [
-  ['/parties', 'מפלגות', 'הרכב כל רשימה, ומי הצביע לה: פרופיל הבוחרים לפי נתוני הלמ״ס'],
-  ['/represent', 'את מי הם מייצגים', 'מאיפה מגיעים חברי הכנסת ומאיפה מגיעים הבוחרים שלהם'],
-  ['/votes', 'הצבעות במליאה', 'כל הצבעה מאז 2003 (הכנסת ה-16), ואיך הצביע כל מי שחוזר לכנסת'],
-  ['/map', 'מפה', 'מקומות המגורים והלידה של חברי הכנסת, ברמת יישוב'],
-];
 
 export default function Home() {
   const { data: mks } = useMKs();
@@ -276,12 +271,19 @@ export default function Home() {
       </Section>
 
       <Section title="להעמיק">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {DOORS.map(([to, t, d]) => (
-            <Link key={to} to={to} className="group rounded-2xl border border-rule p-5 grid gap-2 content-start hover:border-ink/40 transition-colors">
-              <span className="flex items-center justify-between font-semibold">{t}<ArrowLeft size={16} className="text-sub group-hover:text-ink transition-transform group-hover:-translate-x-1" /></span>
-              <span className="text-sm text-sub leading-relaxed">{d}</span>
-            </Link>
+        <div className="grid md:grid-cols-3 gap-4">
+          {NAV_GROUPS.map((g) => (
+            <div key={g.key} className="grid gap-2 content-start">
+              <div className="flex items-baseline gap-2 border-b border-rule pb-1.5">
+                <h3 className="text-2xl">{g.title}</h3><span className="text-xs text-sub">{g.lead}</span>
+              </div>
+              {g.items.map(([to, t, d]) => (
+                <Link key={to} to={to} className="group rounded-xl border border-rule p-4 grid gap-1 hover:border-ink/40 transition-colors">
+                  <span className="flex items-center justify-between font-semibold">{t}<ArrowLeft size={16} className="text-sub group-hover:text-ink transition-transform group-hover:-translate-x-1" /></span>
+                  <span className="text-sm text-sub leading-relaxed">{d}</span>
+                </Link>
+              ))}
+            </div>
           ))}
         </div>
       </Section>
