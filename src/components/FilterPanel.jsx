@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Search, RotateCcw } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { EDU_LABEL, EDU_ORDER, SECTOR_LABEL, useTopics } from '@/lib/data';
@@ -26,6 +26,7 @@ function Group({ title, children, hint }) {
 
 export default function FilterPanel({ mks, parties, filters, count, hideParty = false }) {
   const { f, set, toggle, reset, active } = filters;
+  const [open, setOpen] = useState(false);
   const { data: topics } = useTopics();
   const sectors = useMemo(() => {
     const c = {};
@@ -45,6 +46,13 @@ export default function FilterPanel({ mks, parties, filters, count, hideParty = 
         <span><strong className="num">{count}</strong> <span className="text-sub">חברי כנסת תואמים</span></span>
         {active && <button onClick={reset} className="flex items-center gap-1 text-xs underline text-sub"><RotateCcw size={12} />איפוס</button>}
       </div>
+      {/* on phones the filters are folded, so the list / map is visible right away */}
+      <button type="button" onClick={() => setOpen(!open)} aria-expanded={open}
+        className="lg:hidden flex items-center justify-between rounded-lg border border-rule px-3 py-2 text-sm">
+        <span>סינון לפי מפלגה, מגדר, גיל, השכלה, רקע ומגורים{active ? ' · מסונן' : ''}</span>
+        <span aria-hidden className="text-sub">{open ? '▴' : '▾'}</span>
+      </button>
+      <div className={`${open ? 'grid' : 'hidden'} lg:grid gap-5`}>
       {!hideParty && (
         <Group title="מפלגה">
           {parties.filter((p) => p.seats > 0).map((p) => (
@@ -169,6 +177,7 @@ export default function FilterPanel({ mks, parties, filters, count, hideParty = 
           <Chip key={v} on={f.bornAbroad === v} onClick={() => set({ bornAbroad: v })}>{l}</Chip>
         ))}
       </Group>
+      </div>
     </div>
   );
 }
