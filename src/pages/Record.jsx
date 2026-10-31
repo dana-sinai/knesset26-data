@@ -177,7 +177,7 @@ export default function Record() {
       </Section>
 
       {/* ---------------- drill-down */}
-      <Section title="מה עשתה המפلגה בנושא">
+      <Section title="מה עשתה המפלגה בנושא">
         <div id="drill" className="flex flex-wrap gap-2 scroll-mt-24">
           <select value={P} onChange={(e) => set({ p: e.target.value })} aria-label="מפלגה"
             className="px-3 py-1.5 rounded-full border border-rule text-sm bg-paper">
