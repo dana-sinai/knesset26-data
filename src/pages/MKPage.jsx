@@ -230,9 +230,10 @@ export function MKProfile({ id, compact = false }) {
       {tab === 'bills' && m.has_bills && <BillList personId={m.person_id} />}
       {tab === 'committees' && <CommitteeSessions personId={m.person_id} />}
       {tab === 'practice' && (m.is_new || !m.person_id
-        ? <div className="grid gap-4">
-            <p className="text-sm text-sub leading-relaxed">חבר/ת כנסת חדש/ה – אין עדיין רקורד אישי של הצבעות והצעות חוק. להלן הרקורד של חברי מפלגתו/ה שכיהנו בעבר (רקורד המפלגה, לא אישי).</p>
-            <TopicRecord partyId={m.party} />
+        ? <div className="grid gap-3 rounded-xl bg-sand/50 p-4 text-sm leading-relaxed">
+            <p>{m.name_he} חדש/ה בכנסת, ולכן עוד אין לו/ה הצבעות או הצעות חוק משלו/ה.</p>
+            <p className="text-sub">ההצבעות יופיעו כאן אוטומטית מרגע שהכנסת ה-26 תתחיל לעבוד, אחרי ההשבעה ב-10.11.2026.</p>
+            <Link to={`/party/${m.party}?tab=record`} className="justify-self-start underline text-sub hover:text-ink">איך הצביעו בעבר חברי הרשימה שכיהנו בכנסות קודמות ←</Link>
           </div>
         : <TopicRecord personId={m.person_id} />)}
 
