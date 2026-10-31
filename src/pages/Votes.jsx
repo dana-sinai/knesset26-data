@@ -154,6 +154,7 @@ export default function Votes() {
   const [agree, setAgree] = useState('contested'); // all | consensus | broad | contested
   const [outcome, setOutcome] = useState(''); // '' | passed | failed
   const [mech, setMech] = useState('');
+  const [more, setMore] = useState(false);
   const [who, setWho] = useState('');
   const { data: ess } = useData('topics/bill_essence.json', { retry: false });
   const { data: meta } = useData(`votes/meta_k${k}.json`);
@@ -204,6 +205,10 @@ export default function Votes() {
           {KS.map((x) => <option key={x} value={x}>הכנסת ה-{x}</option>)}
         </select>
         <input value={q} onChange={(e) => { setQ(e.target.value); setN(60); }} placeholder="חיפוש בשם הצעת החוק או הנושא…" className="flex-1 min-w-[200px] rounded-md border border-rule bg-paper px-3 py-1.5" />
+        <button type="button" onClick={() => setMore(!more)} aria-expanded={more} className="sm:hidden rounded-md border border-rule px-2 py-1.5 text-sub">
+          סינון נוסף {(type !== 'all' || topic || outcome || mech || who) ? '· פעיל' : ''} {more ? '▴' : '▾'}
+        </button>
+        <div className={`${more ? 'flex' : 'hidden'} sm:contents flex-wrap gap-2 w-full`}>
         <select value={type} onChange={(e) => { setType(e.target.value); setN(60); }} className="rounded-md border border-rule bg-paper px-2 py-1.5">
           {VOTE_TYPES.map(([v, l]) => <option key={v} value={v}>{l} ({(typeCounts[v] || 0).toLocaleString('he-IL')})</option>)}
         </select>
@@ -223,6 +228,7 @@ export default function Votes() {
             </select>
           </>
         )}
+        </div>
         <span className="text-sub num">{list.length.toLocaleString('he-IL')} הצבעות</span>
         {billParam && <button onClick={() => set({ bill: null, id: null })} className="text-xs underline text-sub">הצגת כל ההצבעות (כרגע: הצבעות על הצעת חוק אחת)</button>}
       </div>
