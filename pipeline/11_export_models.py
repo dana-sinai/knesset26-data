@@ -92,9 +92,15 @@ if os.path.exists(ess_path):
     for line in open("pipeline/input/bill_meaning.tsv", encoding="utf-8"):
         p = line.rstrip("\n").split("\t")
         if len(p) >= 2 and p[0].strip().isdigit():
-            meaning[p[0].strip()] = p[1].strip()
+            meaning[p[0].strip()] = "" if "ללא פירוט מטרה" in p[1] else p[1].strip()
     name = dict(zip(b.BillID.astype(str), b.Name))
-    ess["text"] = [norm(name.get(x, "")) for x in ess.bill]
+    # title + the "בעד =" line (what the bill does, in words) — more accurate than the title alone
+    ess["text"] = [(norm(name.get(x, "")) + " " + meaning.get(x, "")).strip() for x in ess.bill]
     defs = json.load(open("pipeline/input/essence_labels.json"))
     train_export("mechanism", list(ess.text), list(ess.mech1), defs["mechanism"])
     train_export("who", list(ess.text), list(ess.who1), defs["who"])
+
+    # the reviewed labels themselves, for the site (bill id -> [mechanism, mechanism2, who, who2]) + Hebrew names
+    json.dump(dict(labels=defs, bills={r.bill: [r.mech1, r.mech2, r.who1, r.who2] for r in ess.itertuples()}),
+              open("public/data/topics/bill_essence.json", "w"), ensure_ascii=False, separators=(",", ":"))
+    print(f"bill_essence.json: {len(ess)} bills")

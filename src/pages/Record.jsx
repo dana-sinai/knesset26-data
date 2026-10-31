@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useQueries } from '@tanstack/react-query';
-import { loadJSON, useParties, useTopics, useBillSummaries, fmt } from '@/lib/data';
+import { loadJSON, useData, useParties, useTopics, useBillSummaries, fmt } from '@/lib/data';
 import { Loading, Page, Section } from '@/components/bits';
 
 // Party rows in topics/party_{id}.json: [vid, knesset, date, title, stage, partyFor, partyAgainst, allFor, allAgainst, meaning, billId]
@@ -39,26 +39,43 @@ export default function Record() {
   const { data: parties } = useParties();
   const { data: topics } = useTopics();
   const { data: summaries } = useBillSummaries();
+  const { data: ess } = useData('topics/bill_essence.json', { retry: false });
   const rec = useRecords(parties);
   const [sp, setSp] = useSearchParams();
   const [allTopics, setAllTopics] = useState(false);
   const set = (o) => setSp((cur) => { const n = new URLSearchParams(cur); Object.entries(o).forEach(([k, v]) => (v ? n.set(k, v) : n.delete(k))); return n; }, { replace: true });
   const P = sp.get('p') || '', T = sp.get('t') || '', A = sp.get('a') || '', B = sp.get('b') || '', CT = sp.get('ct') || '';
+  const DIM = ess && ['mech', 'who'].includes(sp.get('d')) ? sp.get('d') : 'topic';
 
   const model = useMemo(() => {
     if (!rec || !parties || !topics) return null;
     const withRec = parties.filter((p) => p.seats > 0 && rec[p.id]?.members_with_record > 0);
     const without = parties.filter((p) => p.seats > 0 && !(rec[p.id]?.members_with_record > 0));
-    // topic columns, by how many contested votes they have
+    // rows grouped by the chosen dimension: topic (as stored), or what the bill does / who it affects (bill_essence)
+    const bucket = {};
+    withRec.forEach((p) => {
+      if (DIM === 'topic') { bucket[p.id] = rec[p.id].votes; return; }
+      const seen = new Map();
+      Object.values(rec[p.id].votes).forEach((l) => l.forEach((x) => seen.set(x[0], x)));
+      const g = {};
+      seen.forEach((x) => {
+        const e = ess.bills[String(x[10])];
+        if (!e) return;
+        const keys = DIM === 'mech' ? [e[0], e[1]] : [e[2], e[3]];
+        keys.filter(Boolean).forEach((k) => (g[k] = g[k] || []).push(x));
+      });
+      bucket[p.id] = g;
+    });
+    // columns, by how many contested votes they have
     const tCount = {};
-    withRec.forEach((p) => Object.entries(rec[p.id].votes).forEach(([t, l]) => { tCount[t] = Math.max(tCount[t] || 0, l.length); }));
+    withRec.forEach((p) => Object.entries(bucket[p.id]).forEach(([t, l]) => { tCount[t] = Math.max(tCount[t] || 0, l.length); }));
     const cols = Object.keys(tCount).filter((t) => t !== 'other').sort((a, b) => tCount[b] - tCount[a]);
     // party x topic: share of the party's members' for/against votes that were "for"
     const cell = {};
     withRec.forEach((p) => {
       cell[p.id] = {};
       cols.forEach((t) => {
-        const l = rec[p.id].votes[t] || [];
+        const l = bucket[p.id][t] || [];
         let f = 0, a = 0;
         l.forEach((x) => { f += x[5]; a += x[6]; });
         cell[p.id][t] = f + a ? { r: f / (f + a), n: l.length, f, a } : null;
@@ -73,8 +90,8 @@ export default function Record() {
         l.forEach((x) => { const s = side(x[5], x[6]); if (s) { pos[p.id][t].set(x[0], s); pos[p.id].all.set(x[0], s); } });
       });
     });
-    return { withRec, without, cols, tCount, cell, pos };
-  }, [rec, parties, topics]);
+    return { withRec, without, cols, tCount, cell, pos, bucket };
+  }, [rec, parties, topics, ess, DIM]);
 
   const agree = useMemo(() => {
     if (!model) return null;
@@ -95,12 +112,15 @@ export default function Record() {
   }, [model, CT]);
 
   if (!model || !agree || !topics) return <Loading />;
-  const L = topics.labels;
+  const L = DIM === 'topic' ? topics.labels : ess.labels[DIM === 'mech' ? 'mechanism' : 'who'];
+  const TL = topics.labels;
+  const EL = ess ? { ...ess.labels.mechanism, ...ess.labels.who } : {};
+  const essChips = (bill) => { const e = ess?.bills?.[String(bill)]; return e ? [e[0], e[2]].filter((k) => k && k !== 'other').map((k) => EL[k]) : []; };
   const pById = Object.fromEntries(parties.map((p) => [p.id, p]));
   const shownCols = allTopics ? model.cols : model.cols.slice(0, 12);
 
   // drill-down: what party P did on topic T
-  const drill = P && T && rec[P]?.votes?.[T] ? rec[P].votes[T].slice().sort((x, y) => (y[2] > x[2] ? 1 : -1)) : null;
+  const drill = P && T && model.bucket[P]?.[T] ? model.bucket[P][T].slice().sort((x, y) => (y[2] > x[2] ? 1 : -1)) : null;
   // comparison: votes where A and B took opposite sides
   let split = null;
   if (A && B && model.pos[A] && model.pos[B]) {
@@ -132,7 +152,16 @@ export default function Record() {
 
       {/* ---------------- party x topic */}
       <Section title="מי בעד מה" aside={<Legend />}>
-        <p className="text-sm text-sub -mt-2">כל משבצת: מתוך ההצבעות בעד או נגד של חברי המפלגה בנושא, כמה היו בעד. לחצו על משבצת כדי לראות את ההצבעות עצמן.</p>
+        {ess && (
+          <div className="flex flex-wrap items-center gap-1.5 -mt-2 text-sm">
+            <span className="text-sub text-xs">לפי:</span>
+            {[['topic', 'נושא'], ['mech', 'מה החוק עושה'], ['who', 'על מי הוא משפיע']].map(([k, l]) => (
+              <button key={k} onClick={() => set({ d: k === 'topic' ? '' : k, t: '' })} aria-pressed={DIM === k}
+                className={`px-3 py-1 rounded-full border text-xs ${DIM === k ? 'border-ink bg-ink text-paper' : 'border-rule text-sub hover:border-ink/40'}`}>{l}</button>
+            ))}
+          </div>
+        )}
+        <p className="text-sm text-sub">כל משבצת: מתוך ההצבעות בעד או נגד של חברי המפלגה {DIM === 'topic' ? 'בנושא' : 'בהצעות מהסוג הזה'}, כמה היו בעד. לחצו על משבצת כדי לראות את ההצבעות עצמן.</p>
         <div className="overflow-x-auto rounded-xl border border-rule">
           <table className="text-xs border-separate border-spacing-0.5 min-w-full">
             <thead><tr>
@@ -177,7 +206,7 @@ export default function Record() {
       </Section>
 
       {/* ---------------- drill-down */}
-      <Section title="מה עשתה המפלגה בנושא">
+      <Section title={DIM === 'topic' ? 'מה עשתה המפלגה בנושא' : DIM === 'mech' ? 'מה עשתה המפלגה, לפי סוג החוק' : 'מה עשתה המפלגה, לפי מי שהחוק משפיע עליו'}>
         <div id="drill" className="flex flex-wrap gap-2 scroll-mt-24">
           <select value={P} onChange={(e) => set({ p: e.target.value })} aria-label="מפלגה"
             className="px-3 py-1.5 rounded-full border border-rule text-sm bg-paper">
@@ -186,7 +215,7 @@ export default function Record() {
           </select>
           <select value={T} onChange={(e) => set({ t: e.target.value })} aria-label="נושא"
             className="px-3 py-1.5 rounded-full border border-rule text-sm bg-paper">
-            <option value="">בחרו נושא</option>
+            <option value="">{DIM === 'topic' ? 'בחרו נושא' : DIM === 'mech' ? 'בחרו סוג' : 'בחרו קבוצה'}</option>
             {model.cols.map((t) => <option key={t} value={t}>{L[t] || t}</option>)}
           </select>
         </div>
@@ -207,6 +236,9 @@ export default function Record() {
                     <span>
                       <Link to={`/votes?k=${k}&id=${vid}`} className="hover:underline">{name}</Link>
                       {meaning && <span className="block text-xs text-ink/80 mt-0.5">{meaning}</span>}
+                      {essChips(bill).length > 0 && (
+                        <span className="flex flex-wrap gap-1 mt-1">{essChips(bill).map((c) => <span key={c} className="text-[10px] rounded-full bg-sand px-2 py-0.5 text-sub">{c}</span>)}</span>
+                      )}
                       {summaries?.[bill] && (
                         <details className="text-xs text-ink/80 mt-0.5"><summary className="cursor-pointer text-sub">תקציר החוק</summary>
                           <span className="block mt-1 leading-relaxed">{summaries[bill]}</span></details>
@@ -235,7 +267,7 @@ export default function Record() {
         <select value={CT} onChange={(e) => set({ ct: e.target.value })} aria-label="נושא להשוואה"
           className="px-3 py-1.5 rounded-full border border-rule text-xs bg-paper">
           <option value="">כל הנושאים</option>
-          {model.cols.map((t) => <option key={t} value={t}>{L[t] || t}</option>)}
+          {Object.keys(TL).filter((t) => t !== 'other').map((t) => <option key={t} value={t}>{TL[t]}</option>)}
         </select>
       }>
         <p className="text-sm text-sub -mt-2">באיזה אחוז מההצבעות המשותפות רוב שתי המפלגות הצביע אותו דבר. לחצו על משבצת כדי לראות היכן הן חלוקות.</p>
@@ -279,7 +311,7 @@ export default function Record() {
           {split && (
             <>
               <h3 className="text-xl">
-                היכן <PartyDot p={pById[A]} /> ו<PartyDot p={pById[B]} /> חלוקות{CT ? ` · ${L[CT]}` : ''}: <span className="num">{split.length}</span> הצבעות
+                היכן <PartyDot p={pById[A]} /> ו<PartyDot p={pById[B]} /> חלוקות{CT ? ` · ${TL[CT]}` : ''}: <span className="num">{split.length}</span> הצבעות
               </h3>
               <ul className="grid">
                 {split.slice(0, 40).map(({ x, b }) => {
