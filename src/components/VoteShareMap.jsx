@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, CircleMarker, Tooltip as LTooltip } from 'reac
 import { useData } from '@/lib/data';
 
 /** Party vote share by locality: circle area ∝ party votes, opacity ∝ share of the locality's valid votes. */
-export default function VoteShareMap({ partyId, color, height = 460, mks = [] }) {
+export default function VoteShareMap({ partyId, color, height = 560, mks = [] }) {
   const { data: res } = useData('results_by_locality.json');
   const { data: locs } = useData('localities.json');
   const pts = useMemo(() => {
@@ -21,9 +21,9 @@ export default function VoteShareMap({ partyId, color, height = 460, mks = [] })
   const homes = mks.filter((m) => m.residence?.lat);
 
   return (
-    <div className="grid gap-2">
+    <div className="grid gap-2 max-w-xl">
       <div className="rounded-xl overflow-hidden border border-rule" style={{ height }}>
-        <MapContainer center={[31.75, 34.95]} zoom={8} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
+        <MapContainer bounds={[[29.5, 34.25], [33.3, 35.85]]} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
           <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" referrerPolicy="strict-origin-when-cross-origin" />
           {pts.map((p) => (

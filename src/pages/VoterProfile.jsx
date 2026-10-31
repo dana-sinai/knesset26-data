@@ -182,7 +182,7 @@ export default function VoterProfile() {
   const shown = reg ? (all ? reg.items : reg.items.slice(0, TOP)) : [];
   const bmax = reg ? Math.max(...Object.values(reg.beta).map(Math.abs)) : 1;
   const regRow = (k, sub) => (
-    <div key={k} className={`grid grid-cols-[minmax(130px,1fr)_2fr_auto] items-center gap-3 text-sm ${sub ? 'pr-4' : ''}`}>
+    <div key={k} className={`grid grid-cols-[minmax(170px,1fr)_2fr_auto] items-center gap-3 text-sm ${sub ? 'pr-4' : ''}`}>
       <button onClick={() => setXv(k)} className="text-right hover:underline">{sub ? V[k][0].replace('מוצא ', '') : V[k][0]}</button>
       <Bar v={reg.beta[k]} max={bmax} />
       <span dir="ltr" className="num text-xs w-10 text-left">{reg.beta[k].toFixed(2)}</span>
@@ -239,7 +239,7 @@ export default function VoterProfile() {
               במקום שאחד יקבל מקדם מנופח והשני מקדם הפוך. {all ? 'מוצגים כל המאפיינים' : `מוצגים ${TOP} המאפיינים החזקים`}, וקבוצות המוצא תמיד מוצגות יחד.
             </p>
           </div>
-          <div className="grid gap-1.5 max-w-xl">
+          <div className="grid gap-1.5 max-w-2xl">
             {shown.map((it) => (it.origin ? (
               <div key="origin" className="grid gap-1">
                 <span className="text-sm">מוצא (לפי יבשת)</span>
@@ -286,7 +286,7 @@ export default function VoterProfile() {
       {p && (
         <Section title={`מפת הקולות של ${p.name_he}`} aside={<Link to={`/party/${p.id}?tab=voters`} className="text-xs underline text-sub hover:text-ink">עוד על מצביעי {p.name_he} ←</Link>}>
           <p className="text-sm text-sub -mt-2 max-w-3xl">כל יישוב בארץ (לא רק הרשויות שנבחרו למעלה): גודל העיגול לפי מספר הקולות למפלגה, והכהות לפי השיעור שלה ביישוב.</p>
-          <VoteShareMap partyId={p.id} color={p.color} height={420} />
+          <VoteShareMap partyId={p.id} color={p.color} />
         </Section>
       )}
 

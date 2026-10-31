@@ -12,10 +12,10 @@ function VotersOverview() {
   const [sector, setSector] = useState('jewish');
   const nav = useNavigate();
   return (
-    <>
+    <div className="grid xl:grid-cols-[auto_minmax(0,1fr)] gap-x-10 gap-y-12 items-start">
       <Section title="מפת היישובים">
-        <p className="text-sm text-sub -mt-2 max-w-3xl">כל יישוב בצבע הרשימה הגדולה בו, בגודל לפי מספר הקולות. מפה לכל מפלגה בנפרד – בעמוד המפלגה ובעמוד „מה מאפיין את הבוחרים״.</p>
-        <LeadMap height={520} />
+        <p className="text-sm text-sub -mt-2 max-w-md">כל יישוב בצבע הרשימה הגדולה בו, בגודל לפי מספר הקולות. מפה לכל מפלגה בנפרד – בעמוד המפלגה ובעמוד <Link to="/represent" className="underline hover:text-ink">„מה מאפיין את הבוחרים״</Link>.</p>
+        <LeadMap height={600} />
       </Section>
       {data && parties && (
         <Section title="כל המפלגות מול כל המאפיינים" aside={<Link to="/represent" className="text-xs underline text-sub hover:text-ink">ניתוח לכל מפלגה ←</Link>}>
@@ -27,7 +27,7 @@ function VotersOverview() {
           <CorrTable data={data} parties={parties} sector={sector} onPick={(pid, k) => nav(`/represent?p=${pid}&x=${k}&g=${sector}`)} />
         </Section>
       )}
-    </>
+    </div>
   );
 }
 
