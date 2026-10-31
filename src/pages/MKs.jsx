@@ -31,6 +31,8 @@ const COLS = [
   ['נוכחות בוועדות', (m) => m.metrics?.cmt_rate],
   ['ישיבות ועדה לכנסת', (m) => m.metrics?.cmt_per_k],
 ];
+// name and party stay visible while the table scrolls sideways (RTL: pinned to the right edge)
+const STICKY = { 0: 'sticky right-0 w-[150px] min-w-[150px] max-w-[150px]', 1: 'sticky right-[150px] w-[140px] min-w-[140px]' };
 function byColumn(i, dir) {
   const [, get, text] = COLS[i];
   return (a, b) => {
@@ -94,7 +96,8 @@ export default function MKs() {
               <table className="w-full text-sm">
                 <thead className="bg-sand/60 text-xs text-sub">
                   <tr>{COLS.map(([h], i) => (
-                    <th key={h} aria-sort={col?.i === i ? (col.dir === 'asc' ? 'ascending' : 'descending') : 'none'} className="text-right font-medium p-0 whitespace-nowrap">
+                    <th key={h} aria-sort={col?.i === i ? (col.dir === 'asc' ? 'ascending' : 'descending') : 'none'}
+                      className={`text-right font-medium p-0 whitespace-nowrap ${STICKY[i] ? `${STICKY[i]} z-20 bg-[rgb(var(--sand))]` : ''}`}>
                       <button onClick={() => clickCol(i)} title="לחצו למיון" className={`w-full text-right px-3 py-2 hover:text-ink ${col?.i === i ? 'text-ink' : ''}`}>
                         {h}<span className="mr-1 inline-block w-3">{col?.i === i ? (col.dir === 'asc' ? '▲' : '▼') : ''}</span>
                       </button>
@@ -104,8 +107,8 @@ export default function MKs() {
                 <tbody>
                   {list.map((m) => (
                     <tr key={m.id} className="border-t border-rule hover:bg-sand/40">
-                      <td className="px-3 py-1.5 whitespace-nowrap"><MKLink className="hover:underline font-medium" id={m.id}>{m.name_he}</MKLink></td>
-                      <td className="px-3 py-1.5 whitespace-nowrap"><span className="inline-block w-2 h-2 rounded-full ml-1" style={{ background: partyById[m.party]?.color }} />{partyById[m.party]?.name_he}</td>
+                      <td className={`px-3 py-1.5 whitespace-nowrap ${STICKY[0]} z-10 bg-paper`}><MKLink className="hover:underline font-medium" id={m.id}>{m.name_he}</MKLink></td>
+                      <td className={`px-3 py-1.5 whitespace-nowrap ${STICKY[1]} z-10 bg-paper border-l border-rule`}><span className="inline-block w-2 h-2 rounded-full ml-1" style={{ background: partyById[m.party]?.color }} />{partyById[m.party]?.name_he}</td>
                       <td className="px-3 py-1.5 num">{m.list_position}</td>
                       <td className="px-3 py-1.5">{m.gender === 'female' ? 'אישה' : m.gender === 'male' ? 'גבר' : '—'}</td>
                       <td className="px-3 py-1.5 num">{m.age != null ? `${m.age_approx ? '~' : ''}${m.age}` : '—'}</td>
