@@ -2,6 +2,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { useData, useBillSummaries } from '@/lib/data';
 import { Loading, Page, Section } from '@/components/bits';
 import ClusterExplorer, { GROUP_NAMES } from '@/components/ClusterExplorer';
+import { MKCompare, Sides } from '@/components/ClusterDetail';
 
 const fmtDate = (d) => (d ? d.split('-').reverse().join('.') : '');
 
@@ -11,6 +12,7 @@ export default function Topics() {
   const { data: summaries } = useBillSummaries();
   const [sp, setSp] = useSearchParams();
   const t = sp.get('t') || 'all';
+  const pick = sp.get('p') ? Number(sp.get('p')) : null;
   if (!clusters || !topics) return <Loading />;
   const d = clusters[t];
 
@@ -26,10 +28,23 @@ export default function Topics() {
         <a href="#how" className="text-sm underline text-sub hover:text-ink justify-self-start">איך זה מחושב, ומה אפשר ואי אפשר ללמוד מזה ↓</a>
       </header>
 
-      <ClusterExplorer topic={t} onTopic={(k) => setSp(k === 'all' ? {} : { t: k })} />
+      <ClusterExplorer topic={t} onTopic={(k) => setSp(k === 'all' ? {} : { t: k })}
+        pickedPid={pick} onPickMK={(p) => setSp((cur) => { const n = new URLSearchParams(cur); n.set('p', p); return n; }, { replace: true })}
+        below={pick && d && d.points.some((x) => x[0] === pick) && (
+          <MKCompare key={`${t}-${pick}`} topic={t} pid={pick}
+            groups={d.clusters.map((c) => ({ id: c.id, own: d.points.find((x) => x[0] === pick)?.[3] === c.id }))}
+            onClose={() => setSp((cur) => { const n = new URLSearchParams(cur); n.delete('p'); return n; }, { replace: true })} />
+        )} />
+
+      {d?.clusters?.length > 1 && (
+        <Section title="מה מבדיל בין הקבוצות">
+          <p className="text-sm text-sub -mt-2 max-w-3xl">ההצבעות שבהן כל קבוצה הצביעה אחרת מהאחרות – מה הקבוצה תמכה בו או התנגדה לו. הכותרת היא מה פירוש ההצבעה "בעד".</p>
+          <Sides topic={t} groups={d.clusters.map((c) => ({ id: c.id }))} />
+        </Section>
+      )}
 
       {d?.separating?.length > 0 && (
-        <Section title="החוקים שהכי מבדילים בין הקבוצות">
+        <Section title="הטבלה המלאה: שיעור התומכים בכל קבוצה">
           <div className="overflow-x-auto rounded-xl border border-rule">
             <table className="w-full text-sm">
               <thead className="bg-sand/60 text-xs text-sub"><tr>

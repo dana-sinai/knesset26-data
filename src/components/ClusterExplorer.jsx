@@ -6,7 +6,7 @@ import { useOpenMK, MKLink } from '@/components/MKDrawer';
 
 export const GROUP_NAMES = ['קבוצה א׳', 'קבוצה ב׳', 'קבוצה ג׳', 'קבוצה ד׳'];
 
-function ClusterMap({ data, pidToMK, partyById, highlight }) {
+function ClusterMap({ data, pidToMK, partyById, highlight, onPick, picked }) {
   const openMK = useOpenMK();
   const [hover, setHover] = useState(null);
   const pts = data.points;
@@ -30,20 +30,20 @@ function ClusterMap({ data, pidToMK, partyById, highlight }) {
         ))}
         {pts.map(([pid, x, y, cl]) => {
           const m = pidToMK[pid];
-          const on = !highlight || highlight.has(pid);
+          const on = picked ? pid === picked : (!highlight || highlight.has(pid));
           return (
-            <circle key={pid} cx={sx(x)} cy={sy(y)} r={hover === pid || (highlight && on) ? 8 : 6}
-              fill={partyById[m?.party]?.color || '#999'} fillOpacity={on ? 0.92 : 0.12}
-              stroke={hover === pid || (highlight && on) ? 'rgb(var(--ink))' : 'rgb(var(--paper))'} strokeWidth={1.5}
+            <circle key={pid} cx={sx(x)} cy={sy(y)} r={hover === pid || ((highlight || picked) && on) ? 8 : 6}
+              fill={partyById[m?.party]?.color || '#999'} fillOpacity={on ? 0.92 : picked ? 0.35 : 0.12}
+              stroke={hover === pid || ((highlight || picked) && on) ? 'rgb(var(--ink))' : 'rgb(var(--paper))'} strokeWidth={picked === pid ? 2.5 : 1.5}
               className="cursor-pointer transition-all" onMouseEnter={() => setHover(pid)} onMouseLeave={() => setHover(null)}
-              onClick={() => m && openMK(m.id)}>
+              onClick={() => m && (onPick ? onPick(pid) : openMK(m.id))}>
               <title>{`${m?.name_he} · ${partyById[m?.party]?.name_he} · ${GROUP_NAMES[cl]}`}</title>
             </circle>
           );
         })}
       </svg>
       <div className="min-h-5 text-xs text-sub text-center">
-        {hm ? `${hm.name_he} · ${partyById[hm.party]?.name_he} · ${GROUP_NAMES[h[3]]} · ${h[4]} הצבעות` : 'כל נקודה היא חבר/ת כנסת; קרבה = הצבעה דומה. לחצו על נקודה או על מפלגה בקבוצה.'}
+        {hm ? `${hm.name_he} · ${partyById[hm.party]?.name_he} · ${GROUP_NAMES[h[3]]} · ${h[4]} הצבעות` : (onPick ? 'כל נקודה היא חבר/ת כנסת; קרבה = הצבעה דומה. לחצו על נקודה כדי לראות איפה הוא/היא שונה מכל קבוצה.' : 'כל נקודה היא חבר/ת כנסת; קרבה = הצבעה דומה. לחצו על נקודה או על מפלגה בקבוצה.')}
       </div>
     </div>
   );
@@ -53,7 +53,7 @@ function ClusterMap({ data, pidToMK, partyById, highlight }) {
  * Topic chips + vote-based map + the groups with their party make-up.
  * Clicking a party inside a group lists exactly who it is (one person opens straight in the drawer).
  */
-export default function ClusterExplorer({ topic, onTopic, compact = false, preview = false }) {
+export default function ClusterExplorer({ topic, onTopic, compact = false, preview = false, onPickMK, pickedPid, below }) {
   const { data: clusters } = useData('topics/clusters.json');
   const { data: topics } = useData('topics/topics.json');
   const { data: mks } = useMKs();
@@ -88,11 +88,12 @@ export default function ClusterExplorer({ topic, onTopic, compact = false, previ
       {d && (
         <div className={preview ? 'grid gap-3' : 'grid lg:grid-cols-[1.4fr_1fr] gap-8 items-start'}>
           <div className="grid gap-2">
-            <ClusterMap data={d} pidToMK={pidToMK} partyById={partyById} highlight={highlight} />
+            <ClusterMap data={d} pidToMK={pidToMK} partyById={partyById} highlight={highlight} onPick={onPickMK} picked={pickedPid} />
             {!preview && <p className="text-[11px] text-sub">
               {d.n_votes.toLocaleString('he-IL')} הצבעות שנויות במחלוקת · {d.points.length} חברי כנסת שכיהנו בעבר, עם מספיק הצבעות בנושא.
               הקבוצות נקבעו מההצבעות בלבד; הצירים אינם מסמנים ימין/שמאל.
             </p>}
+            {below}
           </div>
           <div className={preview ? 'grid gap-2' : 'grid gap-4'}>
             {d.clusters.map((c) => (
