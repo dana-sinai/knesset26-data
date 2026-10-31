@@ -86,7 +86,8 @@ export default function PartyVoting({ partyId }) {
   const coh = st.cohesion[partyId];
   const ag = Object.entries(st.agree[partyId] || {}).filter(([, v]) => v).sort((a, b) => b[1].share - a[1].share);
   const loy = st.loyalty[partyId] || [];
-  const loyShown = allMK ? loy : loy.slice(0, 6);
+  const order = Object.fromEntries(mks.filter((m) => m.person_id).map((m) => [String(m.person_id), m.list_position]));
+  const loyShown = [...loy].sort((a, b) => (order[a.pid] ?? 999) - (order[b.pid] ?? 999)).slice(0, allMK ? undefined : 6);
   const highlight = new Set(served.map(Number));
 
   if (!served.length) {
@@ -99,7 +100,7 @@ export default function PartyVoting({ partyId }) {
         {served.length} מתוך {seated.length} הנבחרים של {p?.name_he} כיהנו בעבר. {NOTE}
       </p>
 
-      <Section title="כמה הרשימה מצביעה כגוש">
+      <Section title="כמה הרשימה מצביעה באופן אחיד">
         {coh && (coh.n >= MIN_SHARED ? (
           <div className="grid gap-2 max-w-2xl">
             <div className="flex flex-wrap items-baseline gap-x-3">
@@ -109,7 +110,7 @@ export default function PartyVoting({ partyId }) {
             <p className="text-xs text-sub">מתוך {fmt(coh.n)} הצבעות שבהן הצביעו לפחות שניים מהם.</p>
             {loy.length > 1 && (
               <div className="grid gap-1.5 mt-2">
-                <p className="text-xs text-sub">כל חבר/ת כנסת: באיזה חלק מההצבעות הצביע/ה כמו רוב שאר חברי הרשימה (מהנמוך לגבוה).</p>
+                <p className="text-xs text-sub">כל חבר/ת כנסת: באיזה חלק מההצבעות הצביע/ה כמו רוב שאר חברי הרשימה. לפי הסדר ברשימה.</p>
                 {loyShown.map((x) => {
                   const m = pidToMK[Number(x.pid)];
                   return <HBar key={x.pid} share={x.share} color={p?.color} label={m?.name_he} onClick={() => openMK(m.id, { tab: 'map' })} right={<><Pct v={x.share} /> <span className="text-sub num">({fmt(x.n)})</span></>} />;
@@ -153,7 +154,7 @@ export function PartyVotesOverview() {
   const heat = (v) => (v == null ? {} : { background: `rgba(74,110,140,${0.08 + v * 0.8})`, color: v > 0.6 ? '#fff' : 'inherit' });
   return (
     <div className="grid gap-12">
-      <Section title="כמה כל רשימה מצביעה כגוש">
+      <Section title="כמה כל רשימה מצביעה באופן אחיד">
         <p className="text-sm text-sub -mt-2 max-w-3xl">בממוצע, איזה חלק מחברי הרשימה שהצביעו הצביעו כמו רוב חבריהם לרשימה. לחצו על רשימה לפירוט לפי חבר/ת כנסת.</p>
         <div className="grid gap-1.5 max-w-2xl">
           {[...list].filter((p) => st.cohesion[p.id]?.n >= MIN_SHARED).sort((a, b) => st.cohesion[b.id].share - st.cohesion[a.id].share).map((p) => (
@@ -161,7 +162,7 @@ export function PartyVotesOverview() {
               right={<><Pct v={st.cohesion[p.id].share} /> <span className="text-sub num">({st.members[p.id].length})</span></>} />
           ))}
         </div>
-        <p className="text-[11px] text-sub">בסוגריים: כמה מהנבחרים כיהנו בעבר. רשימה שחבריה הגיעו ממפלגות שונות תיראה פחות מגובשת, כי בעבר הם הצביעו במפלגות שונות.</p>
+        <p className="text-[11px] text-sub">בסוגריים: כמה מהנבחרים כיהנו בעבר. רשימה שחבריה הגיעו ממפלגות שונות תקבל ערך נמוך יותר, כי בעבר הם הצביעו במפלגות שונות.</p>
       </Section>
       <Section title="מי מצביע עם מי">
         <p className="text-sm text-sub -mt-2 max-w-3xl">באיזה חלק מההצבעות רוב חברי שתי הרשימות הצביעו אותו דבר. כהה יותר = מסכימות יותר.</p>

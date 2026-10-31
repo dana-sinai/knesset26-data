@@ -140,7 +140,7 @@ export default function Record() {
         <p className="text-sm text-gold font-semibold">מה הם עושים</p>
         <h1 className="text-4xl sm:text-5xl">מפלגות ונושאים</h1>
         <p className="text-sub leading-relaxed">
-          איך הצביעו בפועל חברי הרשימות הנוכחיות, בכל נושא, על הצעות חוק שנויות במחלוקת. בחרו מפלגה ונושא כדי לראות כל הצבעה, או שתי
+          איך הצביעו חברי הרשימות הנוכחיות, בכל נושא, על הצעות חוק שנויות במחלוקת. בחרו מפלגה ונושא כדי לראות כל הצבעה, או שתי
           מפלגות כדי לראות היכן הן חלוקות.
         </p>
         <p className="text-xs text-sub leading-relaxed rounded-lg bg-sand/60 px-3 py-2">

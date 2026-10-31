@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Search, RotateCcw } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { EDU_LABEL, EDU_ORDER, SECTOR_LABEL, useTopics } from '@/lib/data';
-import { SES_LABEL, PER_LABEL, POP_LABEL, METRICS, placeOf } from '@/lib/filters';
+import { SES_LABEL, PER_LABEL, METRICS, placeOf } from '@/lib/filters';
 
 function Chip({ on, onClick, children, color }) {
   return (
@@ -103,10 +103,6 @@ export default function FilterPanel({ mks, parties, filters, count, hideParty = 
         </Group>
         <Group title="מדד פריפריאליות">
           {Object.entries(PER_LABEL).map(([k, l]) => <Chip key={k} on={f.periphery.includes(k)} onClick={() => toggle('periphery', k)}>{l}</Chip>)}
-        </Group>
-        <Group title="הרכב אוכלוסיית היישוב">
-          {Object.entries(POP_LABEL).map(([k, l]) => <Chip key={k} on={f.popType.includes(k)} onClick={() => toggle('popType', k)}>{l}</Chip>)}
-          <Chip on={f.haredi === 'yes'} onClick={() => set({ haredi: f.haredi === 'yes' ? '' : 'yes' })}>יישוב ברוב חרדי</Chip>
         </Group>
         {districts.length > 0 && (
           <div className="grid gap-2">

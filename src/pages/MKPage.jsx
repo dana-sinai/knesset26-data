@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { usePartyHref } from '@/lib/nav';
-import { ExternalLink, AlertTriangle } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { useMKs, useParties, useData, EDU_LABEL, SECTOR_LABEL, FIELD_HE, sourceName, pct, fmt } from '@/lib/data';
 import { Initials, Src, Loading, Page, Section } from '@/components/bits';
 import VoteTable from '@/components/VoteTable';
@@ -54,7 +54,7 @@ export function MKProfile({ id, compact = false, initialTab = null, initialTopic
   if (m.has_votes) tabs.push(['votes', 'הצבעות במליאה']);
   if (m.has_bills) tabs.push(['bills', 'הצעות חוק']);
   if (!m.is_new && m.person_id) tabs.push(['committees', 'ישיבות ועדה']);
-  tabs.push(['practice', 'בעד ונגד, בפועל']);
+  tabs.push(['practice', 'בעד ונגד לפי נושא']);
   if (!m.is_new && m.person_id) tabs.push(['map', 'מי עם מי']);
   tabs.push(['sources', 'מקורות']);
 
@@ -84,13 +84,6 @@ export function MKProfile({ id, compact = false, initialTab = null, initialTopic
         </div>
       </header>
 
-      {m.conflicts?.length > 0 && (
-        <div className="rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/30 dark:border-amber-800 p-3 text-sm flex gap-2">
-          <AlertTriangle size={16} className="shrink-0 mt-0.5 text-amber-700" />
-          <div><strong>מקורות סותרים: </strong>{m.conflicts.join(' · ')}</div>
-        </div>
-      )}
-
       <Tabs tabs={tabs} value={tab} onChange={setTab} />
 
       {tab === 'profile' && (
@@ -102,12 +95,11 @@ export function MKProfile({ id, compact = false, initialTab = null, initialTopic
               <Fact label="תאריך לידה" src={s.birth_date || s.birth_year}>{m.birth_date ? fmtDate(m.birth_date) : m.birth_year}</Fact>
               <Fact label="מקום לידה" src={s.birthplace}>{m.birthplace}</Fact>
               <Fact label="מקום מגורים" src={s.residence_locality_he}>
-                {m.residence?.name}{m.residence?.note && <span className="text-xs text-sub"> ({m.residence.note})</span>}
+                {m.residence?.name}
               </Fact>
               <Fact label="השכלה (גבוהה)" src={s.highest_education_level}>{EDU_LABEL[m.education_level]}</Fact>
               <Fact label="שירות צבאי" src={s.military_service}>{m.military_service}</Fact>
               <Fact label="שפות" src={s.languages}>{m.languages?.join(', ')}</Fact>
-              <Fact label="מצב משפחתי" src={s.family_status}>{m.family_status}</Fact>
               <Fact label="ויקיפדיה">
                 {m.wikipedia_he && <a className="underline" href={m.wikipedia_he} target="_blank" rel="noreferrer">עברית</a>}
                 {m.wikipedia_he && m.wikipedia_en && ' · '}
@@ -262,12 +254,6 @@ export function MKProfile({ id, compact = false, initialTab = null, initialTopic
             </ul>
           </div>
           {m.filled_from_wikidata?.length > 0 && <p className="text-sub">שדות שהושלמו מוויקינתונים: {m.filled_from_wikidata.map((x) => FIELD_HE[x] || x).join(', ')}</p>}
-          {m.notes && (
-            <div className="grid gap-1">
-              <h3 className="font-bold text-lg">הערות אמינות</h3>
-              <p className="text-sub leading-relaxed whitespace-pre-wrap">{m.notes}</p>
-            </div>
-          )}
         </div>
       )}
     </div>

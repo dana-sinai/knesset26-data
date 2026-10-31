@@ -70,7 +70,7 @@ export default function Home() {
         <p className="text-sm text-gold font-semibold">הבחירות לכנסת ה-26 · 27.10.2026</p>
         <h1 className="text-4xl sm:text-6xl lg:text-5xl xl:text-6xl leading-tight">מי נבחר לכנסת, ומה אנחנו יודעים עליהם</h1>
         <p className="text-sub leading-relaxed">
-          כל מה שידוע בנתונים פתוחים על 120 הנבחרים: מי הם, מי בחר בהם, ומה הם עושים בפועל – כל הצבעה במליאה מאז 2003, הצעות חוק וּועדות.
+          כל מה שידוע בנתונים פתוחים על 120 הנבחרים: מי הם, מי בחר בהם, ומה הם עושים – כל הצבעה במליאה מאז 2003, הצעות חוק וּועדות.
           כל נתון מקושר למקורו.
         </p>
         <FindMK mks={mks} partyById={partyById} />
@@ -94,7 +94,7 @@ export default function Home() {
           <LeadMap height={300} />
         </Door>
 
-        <Door g={group('do')} to="/clusters" linkBody={false} lead="איך הצביעו בפועל, בכל נושא: מי בעד מה, מי מצביע כמו מי, וכל הצבעה במליאה.">
+        <Door g={group('do')} to="/clusters" linkBody={false} lead="איך הצביעו, בכל נושא: מי בעד מה, מי מצביע כמו מי, וכל הצבעה במליאה.">
           <ClusterExplorer preview />
         </Door>
       </div>

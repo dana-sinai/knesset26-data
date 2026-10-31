@@ -39,3 +39,4 @@ dist-ssr
 base44/.app.jsonc
 pipeline/raw/
 pipeline/models/
+pipeline/work/mk_review.json

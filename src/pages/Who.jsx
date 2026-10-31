@@ -257,7 +257,7 @@ export function Composition({ party = null }) {
           <Fact title="מקום מגורים" sub="לפי מדד הפריפריאליות של הלמ״ס ליישוב">
             <Bars rows={facts.per} total={facts.perKnown} active={f.per} onPick={(v) => setFacet('per', v)} />
             <div className="text-xs text-sub pt-1 border-t border-rule">
-              יישובים מובילים: {facts.towns.map(([t, v]) => `${t} (${v})`).join(' · ')}
+              היישובים הנפוצים: {facts.towns.map(([t, v]) => `${t} (${v})`).join(' · ')}
             </div>
           </Fact>
         </div>

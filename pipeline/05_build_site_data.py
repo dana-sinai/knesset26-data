@@ -69,12 +69,30 @@ def find_loc(name):
     cands.sort(key=lambda l: -(l.get("population") or 0))
     return cands[0] if cands else None
 
+def clean_bio(b, name=None, gender=None):
+    """Public bios follow one template for everyone: no place of residence (it is a separate, settlement-level field),
+    no neighbourhoods, no family origin."""
+    if not b:
+        return b
+    b = re.sub(r"(הוא|היא) תושבת? (\S+) ו(מכהנ\S*) (כסגנ?\S*) ראש העירייה", r"\1 \3 \4 ראש עיריית \2", b)
+    b = re.sub(r"(\S+) מתגורר\S* ב.+? ו(?=\S)", r"\1 ", b)               # "X מתגורר במודיעין עילית ועסק" -> "X עסק"
+    b = re.sub(r"(הוא|היא) תושבת? .+? ו(?=\S)", r"\1 ", b)               # "הוא תושב כפר כנא ופעיל" -> "הוא פעיל"
+    b = re.sub(r",? ו(מתגורר|תושב)\S* ב?[^.]*?(?=\.|$)", "", b)          # ", ומתגוררת באשקלון" / " ותושב רהט"
+    b = re.sub(r"(^|(?<=\. ))תושבת? [^.]+\.\s*", "", b)                   # a sentence that is only "תושב X."
+    b = re.sub(r", בת למשפחה שעלתה מ[^,.]+", "", b)
+    b = re.sub(r"\s{2,}", " ", b).strip()
+    if name and not b.startswith(name.split()[0]) and not b.startswith(("נולד", "ילידת", "יליד")):
+        b = f"{name} {'היא' if gender == 'female' else 'הוא'} {b}"
+    return b
+
+
 def loc_profile(L):
     """Locality-level CBS characteristics attached to an MK's home locality or birthplace (never below locality)."""
     if not L:
         return dict(code=None, lat=None, lon=None)
     keep = ("code", "lat", "lon", "district_he", "population_2024", "socioeconomic_cluster", "periphery_cluster",
-            "arab_pct", "haredi_hh_pct", "religiosity_main", "form", "academic_pct", "median_wage")
+            "form", "academic_pct", "median_wage")
+    # not attached to an MK: the ethnic / religious make-up of the MK's own locality (it reads as a label of the MK)
     d = {k: L.get(k) for k in keep}
     d["district"] = L.get("district_he") or L.get("district")
     return d
@@ -93,14 +111,14 @@ def age_group(a):
 
 EDU_RANK = ["PhD", "MD", "LLB/LLM", "MA", "BA", "post_secondary", "yeshiva", "high_school", "unknown"]
 
-mks, unmatched_loc, flat = [], [], []
+mks, unmatched_loc, flat, review = [], [], [], {}
 for r in roster.itertuples():
     p = profiles[r.name_he]
     pid = int(r.PersonID) if pd.notna(r.PersonID) else None
     pr = parl.get(str(pid), {}) if pid else {}
     w = wd.get(r.name_he, {})
     use_w = wiki_ok(r.name_he, w)
-    sources = {k: list(v) for k, v in (p.get("sources") or {}).items()}
+    sources = {k: list(v) for k, v in (p.get("sources") or {}).items() if k not in ("family_status", "residence_note")}
     conflicts, filled = [], []
 
     # gender: Knesset record first
@@ -187,12 +205,12 @@ for r in roster.itertuples():
         party=party_by_roster[r.party_he], list_position=int(r.list_position),
         gender=gender, birth_date=bd, birth_year=by, age=age, age_approx=approx, age_group=age_group(age),
         birthplace=birthplace,
-        residence=dict(name=res_name, note=p.get("residence_note"), **loc_profile(L)) if res_name else None,
+        residence=dict(name=res_name, **loc_profile(L)) if res_name else None,
         birthplace_loc=dict(name=BL["name"], **loc_profile(BL)) if BL else None,
         born_abroad=born_abroad, born_country=born_country,
         education=p.get("education") or [], education_level=edu_level,
         career=p.get("career") or [], sectors=sectors, military_service=p.get("military_service"),
-        languages=p.get("languages"), family_status=p.get("family_status"),
+        languages=p.get("languages"),
         prior_terms=prior, is_new=is_new,
         gov_roles=pr.get("gov_roles", []), knesset_roles=pr.get("knesset_roles", []),
         gov_roles_profile=p.get("government_roles") or [],
@@ -201,9 +219,12 @@ for r in roster.itertuples():
                  votes_cast=k25.get("votes_cast"), votes_held=k25.get("votes_held_while_serving"),
                  bills_initiated=b25.get("initiated"), bills_passed=b25.get("passed")) if (k25 or b25) else None,
         has_votes=bool(pr.get("vote_stats")), has_bills=bool(pr.get("bill_stats")),
-        bio_he=p.get("bio_summary_he"), wikipedia_he=wiki_he, wikipedia_en=p.get("wikipedia_en"),
-        sources=sources, notes=p.get("confidence_notes"), conflicts=conflicts, filled_from_wikidata=filled,
+        bio_he=clean_bio(p.get("bio_summary_he"), r.name_he, gender), wikipedia_he=wiki_he, wikipedia_en=p.get("wikipedia_en"),
+        sources=sources, filled_from_wikidata=filled,
     )
+    # research notes, residence notes and source conflicts are for review only, never published
+    review[mk["id"]] = dict(name=r.name_he, notes=p.get("confidence_notes"), residence_note=p.get("residence_note"),
+                             conflicts=conflicts, family_status=p.get("family_status"))
     mks.append(mk)
     flat.append(dict(id=mk["id"], person_id=pid, name_he=mk["name_he"], name_en=mk["name_en"], party=mk["party"],
                      list_position=mk["list_position"], gender=gender, birth_year=by, age=age,
@@ -215,6 +236,8 @@ for r in roster.itertuples():
                      k25_bills_initiated=mk["k25"]["bills_initiated"] if mk["k25"] else None))
 
 json.dump(mks, open(f"{OUT}/mks.json", "w"), ensure_ascii=False, separators=(",", ":"))
+os.makedirs(os.path.join(ROOT, "work"), exist_ok=True)
+json.dump(review, open(os.path.join(ROOT, "work", "mk_review.json"), "w"), ensure_ascii=False, indent=1)  # not published
 with open(f"{OUT}/mks.csv", "w", newline="", encoding="utf-8-sig") as f:
     wr = csv.DictWriter(f, fieldnames=list(flat[0].keys())); wr.writeheader(); wr.writerows(flat)
 
@@ -249,6 +272,6 @@ meta = dict(
 )
 json.dump(meta, open(f"{OUT}/meta.json", "w"), ensure_ascii=False, indent=1)
 print("mks:", len(mks), "| with residence coords:", sum(1 for m in mks if m["residence"] and m["residence"]["lat"]),
-      "| with age:", sum(1 for m in mks if m["age"] is not None), "| conflicts:", sum(1 for m in mks if m["conflicts"]),
+      "| with age:", sum(1 for m in mks if m["age"] is not None), "| conflicts:", sum(1 for v in review.values() if v["conflicts"]),
       "| filled from wikidata:", sum(1 for m in mks if m["filled_from_wikidata"]))
 print("UNMATCHED LOCALITIES:", unmatched_loc)

@@ -60,7 +60,6 @@ export function useMKFilters(mks, initial = {}) {
       if (f.district && P?.district !== f.district) return false;
       if (f.ses.length && !f.ses.includes(SES_B(P?.socioeconomic_cluster))) return false;
       if (f.periphery.length && !f.periphery.includes(PER_B(P?.periphery_cluster))) return false;
-      if (f.popType.length && !f.popType.includes(POP_B(P?.arab_pct))) return false;
       for (const [key, [lo, hi]] of Object.entries(f.met)) {
         const def = METRICS.find((d) => d.key === key);
         const v = def && metricValue(m, def);
@@ -71,7 +70,6 @@ export function useMKFilters(mks, initial = {}) {
         const r = (m.agreement || {})[f.likeParty];
         if (r == null || r * 100 < f.likeMin) return false;
       }
-      if (f.haredi === 'yes' && !((P?.haredi_hh_pct ?? 0) >= 50 || P?.religiosity_main === 'Haredi')) return false;
       return true;
     });
   }, [mks, f]);

@@ -52,12 +52,9 @@ for m in mks:
     for r in m.get("gov_roles_profile") or []:
         if isinstance(r, dict):
             r["role"] = he(r.get("role"), m.get("gender"))
-    for f in ("notes", "family_status", "military_service", "bio_he", "birthplace"):
+    for f in ("military_service", "bio_he", "birthplace"):
         m[f] = he(m.get(f), m.get("gender"))
-    if m.get("residence"):
-        m["residence"]["note"] = he(m["residence"].get("note"))
     m["languages"] = [he(x) for x in (m.get("languages") or [])]
-    m["conflicts"] = [he(x) for x in (m.get("conflicts") or [])]
 
     # ---- metrics
     met = dict(faction_rate=None, participation=None, bills_per_k=None, bills_passed=None,

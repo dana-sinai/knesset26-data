@@ -29,11 +29,13 @@ export function listsIn(rows, parties) {
   return (parties || []).filter((p) => p.seats > 0 && rows.reduce((a, r) => a + r.v * (r.s[p.id] || 0) / 100, 0) / tot >= 0.01);
 }
 
+export const HEAT_POS = '62,120,118';
+export const HEAT_NEG = '176,132,58';
 const heat = (r) => {
   if (r == null || Number.isNaN(r)) return { background: 'transparent' };
   const a = Math.min(1, Math.abs(r));
   if (a < 0.2) return { background: 'rgb(var(--paper))' };
-  const c = r > 0 ? '74,110,140' : '154,91,91';
+  const c = r > 0 ? HEAT_POS : HEAT_NEG; // neutral pair (not red / blue)
   return { background: `rgba(${c},${0.15 + a * 0.75})`, color: a > 0.55 ? '#fff' : 'inherit' };
 };
 
@@ -190,6 +192,9 @@ export function VoterAnalysis({ partyId, onParty = null, initialSector = null, i
       <Section title={`איפה גרים מצביעי ${p?.name_he}`}>
         <p className="text-sm text-sub -mt-2 max-w-3xl">הממוצע ברשויות שבהן גרים מצביעי המפלגה (משוקלל לפי מספר המצביעים שלה בכל רשות), מול הממוצע של כל המצביעים ברשויות שנבחרו. ממוין מההבדל הגדול לקטן.</p>
         <div className="grid gap-1.5 max-w-3xl">
+          <div className="grid grid-cols-[minmax(130px,1.2fr)_2fr_auto] gap-3 text-[11px] text-sub">
+            <span /><span dir="ltr" className="flex justify-between"><span>− נמוך מהממוצע</span><span>גבוה מהממוצע +</span></span><span className="w-36" />
+          </div>
           {profile.map((x) => (
             <div key={x.k} className="grid grid-cols-[minmax(130px,1.2fr)_2fr_auto] items-center gap-3 text-sm">
               <button onClick={() => setXv(x.k)} className={`text-right hover:underline ${xv === x.k ? 'font-semibold' : ''}`}>{x.label}</button>
@@ -198,7 +203,7 @@ export function VoterAnalysis({ partyId, onParty = null, initialSector = null, i
             </div>
           ))}
         </div>
-        <p className="text-[11px] text-sub">פס ימינה מהקו = גבוה מהממוצע, שמאלה = נמוך מהממוצע (ביחידות של סטיית תקן). לחצו על מאפיין כדי לראות את הרשויות בתרשים למטה.</p>
+        <p className="text-[11px] text-sub">אורך הפס = גודל ההבדל, ביחידות של סטיית תקן. לחצו על מאפיין כדי לראות את הרשויות בתרשים למטה.</p>
       </Section>
 
       {imp && (
@@ -270,7 +275,7 @@ export function VoterAnalysis({ partyId, onParty = null, initialSector = null, i
 
       <p className="text-xs text-sub max-w-3xl leading-relaxed">
         מקור: {data.source} הניתוח לפי רשות, על הקלפיות הרגילות (המעטפות הכפולות לא משויכות ליישוב). כל החישובים משוקללים לפי מספר הקולות.
-        מועצה אזורית נספרת כרשות אחת.
+        מועצה אזורית נספרת כרשות אחת. מוצא משפחתי לפי הגדרת הלמ״ס: ארץ הלידה, ולילידי ישראל – ארץ הלידה של האב.
       </p>
     </div>
   );
@@ -278,7 +283,10 @@ export function VoterAnalysis({ partyId, onParty = null, initialSector = null, i
 
 export default function VoterProfile() {
   const [sp] = useSearchParams();
-  const [party, setParty] = useState(sp.get('p') || 'likud');
+  const { data: parties } = useParties();
+  const [party0, setParty] = useState(sp.get('p'));
+  // no party picked: start from the list with the most votes
+  const party = party0 || [...(parties || [])].sort((a, b) => b.votes - a.votes)[0]?.id;
   return (
     <Page>
       <header className="grid gap-3 max-w-3xl">
@@ -289,7 +297,7 @@ export default function VoterProfile() {
         </p>
         <p className="text-sm text-sub">כל המפלגות מול כל המאפיינים, בטבלה אחת: <Link to="/voters" className="underline hover:text-ink">בתמונה הכללית ←</Link></p>
       </header>
-      <VoterAnalysis partyId={party} onParty={setParty} initialSector={sp.get('g') || 'jewish'} initialX={sp.get('x')} showMap />
+      <VoterAnalysis partyId={party} onParty={setParty} initialSector={sp.get('g')} initialX={sp.get('x')} showMap />
     </Page>
   );
 }

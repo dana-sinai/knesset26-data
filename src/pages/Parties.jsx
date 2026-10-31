@@ -3,13 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useMKs, useParties, useData, fmt } from '@/lib/data';
 import { Loading, Page, Section } from '@/components/bits';
 import LeadMap from '@/components/LeadMap';
-import { CorrTable, SectorSelect } from '@/pages/VoterProfile';
+import { CorrTable, SectorSelect, HEAT_POS, HEAT_NEG } from '@/pages/VoterProfile';
 
 // "מי בחר בהם" overview: the map of localities, every list against every CBS characteristic, then one card per list.
 function VotersOverview() {
   const { data } = useData('voter_profile.json');
   const { data: parties } = useParties();
-  const [sector, setSector] = useState('jewish');
+  const [sector, setSector] = useState('all'); // all authorities, so every list (incl. the Arab-majority lists) is in the table
   const nav = useNavigate();
   return (
     <div className="grid xl:grid-cols-[300px_minmax(0,1fr)] gap-x-10 gap-y-12 items-start">
@@ -20,8 +20,8 @@ function VotersOverview() {
       {data && parties && (
         <Section title="כל המפלגות מול כל המאפיינים" aside={<Link to="/represent" className="text-xs underline text-sub hover:text-ink">ניתוח לכל מפלגה ←</Link>}>
           <p className="text-sm text-sub -mt-2 max-w-3xl">
-            המתאם (r) בין שיעור ההצבעה למפלגה ברשות לבין כל מאפיין של הרשות לפי הלמ״ס. כחול = המפלגה חזקה יותר ברשויות שבהן המאפיין גבוה,
-            אדום = חלשה יותר, לבן = קשר חלש מאוד. הנתונים של רשויות ולא של אנשים. לחצו על משבצת לפירוט.
+            המתאם (r) בין שיעור ההצבעה למפלגה ברשות לבין כל מאפיין של הרשות לפי הלמ״ס. <span className="inline-block w-3 h-3 rounded-sm align-middle" style={{ background: `rgb(${HEAT_POS})` }} /> = המפלגה חזקה יותר ברשויות שבהן המאפיין גבוה,
+            {' '}<span className="inline-block w-3 h-3 rounded-sm align-middle" style={{ background: `rgb(${HEAT_NEG})` }} /> = חלשה יותר, בהיר = קשר חלש מאוד. הנתונים של רשויות ולא של אנשים. לחצו על משבצת לפירוט.
           </p>
           <SectorSelect data={data} value={sector} onChange={setSector} />
           <CorrTable data={data} parties={parties} sector={sector} onPick={(pid, k) => nav(`/represent?p=${pid}&x=${k}&g=${sector}`)} />

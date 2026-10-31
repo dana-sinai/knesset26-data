@@ -48,8 +48,9 @@ export const knessetBillUrl = (billId) =>
 
 export const VOTE_CODE = { 1: 'בעד', 2: 'נגד', 3: 'נמנע', 4: 'נוכח' };
 export const VOTE_CLASS = {
-  1: 'bg-[#E3E9E4] text-[#2F4A3A] dark:bg-[#2F4A3A]/50 dark:text-[#D3E0D6]',
-  2: 'bg-[#EEE2E2] text-[#6A3036] dark:bg-[#6A3036]/50 dark:text-[#EAD3D5]',
+  // neutral hues (not green = good / red = bad)
+  1: 'bg-[#E1E7EE] text-[#2F4560] dark:bg-[#2F4560]/50 dark:text-[#D5DFEA]',
+  2: 'bg-[#F0E6D6] text-[#6B4E1F] dark:bg-[#6B4E1F]/50 dark:text-[#EBDDC4]',
   3: 'bg-[#ECE7DC] text-[#5F5236] dark:bg-[#5F5236]/50 dark:text-[#E6DCC6]',
   4: 'bg-sand text-sub',
 };
@@ -91,9 +92,9 @@ export function sourceName(u) {
 export const FIELD_HE = {
   party_he: 'מפלגה', list_position: 'מקום ברשימה', name_he: 'שם', name_en: 'שם באנגלית', gender: 'מגדר', birth_date: 'תאריך לידה',
   birth_year: 'שנת לידה', birthplace: 'מקום לידה', education: 'השכלה', highest_education_level: 'השכלה (גבוהה)', career: 'קריירה',
-  military_service: 'שירות צבאי', government_roles: 'תפקידים בממשלה', family_status: 'מצב משפחתי', bio_summary_he: 'תקציר',
+  military_service: 'שירות צבאי', government_roles: 'תפקידים בממשלה', bio_summary_he: 'תקציר',
   wikipedia_en: 'ויקיפדיה באנגלית', wikipedia_he: 'ויקיפדיה', prior_knesset_terms: 'כנסות קודמות', is_new_mk: 'חדש/ה בכנסת',
-  languages: 'שפות', residence_locality_he: 'מקום מגורים', residence_note: 'הערה על מקום המגורים', residence: 'מקום מגורים',
+  languages: 'שפות', residence_locality_he: 'מקום מגורים', residence: 'מקום מגורים',
 };
 
 export function hostname(url) {

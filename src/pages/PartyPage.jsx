@@ -115,7 +115,7 @@ export default function PartyPage() {
                     <div className="overflow-x-auto rounded-xl border border-rule">
                       <table className="w-full text-sm">
                         <thead className="bg-sand/60 text-xs text-sub"><tr><th className="text-right px-3 py-2 font-medium">יישוב</th><th className="text-right px-3 py-2 font-medium">קולות</th><th className="text-right px-3 py-2 font-medium">שיעור ביישוב</th></tr></thead>
-                        <tbody>{e.top_localities.map((t) => (
+                        <tbody>{e.top_localities.filter((t) => t.code !== 9999 && t.name !== '9999').map((t) => (
                           <tr key={t.code} className="border-t border-rule num"><td className="px-3 py-1.5">{t.name}</td><td className="px-3 py-1.5">{fmt(t.votes)}</td><td className="px-3 py-1.5">{t.share}%</td></tr>
                         ))}</tbody>
                       </table>
