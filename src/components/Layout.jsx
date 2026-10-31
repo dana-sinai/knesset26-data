@@ -70,16 +70,14 @@ export default function Layout() {
       <MKDrawer />
       <footer className="border-t border-rule mt-16">
         <div className="mx-auto max-w-7xl px-4 py-8 text-sm text-sub grid gap-2">
-          <p>
-            הנתונים נאספו ועובדו ע״י <strong className="text-ink">ד״ר דנה סיני</strong>. כל עובדה מקושרת למקור; מצאתם טעות?
-            {' '}<Link className="underline" to="/about">ראו איך לדווח</Link>.
-          </p>
           <p className="text-xs">
             הכותרות באתר כתובות בגופן <a className="underline" href="https://www.ot-hayim.co.il/fonts/amit-man/" target="_blank" rel="noreferrer">״עמית מן״</a>,
             {' '}שנוצר מכתב ידה של עמית מן ז״ל, פרמדיקית שנרצחה בבארי ב-7 באוקטובר 2023 בעודה מטפלת בפצועים, במסגרת <a className="underline" href="https://www.ot-hayim.co.il/" target="_blank" rel="noreferrer">מיזם אות.חיים</a>. לזכרה.
           </p>
           <p className="text-xs">
             ניתוח עצמאי של ד״ר דנה סיני, שנעשה באופן אישי. אינו מייצג, ואינו קשור, לאף מעסיק בהווה או בעבר.
+            {' '}כל הנתונים מגיעים ממקורות ציבוריים פתוחים ומתעדכנים אוטומטית. מצאתם טעות?{' '}
+            <Link className="underline" to="/about#report">ספרו לנו</Link>.
           </p>
         </div>
       </footer>

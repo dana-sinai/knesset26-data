@@ -6,6 +6,7 @@ import { useMKs, useParties, useMeta, dataBuilt } from '@/lib/data';
 import { Loading, Page } from '@/components/bits';
 import Hemicycle from '@/components/Hemicycle';
 import ClusterExplorer from '@/components/ClusterExplorer';
+import LeadMap from '@/components/LeadMap';
 import { FindMK } from '@/pages/Who';
 
 const group = (k) => NAV_GROUPS.find((g) => g.key === k);
@@ -60,8 +61,6 @@ export default function Home() {
   const fresh = mks.filter((m) => m.is_new).length;
   const ages = mks.map((m) => m.age).filter((a) => a != null).sort((a, b) => a - b);
   const med = ages.length ? ages[Math.floor(ages.length / 2)] : '—';
-  const topVotes = parties.slice().sort((a, b) => b.votes - a.votes).slice(0, 6);
-  const maxPct = Math.max(...topVotes.map((p) => p.pct));
 
   return (
     <Page>
@@ -89,15 +88,7 @@ export default function Home() {
         </Door>
 
         <Door g={group('voters')} to="/voters" lead="מי הצביע לכל רשימה ומאיפה, והאם הנבחרים באים מאותם מקומות כמו הבוחרים שלהם.">
-          <ul className="grid gap-1.5 rounded-xl bg-sand/50 p-4">
-            {topVotes.map((p) => (
-              <li key={p.id} className="grid grid-cols-[88px_1fr_auto] items-center gap-2 text-xs">
-                <span className="truncate">{p.name_he}</span>
-                <span className="h-2 rounded-full bg-paper overflow-hidden"><span className="block h-full rounded-full" style={{ width: `${(p.pct / maxPct) * 100}%`, background: p.color }} /></span>
-                <span className="num text-sub">{p.pct.toFixed(1)}%</span>
-              </li>
-            ))}
-          </ul>
+          <LeadMap height={300} />
         </Door>
 
         <Door g={group('do')} to="/record" lead="איך הצביעו בפועל, בכל נושא: מי בעד מה, מי מצביע כמו מי, וכל הצבעה במליאה.">

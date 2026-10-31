@@ -67,6 +67,7 @@ export default function About() {
         {meta && <p className="text-xs text-sub">עדכון אחרון של הנתונים: {meta.built_at}</p>}
       </Section>
       <Section title="מצאתם טעות?">
+        <span id="report" className="block -mt-24 pt-24" aria-hidden />
         <p className="text-sm">כתבו לי עם קישור למקור, ואעדכן. הנתונים מתעדכנים כל יום ממאגר הכנסת, כולל הצבעות הכנסת ה-26 מרגע שתתחיל לעבוד.</p>
       </Section>
     </Page>
