@@ -1,6 +1,7 @@
 """Step 10: small local model for new bills (runs inside the daily build, no AI service needed).
 
-* Topic: a TF-IDF (character n-grams) + linear SVM classifier, retrained on every run (about 3 seconds) from all
+* Topic: a TF-IDF (character n-grams) + linear SVM classifier — averaged with a fine-tuned DictaBERT (retrained monthly,
+  step 13) when that model is in the Actions cache — retrained on every run (about 3 seconds) from all
   bills labelled so far — the original ~21,000 plus any labelled later by review (not its own guesses), so it keeps
   learning, and there is no saved model file to break when the sandbox reinstalls its packages.
   Held-out check (by distinct bill name): 87% agreement overall; 95.6% on the 73% of bills where the model's
@@ -52,6 +53,26 @@ if new:
     X = vec.fit_transform(list(b.norm.astype(str)))
     clf = CalibratedClassifierCV(LinearSVC(C=0.5), cv=3).fit(X, list(b.y))
     P = clf.predict_proba(vec.transform([norm(r[1]) for r in new]))
+    # if the monthly fine-tuned DictaBERT is available (GitHub Actions cache), average its probabilities in
+    BERT = "pipeline/models/bert-topic"
+    if os.path.exists(f"{BERT}/classes.json"):
+        try:
+            import torch
+            from transformers import AutoTokenizer, AutoModelForSequenceClassification
+            bc = json.load(open(f"{BERT}/classes.json"))["classes"]
+            tok = AutoTokenizer.from_pretrained(BERT)
+            bm = AutoModelForSequenceClassification.from_pretrained(BERT, torch_dtype=torch.float32).eval()
+            with torch.no_grad():
+                Pb = torch.softmax(bm(**tok([norm(r[1]) for r in new], padding=True, truncation=True, max_length=48,
+                                            return_tensors="pt")).logits.float(), -1).numpy()
+            Pb2 = np.zeros_like(P)
+            for j, c in enumerate(clf.classes_):
+                if c in bc:
+                    Pb2[:, j] = Pb[:, bc.index(c)]
+            P = (P + Pb2) / 2
+            print("topics: averaged with DictaBERT")
+        except Exception as e:  # never fail the daily build because of the big model
+            print(f"topics: DictaBERT not used ({e})")
     keep = []
     with open(f"{I}/bill_topics_extra.tsv", "a", encoding="utf-8") as fh:
         for r, p in zip(new, P):

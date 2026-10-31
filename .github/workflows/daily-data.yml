@@ -32,7 +32,17 @@ jobs:
           cache-dependency-path: pipeline/requirements.txt
 
       - name: Install Python packages
-        run: pip install -r pipeline/requirements.txt
+        run: |
+          pip install -r pipeline/requirements.txt
+          pip install --index-url https://download.pytorch.org/whl/cpu torch && pip install transformers
+
+      # the fine-tuned DictaBERT from the monthly workflow (if there is one yet)
+      - name: Restore topic model
+        uses: actions/cache/restore@v4
+        with:
+          path: pipeline/models/bert-topic
+          key: bert-topic-none
+          restore-keys: bert-topic-
 
       # Keep the downloaded raw files between runs, so only files that changed upstream are downloaded again.
       - name: Restore raw downloads

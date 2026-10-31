@@ -1,4 +1,5 @@
 # Monthly: refresh the slower-changing sources that the daily update does not download.
+#  - a fine-tuned DictaBERT topic model (pipeline/13_train_bert.py), kept in the Actions cache for the daily step 10
 #  - Wikipedia / Wikidata details of each MK (birth date and place, education, occupation, residence) -> pipeline/work/wikidata.json
 # The next daily update rebuilds the site data with it. (Judgement work — error reports, new roles, bills the model was
 # unsure about — is done by a monthly Claude task; see pipeline/MONTHLY.md.)
@@ -30,3 +31,19 @@ jobs:
           echo "::notice::$(git diff --cached --stat | tail -1)"
           git commit -m "Monthly: Wikidata refresh $(date -u +%F)"
           for i in 1 2 3; do git pull --rebase origin main && git push && break; sleep 10; done
+
+  train-bert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install --index-url https://download.pytorch.org/whl/cpu torch && pip install transformers pandas
+      - name: Fine-tune DictaBERT on all topic labels
+        run: python3 pipeline/13_train_bert.py | tee /tmp/train.log && grep '^model ' /tmp/train.log | sed 's/^/::notice::/'
+      - name: Keep the model for the daily runs
+        uses: actions/cache/save@v4
+        with:
+          path: pipeline/models/bert-topic
+          key: bert-topic-${{ github.run_id }}
