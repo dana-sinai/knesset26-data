@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useData, useMKs, useParties, fmt } from '@/lib/data';
 import { useOpenMK } from '@/components/MKDrawer';
@@ -51,7 +51,7 @@ export function usePartyVotes() {
         agree[A][B] = both >= MIN_SHARED ? { share: same / both, n: both } : null;
       });
     });
-    return { N, members, cohesion, loyalty, agree };
+    return { N, votes: cv.votes, pos, members, cohesion, loyalty, agree };
   }, [cv, mks]);
 }
 
@@ -67,6 +67,77 @@ function HBar({ share, color, label, right, onClick }) {
   );
 }
 
+const STAGE = { final: 'אישור סופי', early: 'קריאה טרומית / ראשונה', whole: 'הצבעה על ההצעה' };
+const POS = { 1: 'בעד', 2: 'נגד' };
+const fmtDate = (d) => (d ? d.slice(0, 10).split('-').reverse().join('.') : '');
+
+/** The votes behind one cell: where the majorities of lists A and B voted the same way, or opposite ways. */
+export function PairVotes({ st, a, b, onClose }) {
+  const { data: parties } = useParties();
+  const { data: topics } = useData('topics/topics.json');
+  const { data: bt } = useData('topics/bill_topics.json');
+  const [mode, setMode] = useState('same');
+  const [topic, setTopic] = useState('all');
+  const [n, setN] = useState(25);
+  const ref = useRef(null);
+  useEffect(() => { ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); setN(25); }, [a, b]);
+  const pById = Object.fromEntries((parties || []).map((p) => [p.id, p]));
+  const A = pById[a], B = pById[b];
+  const topicOf = (bill) => bt?.[String(bill)]?.[0] || null;
+  const idx = useMemo(() => {
+    const out = { same: [], diff: [] };
+    st.votes.forEach((v, i) => {
+      const x = st.pos[a]?.[i], y = st.pos[b]?.[i];
+      if (x && y) out[x === y ? 'same' : 'diff'].push(i);
+    });
+    const byDate = (i, j) => (st.votes[j][2] || '').localeCompare(st.votes[i][2] || '');
+    out.same.sort(byDate); out.diff.sort(byDate);
+    return out;
+  }, [st, a, b]);
+  const rows = idx[mode].filter((i) => topic === 'all' || topicOf(st.votes[i][6]) === topic);
+  const counts = idx[mode].reduce((c, i) => { const t = topicOf(st.votes[i][6]) || 'other'; c[t] = (c[t] || 0) + 1; return c; }, {});
+  const labels = topics?.labels || {};
+  return (
+    <div ref={ref} className="grid gap-4 rounded-xl bg-sand/40 p-4 scroll-mt-20">
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <h3 className="text-2xl">{A?.name_he} ו{B?.name_he}</h3>
+        <span className="text-sm text-sub">{idx.same.length + idx.diff.length} הצבעות שבהן לשתיהן הייתה עמדה</span>
+        {onClose && <button onClick={onClose} className="mr-auto text-xs underline text-sub hover:text-ink">סגירה</button>}
+      </div>
+      <div className="flex flex-wrap gap-2 items-center">
+        {[['same', `הצביעו אותו דבר (${idx.same.length})`], ['diff', `הצביעו הפוך (${idx.diff.length})`]].map(([k, l]) => (
+          <button key={k} onClick={() => { setMode(k); setTopic('all'); setN(25); }} aria-pressed={mode === k}
+            className={`px-3 py-1 rounded-full border text-sm ${mode === k ? 'border-ink bg-ink text-paper' : 'border-rule hover:border-ink/40'}`}>{l}</button>
+        ))}
+        <select value={topic} onChange={(e) => { setTopic(e.target.value); setN(25); }} className="rounded-md border border-rule bg-paper px-2 py-1 text-sm" aria-label="נושא">
+          <option value="all">כל הנושאים</option>
+          {Object.entries(counts).sort((x, y) => y[1] - x[1]).map(([t, c]) => <option key={t} value={t}>{labels[t] || 'אחר'} ({c})</option>)}
+        </select>
+      </div>
+      <ul className="grid gap-2">
+        {rows.slice(0, n).map((i) => {
+          const [vid, k, date, name, stage, meaning, bill] = st.votes[i];
+          const t = topicOf(bill);
+          return (
+            <li key={vid} className="rounded-lg bg-paper p-3 grid gap-1">
+              <Link to={`/votes?k=${k}&id=${vid}`} className="font-medium hover:underline leading-snug">{name}</Link>
+              <span className="text-[11px] text-sub num">{fmtDate(date)} · הכנסת ה-{k} · {STAGE[stage] || ''}{t && labels[t] ? ` · ${labels[t]}` : ''}</span>
+              {meaning && <span className="text-xs text-sub">בעד = {meaning}</span>}
+              <span className="text-xs">
+                <span className="inline-flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{ background: A?.color }} />רוב {A?.name_he}: <strong>{POS[st.pos[a][i]]}</strong></span>
+                <span className="text-sub"> · </span>
+                <span className="inline-flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{ background: B?.color }} />רוב {B?.name_he}: <strong>{POS[st.pos[b][i]]}</strong></span>
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+      {rows.length > n && <button onClick={() => setN(n + 50)} className="justify-self-start text-sm underline text-sub hover:text-ink">עוד {Math.min(50, rows.length - n)} מתוך {rows.length - n}</button>}
+      {!rows.length && <p className="text-sm text-sub">אין הצבעות כאלה.</p>}
+    </div>
+  );
+}
+
 const NOTE = 'לפי ההצבעות של הנבחרים הנוכחיים בכנסות קודמות (מאז 2003), גם אם אז כיהנו במפלגה אחרת. רק הצבעות על הצעות חוק שנויות במחלוקת: לפחות 20 מצביעים, ולפחות רבע מהם בכל צד.';
 
 /** The party page's "what they do" tab. */
@@ -77,6 +148,7 @@ export default function PartyVoting({ partyId }) {
   const { data: clusters } = useData('topics/clusters.json');
   const openMK = useOpenMK();
   const [allMK, setAllMK] = useState(false);
+  const [pair, setPair] = useState(null);
   const pById = useMemo(() => Object.fromEntries((parties || []).map((p) => [p.id, p])), [parties]);
   const pidToMK = useMemo(() => Object.fromEntries((mks || []).filter((m) => m.person_id).map((m) => [Number(m.person_id), m])), [mks]);
   if (!st || !parties || !mks) return <p className="text-sub text-sm">טוען…</p>;
@@ -124,12 +196,16 @@ export default function PartyVoting({ partyId }) {
 
       {ag.length > 0 && (
         <Section title="עם מי הרשימה מצביעה" aside={<Link to="/party-votes" className="text-xs underline text-sub hover:text-ink">כל הרשימות ←</Link>}>
-          <p className="text-sm text-sub -mt-2 max-w-3xl">באיזה חלק מההצבעות רוב חברי {p?.name_he} ורוב חברי הרשימה האחרת הצביעו אותו דבר (מתוך ההצבעות שבהן לשתיהן הייתה עמדה).</p>
+          <p className="text-sm text-sub -mt-2 max-w-3xl">באיזה חלק מההצבעות רוב חברי {p?.name_he} ורוב חברי הרשימה האחרת הצביעו אותו דבר (מתוך ההצבעות שבהן לשתיהן הייתה עמדה). לחצו על רשימה כדי לראות על מה.</p>
           <div className="grid gap-1.5 max-w-2xl">
             {ag.map(([id, v]) => (
-              <HBar key={id} share={v.share} color={pById[id]?.color} label={<Link to={`/party/${id}?tab=record`} className="hover:underline">{pById[id]?.name_he}</Link>} right={<><Pct v={v.share} /> <span className="text-sub num">({fmt(v.n)})</span></>} />
+              <button key={id} onClick={() => setPair(pair === id ? null : id)} aria-pressed={pair === id}
+                className={`text-right rounded-md px-1 -mx-1 hover:bg-sand/60 ${pair === id ? 'bg-sand/60' : ''}`}>
+                <HBar share={v.share} color={pById[id]?.color} label={pById[id]?.name_he} right={<><Pct v={v.share} /> <span className="text-sub num">({fmt(v.n)})</span></>} />
+              </button>
             ))}
           </div>
+          {pair && <PairVotes st={st} a={partyId} b={pair} onClose={() => setPair(null)} />}
         </Section>
       )}
 
@@ -149,6 +225,7 @@ export default function PartyVoting({ partyId }) {
 export function PartyVotesOverview() {
   const st = usePartyVotes();
   const { data: parties } = useParties();
+  const [sel, setSel] = useState(null); // [a, b]
   if (!st || !parties) return <p className="text-sub text-sm">טוען…</p>;
   const list = parties.filter((p) => p.seats > 0 && st.members[p.id]?.length);
   const heat = (v) => (v == null ? {} : { background: `rgba(74,110,140,${0.08 + v * 0.8})`, color: v > 0.6 ? '#fff' : 'inherit' });
@@ -165,7 +242,7 @@ export function PartyVotesOverview() {
         <p className="text-[11px] text-sub">בסוגריים: כמה מהנבחרים כיהנו בעבר. רשימה שחבריה הגיעו ממפלגות שונות תקבל ערך נמוך יותר, כי בעבר הם הצביעו במפלגות שונות.</p>
       </Section>
       <Section title="מי מצביע עם מי">
-        <p className="text-sm text-sub -mt-2 max-w-3xl">באיזה חלק מההצבעות רוב חברי שתי הרשימות הצביעו אותו דבר. כהה יותר = מסכימות יותר.</p>
+        <p className="text-sm text-sub -mt-2 max-w-3xl">באיזה חלק מההצבעות רוב חברי שתי הרשימות הצביעו אותו דבר. כהה יותר = מסכימות יותר. לחצו על משבצת כדי לראות על מה הצביעו יחד ועל מה הפוך.</p>
         <div className="overflow-x-auto rounded-xl border border-rule">
           <table className="text-xs border-separate border-spacing-0.5">
             <thead><tr><th className="sticky right-0 bg-paper z-10" />{list.map((x) => <th key={x.id} className="font-medium text-sub px-0.5 align-bottom"><span className="block w-14 leading-tight">{x.name_he}</span></th>)}</tr></thead>
@@ -175,7 +252,15 @@ export function PartyVotesOverview() {
                   <th className="sticky right-0 bg-paper z-10 text-right font-normal pl-2 whitespace-nowrap"><Link to={`/party/${a.id}?tab=record`} className="hover:underline">{a.name_he}</Link></th>
                   {list.map((b) => {
                     const v = a.id === b.id ? null : st.agree[a.id]?.[b.id];
-                    return <td key={b.id} className="p-0"><span className="num w-14 h-7 rounded grid place-items-center" style={a.id === b.id ? { background: 'rgb(var(--sand))' } : heat(v?.share)} title={v ? `${a.name_he} · ${b.name_he}: ${Math.round(v.share * 100)}% מתוך ${v.n} הצבעות` : ''}>{v ? Math.round(v.share * 100) : ''}</span></td>;
+                    const on = sel && sel[0] === a.id && sel[1] === b.id;
+                    return (
+                      <td key={b.id} className="p-0">
+                        {v ? (
+                          <button onClick={() => setSel(on ? null : [a.id, b.id])} aria-pressed={on} title={`${a.name_he} · ${b.name_he}: ${Math.round(v.share * 100)}% מתוך ${v.n} הצבעות`}
+                            className={`num w-14 h-7 rounded grid place-items-center hover:ring-2 hover:ring-ink/40 ${on ? 'ring-2 ring-ink' : ''}`} style={heat(v.share)}>{Math.round(v.share * 100)}</button>
+                        ) : <span className="w-14 h-7 rounded block" style={a.id === b.id ? { background: 'rgb(var(--sand))' } : {}} />}
+                      </td>
+                    );
                   })}
                 </tr>
               ))}
@@ -183,6 +268,7 @@ export function PartyVotesOverview() {
           </table>
         </div>
         <p className="text-[11px] text-sub max-w-3xl">{NOTE}</p>
+        {sel && <PairVotes st={st} a={sel[0]} b={sel[1]} onClose={() => setSel(null)} />}
       </Section>
     </div>
   );
