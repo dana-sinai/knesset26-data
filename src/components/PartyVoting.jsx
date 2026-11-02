@@ -122,7 +122,7 @@ export function PairVotes({ st, a, b, onClose }) {
             <li key={vid} className="rounded-lg bg-paper p-3 grid gap-1">
               <Link to={`/votes?k=${k}&id=${vid}`} className="font-medium hover:underline leading-snug">{name}</Link>
               <span className="text-[11px] text-sub num">{fmtDate(date)} · הכנסת ה-{k} · {STAGE[stage] || ''}{t && labels[t] ? ` · ${labels[t]}` : ''}</span>
-              {meaning && <span className="text-xs text-sub">בעד = {meaning}</span>}
+              {meaning && <span className="text-xs text-sub">בעד = {String(meaning).replace(/^\s*בעד\s*=\s*/, '')}</span>}
               <span className="text-xs">
                 <span className="inline-flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{ background: A?.color }} />רוב {A?.name_he}: <strong>{POS[st.pos[a][i]]}</strong></span>
                 <span className="text-sub"> · </span>

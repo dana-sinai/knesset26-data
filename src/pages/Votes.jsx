@@ -253,8 +253,8 @@ export default function Votes() {
                 <span className="text-xs text-sub num">{fmtD(v.dt)} · בעד {v.f} · נגד {v.a}{v.ab ? ` · נמנעו ${v.ab}` : ''}{v.subject ? ` · ${v.subject}` : ''}</span>
                 {v.f + v.a > 0 && (
                   <span className="flex h-1.5 rounded-full overflow-hidden bg-sand" title={`${Math.round((v.f / (v.f + v.a)) * 100)}% בעד`}>
-                    <span style={{ width: `${(v.f / (v.f + v.a)) * 100}%`, background: '#2F4A3A' }} />
-                    <span style={{ width: `${(v.a / (v.f + v.a)) * 100}%`, background: '#6A3036' }} />
+                    <span style={{ width: `${(v.f / (v.f + v.a)) * 100}%`, background: '#2F4560' }} />
+                    <span style={{ width: `${(v.a / (v.f + v.a)) * 100}%`, background: '#B0843A' }} />
                   </span>
                 )}
                 <TopicChips billId={v.item} />
