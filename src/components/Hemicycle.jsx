@@ -87,12 +87,8 @@ export default function Hemicycle({ mks, parties, groups, match, label }) {
           const tot = g.parties.reduce((s, p) => s + p.seats, 0);
           const sel = g.parties.reduce((s, p) => s + (byParty[p.id] || 0), 0);
           return (
-            <div key={g.id} className="grid gap-1 content-start pt-2">
-              <span className="flex items-baseline gap-1.5 text-sm">
-                <span className="w-2.5 h-2.5 rounded-sm shrink-0 self-center" style={{ background: g.color }} />
-                <span className="font-semibold">{g.name_he}</span>
-                <span className="num text-sub mr-auto">{match ? `${sel}/${tot}` : tot}</span>
-              </span>
+            <div key={g.id} className="grid gap-1 content-start border-t-2 pt-2" style={{ borderColor: g.color }}>
+              <span className="num font-semibold text-sm">{match ? <>{sel} <span className="text-sub font-normal">מתוך {tot}</span></> : `${tot} מושבים`}</span>
               {g.parties.map((p) => (
                 <Link key={p.id} to={partyHref(p.id)} className="hover:underline flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full" style={{ background: p.color }} />{p.name_he}

@@ -215,7 +215,7 @@ export function Composition({ party = null }) {
           </div>
         )}
         {!party && <Hemicycle mks={mks} parties={parties} groups={meta?.groups} match={match} label={label} />}
-        {!party && meta?.groups_source && <p className="text-[11px] text-sub text-center">{meta.groups_source}.</p>}
+        {!party && meta?.groups_source && <p className="text-[11px] text-sub text-center">{meta.groups_source}. הקבוצות מוצגות בצבעים בלבד, ללא שמות.</p>}
         {match && (
           <div id="names" className="grid gap-2 scroll-mt-24">
             <h2 className="text-xl">{label}: {sel.length} חברי כנסת</h2>
