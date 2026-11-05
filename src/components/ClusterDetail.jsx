@@ -150,6 +150,59 @@ export function Sides({ topic, groups }) {
   );
 }
 
+/** Who this member votes with most and least on the topic (only members with enough shared votes); a name picks them for comparison. */
+function MKNeighbours({ topic, pid, minShared, pidToMK, partyById, onPick, picked }) {
+  const { data: det } = useDetail(topic);
+  const [all, setAll] = useState(false);
+  const res = useMemo(() => {
+    const a = det?.mk?.[String(pid)];
+    if (!a) return null;
+    const rows = [];
+    let few = 0;
+    for (const [q, b] of Object.entries(det.mk)) {
+      if (Number(q) === pid || !pidToMK[Number(q)]) continue;
+      let n = 0, same = 0;
+      for (let i = 0; i < a.length; i++) if (a[i] !== '0' && b[i] !== '0') { n++; if (a[i] === b[i]) same++; }
+      if (n < minShared) { few++; continue; }
+      rows.push({ q: Number(q), n, rate: same / n });
+    }
+    rows.sort((x, y) => y.rate - x.rate || y.n - x.n);
+    return { rows, few };
+  }, [det, pid, minShared, pidToMK]);
+  if (!res) return null;
+  const Row = ({ r }) => {
+    const m = pidToMK[r.q];
+    return (
+      <li>
+        <button onClick={() => onPick(r.q)} aria-pressed={picked === r.q}
+          className={`w-full grid grid-cols-[1fr_auto] items-center gap-2 rounded-md px-2 py-1 text-sm text-right ${picked === r.q ? 'bg-sand' : 'hover:bg-sand/60'}`}>
+          <span className="flex items-center gap-1.5 min-w-0"><span className="w-2 h-2 rounded-full shrink-0" style={{ background: partyById[m.party]?.color }} /><span className="truncate">{m.name_he}</span><span className="text-[11px] text-sub truncate">{partyById[m.party]?.name_he}</span></span>
+          <span className="num text-xs text-sub whitespace-nowrap"><strong className="text-ink">{Math.round(r.rate * 100)}%</strong> מתוך {r.n}</span>
+        </button>
+      </li>
+    );
+  };
+  const k = 5;
+  return (
+    <div className="grid gap-2">
+      <h3 className="text-xl">עם מי הוא/היא מצביע/ה</h3>
+      <p className="text-xs text-sub">אחוז ההצבעות שבהן הצביעו אותו דבר, מתוך ההצבעות שבהן לשניהם הייתה עמדה. לחצו על שם כדי לראות על מה הסכימו ועל מה לא.</p>
+      {all ? (
+        <ul className="grid gap-0.5 sm:grid-cols-2 sm:gap-x-6">{res.rows.map((r) => <Row key={r.q} r={r} />)}</ul>
+      ) : (
+        <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
+          <div className="grid gap-1"><span className="text-xs font-medium text-sub">הכי דומים</span><ul className="grid gap-0.5">{res.rows.slice(0, k).map((r) => <Row key={r.q} r={r} />)}</ul></div>
+          <div className="grid gap-1"><span className="text-xs font-medium text-sub">הכי שונים</span><ul className="grid gap-0.5">{res.rows.slice(-k).reverse().map((r) => <Row key={r.q} r={r} />)}</ul></div>
+        </div>
+      )}
+      <div className="flex flex-wrap gap-3 text-xs text-sub">
+        {res.rows.length > 2 * k && <button onClick={() => setAll(!all)} className="underline hover:text-ink">{all ? 'רק הכי דומים והכי שונים' : `כל ${res.rows.length} חברי הכנסת`}</button>}
+        {res.few > 0 && <span>{res.few} חברי כנסת נוספים לא מוצגים: פחות מ-{minShared} הצבעות משותפות.</span>}
+      </div>
+    </div>
+  );
+}
+
 /** Member card tab: where this member sits on the vote map, per topic, and where they differ from each group. */
 export function MKClusterTab({ pid, initialTopic }) {
   const { data: clusters } = useData('topics/clusters.json');
@@ -179,6 +232,8 @@ export function MKClusterTab({ pid, initialTopic }) {
       </select>
       <ClusterMap data={d} pidToMK={pidToMK} partyById={partyById} picked={pid} second={otherHere} topic={topic}
         onPick={(p) => p !== pid && setOther(p === other ? null : p)} />
+      <MKNeighbours topic={topic} pid={pid} minShared={d.min_shared || (topic === 'all' ? 25 : 10)} pidToMK={pidToMK} partyById={partyById}
+        picked={otherHere} onPick={(p) => setOther(p === other ? null : p)} />
       <div className="grid gap-2">
         <label className="flex flex-wrap items-center gap-2 text-sm">
           <span className="font-medium">השוואה עם חבר/ת כנסת אחר/ת:</span>

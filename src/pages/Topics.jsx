@@ -1,10 +1,45 @@
-import { Link, useSearchParams } from 'react-router-dom';
-import { useData, useBillSummaries } from '@/lib/data';
+import { useMemo, useState } from 'react';
+import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { useData, useBillSummaries, useMKs, useParties } from '@/lib/data';
 import { Loading, Page, Section } from '@/components/bits';
 import ClusterExplorer, { GROUP_NAMES } from '@/components/ClusterExplorer';
 import { Sides } from '@/components/ClusterDetail';
 
 const fmtDate = (d) => (d ? d.split('-').reverse().join('.') : '');
+
+/** Pick one member (of those on the vote map) and open their card on the "who with whom" tab. */
+function PickMK({ clusters, topic }) {
+  const { data: mks } = useMKs();
+  const { data: parties } = useParties();
+  const nav = useNavigate();
+  const [q, setQ] = useState('');
+  const list = useMemo(() => {
+    const on = new Set((clusters.all?.points || []).map((p) => p[0]));
+    return (mks || []).filter((m) => m.person_id && on.has(Number(m.person_id))).sort((a, b) => a.name_he.localeCompare(b.name_he, 'he'));
+  }, [mks, clusters]);
+  const pName = (id) => parties?.find((p) => p.id === id)?.name_he;
+  const pColor = (id) => parties?.find((p) => p.id === id)?.color;
+  const shown = list.filter((m) => !q.trim() || m.name_he.includes(q.trim()) || (pName(m.party) || '').includes(q.trim()));
+  const open = (m) => nav(`/mk/${m.id}?tab=map${topic !== 'all' ? `&topic=${topic}` : ''}`);
+  return (
+    <div className="grid gap-3">
+      <p className="text-sm text-sub max-w-3xl">בחרו חבר/ת כנסת כדי לראות איפה הוא/היא במפה, עם מי הוא/היא מצביע/ה הכי הרבה והכי מעט, איפה שונה מכל קבוצה, ולהשוות לחבר/ת כנסת אחר/ת – בכל הנושאים או בנושא אחד.</p>
+      <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="חיפוש לפי שם או מפלגה" className="max-w-sm rounded-md border border-rule bg-paper px-3 py-1.5 text-sm" />
+      <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1">
+        {shown.map((m) => (
+          <li key={m.id}>
+            <button onClick={() => open(m)} className="w-full flex items-center gap-1.5 rounded-md px-2 py-1.5 text-sm text-right hover:bg-sand/60">
+              <span className="w-2 h-2 rounded-full shrink-0" style={{ background: pColor(m.party) }} />
+              <span className="truncate">{m.name_he}</span>
+              <span className="text-[11px] text-sub truncate">{pName(m.party)}</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+      <p className="text-[11px] text-sub">{list.length} חברי כנסת שכיהנו בכנסות קודמות ויש להם מספיק הצבעות. חברי כנסת חדשים עוד לא הצביעו במליאה.</p>
+    </div>
+  );
+}
 
 export default function Topics() {
   const { data: clusters } = useData('topics/clusters.json');
@@ -12,6 +47,7 @@ export default function Topics() {
   const { data: summaries } = useBillSummaries();
   const [sp, setSp] = useSearchParams();
   const t = sp.get('t') || 'all';
+  const view = sp.get('v') === 'one' ? 'one' : 'map';
   if (!clusters || !topics) return <Loading />;
   const d = clusters[t];
 
@@ -27,16 +63,25 @@ export default function Topics() {
         <a href="#how" className="text-sm underline text-sub hover:text-ink justify-self-start">איך זה מחושב, ומה אפשר ואי אפשר ללמוד מזה ↓</a>
       </header>
 
-      <ClusterExplorer topic={t} onTopic={(k) => setSp(k === 'all' ? {} : { t: k })} />
+      <div role="tablist" className="flex flex-wrap gap-1.5">
+        {[['map', 'המפה של כולם'], ['one', 'חבר/ת כנסת אחד/ת']].map(([k, l]) => (
+          <button key={k} role="tab" aria-selected={view === k} onClick={() => setSp({ ...(t !== 'all' ? { t } : {}), ...(k === 'one' ? { v: 'one' } : {}) })}
+            className={`px-4 py-1.5 rounded-full border text-sm ${view === k ? 'border-ink bg-ink text-paper' : 'border-rule text-sub hover:border-ink/40'}`}>{l}</button>
+        ))}
+      </div>
 
-      {d?.clusters?.length > 1 && (
+      {view === 'one' ? <PickMK clusters={clusters} topic={t} /> : (
+        <ClusterExplorer topic={t} onTopic={(k) => setSp(k === 'all' ? {} : { t: k })} />
+      )}
+
+      {view === 'map' && d?.clusters?.length > 1 && (
         <Section title="מה מבדיל בין הקבוצות">
           <p className="text-sm text-sub -mt-2 max-w-3xl">לכל קבוצה: הצעות שרובה תמך בהן ורוב הקבוצות האחרות התנגד להן. השורה הראשונה היא מה פירוש ההצבעה "בעד". לחצו על נקודה במפה כדי לפתוח את כרטיס חבר/ת הכנסת ולראות איפה הוא/היא שונה מכל קבוצה.</p>
           <Sides topic={t} groups={d.clusters.map((c) => ({ id: c.id }))} />
         </Section>
       )}
 
-      {d?.separating?.length > 0 && (
+      {view === 'map' && d?.separating?.length > 0 && (
         <Section title="הטבלה המלאה: שיעור התומכים בכל קבוצה">
           <div className="overflow-x-auto rounded-xl border border-rule">
             <table className="w-full text-sm">

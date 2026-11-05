@@ -264,5 +264,5 @@ export default function MKPage() {
   const { id } = useParams();
   const [sp, setSp] = useSearchParams();
   // the tab is kept in the address, so the header menu can show which section it belongs to
-  return <Page><MKProfile key={id} id={id} initialTab={sp.get('tab')} onTab={(k) => setSp(k === 'profile' ? {} : { tab: k }, { replace: true })} /></Page>;
+  return <Page><MKProfile key={id} id={id} initialTab={sp.get('tab')} initialTopic={sp.get('topic')} onTab={(k) => setSp(k === 'profile' ? {} : { tab: k }, { replace: true })} /></Page>;
 }
