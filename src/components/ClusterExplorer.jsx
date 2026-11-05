@@ -6,9 +6,27 @@ import { useOpenMK, MKLink } from '@/components/MKDrawer';
 
 export const GROUP_NAMES = ['קבוצה א׳', 'קבוצה ב׳', 'קבוצה ג׳', 'קבוצה ד׳'];
 
+/** How many votes two members both took part in, and in how many they voted the same way. */
+function overlap(a, b) {
+  let shared = 0, same = 0;
+  if (!a || !b) return { shared, same };
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== '0' && b[i] !== '0') { shared++; if (a[i] === b[i]) same++; }
+  }
+  return { shared, same };
+}
+
 export function ClusterMap({ data, pidToMK, partyById, highlight, onPick, picked, second, topic }) {
   const openMK = useOpenMK();
   const [hover, setHover] = useState(null);
+  // each member's own votes, only needed once a member is picked (to tell which distances rest on enough shared votes)
+  const { data: det } = useData(`topics/cluster_votes_${topic || 'all'}.json`, { retry: false, enabled: !!picked });
+  const minShared = data.min_shared || (topic && topic !== 'all' ? 10 : 25);
+  const sharedWith = useMemo(() => {
+    if (!picked || !det?.mk) return null;
+    const a = det.mk[String(picked)];
+    return Object.fromEntries(data.points.map(([pid]) => [pid, overlap(a, det.mk[String(pid)])]));
+  }, [picked, det, data]);
   const pts = data.points;
   const xs = pts.map((p) => p[1]);
   const ys = pts.map((p) => p[2]);
@@ -22,29 +40,59 @@ export function ClusterMap({ data, pidToMK, partyById, highlight, onPick, picked
   });
   const h = hover && pts.find((p) => p[0] === hover);
   const hm = h && pidToMK[h[0]];
+  const few = (pid) => sharedWith && pid !== picked && sharedWith[pid].shared < minShared;
+  const P = picked && pts.find((p) => p[0] === picked);
+  const S = second && pts.find((p) => p[0] === second);
+  const pair = P && S && sharedWith?.[second];
+  const pm = picked && pidToMK[picked];
+  const nFew = sharedWith ? pts.filter((p) => few(p[0])).length : 0;
+  let caption;
+  if (hm) {
+    const o = sharedWith && h[0] !== picked ? sharedWith[h[0]] : null;
+    caption = `${hm.name_he} · ${partyById[hm.party]?.name_he} · ${GROUP_NAMES[h[3]]} · ${h[4]} הצבעות`
+      + (o ? ` · ${o.shared} הצבעות משותפות עם ${pm?.name_he}${o.shared ? `, אותו דבר ב-${Math.round((o.same / o.shared) * 100)}%` : ''}` : '');
+  } else if (picked && nFew) {
+    caption = `נקודה חיוורת: פחות מ-${minShared} הצבעות משותפות עם ${pm?.name_he}, כך שהמרחק ממנה לא אומר הרבה.`;
+  } else {
+    caption = 'כל נקודה היא חבר/ת כנסת; קרבה = הצבעה דומה. לחצו על נקודה כדי לראות איפה הוא/היא שונה מכל קבוצה.';
+  }
   return (
     <div className="grid gap-1">
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto rounded-xl border border-rule bg-paper">
         {centres.map((c) => (
           <text key={c.id} x={c.x} y={Math.max(16, c.y)} textAnchor="middle" style={{ font: '400 18px var(--font-title)', fill: 'rgb(var(--sub))' }}>{GROUP_NAMES[c.id]}</text>
         ))}
+        {pair && (
+          <line x1={sx(P[1])} y1={sy(P[2])} x2={sx(S[1])} y2={sy(S[2])} stroke="rgb(var(--ink))" strokeWidth="1.2" strokeDasharray="4 3" opacity="0.7" />
+        )}
         {pts.map(([pid, x, y, cl]) => {
           const m = pidToMK[pid];
           const on = picked ? (pid === picked || pid === second) : (!highlight || highlight.has(pid));
+          const faint = !on && few(pid);
+          const big = hover === pid || ((highlight || picked) && on);
           return (
-            <circle key={pid} cx={sx(x)} cy={sy(y)} r={hover === pid || ((highlight || picked) && on) ? 8 : 6}
-              fill={partyById[m?.party]?.color || '#999'} fillOpacity={on ? 0.92 : picked ? 0.35 : 0.12}
-              stroke={hover === pid || ((highlight || picked) && on) ? 'rgb(var(--ink))' : 'rgb(var(--paper))'} strokeWidth={picked === pid || second === pid ? 2.5 : 1.5}
+            <circle key={pid} cx={sx(x)} cy={sy(y)} r={big ? 8 : 6}
+              fill={partyById[m?.party]?.color || '#999'} fillOpacity={on ? 0.92 : faint ? 0.07 : picked ? 0.45 : 0.12}
+              stroke={big ? 'rgb(var(--ink))' : faint ? 'rgb(var(--sub))' : 'rgb(var(--paper))'} strokeOpacity={faint ? 0.35 : 1}
+              strokeWidth={picked === pid || second === pid ? 2.5 : faint ? 1 : 1.5}
               className="cursor-pointer transition-all" onMouseEnter={() => setHover(pid)} onMouseLeave={() => setHover(null)}
               onClick={() => m && (onPick ? onPick(pid) : openMK(m.id, { tab: 'map', topic }))}>
               <title>{`${m?.name_he} · ${partyById[m?.party]?.name_he} · ${GROUP_NAMES[cl]}`}</title>
             </circle>
           );
         })}
+        {pair && (() => {
+          const mx = (sx(P[1]) + sx(S[1])) / 2, my = (sy(P[2]) + sy(S[2])) / 2;
+          const label = pair.shared ? `${Math.round((pair.same / pair.shared) * 100)}% מתוך ${pair.shared}` : 'אין הצבעות משותפות';
+          return (
+            <g style={{ pointerEvents: 'none' }}>
+              <rect x={mx - 52} y={my - 22} width="104" height="18" rx="9" fill="rgb(var(--paper))" opacity="0.92" />
+              <text x={mx} y={my - 9} textAnchor="middle" direction="rtl" style={{ font: '500 12px var(--font-body, sans-serif)', fill: 'rgb(var(--ink))' }}>{label}</text>
+            </g>
+          );
+        })()}
       </svg>
-      <div className="min-h-5 text-xs text-sub text-center">
-        {hm ? `${hm.name_he} · ${partyById[hm.party]?.name_he} · ${GROUP_NAMES[h[3]]} · ${h[4]} הצבעות` : 'כל נקודה היא חבר/ת כנסת; קרבה = הצבעה דומה. לחצו על נקודה כדי לראות איפה הוא/היא שונה מכל קבוצה.'}
-      </div>
+      <div className="min-h-5 text-xs text-sub text-center">{caption}</div>
     </div>
   );
 }

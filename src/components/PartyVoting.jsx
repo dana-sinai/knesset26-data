@@ -75,7 +75,7 @@ const fmtDate = (d) => (d ? d.slice(0, 10).split('-').reverse().join('.') : '');
  * Two "sides" (two lists, or two MKs) over the same votes: where they voted the same way, and where opposite ways.
  * posA / posB: per vote 1 = for, 2 = against, 0 = no position. A / B: { label, color }.
  */
-export function PairList({ votes, posA, posB, A, B, title, onClose, unit = 'לשניהם הייתה עמדה' }) {
+export function PairList({ votes, posA, posB, A, B, title, onClose, note, unit = 'לשניהם הייתה עמדה' }) {
   const { data: topics } = useData('topics/topics.json');
   const { data: bt } = useData('topics/bill_topics.json');
   const [mode, setMode] = useState('same');
@@ -108,6 +108,7 @@ export function PairList({ votes, posA, posB, A, B, title, onClose, unit = 'לש
         </span>
         {onClose && <button onClick={onClose} className="mr-auto text-xs underline text-sub hover:text-ink">סגירה</button>}
       </div>
+      {note && <p className="text-sm text-sub">{note}</p>}
       {total > 0 && (
         <>
           <div className="flex flex-wrap gap-2 items-center">
@@ -155,8 +156,8 @@ export function PairVotes({ st, a, b, onClose }) {
 }
 
 /** Two MKs (person ids), over every contested vote in which both voted for or against. */
-export function MKPairVotes({ a, b, onClose }) {
-  const { data: cv } = useData('topics/cluster_votes_all.json');
+export function MKPairVotes({ a, b, onClose, topic = 'all', minShared = 25, topicLabel }) {
+  const { data: cv } = useData(`topics/cluster_votes_${topic}.json`, { retry: false });
   const { data: mks } = useMKs();
   const { data: parties } = useParties();
   const toPos = (s) => (s ? Array.from(s, (c) => (c === '1' ? 1 : c === '2' ? 2 : 0)) : []);
@@ -166,8 +167,12 @@ export function MKPairVotes({ a, b, onClose }) {
   const mOf = (pid) => mks.find((m) => String(m.person_id) === String(pid));
   const color = (m) => parties.find((p) => p.id === m?.party)?.color;
   const A = mOf(a), B = mOf(b);
+  const shared = posA.reduce((n, x, i) => n + (x && posB[i] ? 1 : 0), 0);
+  const note = shared < minShared
+    ? `רק ${shared} הצבעות משותפות${topic !== 'all' && topicLabel ? ` בנושא ${topicLabel}` : ''} – מעט מדי כדי להסיק מהן הרבה. המרחק ביניהם במפה לא נקבע מההצבעות האלה, אלא מהאנשים שכל אחד מהם הצביע איתם.`
+    : null;
   return (
-    <PairList votes={cv.votes} posA={posA} posB={posB} onClose={onClose} title={`${A?.name_he} ו${B?.name_he}`}
+    <PairList votes={cv.votes} posA={posA} posB={posB} onClose={onClose} title={`${A?.name_he} ו${B?.name_he}`} note={note}
       A={{ label: A?.name_he, color: color(A) }} B={{ label: B?.name_he, color: color(B) }} />
   );
 }

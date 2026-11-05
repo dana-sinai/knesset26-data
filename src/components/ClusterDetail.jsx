@@ -166,6 +166,7 @@ export function MKClusterTab({ pid, initialTopic }) {
   if (!avail.length) return <p className="text-sm text-sub">אין מספיק הצבעות שנויות במחלוקת כדי למקם את חבר/ת הכנסת במפה.</p>;
   const d = clusters[topic];
   const own = d.points.find((x) => x[0] === pid)?.[3];
+  const otherHere = other && d.points.some((x) => x[0] === other) ? other : null;
   const labels = { all: 'כל הנושאים', ...topics.labels };
   return (
     <div className="grid gap-4">
@@ -176,19 +177,19 @@ export function MKClusterTab({ pid, initialTopic }) {
       <select value={topic} onChange={(e) => setT(e.target.value)} aria-label="נושא" className="justify-self-start rounded-full border border-ink bg-paper px-4 py-1.5 text-sm">
         {avail.map((k) => <option key={k} value={k}>{labels[k]}</option>)}
       </select>
-      <ClusterMap data={d} pidToMK={pidToMK} partyById={partyById} picked={pid} second={other} topic={topic}
+      <ClusterMap data={d} pidToMK={pidToMK} partyById={partyById} picked={pid} second={otherHere} topic={topic}
         onPick={(p) => p !== pid && setOther(p === other ? null : p)} />
       <div className="grid gap-2">
         <label className="flex flex-wrap items-center gap-2 text-sm">
           <span className="font-medium">השוואה עם חבר/ת כנסת אחר/ת:</span>
-          <select value={other || ''} onChange={(e) => setOther(e.target.value ? Number(e.target.value) : null)} className="rounded-md border border-rule bg-paper px-2 py-1">
+          <select value={otherHere || ''} onChange={(e) => setOther(e.target.value ? Number(e.target.value) : null)} className="rounded-md border border-rule bg-paper px-2 py-1">
             <option value="">בחרו, או לחצו על נקודה במפה</option>
             {d.points.filter((x) => x[0] !== pid && pidToMK[x[0]]).map((x) => pidToMK[x[0]]).sort((x, y) => x.name_he.localeCompare(y.name_he, 'he')).map((m) => (
               <option key={m.person_id} value={m.person_id}>{m.name_he} · {partyById[m.party]?.name_he}</option>
             ))}
           </select>
         </label>
-        {other && <MKPairVotes a={pid} b={other} onClose={() => setOther(null)} />}
+        {otherHere && <MKPairVotes a={pid} b={otherHere} topic={topic} topicLabel={labels[topic]} minShared={d.min_shared || (topic === 'all' ? 25 : 10)} onClose={() => setOther(null)} />}
       </div>
       <MKCompare key={`${topic}-${pid}`} topic={topic} pid={pid} groups={d.clusters.map((c) => ({ id: c.id, own: own === c.id }))} />
     </div>

@@ -246,6 +246,25 @@ def mds2(dist):
     return v[:, idx] * np.sqrt(np.maximum(w[idx], 0))
 
 
+def smacof2(dist, known, x, iters=600):
+    """2-D map that fits only the known distances (pairs with enough shared votes); unknown pairs have no pull at all,
+    so two members who rarely voted on the same bills are placed by the members each of them did share votes with."""
+    W = known.astype(float)
+    np.fill_diagonal(W, 0)
+    Dz = np.where(known, dist, 0.0)
+    V = -W.copy()
+    np.fill_diagonal(V, W.sum(axis=1))
+    Vp = np.linalg.pinv(V)
+    for _ in range(iters):
+        E = np.sqrt(((x[:, None] - x[None]) ** 2).sum(axis=2))
+        with np.errstate(invalid="ignore", divide="ignore"):
+            R = np.where(E > 1e-9, W * Dz / E, 0.0)
+        Bm = -R
+        np.fill_diagonal(Bm, R.sum(axis=1))
+        x = Vp @ Bm @ x
+    return x - x.mean(axis=0)
+
+
 def cluster_topic(vids, min_votes=15, min_shared=10):
     from sklearn.cluster import AgglomerativeClustering
     from sklearn.metrics import silhouette_score
@@ -255,16 +274,35 @@ def cluster_topic(vids, min_votes=15, min_shared=10):
     piv = piv[piv.notna().sum(axis=1) >= min_votes]
     if len(piv) < 8:
         return None
+    # a member needs enough shared votes with at least MIN_KNOWN others to have a position on the map at all
+    MIN_KNOWN = 5
+    while True:
+        o_ = piv.notna().values.astype(int)
+        sh_ = o_ @ o_.T
+        np.fill_diagonal(sh_, 0)
+        keep = (sh_ >= min_shared).sum(axis=1) >= MIN_KNOWN
+        if keep.all():
+            break
+        piv = piv[keep]
+    if len(piv) < 8:
+        return None
     X = piv.values
     n = len(piv)
     obs = ~np.isnan(X)
     Xf = np.nan_to_num(X)
     shared = obs.astype(int) @ obs.astype(int).T
     same = ((Xf[:, None, :] == Xf[None, :, :]) & obs[:, None, :] & obs[None, :, :]).sum(axis=2)
+    known = shared >= min_shared
+    np.fill_diagonal(known, True)
     with np.errstate(invalid="ignore", divide="ignore"):
-        dist = np.where(shared >= min_shared, 1 - same / shared, 0.5)
+        dist0 = np.where(known, 1 - same / np.maximum(shared, 1), 0.5)
+    np.fill_diagonal(dist0, 0)
+    # start from the classical map (unknown pairs at 0.5), then refit using the known pairs only
+    xy = smacof2(dist0, known, mds2(dist0))
+    # for grouping, unknown pairs take their distance on the map instead of a made-up 0.5
+    emb = np.sqrt(((xy[:, None] - xy[None]) ** 2).sum(axis=2))
+    dist = np.where(known, dist0, emb)
     np.fill_diagonal(dist, 0)
-    xy = mds2(dist)
     best, lab = -1, np.zeros(n, int)
     for kk in (2, 3, 4):
         if n <= kk:
@@ -325,7 +363,7 @@ def cluster_topic(vids, min_votes=15, min_shared=10):
     return dict(detail=detail, points=[[int(pids[i]), round(float(xy[i, 0]), 3), round(float(xy[i, 1]), 3), int(lab[i]),
                          int(obs[i].sum())] for i in range(n)],
                 clusters=clusters, silhouette=round(float(best), 3) if best > -1 else None,
-                separating=[list(x[1:]) for x in sig[:12]], n_votes=int(piv.shape[1]))
+                separating=[list(x[1:]) for x in sig[:12]], n_votes=int(piv.shape[1]), min_shared=int(min_shared))
 
 
 clusters = {}
