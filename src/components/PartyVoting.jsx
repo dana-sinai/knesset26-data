@@ -71,70 +71,104 @@ const STAGE = { final: 'אישור סופי', early: 'קריאה טרומית / 
 const POS = { 1: 'בעד', 2: 'נגד' };
 const fmtDate = (d) => (d ? d.slice(0, 10).split('-').reverse().join('.') : '');
 
-/** The votes behind one cell: where the majorities of lists A and B voted the same way, or opposite ways. */
-export function PairVotes({ st, a, b, onClose }) {
-  const { data: parties } = useParties();
+/**
+ * Two "sides" (two lists, or two MKs) over the same votes: where they voted the same way, and where opposite ways.
+ * posA / posB: per vote 1 = for, 2 = against, 0 = no position. A / B: { label, color }.
+ */
+export function PairList({ votes, posA, posB, A, B, title, onClose, unit = 'לשניהם הייתה עמדה' }) {
   const { data: topics } = useData('topics/topics.json');
   const { data: bt } = useData('topics/bill_topics.json');
   const [mode, setMode] = useState('same');
   const [topic, setTopic] = useState('all');
   const [n, setN] = useState(25);
   const ref = useRef(null);
-  useEffect(() => { ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); setN(25); }, [a, b]);
-  const pById = Object.fromEntries((parties || []).map((p) => [p.id, p]));
-  const A = pById[a], B = pById[b];
+  useEffect(() => { ref.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); setN(25); }, [posA, posB]);
   const topicOf = (bill) => bt?.[String(bill)]?.[0] || null;
   const idx = useMemo(() => {
     const out = { same: [], diff: [] };
-    st.votes.forEach((v, i) => {
-      const x = st.pos[a]?.[i], y = st.pos[b]?.[i];
+    votes.forEach((v, i) => {
+      const x = posA[i], y = posB[i];
       if (x && y) out[x === y ? 'same' : 'diff'].push(i);
     });
-    const byDate = (i, j) => (st.votes[j][2] || '').localeCompare(st.votes[i][2] || '');
+    const byDate = (i, j) => (votes[j][2] || '').localeCompare(votes[i][2] || '');
     out.same.sort(byDate); out.diff.sort(byDate);
     return out;
-  }, [st, a, b]);
-  const rows = idx[mode].filter((i) => topic === 'all' || topicOf(st.votes[i][6]) === topic);
-  const counts = idx[mode].reduce((c, i) => { const t = topicOf(st.votes[i][6]) || 'other'; c[t] = (c[t] || 0) + 1; return c; }, {});
+  }, [votes, posA, posB]);
+  const total = idx.same.length + idx.diff.length;
+  const rows = idx[mode].filter((i) => topic === 'all' || topicOf(votes[i][6]) === topic);
+  const counts = idx[mode].reduce((c, i) => { const t = topicOf(votes[i][6]) || 'other'; c[t] = (c[t] || 0) + 1; return c; }, {});
   const labels = topics?.labels || {};
+  const who = (X, v) => <span className="inline-flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{ background: X.color }} />{X.label}: <strong>{POS[v]}</strong></span>;
   return (
     <div ref={ref} className="grid gap-4 rounded-xl bg-sand/40 p-4 scroll-mt-20">
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <h3 className="text-2xl">{A?.name_he} ו{B?.name_he}</h3>
-        <span className="text-sm text-sub">{idx.same.length + idx.diff.length} הצבעות שבהן לשתיהן הייתה עמדה</span>
+        <h3 className="text-2xl">{title}</h3>
+        <span className="text-sm text-sub">
+          {total ? <>הצביעו אותו דבר ב-<strong className="text-ink num">{Math.round((idx.same.length / total) * 100)}%</strong> מתוך {fmt(total)} הצבעות שבהן {unit}</> : `אין הצבעות שבהן ${unit}`}
+        </span>
         {onClose && <button onClick={onClose} className="mr-auto text-xs underline text-sub hover:text-ink">סגירה</button>}
       </div>
-      <div className="flex flex-wrap gap-2 items-center">
-        {[['same', `הצביעו אותו דבר (${idx.same.length})`], ['diff', `הצביעו הפוך (${idx.diff.length})`]].map(([k, l]) => (
-          <button key={k} onClick={() => { setMode(k); setTopic('all'); setN(25); }} aria-pressed={mode === k}
-            className={`px-3 py-1 rounded-full border text-sm ${mode === k ? 'border-ink bg-ink text-paper' : 'border-rule hover:border-ink/40'}`}>{l}</button>
-        ))}
-        <select value={topic} onChange={(e) => { setTopic(e.target.value); setN(25); }} className="rounded-md border border-rule bg-paper px-2 py-1 text-sm" aria-label="נושא">
-          <option value="all">כל הנושאים</option>
-          {Object.entries(counts).sort((x, y) => y[1] - x[1]).map(([t, c]) => <option key={t} value={t}>{labels[t] || 'אחר'} ({c})</option>)}
-        </select>
-      </div>
-      <ul className="grid gap-2">
-        {rows.slice(0, n).map((i) => {
-          const [vid, k, date, name, stage, meaning, bill] = st.votes[i];
-          const t = topicOf(bill);
-          return (
-            <li key={vid} className="rounded-lg bg-paper p-3 grid gap-1">
-              <Link to={`/votes?k=${k}&id=${vid}`} className="font-medium hover:underline leading-snug">{name}</Link>
-              <span className="text-[11px] text-sub num">{fmtDate(date)} · הכנסת ה-{k} · {STAGE[stage] || ''}{t && labels[t] ? ` · ${labels[t]}` : ''}</span>
-              {meaning && <span className="text-xs text-sub">בעד = {String(meaning).replace(/^\s*בעד\s*=\s*/, '')}</span>}
-              <span className="text-xs">
-                <span className="inline-flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{ background: A?.color }} />רוב {A?.name_he}: <strong>{POS[st.pos[a][i]]}</strong></span>
-                <span className="text-sub"> · </span>
-                <span className="inline-flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{ background: B?.color }} />רוב {B?.name_he}: <strong>{POS[st.pos[b][i]]}</strong></span>
-              </span>
-            </li>
-          );
-        })}
-      </ul>
-      {rows.length > n && <button onClick={() => setN(n + 50)} className="justify-self-start text-sm underline text-sub hover:text-ink">עוד {Math.min(50, rows.length - n)} מתוך {rows.length - n}</button>}
-      {!rows.length && <p className="text-sm text-sub">אין הצבעות כאלה.</p>}
+      {total > 0 && (
+        <>
+          <div className="flex flex-wrap gap-2 items-center">
+            {[['same', `הצביעו אותו דבר (${idx.same.length})`], ['diff', `הצביעו הפוך (${idx.diff.length})`]].map(([k, l]) => (
+              <button key={k} onClick={() => { setMode(k); setTopic('all'); setN(25); }} aria-pressed={mode === k}
+                className={`px-3 py-1 rounded-full border text-sm ${mode === k ? 'border-ink bg-ink text-paper' : 'border-rule hover:border-ink/40'}`}>{l}</button>
+            ))}
+            <select value={topic} onChange={(e) => { setTopic(e.target.value); setN(25); }} className="rounded-md border border-rule bg-paper px-2 py-1 text-sm" aria-label="נושא">
+              <option value="all">כל הנושאים</option>
+              {Object.entries(counts).sort((x, y) => y[1] - x[1]).map(([t, c]) => <option key={t} value={t}>{labels[t] || 'אחר'} ({c})</option>)}
+            </select>
+          </div>
+          <ul className="grid gap-2">
+            {rows.slice(0, n).map((i) => {
+              const [vid, k, date, name, stage, meaning, bill] = votes[i];
+              const t = topicOf(bill);
+              return (
+                <li key={vid} className="rounded-lg bg-paper p-3 grid gap-1">
+                  <Link to={`/votes?k=${k}&id=${vid}`} className="font-medium hover:underline leading-snug">{name}</Link>
+                  <span className="text-[11px] text-sub num">{fmtDate(date)} · הכנסת ה-{k} · {STAGE[stage] || ''}{t && labels[t] ? ` · ${labels[t]}` : ''}</span>
+                  {meaning && <span className="text-xs text-sub">בעד = {String(meaning).replace(/^\s*בעד\s*=\s*/, '')}</span>}
+                  <span className="text-xs">{who(A, posA[i])}<span className="text-sub"> · </span>{who(B, posB[i])}</span>
+                </li>
+              );
+            })}
+          </ul>
+          {rows.length > n && <button onClick={() => setN(n + 50)} className="justify-self-start text-sm underline text-sub hover:text-ink">עוד {Math.min(50, rows.length - n)} מתוך {rows.length - n}</button>}
+          {!rows.length && <p className="text-sm text-sub">אין הצבעות כאלה.</p>}
+        </>
+      )}
     </div>
+  );
+}
+
+/** The votes behind one cell: where the majorities of lists A and B voted the same way, or opposite ways. */
+export function PairVotes({ st, a, b, onClose }) {
+  const { data: parties } = useParties();
+  const pById = Object.fromEntries((parties || []).map((p) => [p.id, p]));
+  const A = pById[a], B = pById[b];
+  return (
+    <PairList votes={st.votes} posA={st.pos[a] || []} posB={st.pos[b] || []} onClose={onClose}
+      title={`${A?.name_he} ו${B?.name_he}`} unit="לשתי הרשימות הייתה עמדה"
+      A={{ label: `רוב ${A?.name_he}`, color: A?.color }} B={{ label: `רוב ${B?.name_he}`, color: B?.color }} />
+  );
+}
+
+/** Two MKs (person ids), over every contested vote in which both voted for or against. */
+export function MKPairVotes({ a, b, onClose }) {
+  const { data: cv } = useData('topics/cluster_votes_all.json');
+  const { data: mks } = useMKs();
+  const { data: parties } = useParties();
+  const toPos = (s) => (s ? Array.from(s, (c) => (c === '1' ? 1 : c === '2' ? 2 : 0)) : []);
+  const posA = useMemo(() => toPos(cv?.mk?.[String(a)]), [cv, a]);
+  const posB = useMemo(() => toPos(cv?.mk?.[String(b)]), [cv, b]);
+  if (!cv || !mks || !parties) return <p className="text-sm text-sub">טוען…</p>;
+  const mOf = (pid) => mks.find((m) => String(m.person_id) === String(pid));
+  const color = (m) => parties.find((p) => p.id === m?.party)?.color;
+  const A = mOf(a), B = mOf(b);
+  return (
+    <PairList votes={cv.votes} posA={posA} posB={posB} onClose={onClose} title={`${A?.name_he} ו${B?.name_he}`}
+      A={{ label: A?.name_he, color: color(A) }} B={{ label: B?.name_he, color: color(B) }} />
   );
 }
 

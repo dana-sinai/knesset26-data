@@ -4,6 +4,7 @@ import { X } from 'lucide-react';
 import { useData, useMKs, useParties } from '@/lib/data';
 import { MKLink } from '@/components/MKDrawer';
 import { GROUP_NAMES, ClusterMap } from '@/components/ClusterExplorer';
+import { MKPairVotes } from '@/components/PartyVoting';
 
 // topics/cluster_votes_{topic}.json: votes = [vid, knesset, date, name, stage, meaning, billId, [[shareFor, n] per group]],
 // mk = {personId: one char per vote: "1" for, "2" against, "0" did not vote}
@@ -157,6 +158,7 @@ export function MKClusterTab({ pid, initialTopic }) {
   const { data: parties } = useParties();
   const avail = useMemo(() => (clusters ? Object.keys(clusters).filter((k) => clusters[k]?.points?.some((p) => p[0] === pid)) : []), [clusters, pid]);
   const [t, setT] = useState(null);
+  const [other, setOther] = useState(null); // a second MK to compare with
   const topic = t || (initialTopic && avail.includes(initialTopic) ? initialTopic : avail.includes('all') ? 'all' : avail[0]);
   const pidToMK = useMemo(() => Object.fromEntries((mks || []).filter((m) => m.person_id).map((m) => [Number(m.person_id), m])), [mks]);
   const partyById = useMemo(() => Object.fromEntries((parties || []).map((p) => [p.id, p])), [parties]);
@@ -174,7 +176,20 @@ export function MKClusterTab({ pid, initialTopic }) {
       <select value={topic} onChange={(e) => setT(e.target.value)} aria-label="נושא" className="justify-self-start rounded-full border border-ink bg-paper px-4 py-1.5 text-sm">
         {avail.map((k) => <option key={k} value={k}>{labels[k]}</option>)}
       </select>
-      <ClusterMap data={d} pidToMK={pidToMK} partyById={partyById} picked={pid} topic={topic} />
+      <ClusterMap data={d} pidToMK={pidToMK} partyById={partyById} picked={pid} second={other} topic={topic}
+        onPick={(p) => p !== pid && setOther(p === other ? null : p)} />
+      <div className="grid gap-2">
+        <label className="flex flex-wrap items-center gap-2 text-sm">
+          <span className="font-medium">השוואה עם חבר/ת כנסת אחר/ת:</span>
+          <select value={other || ''} onChange={(e) => setOther(e.target.value ? Number(e.target.value) : null)} className="rounded-md border border-rule bg-paper px-2 py-1">
+            <option value="">בחרו, או לחצו על נקודה במפה</option>
+            {d.points.filter((x) => x[0] !== pid && pidToMK[x[0]]).map((x) => pidToMK[x[0]]).sort((x, y) => x.name_he.localeCompare(y.name_he, 'he')).map((m) => (
+              <option key={m.person_id} value={m.person_id}>{m.name_he} · {partyById[m.party]?.name_he}</option>
+            ))}
+          </select>
+        </label>
+        {other && <MKPairVotes a={pid} b={other} onClose={() => setOther(null)} />}
+      </div>
       <MKCompare key={`${topic}-${pid}`} topic={topic} pid={pid} groups={d.clusters.map((c) => ({ id: c.id, own: own === c.id }))} />
     </div>
   );

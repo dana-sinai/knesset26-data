@@ -6,7 +6,7 @@ import { useOpenMK, MKLink } from '@/components/MKDrawer';
 
 export const GROUP_NAMES = ['קבוצה א׳', 'קבוצה ב׳', 'קבוצה ג׳', 'קבוצה ד׳'];
 
-export function ClusterMap({ data, pidToMK, partyById, highlight, onPick, picked, topic }) {
+export function ClusterMap({ data, pidToMK, partyById, highlight, onPick, picked, second, topic }) {
   const openMK = useOpenMK();
   const [hover, setHover] = useState(null);
   const pts = data.points;
@@ -30,11 +30,11 @@ export function ClusterMap({ data, pidToMK, partyById, highlight, onPick, picked
         ))}
         {pts.map(([pid, x, y, cl]) => {
           const m = pidToMK[pid];
-          const on = picked ? pid === picked : (!highlight || highlight.has(pid));
+          const on = picked ? (pid === picked || pid === second) : (!highlight || highlight.has(pid));
           return (
             <circle key={pid} cx={sx(x)} cy={sy(y)} r={hover === pid || ((highlight || picked) && on) ? 8 : 6}
               fill={partyById[m?.party]?.color || '#999'} fillOpacity={on ? 0.92 : picked ? 0.35 : 0.12}
-              stroke={hover === pid || ((highlight || picked) && on) ? 'rgb(var(--ink))' : 'rgb(var(--paper))'} strokeWidth={picked === pid ? 2.5 : 1.5}
+              stroke={hover === pid || ((highlight || picked) && on) ? 'rgb(var(--ink))' : 'rgb(var(--paper))'} strokeWidth={picked === pid || second === pid ? 2.5 : 1.5}
               className="cursor-pointer transition-all" onMouseEnter={() => setHover(pid)} onMouseLeave={() => setHover(null)}
               onClick={() => m && (onPick ? onPick(pid) : openMK(m.id, { tab: 'map', topic }))}>
               <title>{`${m?.name_he} · ${partyById[m?.party]?.name_he} · ${GROUP_NAMES[cl]}`}</title>
